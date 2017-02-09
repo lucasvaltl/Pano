@@ -1,5 +1,7 @@
 
 #gradhome{
+  border-width: thick;
+  border-color: white;
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#540d6e+0,584a85+37,61e8bf+100 */
 background: #540d6e; /* Old browsers */
 background: -moz-linear-gradient(45deg, #540d6e 0%, #584a85 37%, #61e8bf 100%); /* FF3.6-15 */
@@ -9,11 +11,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#540d6e', end
 }
 
 body{
+
   font-family: lato;
   font-weight: 100;
   color: white;
   text-align: center;
 }
+#top, #bottom, #left, #right {
+  background: white;
+  position: fixed;
+  }
+  #left, #right {
+    top: 0; bottom: 0;
+    width: 10px;
+    }
+    #left { left: 0; }
+    #right { right: 0; }
+
+  #top, #bottom {
+    left: 0; right: 0;
+    height: 10px;
+    }
+    #top { top: 0; }
+    #bottom { bottom: 0; }
+
 
 /*.container {
     display: box;
@@ -23,6 +44,7 @@ body{
 }*/
 
 .container {
+
     position: absolute;
     top: 50%;
     left: 50%;
