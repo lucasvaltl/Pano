@@ -59,6 +59,7 @@ font-family: 'Lato-Light', sans-serif;
 
 body{
 padding-top: 70px;
+padding-bottom: 70px;
 }
 
 .center-center {
@@ -79,6 +80,19 @@ padding-top: 70px;
 .panorama{
   width:100%;
   height: auto;
+}
+
+.profile-picture{
+  border-radius: 50%;
+}
+
+.post-picture{
+  padding-bottom: 10px;
+}
+
+a .profile-picture{
+  height: 60px;
+  width: auto;
 }
 /*navbars*/
 
@@ -159,13 +173,15 @@ padding-top: 70px;
 .lv-icons a:hover i {
   color: #56c7a5;
 }
+
+
 /*buttons*/
 
 .lv-button{
   color: white;
   background-color: transparent;
 margin: 10px 10px 10px 10px;
-width: 120px;
+width: 150px;
 height: 40px;
 font-size: 1.1em;
 }
@@ -176,16 +192,19 @@ font-size: 1.1em;
     text-decoration: none;
 }
 
+/*upload box*/
 .drag-in{
   width: 80%;
-  height: 70%;
-  color: white
+  height: 40%;
+  color: white;
   text-align: center;
   border-style: dashed;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .lv-bigplus{
-  font-size: 20em;
+  font-size: 15em;
 }
 
 a.btn {
@@ -198,6 +217,33 @@ a.btn {
   width: 300px;
   height: 40px;
 }
+
+input.form-control, textarea.form-control, select.form-control{
+       background-color:rgba(0,0,0,0);
+       color: white;
+    }
+
+    /*posts*/
+
+.post{
+  padding-bottom: 10px;
+  color: darkgrey;
+}
+
+.post-content{
+    text-align: left;
+    vertical-align: middle;
+}
+
+.post-location{
+  font-weight: 600;
+}
+
+.user-name-text{
+  font-size:1.5em;
+  vertical-align: middle;
+}
+
 
 /*other*/
 
