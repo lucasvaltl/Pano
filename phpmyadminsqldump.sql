@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 16, 2017 at 04:08 PM
+-- Generation Time: Feb 16, 2017 at 04:49 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -182,6 +182,7 @@ CREATE TABLE `user` (
   `LastName` varchar(30) NOT NULL,
   `UserName` varchar(30) NOT NULL,
   `EmailAddress` varchar(80) NOT NULL,
+  `Password` char(64) NOT NULL,
   `Location` varchar(150) NOT NULL,
   `ShortDescrip` varchar(150) NOT NULL,
   `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -191,8 +192,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Location`, `ShortDescrip`, `DateCreated`) VALUES
-(12345, 'Li', 'Xie', 'Liko', '', 'London', 'This is a short description', '2017-02-16 13:10:57');
+INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Password`, `Location`, `ShortDescrip`, `DateCreated`) VALUES
+(12345, 'Li', 'Xie', 'Liko', '', '', 'London', 'This is a short description', '2017-02-16 13:10:57');
 
 -- --------------------------------------------------------
 
