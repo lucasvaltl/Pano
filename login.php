@@ -1,5 +1,11 @@
 <?php
+//ob_start needed to allow redirecting after login
 ob_start();
+
+//session_start() needed to use global session variabls $_SESSION etc
+session_start();
+
+include('includes/config.php');
 ?>
 
 <!DOCTYPE html>
