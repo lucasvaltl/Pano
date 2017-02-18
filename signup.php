@@ -1,3 +1,8 @@
+<?php
+ob_start();
+?>
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -15,47 +20,12 @@
 
     <?php
 
-    include('includes/dbconnect.php');
+    require_once('includes/dbconnect.php');
 
-    function NewUser($conn) {
-        $FirstName = mysqli_real_escape_string($conn, $_POST['FirstName']);
-        $LastName = mysqli_real_escape_string($conn, $_POST['LastName']);
-        $UserName = mysqli_real_escape_string($conn, $_POST['UserName']);
-        $EmailAddress = mysqli_real_escape_string($conn, $_POST['EmailAddress']);
-        $Password = mysqli_real_escape_string ($conn, $_POST['Password']);
-        $Password = password_hash($Password, PASSWORD_DEFAULT);
-        $Location = mysqli_real_escape_string($conn, $_POST['Location']);
-        $ShortDescrip = mysqli_real_escape_string($conn, $_POST['ShortDescrip']);
+    //contains the form validation logic for sign up
+    require_once('includes/validatesignup.php');
 
-        $query = "INSERT INTO user (FirstName, LastName, UserName, EmailAddress, Password, Location, ShortDescrip)
-        VALUES ('$FirstName', '$LastName', '$UserName', '$EmailAddress', '$Password', '$Location', '$ShortDescrip')";
 
-        if (mysqli_query($conn, $query)) {
-            echo "New record created successfully";
-
-            header("Location: home.php");
-
-        } else {
-            echo "Error: " . $query . "<br>" . mysqli_error($conn);
-        }
-    }
-
-    function SignUp($conn) {
-        if (!empty($_POST['UserName'])) {
-            $query = mysqli_query($conn, "SELECT * FROM user WHERE UserName = '$_POST[UserName]'");
-            if (!$row = mysqli_fetch_array($query)) {
-                NewUser($conn);
-            } else {
-                echo "The username you have selected already exists!";
-            }
-        }
-    }
-
-    if (isset($_POST['submit'])) {
-        SignUp($conn);
-    }
-
-    mysqli_close($conn);
     ?>
 
 
@@ -73,37 +43,128 @@
                 </div>
                 <br />
 
-                <div class="form-group questionnaire animated slideInLeft">
+                <div class="form-group questionnaire">
                     <h3>Welcome to Pano! </h3>
 
                     <h3>  Please answer these questions to get started:</h3>
                     <br />
                     <div class="row">
-                        <form action="signup.php" method="post" class="form-group">
-                            <label class="signupform" for="usr">What  do you want to be called on Pano?</label>
-                            <input type="text" class="form-control" id="usr" name="UserName" placeholder="User Name">
+
+                        <br>
+
+                        <?php if ($errors || $missing) : ?>
+                        <p class="alert alert-danger">Please fix the item(s) indicated</p>
+                        <?php endif; ?>
+
+                        <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
+                            <label class="signupform" for="usr">What  do you want to be called on Pano?
+                                <?php if ($missing && in_array('UserName', $missing)) : ?>
+                                    <div class="alert alert-danger">Please enter a User Name!</div>
+                                <?php endif;
+
+                                if ($userNameAlreadyExists) : ?>
+                                    <div class="alert alert-danger">The User Name you have chosen already exists!</div>
+                                <?php endif; ?>
+                            </label>
+                            <input type="text" class="form-control" id="usr" name="UserName" placeholder="User Name"
+                                <?php
+                                if ($errors || $missing) {
+                                    echo 'value="' . htmlentities($UserName) . '"';
+                                }
+                                ?>
+                            >
                             <br />
-                            <label for="pwd">Please enter a password!</label>
-                            <input type="password" class="form-control" id="pwd" name="Password" placeholder="Password">
+                            <label for="pwd">Please enter a password!
+                                <?php if ($missing && in_array('Password', $missing)) : ?>
+                                    <div class="alert alert-danger">You forgot to create a password!</div>
+                                <?php endif; ?>
+                            </label>
+                            <input type="password" class="form-control" id="pwd" name="Password" placeholder="Password"
+                                <?php
+                                if ($errors || $missing) {
+                                    echo 'value="' . htmlentities($Password) . '"';
+                                }
+                                ?>
+                            >
                             <br />
-                            <label class="signupform" for="usr">What  is you email address?</label>
-                            <input type="text" class="form-control" id="usr" name="EmailAddress" placeholder="Email Address">
+                            <label class="signupform" for="usr">What  is you email address?
+                                <?php if ($missing && in_array('EmailAddress', $missing)) : ?>
+                                    <div class="alert alert-danger">You forgot to add your email address!</div>
+                                <?php
+
+                                elseif ($isEmailAddressInvalid) : ?>
+                                    <div class="alert alert-danger">This email address is in an invalid format!</div>
+                                <?php endif;
+
+                                if ($emailAddressAlreadyExists) : ?>
+                                    <div class="alert alert-danger">This email address is already associated with an account!</div>
+                                <?php endif; ?>
+                            </label>
+                            <input type="text" class="form-control" id="usr" name="EmailAddress" placeholder="Email Address"
+                                <?php
+                                if ($errors || $missing) {
+                                    echo 'value="' . htmlentities($EmailAddress) . '"';
+                                }
+                                ?>
+                            >
                             <br />
-                            <label class="signupform" for="fname">What  is your first name?</label>
-                            <input type="text" class="form-control" id="fname" name="FirstName" placeholder="First Name">
+                            <label class="signupform" for="fname">What  is your first name?
+                                <?php if ($missing && in_array('FirstName', $missing)) : ?>
+                                    <div class="alert alert-danger">You forgot to add enter your first name!!</div>
+                                <?php endif; ?>
+                            </label>
+                            <input type="text" class="form-control" id="fname" name="FirstName" placeholder="First Name"
+                                <?php
+                                if ($errors || $missing) {
+                                    echo 'value="' . htmlentities($FirstName) . '"';
+                                }
+                                ?>
+                            >
                             <br />
-                            <label class="signupform" for="lname">What  is your last name?</label>
-                            <input type="text" class="form-control" id="lname" name="LastName" placeholder="Last Name">
+                            <label class="signupform" for="lname">What  is your last name?
+                                <?php if ($missing && in_array('LastName', $missing)) : ?>
+                                    <div class="alert alert-danger">You forgot to add your last name!</div>
+                                <?php endif; ?>
+                            </label>
+                            <input type="text" class="form-control" id="lname" name="LastName" placeholder="Last Name"
+                                <?php
+                                if ($errors || $missing) {
+                                    echo 'value="' . htmlentities($LastName) . '"';
+                                }
+                                ?>
+                            >
                             <br />
-                            <label class="signupform" for="location">Where do you live?</label>
-                            <input type="text" class="form-control" id="location" name="Location" placeholder="Location">
+                            <label class="signupform" for="location">Where do you live?
+                                <?php if ($missing && in_array('Location', $missing)) : ?>
+                                    <div class="alert alert-danger">You forgot to add your location!</div>
+                                <?php endif; ?>
+                            </label>
+                            <input type="text" class="form-control" id="location" name="Location" placeholder="Location"
+                                <?php
+                                if ($errors || $missing) {
+                                    echo 'value="' . htmlentities($Location) . '"';
+                                }
+                                ?>
+                            >
                             <br />
-                            <label class="signupform" for="description">Tell us a bit about yourself:</label>
-                            <textarea type="selection" class="form-control" rows="5" maxlength="150" id="description" name="ShortDescrip" placeholder="Who are you? What is it that makes you you?"></textarea>
-                            <!--<a href="home.html" type="button" class="btn btn-default lv-button ">Sign Up</a>
-                            -->
+                            <label class="signupform" for="description">Tell us a bit about yourself:
+                                <?php if ($missing && in_array('ShortDescrip', $missing)) : ?>
+                                    <div class="alert alert-danger">Say something!</div>
+                                <?php endif; ?>
+                            </label>
+                            <textarea type="selection" class="form-control" rows="5" maxlength="150" id="description" name="ShortDescrip" placeholder="Who are you? What is it that makes you you?"><?php
+                                if ($errors || $missing) {
+                                    echo htmlentities($ShortDescrip);
+                                }
+                                ?></textarea>
+                            <br>
                             <input type="submit" name="submit" class="btn btn-default lv-button" value="Sign Up" />
                         </form>
+
+                        <br>
+                        <div class="login-help">
+                            <a href="login.php">Already a member? Log in over here!</a>
+                        </div>
 
                     </div>
                 </div>

@@ -1,19 +1,20 @@
 <?php
     //Create database connection
-    $username = 'root';
-    $password = 'root';
-    $dbname = 'Pano';
-    $host = 'localhost';
-    $port = 8889;
+
+    define("DB_USERNAME", "root");
+    define("DB_PASS", "root");
+    define("DB_NAME", "Pano");
+    define("DB_HOST", "localhost");
+    define("DB_PORT", "8889");
 
     //$link = mysqli_init();
     $conn = mysqli_connect(
       // $link,
-       $host,
-       $username,
-       $password,
-       $dbname,
-       $port
+       DB_HOST,
+       DB_USERNAME,
+       DB_PASS,
+       DB_NAME,
+       DB_PORT
     );
 
     //test if connection occured
