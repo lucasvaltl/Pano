@@ -95,7 +95,7 @@ include('includes/config.php');
                     <a href="profile.php"><img src="images/profilepics/2.jpg" class="profile-picture" /> </a>
                 </div>
                 <div class="post-user-name col-md-2 col-xs-2">
-                    <a href="profile.php"><h3>clairethemayor<?php echo $_SERVER['HTTP_HOST'];?></h3></a>
+                    <a href="profile.php"><h3>clairethemayor</h3></a>
                 </div>
                 <div class="post-content col-md-7 col-md-offset-1 col-xs-6 col-xs-offset-2">
                     <div class="post-location">
