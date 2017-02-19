@@ -1,0 +1,312 @@
+
+#gradhome{
+  border-width: thick;
+  border-color: white;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#540d6e+0,584a85+37,61e8bf+100 */
+background: #540d6e; /* Old browsers */
+background: -moz-linear-gradient(45deg, #540d6e 0%, #584a85 37%, #61e8bf 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, #540d6e 0%,#584a85 37%,#61e8bf 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, #540d6e 0%,#584a85 37%,#61e8bf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#540d6e', endColorstr='#61e8bf',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+/*font alterations*/
+
+body{
+font-family: 'Lato-Light', sans-serif;
+  font-variant: normal;
+  font-weight: 100;
+  color: white;
+  text-align: center;
+}
+
+.form-group h2, .form-group h3, .form-group label {
+  font-family: 'Lato-Light';
+  font-weight: 300;
+}
+
+.form-group{
+  font-size: 1.2em;
+}
+
+
+/*box around login and siognup pages*/
+
+#top, #bottom, #left, #right {
+  background: white;
+  position: fixed;
+  }
+  #left, #right {
+    top: 0; bottom: 0;
+    width: 10px;
+    }
+    #left { left: 0; }
+    #right { right: 0; }
+
+  #top, #bottom {
+    left: 0; right: 0;
+    height: 10px;
+    }
+    #top { top: 0; }
+    #bottom { bottom: 0; }
+
+
+
+
+/*alignment*/
+
+body{
+padding-top: 70px;
+padding-bottom: 70px;
+}
+
+.center-center {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.content {
+  text-align: center;
+}
+
+textarea {
+    resize: none;
+}
+
+
+
+/*photos*/
+
+.panorama{
+  width:100%;
+  height: auto;
+}
+
+.post-picture{
+  padding-bottom: 10px;
+}
+
+
+a .profile-picture{
+  height: 60px;
+  width: auto;
+}
+
+.comment-picture{
+  height: 30px;
+  width: auto;
+}
+
+/*navbars*/
+
+ .navbar-fixed-top{
+   background-color: white;
+   border-bottom: thin solid lightgrey;
+   box-shadow:  0px 0px 2px 0px lightgrey;
+}
+
+.navbar-fixed-bottom{
+  padding-top: 3px;
+  background-color: white;
+   border-top: thin solid lightgrey;
+     box-shadow: 2px 0px 0px 0px lightgrey;
+}
+
+/*icons*/
+
+.fa{
+  color: color: #61e8bf;
+    vertical-align: middle;
+}
+
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
+/*Logos*/
+
+#loginlogo{
+  height: auto;
+  width: 80%;
+}
+
+#signuplogo{
+  height: auto;
+  width: 50%;
+}
+
+#homepagelogo{
+  height: auto;
+  width: 170px;
+}
+
+.lv-icons a i {
+  color: #61e8bf;
+}
+
+.lv-icons a:hover i {
+  color: #56c7a5;
+}
+
+
+/*buttons*/
+
+.lv-button{
+  color: white;
+  background-color: transparent;
+margin: 10px 10px 10px 10px;
+width: 150px;
+height: 40px;
+font-size: 1.1em;
+}
+
+.comment-button{
+    background-color: transparent;
+    color: #444;
+    font-size: 1.1em;
+    margin: 10px 10px 10px 10px;
+    width: 150px;
+    height: 40px;
+}
+
+.settings-buttons{
+  padding: 8px 12px;
+  width: 150px;
+    text-decoration: none;
+}
+
+/*upload box*/
+.drag-in{
+  width: 80%;
+  height: 40%;
+  color: white;
+  text-align: center;
+  border-style: dashed;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.lv-bigplus{
+  font-size: 15em;
+}
+
+a.btn {
+  text-decoration: none;
+}
+
+/*input fields*/
+.form-control{
+  margin: 0 auto;
+  width: 300px;
+  height: 40px;
+}
+
+input.form-control, textarea.form-control, select.form-control{
+       background-color:rgba(0,0,0,0);
+       color: white;
+    }
+
+    /*posts*/
+
+.post{
+  padding-bottom: 10px;
+  color: #555;
+}
+
+.post-meta{
+width: 100%;
+align-items : center;
+}
+
+.post-user-picture {
+  font-size:1.3em;
+  text-align: left;
+
+}
+
+.post-user-picture a:hover, .post-user-picture a:hover{
+    text-decoration: none;
+}
+
+.post-content, .post-comment, .user-comment{
+text-align: left;
+}
+
+hr{
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.user-comment{
+    padding-left: 6em;
+      color: #444;
+}
+
+input.actual-comment{
+  color: #444;
+      display: inline;
+      width: 70%;
+}
+
+.comment-button{
+  width: 20%;
+}
+
+.post-comment{
+  padding-left: 5em;
+}
+
+.post-location{
+  font-weight: 600;
+}
+.lv-top-padding{
+  padding-top: 6px;
+}
+
+/*other*/
+
+.login-help, .login-help a {
+  color: #ababab;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+a:hover{
+  text-decoration: none;
+}
