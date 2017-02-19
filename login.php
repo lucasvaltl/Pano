@@ -26,7 +26,6 @@ include('includes/config.php');
     <?php
 
     require_once('includes/dbconnect.php');
-
     require_once('includes/validatelogin.php');
 
 //THIS IF STATEMENT IS TEMPORARY

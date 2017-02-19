@@ -21,48 +21,18 @@ include('includes/config.php');
 </head>
 
 <body>
-    <div>
-        <header>
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="container">
-                    <div class="logo center-center">
-                        <a href="home.html"><img src="images/gradient-logo.png" class="png" id="homepagelogo"></a>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-    </div>
+    <?php
+         include('includes/header.php');
+     ?>
     <main>
 
 
 
     </main>
 
-    <footer>
-        <nav class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container-fluid">
-
-                <div class="row">
-                    <div class="col-md-15 col-xs-15   lv-icons">
-                        <a href="home.html"> <i class="fa fa-newspaper-o fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15  lv-icons">
-                        <a href="circles.html"> <i class="fa fa-circle-thin fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15  lv-icons">
-                        <a href="upload.html"> <i class="fa fa-camera fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15 lv-icons">
-                        <a href="profile.html"> <i class="fa fa-user-o fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15 lv-icons">
-                        <a href="settings.html"> <i class="fa fa-sliders fa-3x"></i></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </footer>
+    <?php
+        include('includes/footer.php');
+    ?>
 
 </body>
 

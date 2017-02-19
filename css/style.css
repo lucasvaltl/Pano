@@ -74,6 +74,11 @@ padding-bottom: 70px;
   text-align: center;
 }
 
+textarea {
+    resize: none;
+}
+
+
 
 /*photos*/
 
@@ -82,18 +87,21 @@ padding-bottom: 70px;
   height: auto;
 }
 
-.profile-picture{
-  border-radius: 50%;
-}
-
 .post-picture{
   padding-bottom: 10px;
 }
+
 
 a .profile-picture{
   height: 60px;
   width: auto;
 }
+
+.comment-picture{
+  height: 30px;
+  width: auto;
+}
+
 /*navbars*/
 
  .navbar-fixed-top{
@@ -186,6 +194,15 @@ height: 40px;
 font-size: 1.1em;
 }
 
+.comment-button{
+    background-color: transparent;
+    color: #444;
+    font-size: 1.1em;
+    margin: 10px 10px 10px 10px;
+    width: 150px;
+    height: 40px;
+}
+
 .settings-buttons{
   padding: 8px 12px;
   width: 150px;
@@ -227,26 +244,69 @@ input.form-control, textarea.form-control, select.form-control{
 
 .post{
   padding-bottom: 10px;
-  color: darkgrey;
+  color: #555;
 }
 
-.post-content{
-    text-align: left;
-    vertical-align: middle;
+.post-meta{
+width: 100%;
+align-items : center;
+}
+
+.post-user-picture {
+  font-size:1.3em;
+  text-align: left;
+
+}
+
+.post-user-picture a:hover, .post-user-picture a:hover{
+    text-decoration: none;
+}
+
+.post-content, .post-comment, .user-comment{
+text-align: left;
+}
+
+hr{
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.user-comment{
+    padding-left: 6em;
+      color: #444;
+}
+
+input.actual-comment{
+  color: #444;
+      display: inline;
+      width: 70%;
+}
+
+.comment-button{
+  width: 20%;
+}
+
+.post-comment{
+  padding-left: 5em;
 }
 
 .post-location{
   font-weight: 600;
 }
-
-.user-name-text{
-  font-size:1.5em;
-  vertical-align: middle;
+.lv-top-padding{
+  padding-top: 6px;
 }
-
 
 /*other*/
 
 .login-help, .login-help a {
   color: #ababab;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+a:hover{
+  text-decoration: none;
 }

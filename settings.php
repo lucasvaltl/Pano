@@ -17,29 +17,20 @@ include('includes/config.php');
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Pano - Settings</title>
+    <!--<title>Pano - Settings</title>-->
+</head>
+
+<head>
+<title>Pano yolo</title>
 </head>
 
 <body id="gradhome">
 
     <?php
         require_once('includes/dbconnect.php');
-
-
-
+        include('includes/header.php');
      ?>
-    <div>
-        <header>
-            <nav class="navbar navbar-default navbar-fixed-top">
-                <div class="container">
-                    <div class="logo center-center">
-                        <a href="home.html"><img src="images/gradient-logo.png" class="png" id="homepagelogo"></a>
-                    </div>
-                </div>
-            </nav>
-        </header>
 
-    </div>
     <main>
 
         <div class="center-center">
@@ -75,30 +66,9 @@ include('includes/config.php');
 
     </main>
 
-    <footer>
-        <nav class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container-fluid">
-
-                <div class="row">
-                    <div class="col-md-15 col-xs-15   lv-icons">
-                        <a href="home.html"> <i class="fa fa-newspaper-o fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15  lv-icons">
-                        <a href="circles.html"> <i class="fa fa-circle-thin fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15  lv-icons">
-                        <a href="upload.html"> <i class="fa fa-camera fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15 lv-icons">
-                        <a href="profile.html"> <i class="fa fa-user-o fa-3x"></i></a>
-                    </div>
-                    <div class="col-md-15  col-xs-15 lv-icons">
-                        <a href="settings.html"> <i class="fa fa-sliders fa-3x"></i></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </footer>
+    <?php
+        include('includes/footer.php');
+    ?>
 
 </body>
 
