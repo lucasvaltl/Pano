@@ -7,6 +7,7 @@ ob_start();
 session_start();
 
 include('includes/config.php');
+$filename = basename(__FILE__, '.php');
 ?>
 <!DOCTYPE html>
 <html>

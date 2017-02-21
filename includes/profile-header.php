@@ -28,16 +28,16 @@ $profileUserDescription='Working class citizen obsessed with photography! Workin
 </div>
 <div class="container profile-options">
   <div class="row">
-    <div class="col-md-3 col-xs-3   lv-icons border-right">
-      <a href="<?=SITE_ROOT?>/profile-info.php">     <i class="fa  fa-user fa-3x"></i></a>
+    <div class="col-md-3 col-xs-3   lv-icons-unclicked border-right <?php echo ($filename == 'profile-info' ? 'lv-icons-clicked': '' )?>">
+      <a href="<?=SITE_ROOT?>/profile-info.php">     <i class="fa  fa-picture-o fa-3x"></i></a>
     </div>
-    <div class="col-md-3  col-xs-3  lv-icons border-right">
+    <div class="col-md-3  col-xs-3  lv-icons-unclicked  border-right <?php echo ($filename == 'profile-collections' ? 'lv-icons-clicked': '' )?>">
         <a href="<?=SITE_ROOT?>/profile-collections.php">   <i class="fa fa-folder fa-3x"></i></a>
     </div>
-    <div class="col-md-3  col-xs-3  lv-icons border-right">
+    <div class="col-md-3  col-xs-3  lv-icons-unclicked  border-right <?php echo ($filename == 'profile-friends' ? 'lv-icons-clicked': '' )?>">
         <a href="<?=SITE_ROOT?>/profile-friends.php">   <i class="fa fa-users fa-3x"></i></a>
     </div>
-    <div class="col-md-3  col-xs-3 lv-icons">
+    <div class="col-md-3  col-xs-3 lv-icons-unclicked <?php echo ($filename == 'profile-circles' ? 'lv-icons-clicked': '' )?>">
         <a href="<?=SITE_ROOT?>/profile-circles.php">   <i class="fa fa-circle-o fa-3x"></i></a>
     </div>
     </div>

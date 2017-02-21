@@ -98,7 +98,7 @@ a .profile-picture{
 }
 
 .profile-info .profile-user-picture {
-  max-height: 120px;
+  max-height: 135px;
   width: auto;
 }
 
@@ -106,6 +106,14 @@ a .profile-picture{
   height: 30px;
   width: auto;
 }
+
+.friend-picture{
+  height: 70px;
+  width: auto;
+}
+
+
+
 
 /*navbars*/
 
@@ -185,6 +193,22 @@ a .profile-picture{
 
 .lv-icons a:hover i {
   color: #56c7a5;
+}
+
+.lv-icons-unclicked a i {
+  color: #cdcdcd;
+}
+
+.lv-icons-unclicked a:hover i {
+  color: #888;
+}
+
+.lv-icons-clicked a i {
+  color: #888;
+}
+
+.lv-icons-clicked a:hover i {
+  color: #777;
 }
 
 
@@ -314,6 +338,30 @@ input.actual-comment{
   border-right: 1px solid #ccc;
 }
 
+/*profile-collections*/
+
+.collections-content,.collections-content  a, .friends-content, .friends-content a{
+  text-align: center;
+  color: #444;
+}
+
+
+/*friends*/
+.friend-name{
+  text-align: left;
+  font-size: 1.7em;
+}
+
+.friending-icon{
+  padding-top: 6px;
+  text-align: right;
+  color: #aaa;
+}
+
+ a:hover .friending-icon{
+  text-align: right;
+  color: #888;
+}
 
 
 /*other*/
