@@ -117,7 +117,7 @@ a .profile-picture{
 }
 
 .circle-cover{
-
+-webkit-clip-path: circle(70px at center);
 clip-path: circle(70px at center);
 display: inline;
 }
