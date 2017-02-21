@@ -45,7 +45,7 @@ include('includes/config.php');
 
         $posts= [
 
-        new post("IMG_8937", "1", "curious_clark", "656", "1", "#bestintheworld", "Bergen, Austria" ),
+        new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria" ),
         new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil" ),
         new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK" )
         ];

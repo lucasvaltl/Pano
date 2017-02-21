@@ -1,4 +1,5 @@
 <?php
+
 //ob_start needed to allow redirecting after login
 ob_start();
 
@@ -25,11 +26,18 @@ include('includes/config.php');
         include('includes/header.php');
      ?>
     <main>
+      <div class="profile-header">
+        <?php
+        include('includes/profile-header.php')
+         ?>
+      </div>
+      <div class="content">
+
+      </div>
 
 
 
     </main>
-
     <?php
         include('includes/footer.php');
     ?>
