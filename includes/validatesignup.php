@@ -34,6 +34,8 @@ if (isset($_POST['submit'])) {
     $ShortDescrip = mysqli_real_escape_string($conn, $_POST['ShortDescrip']);
 
 
+
+
     //checking if fields are missing
     foreach ($_POST as $key => $value) {
         $value = is_array($value) ? $value : trim($value);
@@ -99,6 +101,10 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
 
     if (mysqli_query($conn, $query)) {
         echo "New record created successfully";
+
+        $_SESSION['UserName'] = $UserName;
+        //SettingID set to 3 to correspond with the default SettingID upon creation of new user
+        $_SESSION['SettingID'] = 3;
 
         header("Location: home.php");
 

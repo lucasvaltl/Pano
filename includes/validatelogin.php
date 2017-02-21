@@ -10,6 +10,7 @@ if (isset($_POST['submit'])) {
     $UserName = mysqli_real_escape_string($conn, $_POST['UserName']);
     $Password = mysqli_real_escape_string ($conn, $_POST['Password']);
 
+
     $query = "SELECT * FROM user WHERE UserName = '$UserName'";
 
     if ($result = mysqli_query($conn, $query)) {
@@ -20,7 +21,8 @@ if (isset($_POST['submit'])) {
         //if there is only one entry matching a username (sanity check) and the password matches
         if ($count == 1 && password_verify($Password, $row['Password'])){
             $_SESSION['UserName'] = $UserName;
-            $invalid_credentials = true;
+            $_SESSION['SettingID'] = $row['SettingID'];
+            $invalid_credentials = false;
             header("Location: home.php");
         } else {
             $invalid_credentials = true;
