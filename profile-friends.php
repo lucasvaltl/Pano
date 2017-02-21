@@ -38,22 +38,23 @@ $filename = basename(__FILE__, '.php');
         <h2><?= $profileUserName ?>'s Friends</h2>
         <br />
         <hr />
-        <div class="row friend-content">
-          <div class="col-md-6 col-xs-6 friend-name">
-            <a href="profile.php">&nbsp;
-              <img src="images/profilepics/2.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; JudgyJudy
-            </a>
-          </div>
 
-               <div class="col col-md-6 col-xs-6 friending-icon">
-                 <!-- need to implement friending here! -->
-                 <a href="" class="" ng-click="isfriend = !isfriend"> <i  class="fa fa-3x fa-check friending-icon" ng-show="isfriend" ng-model="isfriend"></i>
-                   <i  class="fa fa-3x fa-user-plus friending-icon" ng-hide="isfriend"></i>
-                 </a>  
-               </div>
+      <?php
+include('includes/friends-list.php');
 
-        </div>
-         <hr>
+$friends = [
+new frienditem('JudgyJudy', 'profile-info', '3', False),
+new frienditem('Carl', 'profile-info', '4', True),
+new frienditem('Johnson', 'profile-info', '5', False),
+new frienditem('JakeJohnson', 'profile-info', '2', False),
+new frienditem('MrVanDenBorn', 'profile-info', '1', true)
+];
+
+foreach($friends as $friend){
+  echo $friend->returnHTML();
+}
+
+       ?>
 
 
 
