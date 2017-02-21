@@ -23,11 +23,11 @@ public function setBorderRight(){
 public function returnHTML(){
 
 
-$output =  ' <div class="col col-sm-6 mask-container ' . $this->borderRight . '">
+$output =  ' <div class="col col-sm-6  ' . $this->borderRight . '">
     <a href="'.SITE_ROOT.'/' . $this->collectionLinkA . '">
 
-    <p>
-          <img src="'.SITE_ROOT.'/images/panoramas/'.$this->collectionImageIDA.'.jpg" class="img-responsive  circle-cover circle-cover" />
+    <p class="mask-container">
+          <img src="'.SITE_ROOT.'/images/panoramas/'.$this->collectionImageIDA.'.jpg" class="img-responsive  circle-cover center-center" />
     </p>
 
     <p>

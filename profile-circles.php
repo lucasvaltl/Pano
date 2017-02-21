@@ -42,7 +42,10 @@ $filename = basename(__FILE__, '.php');
         $collections = [
         new circle('circle.php', 'IMG_8937', 'Besties'),
         new circle('circle.php', 'IMG_2821', 'London Crew'),
-        new circle('circle.php', 'IMG_6346', 'MSCCSUCL')
+        new circle('circle.php', 'IMG_6346', 'MSCCSUCL'),
+            new circle('circle.php', 'IMG_2821', 'MSCCSUCL'),
+            new circle('circle.php', 'IMG_8937', 'MSCCSUCL'),
+            new circle('circle.php', 'IMG_6346', 'MSCCSUCL')
         ];
 
         $count = 1;

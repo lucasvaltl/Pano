@@ -113,18 +113,13 @@ a .profile-picture{
 }
 
 .mask-container{
-  align-content: center;
-    align-items: center;
+  min-height: 185px;
 }
 
 .circle-cover{
-  width: 150px;
-  height: 150px;
-    -webkit-mask-image: url(circles-mask.png);
-    mask-image: url(circles-mask.png);
-mask-size: contain;
+
+clip-path: circle(70px at center);
 display: inline;
-filter: blur(10px) saturate(8);
 }
 
 hr{
