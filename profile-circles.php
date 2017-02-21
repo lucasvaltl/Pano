@@ -32,7 +32,44 @@ $filename = basename(__FILE__, '.php');
         include('includes/profile-header.php')
          ?>
       </div>
-      <div class="content">
+      <div class="content circles-content container">
+        <h2><?= $profileUserName ?>'s Circles</h2>
+        <br />
+        <?php
+        include('includes/circle-cover.php');
+
+        //create an array of collections - will need to be redone with php when the database is ready
+        $collections = [
+        new circle('circle.php', 'IMG_8937', 'Besties'),
+        new circle('circle.php', 'IMG_2821', 'London Crew'),
+        new circle('circle.php', 'IMG_6346', 'MSCCSUCL')
+        ];
+
+        $count = 1;
+          echo '<hr/> ';
+        //insert the collections into the page
+        foreach($collections as $collection){
+
+        // insert a new row every two elements
+        if($count % 2 != 0){
+        echo '<div class="row"> ';
+        $collection->setBorderRight();
+        }
+        //insert post
+        $collection->returnHTML();
+        //close row every two elements and insert a dividor
+        if($count % 2 == 0){
+          echo '</div> <hr/> ';
+        }
+        $count += 1;
+
+        }
+
+        ?>
+
+
+
+
 
       </div>
 

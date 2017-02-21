@@ -58,7 +58,7 @@ font-family: 'Lato-Light', sans-serif;
 /*alignment*/
 
 body{
-padding-top: 70px;
+padding-top: 60px;
 padding-bottom: 70px;
 }
 
@@ -112,6 +112,24 @@ a .profile-picture{
   width: auto;
 }
 
+.mask-container{
+  align-content: center;
+    align-items: center;
+}
+
+.circle-cover{
+  width: 150px;
+  height: 150px;
+    -webkit-mask-image: url(circles-mask.png);
+    mask-image: url(circles-mask.png);
+mask-size: contain;
+display: inline;
+filter: blur(10px) saturate(8);
+}
+
+hr{
+  color: #ccc;
+}
 
 
 
@@ -327,6 +345,11 @@ input.actual-comment{
 
 /*profile*/
 
+.collections-content,.collections-content  a, .friends-content, .friends-content a,  .collection-content,  .collection-content a, .circles-content, .circles-content a{
+  text-align: center;
+  color: #444;
+}
+
 /*profile-info*/
 .profile-info{
   padding-top: 10px;
@@ -340,9 +363,20 @@ input.actual-comment{
 
 /*profile-collections*/
 
-.collections-content,.collections-content  a, .friends-content, .friends-content a{
-  text-align: center;
-  color: #444;
+
+.collections-content h2, .friends-content h2, .collection-content h2{
+  padding-top: 3px;
+}
+
+.new-collection,.new-collection a {
+  font-size: 1.4em;
+    color: #fff;
+}
+
+.alignright{
+  float: right;
+  text-align: right;
+  padding-right: 10px;
 }
 
 
@@ -363,6 +397,7 @@ input.actual-comment{
   color: #888;
 }
 
+/*circles*/
 
 /*other*/
 
