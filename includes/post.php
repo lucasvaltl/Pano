@@ -40,7 +40,7 @@ foreach($comments as $comment){
 }
 
 public function returnHTML(){
-$currentComments;
+$currentComments = "";
   foreach ($this->comments as $comment){
     $currentComments .= ' <div class= "row post-comment">
        <div class="comment-user-picture col-md-12 col-xs-12">
@@ -81,7 +81,7 @@ $currentComments;
           </p>
         </div>
         <div class="post-content col-md-6  col-xs-6 ">
-          <div class="post-location lv-top-padding" >
+          <div class="location lv-top-padding" >
             <p>
               <i class="fa fa-map-marker fa-lg"></i>&nbsp;  ' . $this->postLocation . '
             </p>

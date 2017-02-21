@@ -34,6 +34,22 @@ if (isset($_POST['submit'])) {
     $ShortDescrip = mysqli_real_escape_string($conn, $_POST['ShortDescrip']);
 
 
+    //TODO come back when server is up
+    /*
+    $to = $EmailAddress;
+    $subject = "Welcome to Pano!";
+    $message = "Why are you reading this email for? Get uploading your amazing Panorama photos and find your friends!";
+
+
+
+    $headers = [];
+    $headers[] = 'From: likoxie@gmail.com';
+    $headers[] = 'Cc: likoxie@gmail.com';
+    $headers[] = 'Content-type: text/plain; charset=utf-8';
+    */
+
+
+
     //checking if fields are missing
     foreach ($_POST as $key => $value) {
         $value = is_array($value) ? $value : trim($value);
@@ -99,6 +115,16 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
 
     if (mysqli_query($conn, $query)) {
         echo "New record created successfully";
+
+
+        //welcome email can be sent
+        //TODO MAKE SURE TO DO THIS WHEN THE SERVER IS ONLINE
+        //mail($to, $subject, $message, implode("\r\n", $headers));
+
+
+        $_SESSION['UserName'] = $UserName;
+        //SettingID set to 3 to correspond with the default SettingID upon creation of new user
+        $_SESSION['SettingID'] = 3;
 
         header("Location: home.php");
 

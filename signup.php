@@ -1,5 +1,8 @@
 <?php
 ob_start();
+
+//session_start() needed to use global session variabls $_SESSION etc
+session_start();
 ?>
 
 <!DOCTYPE html>
