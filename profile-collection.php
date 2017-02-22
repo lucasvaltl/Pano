@@ -29,34 +29,46 @@ $filename = basename(__FILE__, '.php');
         include('includes/header.php');
      ?>
     <main>
+
       <div class="profile-header">
         <?php
         include('includes/profile-header.php')
          ?>
       </div>
-      <div class="content friends-content container">
-        <h2><?= $profileUserName ?>'s Friends</h2>
+      <div class="content collection-content">
+        <?php
+$thisCollection ='Outside';
+         ?>
+        <h2><?= $thisCollection ?> by  <?= $profileUserName ?></h2>
+
         <br />
         <hr />
 
-      <?php
-include('includes/friends-list.php');
 
-$friends = [
-new frienditem('JudgyJudy', 'profile-info', '3', False),
-new frienditem('Carl', 'profile-info', '4', True),
-new frienditem('Johnson', 'profile-info', '5', False),
-new frienditem('JakeJohnson', 'profile-info', '2', False),
-new frienditem('MrVanDenBorn', 'profile-info', '1', true)
-];
+        <?php
+      include 'includes/post.php';
 
-foreach($friends as $friend){
-  echo $friend->returnHTML();
-}
+      $posts= [
 
-       ?>
+      new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria" ),
+      new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil" ),
+      new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK" )
+      ];
 
+      $comments=[
+      new comment("LikelyLucy","3","wow amazing stuff here"),
+      new comment("judgyjudy","2","Great Work"),
+      new comment("GrannyGiu","5","Not so sure...I would add more color")
+      ];
 
+      foreach ($posts as $post){
+        $post->addComments($comments);
+      }
+
+      foreach ($posts as $post){
+        $post->returnHTML();
+      }
+        ?>
 
       </div>
 

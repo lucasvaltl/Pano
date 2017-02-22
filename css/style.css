@@ -58,7 +58,7 @@ font-family: 'Lato-Light', sans-serif;
 /*alignment*/
 
 body{
-padding-top: 70px;
+padding-top: 60px;
 padding-bottom: 70px;
 }
 
@@ -98,7 +98,7 @@ a .profile-picture{
 }
 
 .profile-info .profile-user-picture {
-  max-height: 120px;
+  max-height: 135px;
   width: auto;
 }
 
@@ -106,6 +106,27 @@ a .profile-picture{
   height: 30px;
   width: auto;
 }
+
+.friend-picture{
+  height: 70px;
+  width: auto;
+}
+
+.mask-container{
+  min-height: 185px;
+}
+
+.circle-cover{
+-webkit-clip-path: circle(70px at center);
+clip-path: circle(70px at center);
+display: inline;
+}
+
+hr{
+  color: #ccc;
+}
+
+
 
 /*navbars*/
 
@@ -185,6 +206,22 @@ a .profile-picture{
 
 .lv-icons a:hover i {
   color: #56c7a5;
+}
+
+.lv-icons-unclicked a i {
+  color: #cdcdcd;
+}
+
+.lv-icons-unclicked a:hover i {
+  color: #888;
+}
+
+.lv-icons-clicked a i {
+  color: #888;
+}
+
+.lv-icons-clicked a:hover i {
+  color: #777;
 }
 
 
@@ -303,6 +340,11 @@ input.actual-comment{
 
 /*profile*/
 
+.collections-content,.collections-content  a, .friends-content, .friends-content a,  .collection-content,  .collection-content a, .circles-content, .circles-content a{
+  text-align: center;
+  color: #444;
+}
+
 /*profile-info*/
 .profile-info{
   padding-top: 10px;
@@ -314,7 +356,43 @@ input.actual-comment{
   border-right: 1px solid #ccc;
 }
 
+/*profile-collections*/
 
+
+.collections-content h2, .friends-content h2, .collection-content h2{
+  padding-top: 3px;
+}
+
+.new-collection,.new-collection a {
+  font-size: 1.4em;
+    color: #fff;
+}
+
+.alignright{
+  float: right;
+  text-align: right;
+  padding-right: 10px;
+}
+
+
+/*friends*/
+.friend-name{
+  text-align: left;
+  font-size: 1.7em;
+}
+
+.friending-icon{
+  padding-top: 6px;
+  text-align: right;
+  color: #aaa;
+}
+
+ a:hover .friending-icon{
+  text-align: right;
+  color: #888;
+}
+
+/*circles*/
 
 /*other*/
 
