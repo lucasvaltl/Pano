@@ -20,7 +20,12 @@ if (isset($_POST['submit'])) {
 
         //if there is only one entry matching a username (sanity check) and the password matches
         if ($count == 1 && password_verify($Password, $row['Password'])){
+            $_SESSION['UserID'] = $row['UserID'];
             $_SESSION['UserName'] = $UserName;
+            $_SESSION['FirstName'] = $row['FirstName'];
+            $_SESSION['LastName'] = $row['LastName'];
+            $_SESSION['Location'] = $row['Location'];
+            $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
             $_SESSION['SettingID'] = $row['SettingID'];
             $invalid_credentials = false;
             header("Location: home.php");
