@@ -11,6 +11,12 @@ require_once('includes/dbconnect.php');
 
 $filename = basename(__FILE__, '.php');
 
+if (isset($_GET['id'])) {
+    $profileUserName = $_GET['id'];
+    include('includes/profile-header.php');
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,12 +39,7 @@ $filename = basename(__FILE__, '.php');
      ?>
     <main>
       <div class="profile-header">
-        <?php
-        if (isset($_GET['id'])) {
-            $profileUserName = $_GET['id'];
-            include('includes/profile-header.php');
-        }
-         ?>
+
       </div>
 <div class="profile-content" >
 

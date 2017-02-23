@@ -10,7 +10,13 @@ include('includes/config.php');
 require_once('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
 
+if (isset($_GET['id'])) {
+    $profileUserName = $_GET['id'];
+    include('includes/profile-header.php');
+}
+
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -29,7 +35,9 @@ $filename = basename(__FILE__, '.php');
 <body ng-app="">
   <!-- needs to be made dependent on the fact that this is your own profile -->
   <div class="new-collection" id="gradhome" ng-hide="newCollectionPopup">
-      <a href="collection-creation.php">Add a new Collection +</a>
+      <?php if ($_SESSION['UserName'] == $profileUserName) : ?>
+          <a href="collection-creation.php">Add a new Collection +</a>
+    <?php endif; ?>
     <span class="alignright">
        <a href="" ng-click="newCollectionPopup = !newCollectionPopup">X</a>
     </span>
@@ -40,12 +48,7 @@ $filename = basename(__FILE__, '.php');
      ?>
     <main>
       <div class="profile-header">
-        <?php
-        if (isset($_GET['id'])) {
-            $profileUserName = $_GET['id'];
-            include('includes/profile-header.php');
-        }
-         ?>
+
       </div>
       <div class="content container collections-content">
   <h2><?= $profileUserName ?>'s Collections</h2>
