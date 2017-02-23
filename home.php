@@ -27,19 +27,11 @@ include('includes/config.php');
 
     <?php
         require_once('includes/dbconnect.php');
-
-        //of user is not uet logged in, redirect them to the login page
-        /*
-        if(!isset($_SESSION['UserName'])) {
-           header("Location: login.php");
-           exit;
-        }
-        */
-
         include('includes/header.php');
       ?>
 
     <main>
+
           <?php
         include 'includes/post.php';
 

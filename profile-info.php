@@ -7,8 +7,16 @@ ob_start();
 session_start();
 
 include('includes/config.php');
+require_once('includes/dbconnect.php');
 
 $filename = basename(__FILE__, '.php');
+
+if (isset($_GET['id'])) {
+    $profileUserName = $_GET['id'];
+    include('includes/profile-header.php');
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +30,7 @@ $filename = basename(__FILE__, '.php');
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Pano - Profile</title>
+    <title>Pano - <?php echo $profileUserName;?></title>
 </head>
 
 <body ng-app="">
@@ -31,22 +39,12 @@ $filename = basename(__FILE__, '.php');
      ?>
     <main>
       <div class="profile-header">
-        <?php
-        include('includes/profile-header.php')
-         ?>
+
       </div>
 <div class="profile-content" >
 
       <?php
-          require_once('includes/dbconnect.php');
 
-          //of user is not uet logged in, redirect them to the login page
-          /*
-          if(!isset($_SESSION['UserName'])) {
-             header("Location: login.php");
-             exit;
-          }
-          */
           include('includes/header.php');
         ?>
             <?php

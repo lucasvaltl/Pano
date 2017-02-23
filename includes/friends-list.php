@@ -16,7 +16,7 @@ class frienditem{
   public function returnHTML(){
     $output = '<div class="row friend-content">
     <div class="col-md-6 col-xs-6 friend-name">
-    <a href="'.SITE_ROOT.'/'.$this->friendLink.'.php">&nbsp;
+    <a href="'.SITE_ROOT.'/profile-info.php?id='.$this->friendLink.'">&nbsp;
     <img src="'.SITE_ROOT.'/images/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
     </a>
     </div>

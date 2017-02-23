@@ -123,10 +123,27 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
 
 
         $_SESSION['UserName'] = $UserName;
-        //SettingID set to 3 to correspond with the default SettingID upon creation of new user
-        $_SESSION['SettingID'] = 3;
 
-        header("Location: home.php");
+        $query = "SELECT * FROM user WHERE UserName = '{$_SESSION['UserName']}'";
+        //SettingID set to 3 to correspond with the default SettingID upon creation of new user
+
+        if ($result = mysqli_query($conn, $query)) {
+
+            $count = mysqli_num_rows($result);
+            $row = mysqli_fetch_array($result);
+
+            //if there is only one entry matching a username (sanity check) and the password matches
+            if ($count == 1){
+                $_SESSION['UserID'] = $row['UserID'];
+                $_SESSION['FirstName'] = $row['FirstName'];
+                $_SESSION['LastName'] = $row['LastName'];
+                $_SESSION['Location'] = $row['Location'];
+                $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
+                $_SESSION['SettingID'] = $row['SettingID'];
+
+                header("Location: home.php");
+            }
+        }
 
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($conn);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 16, 2017 at 04:49 PM
+-- Generation Time: Feb 23, 2017 at 04:11 AM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -80,6 +80,16 @@ CREATE TABLE `friends` (
   `UserID` int(20) NOT NULL,
   `FriendID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `friends`
+--
+
+INSERT INTO `friends` (`UserID`, `FriendID`) VALUES
+(12399, 12400),
+(12402, 12400),
+(12400, 12401),
+(12399, 12402);
 
 -- --------------------------------------------------------
 
@@ -170,6 +180,15 @@ CREATE TABLE `privacy settings` (
   `Description` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `privacy settings`
+--
+
+INSERT INTO `privacy settings` (`SettingID`, `Description`) VALUES
+(1, 'Friends Only'),
+(2, 'Friends of Friends'),
+(3, 'Public');
+
 -- --------------------------------------------------------
 
 --
@@ -185,15 +204,20 @@ CREATE TABLE `user` (
   `Password` char(64) NOT NULL,
   `Location` varchar(150) NOT NULL,
   `ShortDescrip` varchar(150) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `SettingID` int(5) NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Password`, `Location`, `ShortDescrip`, `DateCreated`) VALUES
-(12345, 'Li', 'Xie', 'Liko', '', '', 'London', 'This is a short description', '2017-02-16 13:10:57');
+INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Password`, `Location`, `ShortDescrip`, `DateCreated`, `SettingID`) VALUES
+(12399, 'Li', 'Xie', 'Liko', 'liko@mail.com', '$2y$10$SW1DWeNQuLcFdbWs2PgXiO5VqCrUDdzJ173sEi/tLmL9oWsXWmI4G', 'London', 'Yolo', '2017-02-21 18:24:29', 2),
+(12400, 'Lucas', 'Valtl', 'Lucas', 'lucas@pano.com', '$2y$10$KZHC1VBrAWtUZJPrcwyb9uL1TWIwJqP9FIYT7O2k4BNvK5PX8ZYay', 'London', 'I like Pano', '2017-02-21 18:25:19', 3),
+(12401, 'Florian', 'Obst', 'Florian', 'florian@pano.com', '$2y$10$JCCx7lZflspi.B55V7j8bOEuJG.gM1MlpeQbrZDeYiT8oh0MLRm2m', 'London', 'Go Pano Go', '2017-02-21 18:25:47', 3),
+(12402, 'Johannes', 'Landgraf', 'Johannes', 'johannes@pano.com', '$2y$10$6Bq0sco8ddlwFUy47oNAA.Nm.QvD7wmMtYaA.z6iuRsjLOOLyHWHm', 'London', 'Pano is great', '2017-02-21 18:26:32', 3),
+(12403, 'Noob', 'Master', 'Noob123', 'noob@mail.com', '$2y$10$bfqBPR5mPB0nuuY4SAEOo.M090R/7Q3x/b/N10T5Hpkku7U3kcLfG', 'London', 'I am a noob', '2017-02-22 22:57:13', 3);
 
 -- --------------------------------------------------------
 
@@ -351,7 +375,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12346;
+  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12404;
 --
 -- Constraints for dumped tables
 --
