@@ -11,9 +11,6 @@ require_once('includes/dbconnect.php');
 
 $filename = basename(__FILE__, '.php');
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
