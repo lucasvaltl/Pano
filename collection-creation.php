@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
       <div class="row collection-creation-header">
         <div class="create-collection-name">
 
-                <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': ((CollectionName.length*13)+10) + 'px'}" ng-model="CollectionName">
+                <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '320': ((CollectionName.length*13))) + 'px'}" ng-model="CollectionName">
 
 
            by  <?= $profileUserName ?>
@@ -48,37 +48,37 @@ if (isset($_GET['id'])) {
         <br />
         <hr />
       </div>
-      <div class="content collection-content">
-
-
-
-
-
-
+      <div class="content collection-creation">
+<h4>Please choose the picture(s) you want to add to this album</h4>
         <?php
-      include 'includes/post.php';
+          include('includes/collection-creation-picture.php');
 
-      $posts= [
+        //create an array of collections - will need to be redone with php when the database is ready
 
-      new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria" ),
-      new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil" ),
-      new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK" )
-      ];
+        for ($i=0; $i <4 ; $i++) {
+          $pictures[] = new picture('IMG_8937');
+          $pictures[] = new picture('IMG_2821');
+          $pictures[] = new picture('IMG_6346');
+        }
+        $count = 1;
+        //insert the collections into the page
+        foreach($pictures as $picture){
 
-      $comments=[
-      new comment("LikelyLucy","3","wow amazing stuff here"),
-      new comment("judgyjudy","2","Great Work"),
-      new comment("GrannyGiu","5","Not so sure...I would add more color")
-      ];
+          // insert a new row every two elements
+        if($count % 3 == 0){
+          echo '<div class="row picture-list-row"> ';
+        }
+        //insert post
+          $picture->returnHTML();
+          //close row every two elements and insert a dividor
+          if($count % 3 == 0){
+            echo '</div>';
+          }
+          $count += 1;
 
-      foreach ($posts as $post){
-        $post->addComments($comments);
-      }
+        }
 
-      foreach ($posts as $post){
-        $post->returnHTML();
-      }
-        ?>
+         ?>
 
       </div>
 
