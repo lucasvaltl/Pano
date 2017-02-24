@@ -12,8 +12,8 @@ $filename = basename(__FILE__, '.php');
 
 if (isset($_GET['id'])) {
     $profileUserName = $_GET['id'];
-    include('includes/profile-header.php');
-}
+  }
+
 
 ?>
 
@@ -33,23 +33,27 @@ if (isset($_GET['id'])) {
 </head>
 
 <body ng-app="">
-  <!-- needs to be made dependent on the fact that this is your own profile -->
-  <div class="new-collection" id="gradhome" ng-hide="newCollectionPopup">
-      <?php if ($_SESSION['UserName'] == $profileUserName) : ?>
-          <a href="collection-creation.php">Add a new Collection +</a>
-    <?php endif; ?>
-    <span class="alignright">
-       <a href="" ng-click="newCollectionPopup = !newCollectionPopup">X</a>
-    </span>
 
-  </div>
     <?php
         include('includes/header.php');
      ?>
     <main>
-      <div class="profile-header">
-
+      <div class="new-collection" id="gradhome" ng-hide="newCollectionPopup">
+          <?php if ($_SESSION['UserName'] == $profileUserName) : ?>
+              <a href="collection-creation.php?id=<?=$profileUserName?>">Add a new Collection +</a>
+        <span class="alignright">
+           <a href="" ng-click="newCollectionPopup = !newCollectionPopup">X</a>
+        </span>
+        <?php endif; ?>
       </div>
+      <div class="profile-header">
+<?php
+if (isset($_GET['id'])) {
+    include('includes/profile-header.php');
+}
+?>
+      </div>
+
       <div class="content container collections-content">
   <h2><?= $profileUserName ?>'s Collections</h2>
   <br />
