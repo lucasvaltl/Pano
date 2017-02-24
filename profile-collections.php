@@ -57,12 +57,14 @@ if (isset($_GET['id'])) {
   include('includes/collection-cover.php');
 
 //create an array of collections - will need to be redone with php when the database is ready
+$link = 'profile-collection.php?id='. $profileUserName;
+
 $collections = [
-new collections('profile-collection.php', 'IMG_8937', 'Outside'),
-new collections('profile-collection.php', 'IMG_2821', 'Nature'),
-new collections('profile-collection.php', 'IMG_8937', 'Outside'),
-new collections('profile-collection.php', 'IMG_8937', 'Outside'),
-new collections('profile-collection.php', 'IMG_8937', 'Outside')
+new collections($link, 'IMG_8937', 'Outside'),
+new collections($link,'IMG_2821', 'Nature'),
+new collections($link, 'IMG_8937', 'Outside'),
+new collections($link, 'IMG_8937', 'Outside'),
+new collections($link, 'IMG_8937', 'Outside')
 ];
 
 $count = 1;
