@@ -10,6 +10,11 @@ include('includes/config.php');
 require_once('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
 
+
+if (isset($_GET['id'])) {
+    $profileUserName = $_GET['id'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +41,6 @@ $filename = basename(__FILE__, '.php');
         <?php
         if (isset($_GET['id'])) {
             $profileUserName = $_GET['id'];
-            include('includes/profile-header.php');
         }
          ?>
       </div>
