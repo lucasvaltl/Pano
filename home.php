@@ -35,17 +35,92 @@ include('includes/config.php');
           <?php
         include 'includes/post.php';
 
-        $posts= [
+        $query = "SELECT * FROM posts
+                    LEFT JOIN user ON user.`UserID` = posts.`UserID`";
 
-        new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria" ),
-        new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil" ),
-        new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK" )
+        //for each post:
+        if ($result = mysqli_query($conn, $query)) {
+            $count = mysqli_num_rows($result);
+            while ($post = mysqli_fetch_array($result)) {
+
+                $postID = $post['PostID'];
+                $numComments; //calculated in query 2
+                $numLikes; //not in DB
+                $postUserName = $post['UserName'];
+                $postPictureID = $post['PhotoID'];
+                $postUserPictureID = 1;
+                $postDescription = $post['PostText'];
+                $postLocation = $post['PostLocation'];
+                $postTimeStamp = $post['PostTime'];
+                //array stores all the comments from the second query
+                $comments = [];
+                $likes = [];
+
+                //gathers all the comments for a photo
+                $query2 = "SELECT * FROM comments
+                            LEFT JOIN user ON user.`UserID` = comments.`UserID`
+                            WHERE PhotoID = $postPictureID";
+
+                if ($result2 = mysqli_query($conn, $query2)) {
+                    $numComments = mysqli_num_rows($result2);
+
+
+                    while ($comment = mysqli_fetch_array($result2)) {
+
+                        $commentID = $comment['CommentID'];
+                        $commentUserName = $comment['UserName'];
+                        $commentUserPictureID = 2;
+                        $commentContent = $comment['Comment'];
+                        $commentTimeStamp = $comment['CommentTime'];
+
+
+
+                        $comment = new comment($commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
+
+                        $comments[] = $comment;
+
+                    }
+
+                }
+
+                $query3 = "SELECT * FROM likes
+                            LEFT JOIN user ON user.`UserID` = likes.`UserID`
+                            WHERE PhotoID = $postPictureID";
+
+                if ($result3 = mysqli_query($conn, $query2)) {
+                    $numLikes = mysqli_num_rows($result3);
+
+                    while($like = mysqli_fetch_array($result3)) {
+                        $LikeUserName = $like['UserName'];
+
+                        $likes[] = $like;
+                    }
+                }
+
+                $post = new post("IMG_8937", $postUserPictureID, $postUserName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp);
+
+                echo $post->addComments($comments);
+
+                echo $post->returnHTML();
+
+
+            }
+
+
+        }
+
+
+/*
+        $posts= [
+        new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria", "12/02/17 10:45" ),
+        new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil", "11/02/17 12:04" ),
+        new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK", "10/02/17 15:45" )
         ];
 
         $comments=[
-        new comment("LikelyLucy","3","wow amazing stuff here"),
-        new comment("judgyjudy","2","Great Work"),
-        new comment("GrannyGiu","5","Not so sure...I would add more color")
+        new comment("LikelyLucy","3","wow amazing stuff here", "12/02/17 13:45"),
+        new comment("judgyjudy","2","Great Work", "12/02/17 15:23"),
+        new comment("GrannyGiu","5","Not so sure...I would add more color", "13/02/17 17:02")
         ];
 
         foreach ($posts as $post){
@@ -55,6 +130,8 @@ include('includes/config.php');
         foreach ($posts as $post){
           $post->returnHTML();
         }
+
+*/
           ?>
 
     </main>
