@@ -231,6 +231,7 @@ hr{
   color: white;
   background-color: transparent;
 margin: 10px 10px 10px 10px;
+vertical-align: middle;
 width: 150px;
 height: 40px;
 font-size: 1.1em;
@@ -250,6 +251,12 @@ font-size: 1.1em;
   width: 150px;
     text-decoration: none;
 }
+
+.add-padding{
+  padding-top:50px;
+}
+
+
 
 /*upload box*/
 .drag-in{
@@ -396,14 +403,34 @@ input.actual-comment{
       border-bottom: 1px solid  #61e8bf;
 }
 
+.add-padding-40{
+    padding-top: 38px;
+
+}
+
+.add-padding-30{
+    padding-top: 25px;
+}
+
 .create-collection-name, .create-collectionheader{
-  padding-top: 30px;
 color: #444;
   font-size: 1.7em;
 }
 
+.create-collection-name .lv-button{
+  height: 40px;
+  font-size: 1em;
+  width: 140px;
+  color: #444;
+  float: none;
+}
+
 .collection-creation{
   color: #444;
+}
+
+.create-collection-btn{
+  padding: 0 0 0 0;
 }
 
 .picture-list-col, .picture-list-row{

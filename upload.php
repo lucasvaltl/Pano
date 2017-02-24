@@ -25,7 +25,7 @@ include('includes/config.php');
     <?php
         include('includes/header.php');
     ?>
-    <main>
+    <main class="add-padding">
 
         <div class="drag-in row text-center">
             <p>

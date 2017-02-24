@@ -37,13 +37,19 @@ if (isset($_GET['id'])) {
     <main>
 
       <div class="row collection-creation-header">
-        <div class="create-collection-name">
+        <div class="create-collection-name row">
+<div class="col col-sm-9 add-padding-40">
+  <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '320': ((CollectionName.length*13))) + 'px'}" ng-model="CollectionName">
 
-                <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '320': ((CollectionName.length*13))) + 'px'}" ng-model="CollectionName">
 
+by  <?= $profileUserName ?>
+</div>
+              <div class="col col-sm-2 add-padding-30">
+                           <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="Create" />
+              </div>
+<div class="col col-sm-1">
 
-           by  <?= $profileUserName ?>
-
+</div>
         </div>
         <br />
         <hr />
