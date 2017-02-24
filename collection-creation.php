@@ -55,11 +55,14 @@ if (isset($_GET['id'])) {
 
         //create an array of collections - will need to be redone with php when the database is ready
 
-        for ($i=0; $i <4 ; $i++) {
+        for ($i=0; $i <1 ; $i++) {
           $pictures[] = new picture('IMG_8937');
           $pictures[] = new picture('IMG_2821');
           $pictures[] = new picture('IMG_6346');
+
         }
+
+
         $count = 1;
         //insert the collections into the page
         foreach($pictures as $picture){
