@@ -374,6 +374,32 @@ input.actual-comment{
   padding-right: 10px;
 }
 
+/*create collection*/
+
+.collection-name-input{
+  display: inline;
+  align-self: center;
+  height: inherit;
+    font-size: 1.1em;
+    color: #444!important;
+    width: 320px;
+    text-align: center;
+    padding: 0 0 0 0;
+    border: none;
+    border-bottom: 1px solid #444;
+    box-shadow: none;
+  border-radius: 0px;
+}
+
+.collection-name-input:focus{
+  box-shadow: none;
+}
+
+.create-collection-name, .create-collectionheader{
+  padding-top: 30px;
+color: #444;
+  font-size: 1.7em;
+}
 
 /*friends*/
 .friend-name{
@@ -393,6 +419,9 @@ input.actual-comment{
 }
 
 /*circles*/
+
+
+
 
 /*other*/
 

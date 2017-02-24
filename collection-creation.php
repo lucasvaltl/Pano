@@ -10,6 +10,10 @@ include('includes/config.php');
 require_once('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
 
+if (isset($_GET['id'])) {
+    $profileUserName = $_GET['id'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,21 +36,23 @@ $filename = basename(__FILE__, '.php');
      ?>
     <main>
 
-      <div class="profile-header">
-        <?php
-        if (isset($_GET['id'])) {
-            $profileUserName = $_GET['id'];
-        }
-         ?>
-      </div>
-      <div class="content collection-content">
-        <?php
-$thisCollection ='Outside';
-         ?>
-        <h2><?= $thisCollection ?> by  <?= $profileUserName ?></h2>
+      <div class="row collection-creation-header">
+        <div class="create-collection-name">
 
+                <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': ((CollectionName.length*13)+10) + 'px'}" ng-model="CollectionName">
+
+
+           by  <?= $profileUserName ?>
+
+        </div>
         <br />
         <hr />
+      </div>
+      <div class="content collection-content">
+
+
+
+
 
 
         <?php
