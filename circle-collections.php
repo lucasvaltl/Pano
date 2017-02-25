@@ -8,7 +8,14 @@ session_start();
 
 include('includes/config.php');
 require_once('includes/dbconnect.php');
+
 $filename = basename(__FILE__, '.php');
+
+if (isset($_GET['id'])) {
+  $circleName = $_GET['id'];
+
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -23,7 +30,7 @@ $filename = basename(__FILE__, '.php');
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="css/offset.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Pano - Profile</title>
+  <title>Pano - <?php echo $circleName;?></title>
 </head>
 
 <body ng-app="">
@@ -31,45 +38,27 @@ $filename = basename(__FILE__, '.php');
   include('includes/header.php');
   ?>
   <main>
-    <div class="profile-header">
+    <div class="circle-profile-header">
       <?php
-      if (isset($_GET['id'])) {
-        $profileUserName = $_GET['id'];
-      }
+      include('includes/circle-header.php');
       ?>
     </div>
-    <div class="popup" id="gradhome" ng-hide="newCollectionPopup">
-      <div class="create-circle-link">
-            <a href="circle-creation.php?id=<?=$profileUserName?>">&nbsp;  &nbsp; &nbsp;  Create new Circle</a>
-      </div>
-    <div class="create-circle-close">
 
-        <a lass="create-circle-close" href="" ng-click="newCollectionPopup = !newCollectionPopup">X &nbsp;  &nbsp;</a>
-    </div>
-    </div>
-    <div class="content circles-overview container">
-
-      <div class="circles-overview-header">
-      Your  Circles
-      <br />
-</div>
-      <div class="circles-overview-content">
-
-
+      <div class="content container circle-collections-content collections-content">
+        <h2><?= $circleName ?>'s Collections</h2>
+        <br />
         <?php
-        include('includes/circle-cover.php');
+        include('includes/collection-cover.php');
 
         //create an array of collections - will need to be redone with php when the database is ready
+        $link = 'profile-collection.php?id='. $circleName;
+
         $collections = [
-          new circle('circle-messages.php', 'IMG_8937', 'Besties'),
-          new circle('circle-messages.php', 'IMG_2821', 'London Crew'),
-          new circle('circle-messages.php', 'IMG_6346', 'MSCCSUCL'),
-          new circle('circle-messages.php', 'IMG_8937', 'Besties'),
-          new circle('circle-messages.php', 'IMG_2821', 'London Crew'),
-          new circle('circle-messages.php', 'IMG_6346', 'MSCCSUCL'),
-          new circle('circle-messages.php', 'IMG_8937', 'Besties'),
-          new circle('circle-messages.php', 'IMG_2821', 'London Crew'),
-          new circle('circle-messages.php', 'IMG_6346', 'MSCCSUCL')
+          new collections($link, 'IMG_8937', 'Outside'),
+          new collections($link,'IMG_2821', 'Nature'),
+          new collections($link, 'IMG_8937', 'Outside'),
+          new collections($link, 'IMG_8937', 'Outside'),
+          new collections($link, 'IMG_8937', 'Outside')
         ];
 
         $count = 1;
@@ -94,10 +83,6 @@ $filename = basename(__FILE__, '.php');
 
         ?>
       </div>
-
-    </div>
-
-
 
   </main>
   <?php

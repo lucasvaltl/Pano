@@ -53,7 +53,7 @@
         </div>
         <div class="col col-md-6  col-xs-6 container">
             <p class="profile-info-name">
-                <h3><?=$profileUserName?></h3>
+                <?=$profileUserName?>
             </p>
             <p class="profile-info-location location">
                 <i class="fa fa-map-marker fa-lg"></i>&nbsp;
