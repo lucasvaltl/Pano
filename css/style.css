@@ -453,8 +453,13 @@ top: -5px;
 .create-collection-check{
 width: 100%;
 height: 100%;
-/*hide checkbox to only display angular classwitching*/
+}
 
+/*circles*/
+
+.circles-overview, .circles-overview  a{
+  text-align: center;
+  color: #444;
 }
 
 .create-collection-check{
