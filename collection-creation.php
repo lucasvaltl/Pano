@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
         include('includes/header.php');
      ?>
     <main>
-
+<form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
       <div class="row collection-creation-header">
         <div class="create-collection-name row">
 <div class="col col-sm-9 add-padding-40">
@@ -61,7 +61,7 @@ by  <?= $profileUserName ?>
 
         //create an array of collections - will need to be redone with php when the database is ready
 
-        for ($i=0; $i <1 ; $i++) {
+        for ($i=0; $i <3 ; $i++) {
           $pictures[] = new picture('IMG_8937');
           $pictures[] = new picture('IMG_2821');
           $pictures[] = new picture('IMG_6346');
@@ -91,7 +91,7 @@ by  <?= $profileUserName ?>
 
       </div>
 
-
+</form>
 
     </main>
     <?php

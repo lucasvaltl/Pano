@@ -441,12 +441,55 @@ color: #444;
    position: relative;
 }
 
-.picture-list-picture-container i{
+
+.picture-list-picture-container input{
   position: absolute;
-  top: 70px;
-  left: 0;
-  width: 100%;
+top: -5px;
+  left: 0%;
+  text-align: center;
+  outline: none!important;
 }
+
+.create-collection-check{
+width: 100%;
+height: 100%;
+/*hide checkbox to only display angular classwitching*/
+
+}
+
+.create-collection-check{
+  -webkit-appearance: none;
+width: 100%;
+height: 100%;
+box-shadow: none;
+top: -5px;
+outline:none;
+/*hide checkbox to only display angular classwitching*/
+}
+
+.create-collection-check:checked{
+  -webkit-appearance: none;
+/*hide checkbox to only display angular classwitching*/
+background-color: white;
+  opacity: 0.5;
+  box-shadow: none;
+top: -4px;
+outline:none;
+}
+
+.create-collection-check:checked:after{
+  font-family: FontAwesome;
+   content: "\f00c";
+font-size: 4em;
+text-align: center;
+position: absolute;
+box-shadow: none;
+outline:none;
+top: 60px;
+left: 43%;
+}
+
+
 
 .picture-list-picture{
   width: 100%;
