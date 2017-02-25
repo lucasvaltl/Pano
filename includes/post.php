@@ -1,13 +1,13 @@
 <?php
 
 class comment{
-    public $userName;
+    public $commentUserName;
     public $commentUserPictureID;
     public $commentContent;
     public $commentTimeStamp;
 
-    public function __construct ( $userName, $commentUserPictureID, $commentContent, $commentTimeStamp ){
-        $this->userName = $userName;
+    public function __construct ( $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp ){
+        $this->commentUserName = $commentUserName;
         $this->commentUserPictureID = $commentUserPictureID;
         $this->commentContent = $commentContent;
         $this->commentTimeStamp = $commentTimeStamp;
@@ -18,7 +18,7 @@ class post{
 
     public $numComments;
     public $numLikes;
-    public $userName = "";
+    public $postUserName = "";
     public $postPictureID;
     public $postUserPictureID;
     public $postDescription;
@@ -26,10 +26,10 @@ class post{
     public $postTimeStamp;
     public $comments = array();
 
-    public function __construct ($postPictureID, $postUserPictureID, $userName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp){
+    public function __construct ($postPictureID, $postUserPictureID, $postUserName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp){
       $this->numComments = $numComments;
       $this->numLikes = $numLikes;
-      $this->userName = $userName;
+      $this->postUserName = $postUserName;
       $this->postPictureID = $postPictureID;
       $this->postUserPictureID = $postUserPictureID;
       $this->postDescription = $postDescription;
@@ -48,8 +48,8 @@ class post{
       foreach ($this->comments as $comment){
         $currentComments .= ' <div class= "row post-comment">
            <div class="comment-user-picture col-md-10 col-xs-10">
-             <a href="profile.php" >&nbsp;
-               <img src="images/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->userName . '
+             <a href="'. SITE_ROOT .'/profile-info.php?id='. $_SESSION['UserName'] .'" >&nbsp;
+               <img src="images/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
              </a>:
               &nbsp;    ' . $comment->commentContent . '
            </div>
@@ -70,8 +70,8 @@ class post{
         <div class="row ">
           <div class="container post-meta vertical-center">
             <div class="post-user-picture col-md-3 col-xs-3">
-              <a href="profile.php" >&nbsp;
-                <img src="images/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->userName.'
+              <a href="'. SITE_ROOT .'/profile-info.php?id='. $_SESSION['UserName'] .'" >&nbsp;
+                <img src="images/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
               </a>
             </div>
             <div class="post-like-comment col-md-1 col-xs-1 " >
@@ -107,10 +107,11 @@ class post{
         </div>
         <div class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
       ' . $currentComments . '
-             <div class="row user-comment">
-        <input type="text" class="form-control actual-comment" placeholder="What do you want to say about it?">
-          <a href="home.php" type="button" class="btn btn-default comment-button ">comment</a>
-             </div>
+      <form action="home.php" class="row user-comment" method="post">
+        <input type="hidden" name="postPictureID" value="' . $this->postPictureID .'" />
+         <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
+         <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
+      </form>
              <hr>
       </div>
       </div>
@@ -118,5 +119,23 @@ class post{
     }
 
 }
+/*
+1. original
+<form class="row user-comment">
+   <input type="text" class="form-control actual-comment" placeholder="What do you want to say about it?">
+   <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
+</form>
+
+2. with phpself
+<form action=" ' . $_SERVER['PHP_SELF']; . ' " class="row user-comment" method="post">
+   <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
+   <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
+</form>
+
+3. without phpself
+<form action="" class="row user-comment" method="post">
+   <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
+   <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
+</form>*/
 
 ?>

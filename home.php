@@ -32,7 +32,7 @@ include('includes/config.php');
 
     <main>
 
-          <?php
+        <?php
         include 'includes/post.php';
 
         $query = "SELECT * FROM posts
@@ -45,25 +45,25 @@ include('includes/config.php');
 
                 $postID = $post['PostID'];
                 $numComments; //calculated in query 2
-                $numLikes; //not in DB
+                $numLikes = 0; //calculated in query 3
                 $postUserName = $post['UserName'];
                 $postPictureID = $post['PhotoID'];
                 $postUserPictureID = 1;
                 $postDescription = $post['PostText'];
                 $postLocation = $post['PostLocation'];
                 $postTimeStamp = $post['PostTime'];
-                //array stores all the comments from the second query
+                //arrays store all necessary comments and likes data from the second and third query
                 $comments = [];
                 $likes = [];
 
-                //gathers all the comments for a photo
+                //gathers all the comments data for a photo
                 $query2 = "SELECT * FROM comments
                             LEFT JOIN user ON user.`UserID` = comments.`UserID`
-                            WHERE PhotoID = $postPictureID";
+                            WHERE PhotoID = $postPictureID
+                            ORDER BY CommentTime ASC";
 
                 if ($result2 = mysqli_query($conn, $query2)) {
                     $numComments = mysqli_num_rows($result2);
-
 
                     while ($comment = mysqli_fetch_array($result2)) {
 
@@ -73,42 +73,63 @@ include('includes/config.php');
                         $commentContent = $comment['Comment'];
                         $commentTimeStamp = $comment['CommentTime'];
 
-
-
                         $comment = new comment($commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
 
                         $comments[] = $comment;
 
                     }
-
                 }
 
+                //gathers all the like data for a photo
                 $query3 = "SELECT * FROM likes
                             LEFT JOIN user ON user.`UserID` = likes.`UserID`
                             WHERE PhotoID = $postPictureID";
 
-                if ($result3 = mysqli_query($conn, $query2)) {
+                if ($result3 = mysqli_query($conn, $query3)) {
                     $numLikes = mysqli_num_rows($result3);
 
                     while($like = mysqli_fetch_array($result3)) {
                         $LikeUserName = $like['UserName'];
-
                         $likes[] = $like;
                     }
                 }
 
-                $post = new post("IMG_8937", $postUserPictureID, $postUserName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp);
+                $post = new post($postPictureID, $postUserPictureID, $postUserName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp);
 
                 echo $post->addComments($comments);
-
                 echo $post->returnHTML();
-
-
             }
-
-
         }
 
+        if (isset($_POST['submit'])) {
+            $Comment = mysqli_real_escape_string($conn, $_POST['Comment']);
+            $postPictureID = $_POST['postPictureID'];
+
+            $query = "INSERT INTO comments (UserID, PhotoID, Comment)
+                        VALUES ('{$_SESSION['UserID']}', '$postPictureID', '$Comment')";
+
+            if (mysqli_query($conn, $query)) {
+                echo "yolo";
+            } else {
+                echo "Error: " . $query . "<br>" . mysqli_error($conn);
+            }
+        }
+/*
+        function submitComment(){
+
+            $Comment = mysqli_real_escape_string($conn, $_POST['Comment']);
+            $postPictureID = 123;
+
+            $query = "INSERT INTO comments (UserID, PhotoID, Comment)
+                        VALUES ('{$_SESSION['UserID']}', '$postPictureID', '$Comment')";
+
+            if (mysqli_query($conn, $query)) {
+                echo "yolo";
+            } else {
+                echo "Error: " . $query . "<br>" . mysqli_error($conn);
+            }
+        }
+*/
 
 /*
         $posts= [
