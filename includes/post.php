@@ -18,6 +18,7 @@ class post{
 
     public $numComments;
     public $numLikes;
+    public $hasUserLiked;
     public $postUserName = "";
     public $postPictureID;
     public $postUserPictureID;
@@ -26,9 +27,10 @@ class post{
     public $postTimeStamp;
     public $comments = array();
 
-    public function __construct ($postPictureID, $postUserPictureID, $postUserName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp){
+    public function __construct ($postPictureID, $postUserPictureID, $postUserName, $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp){
       $this->numComments = $numComments;
       $this->numLikes = $numLikes;
+      $this->hasUserLiked = $hasUserLiked;
       $this->postUserName = $postUserName;
       $this->postPictureID = $postPictureID;
       $this->postUserPictureID = $postUserPictureID;
@@ -59,7 +61,18 @@ class post{
           </div>
              <hr>';
       }
-      //$typeOfStar = ($userHasLiked ? 'fa-star' : 'fa-star-o');
+
+      //if numLikes = 1, then it will display the singular rather than plural
+      if ($this->numLikes == 1) {
+          $likeOrLikes = $this->numLikes . " like";
+      } else {
+          $likeOrLikes = $this->numLikes . " likes";
+      }
+
+      // if the user has liked, then 'liked' will be present,
+      //so the default option will be for the user to unlike a post they had liked from before
+      $typeOfStar = ($this->hasUserLiked ? 'liked' : '');
+
       $commentWithAnS =  (sizeof($this->comments) == 1 ? '' : 's');
 
       echo '<div class="post continer">
@@ -75,9 +88,10 @@ class post{
               </a>
             </div>
             <div class="post-like-comment col-md-1 col-xs-1 " >
-              <p class="lv-icons lv-top-padding">
-                <a href="#"><i class="fa fa-star fa-2x "></i></a>
-                <h5>' . $this->numLikes . ' likes</h5>
+              <p class="lv-icons lv-top-padding ' . $typeOfStar .'"  id="' . $this->postPictureID .'">
+                <button class="like-button button-link" href=""><i class="fa fa-star-o fa-2x "></i></button>
+                <button class="unlike-button button-link" href=""><i class="fa fa-star fa-2x "></i></button>
+                <h5>' . $likeOrLikes . '</h5>
               </p>
             </div>
             <div class="post-like-comment col-md-2 col-xs-2 " >
@@ -105,13 +119,14 @@ class post{
           </div>
              <hr>
         </div>
-        <div class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
+        <div id="currentComments" class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
       ' . $currentComments . '
-      <form action="home.php" class="row user-comment" method="post">
-        <input type="hidden" name="postPictureID" value="' . $this->postPictureID .'" />
-         <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
-         <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
+      <form class="row user-comment"  id="' . $this->postPictureID .'">
+      <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
+         <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
       </form>
+
+
              <hr>
       </div>
       </div>
@@ -120,22 +135,10 @@ class post{
 
 }
 /*
-1. original
-<form class="row user-comment">
-   <input type="text" class="form-control actual-comment" placeholder="What do you want to say about it?">
-   <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
-</form>
-
-2. with phpself
-<form action=" ' . $_SERVER['PHP_SELF']; . ' " class="row user-comment" method="post">
+<form action="home.php" class="row user-comment" method="post">
+  <input type="hidden" name="postPictureID" value="' . $this->postPictureID .'" />
    <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
    <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
 </form>
-
-3. without phpself
-<form action="" class="row user-comment" method="post">
-   <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
-   <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
-</form>*/
-
 ?>
+*/

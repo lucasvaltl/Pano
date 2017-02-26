@@ -46,6 +46,7 @@ include('includes/config.php');
                 $postID = $post['PostID'];
                 $numComments; //calculated in query 2
                 $numLikes = 0; //calculated in query 3
+                $hasUserLiked = false;
                 $postUserName = $post['UserName'];
                 $postPictureID = $post['PhotoID'];
                 $postUserPictureID = 1;
@@ -90,18 +91,22 @@ include('includes/config.php');
 
                     while($like = mysqli_fetch_array($result3)) {
                         $LikeUserName = $like['UserName'];
+                        if ($like['UserID'] == $_SESSION['UserID']) {
+                            $hasUserLiked = true;
+                        }
                         $likes[] = $like;
                     }
                 }
 
-                $post = new post($postPictureID, $postUserPictureID, $postUserName, $numLikes, $numComments, $postDescription, $postLocation, $postTimeStamp);
+                $post = new post($postPictureID, $postUserPictureID, $postUserName, $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp);
 
                 echo $post->addComments($comments);
                 echo $post->returnHTML();
             }
         }
 
-        if (isset($_POST['submit'])) {
+
+        /*if (isset($_POST['submit'])) {
             $Comment = mysqli_real_escape_string($conn, $_POST['Comment']);
             $postPictureID = $_POST['postPictureID'];
 
@@ -113,7 +118,10 @@ include('includes/config.php');
             } else {
                 echo "Error: " . $query . "<br>" . mysqli_error($conn);
             }
-        }
+        }*/
+
+
+
 /*
         function submitComment(){
 
@@ -154,6 +162,121 @@ include('includes/config.php');
 
 */
           ?>
+
+          <script>
+            function sendComment() {
+                var parent  = this.parentElement;
+                var postPictureID = parent.id;
+                var Comment = parent.childNodes[1].value;
+                //console.log(parent);
+                //console.log(postPictureID);
+                //console.log(Comment);
+                var xhr = new XMLHttpRequest();
+                var data = "Comment=" + Comment + "&postPictureID=" + postPictureID;
+                xhr.open('POST',  '<?=SITE_ROOT?>/includes/commentadd.php', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(data);
+
+                console.log(data);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                    //    document.getElementById("currentComments").innerHTML = xhr.responseText;
+                        var result = xhr.responseText;
+                        console.log(result);
+                    } else {
+                        alert("There was a problem with the request.");
+                    }
+                }
+            }
+
+            var commentButtons = document.getElementsByClassName("comment-button");
+            for (i=0; i<commentButtons.length; i++) {
+                commentButtons.item(i).addEventListener("click", sendComment);
+            }
+
+            function registerLike() {
+
+                //accessing the parent element, to gain access to the data
+                //corresponding to the one being clicked
+                var parent = this.parentElement;
+                var postPictureID = parent.id;
+
+                //accessing variables needed to alter the like count
+                var likePhrase = parent.nextSibling.innerHTML;
+                //splicing the likes to just get the number of likes,
+                //then adding 1 to represent the user liking it
+                var regex = new RegExp(/^\d+/);
+                var likeNumber = parseInt(likePhrase[0]) + 1;
+
+
+                //setting up the data to be passed through to the php page to process the database updating
+                var xhr = new XMLHttpRequest();
+                var data = "postPictureID=" + postPictureID;
+                xhr.open('POST',  '<?=SITE_ROOT?>/includes/liketoggleon.php', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(data);
+
+                //upon return, the 'liked' class is added to the parent class list,
+                //which drives the toggling functionality of the two different like buttons
+                //and also the dynamic updating of number of likes
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var result = xhr.responseText;
+                        //this 'liked' class will allow the like-button and unlike-button to toggle on and off
+                        //in terms of their individual visiblity, based on the presence of 'liked'
+                        parent.classList.add("liked");
+                        //special case that if likeNumber = 2, then the singular for 1 like rather than 1 likes
+                        if (likeNumber == 2){
+                            parent.nextSibling.innerHTML = likeNumber + " likes";
+                        } else {
+                            parent.nextSibling.innerHTML = likeNumber + " like";
+                        }
+                    } else {
+                        //alert("There was a problem with the request.");
+                    }
+                }
+            }
+
+            function unregisterLike() {
+                var parent = this.parentElement;
+                var postPictureID = parent.id;
+                var likePhrase = parent.nextSibling.innerHTML;
+                var regex = new RegExp(/^\d+/);
+                var likeNumber = parseInt(likePhrase[0]) - 1;
+
+                var xhr = new XMLHttpRequest();
+                var data = "postPictureID=" + postPictureID;
+                xhr.open('POST',  '<?=SITE_ROOT?>/includes/liketoggleoff.php', true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(data);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var result = xhr.responseText;
+                        console.log(result);
+                        parent.classList.remove("liked");
+                        if (likeNumber == 0){
+                            parent.nextSibling.innerHTML = likeNumber + " likes";
+                        } else {
+                            parent.nextSibling.innerHTML = likeNumber + " like";
+                        }
+                    } else {
+                    //    alert("There was a problem with the request.");
+                    }
+                }
+            }
+
+
+            //assigning an event listener to each of the like-buttons and unlike-buttons
+            var likeButtons = document.getElementsByClassName("like-button");
+            var unlikeButtons = document.getElementsByClassName("unlike-button");
+            for (i=0; i<likeButtons.length; i++) {
+                likeButtons.item(i).addEventListener("click" , registerLike);
+                unlikeButtons.item(i).addEventListener("click" , unregisterLike);
+            }
+
+            </script>
 
     </main>
 </body>
