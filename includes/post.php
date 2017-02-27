@@ -1,12 +1,14 @@
 <?php
 
 class comment{
+    public $commentUserID;
     public $commentUserName;
     public $commentUserPictureID;
     public $commentContent;
     public $commentTimeStamp;
 
-    public function __construct ( $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp ){
+    public function __construct ( $commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp ){
+        $this->commentUserID = $commentUserID;
         $this->commentUserName = $commentUserName;
         $this->commentUserPictureID = $commentUserPictureID;
         $this->commentContent = $commentContent;
@@ -39,35 +41,31 @@ class post{
       $this->postTimeStamp = $postTimeStamp;
     }
 
-    public function addComments($comments ){
-    foreach($comments as $comment){
-        $this->comments[] = $comment;
-    }
+    public function addComments($comments){
+        foreach($comments as $comment){
+            $this->comments[] = $comment;
+        }
     }
 
     public function returnHTML(){
-    $currentComments = "";
-      foreach ($this->comments as $comment){
-        $currentComments .= ' <div class= "row post-comment">
-           <div class="comment-user-picture col-md-10 col-xs-10">
-             <a href="'. SITE_ROOT .'/profile-info.php?id='. $_SESSION['UserName'] .'" >&nbsp;
-               <img src="images/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
-             </a>:
-              &nbsp;    ' . $comment->commentContent . '
-           </div>
-           <div col-md-2 col-xs-2">'
-           . $comment->commentTimeStamp . '
-           </div>
-          </div>
-             <hr>';
+        $currentComments = "";
+          foreach ($this->comments as $comment){
+            $currentComments .= ' <div class= "row post-comment">
+               <div class="comment-user-picture col-md-10 col-xs-10">
+                 <a href="'. SITE_ROOT .'/profile-info.php?id='. $comment->commentUserName .'" >&nbsp;
+                   <img src="images/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
+                 </a>:
+                  &nbsp;    ' . $comment->commentContent . '
+               </div>
+               <div col-md-2 col-xs-2">'
+               . $comment->commentTimeStamp . '
+               </div>
+              </div>
+                <hr>';
       }
 
       //if numLikes = 1, then it will display the singular rather than plural
-      if ($this->numLikes == 1) {
-          $likeOrLikes = $this->numLikes . " like";
-      } else {
-          $likeOrLikes = $this->numLikes . " likes";
-      }
+      $likeOrLikes = ($this->numLikes == 1 ? '' : 's');
 
       // if the user has liked, then 'liked' will be present,
       //so the default option will be for the user to unlike a post they had liked from before
@@ -91,13 +89,13 @@ class post{
               <p class="lv-icons lv-top-padding ' . $typeOfStar .'"  id="' . $this->postPictureID .'">
                 <button class="like-button button-link" href=""><i class="fa fa-star-o fa-2x "></i></button>
                 <button class="unlike-button button-link" href=""><i class="fa fa-star fa-2x "></i></button>
-                <h5>' . $likeOrLikes . '</h5>
+                <h5>' . $this->numLikes . ' like' . $likeOrLikes . '</h5>
               </p>
             </div>
             <div class="post-like-comment col-md-2 col-xs-2 " >
               <p class="lv-icons lv-top-padding">
                 <a href="" ng-click="showcomments' . $this->postPictureID . ' = !showcomments' . $this->postPictureID . '"><i class="fa fa-comment-o fa-2x " ></i>
-                <h5>' . sizeof($this->comments) . ' comment'.$commentWithAnS.'</h5>
+                <h5 id="counter' . $this->postPictureID.'">' . sizeof($this->comments) . ' comment'.$commentWithAnS.'</h5>
                 </a>
               </p>
             </div>
@@ -119,8 +117,9 @@ class post{
           </div>
              <hr>
         </div>
-        <div id="currentComments" class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
+        <div id="currentComments' .$this->postPictureID .'" class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
       ' . $currentComments . '
+      </div>
       <form class="row user-comment"  id="' . $this->postPictureID .'">
       <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
          <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
@@ -128,7 +127,7 @@ class post{
 
 
              <hr>
-      </div>
+
       </div>
     ';
     }

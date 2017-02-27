@@ -36,7 +36,8 @@ include('includes/config.php');
         include 'includes/post.php';
 
         $query = "SELECT * FROM posts
-                    LEFT JOIN user ON user.`UserID` = posts.`UserID`";
+                    LEFT JOIN user ON user.`UserID` = posts.`UserID`
+                    ORDER BY PostTime DESC";
 
         //for each post:
         if ($result = mysqli_query($conn, $query)) {
@@ -69,12 +70,13 @@ include('includes/config.php');
                     while ($comment = mysqli_fetch_array($result2)) {
 
                         $commentID = $comment['CommentID'];
+                        $commentUserID = $comment['UserID'];
                         $commentUserName = $comment['UserName'];
                         $commentUserPictureID = 2;
                         $commentContent = $comment['Comment'];
                         $commentTimeStamp = $comment['CommentTime'];
 
-                        $comment = new comment($commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
+                        $comment = new comment($commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
 
                         $comments[] = $comment;
 
@@ -105,178 +107,9 @@ include('includes/config.php');
             }
         }
 
+        include('includes/commentlikejs.php');
 
-        /*if (isset($_POST['submit'])) {
-            $Comment = mysqli_real_escape_string($conn, $_POST['Comment']);
-            $postPictureID = $_POST['postPictureID'];
-
-            $query = "INSERT INTO comments (UserID, PhotoID, Comment)
-                        VALUES ('{$_SESSION['UserID']}', '$postPictureID', '$Comment')";
-
-            if (mysqli_query($conn, $query)) {
-                echo "yolo";
-            } else {
-                echo "Error: " . $query . "<br>" . mysqli_error($conn);
-            }
-        }*/
-
-
-
-/*
-        function submitComment(){
-
-            $Comment = mysqli_real_escape_string($conn, $_POST['Comment']);
-            $postPictureID = 123;
-
-            $query = "INSERT INTO comments (UserID, PhotoID, Comment)
-                        VALUES ('{$_SESSION['UserID']}', '$postPictureID', '$Comment')";
-
-            if (mysqli_query($conn, $query)) {
-                echo "yolo";
-            } else {
-                echo "Error: " . $query . "<br>" . mysqli_error($conn);
-            }
-        }
-*/
-
-/*
-        $posts= [
-        new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria", "12/02/17 10:45" ),
-        new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil", "11/02/17 12:04" ),
-        new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK", "10/02/17 15:45" )
-        ];
-
-        $comments=[
-        new comment("LikelyLucy","3","wow amazing stuff here", "12/02/17 13:45"),
-        new comment("judgyjudy","2","Great Work", "12/02/17 15:23"),
-        new comment("GrannyGiu","5","Not so sure...I would add more color", "13/02/17 17:02")
-        ];
-
-        foreach ($posts as $post){
-          $post->addComments($comments);
-        }
-
-        foreach ($posts as $post){
-          $post->returnHTML();
-        }
-
-*/
           ?>
-
-          <script>
-            function sendComment() {
-                var parent  = this.parentElement;
-                var postPictureID = parent.id;
-                var Comment = parent.childNodes[1].value;
-                //console.log(parent);
-                //console.log(postPictureID);
-                //console.log(Comment);
-                var xhr = new XMLHttpRequest();
-                var data = "Comment=" + Comment + "&postPictureID=" + postPictureID;
-                xhr.open('POST',  '<?=SITE_ROOT?>/includes/commentadd.php', true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send(data);
-
-                console.log(data);
-
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                    //    document.getElementById("currentComments").innerHTML = xhr.responseText;
-                        var result = xhr.responseText;
-                        console.log(result);
-                    } else {
-                        alert("There was a problem with the request.");
-                    }
-                }
-            }
-
-            var commentButtons = document.getElementsByClassName("comment-button");
-            for (i=0; i<commentButtons.length; i++) {
-                commentButtons.item(i).addEventListener("click", sendComment);
-            }
-
-            function registerLike() {
-
-                //accessing the parent element, to gain access to the data
-                //corresponding to the one being clicked
-                var parent = this.parentElement;
-                var postPictureID = parent.id;
-
-                //accessing variables needed to alter the like count
-                var likePhrase = parent.nextSibling.innerHTML;
-                //splicing the likes to just get the number of likes,
-                //then adding 1 to represent the user liking it
-                var regex = new RegExp(/^\d+/);
-                var likeNumber = parseInt(likePhrase[0]) + 1;
-
-
-                //setting up the data to be passed through to the php page to process the database updating
-                var xhr = new XMLHttpRequest();
-                var data = "postPictureID=" + postPictureID;
-                xhr.open('POST',  '<?=SITE_ROOT?>/includes/liketoggleon.php', true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send(data);
-
-                //upon return, the 'liked' class is added to the parent class list,
-                //which drives the toggling functionality of the two different like buttons
-                //and also the dynamic updating of number of likes
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        var result = xhr.responseText;
-                        //this 'liked' class will allow the like-button and unlike-button to toggle on and off
-                        //in terms of their individual visiblity, based on the presence of 'liked'
-                        parent.classList.add("liked");
-                        //special case that if likeNumber = 2, then the singular for 1 like rather than 1 likes
-                        if (likeNumber == 2){
-                            parent.nextSibling.innerHTML = likeNumber + " likes";
-                        } else {
-                            parent.nextSibling.innerHTML = likeNumber + " like";
-                        }
-                    } else {
-                        //alert("There was a problem with the request.");
-                    }
-                }
-            }
-
-            function unregisterLike() {
-                var parent = this.parentElement;
-                var postPictureID = parent.id;
-                var likePhrase = parent.nextSibling.innerHTML;
-                var regex = new RegExp(/^\d+/);
-                var likeNumber = parseInt(likePhrase[0]) - 1;
-
-                var xhr = new XMLHttpRequest();
-                var data = "postPictureID=" + postPictureID;
-                xhr.open('POST',  '<?=SITE_ROOT?>/includes/liketoggleoff.php', true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send(data);
-
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        var result = xhr.responseText;
-                        console.log(result);
-                        parent.classList.remove("liked");
-                        if (likeNumber == 0){
-                            parent.nextSibling.innerHTML = likeNumber + " likes";
-                        } else {
-                            parent.nextSibling.innerHTML = likeNumber + " like";
-                        }
-                    } else {
-                    //    alert("There was a problem with the request.");
-                    }
-                }
-            }
-
-
-            //assigning an event listener to each of the like-buttons and unlike-buttons
-            var likeButtons = document.getElementsByClassName("like-button");
-            var unlikeButtons = document.getElementsByClassName("unlike-button");
-            for (i=0; i<likeButtons.length; i++) {
-                likeButtons.item(i).addEventListener("click" , registerLike);
-                unlikeButtons.item(i).addEventListener("click" , unregisterLike);
-            }
-
-            </script>
 
     </main>
 </body>
