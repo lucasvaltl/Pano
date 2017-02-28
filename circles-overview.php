@@ -40,37 +40,35 @@ $filename = basename(__FILE__, '.php');
     </div>
     <div class="popup" id="gradhome" ng-hide="newCollectionPopup">
       <div class="create-circle-link">
-            <a href="circle-creation.php?id=<?=$profileUserName?>">&nbsp;  &nbsp; &nbsp;  Create new Circle</a>
+        <a href="circle-creation.php?id=<?=$profileUserName?>">&nbsp;  &nbsp; &nbsp;  Create new Circle</a>
       </div>
-    <div class="create-circle-close">
+      <div class="create-circle-close">
 
         <a lass="create-circle-close" href="" ng-click="newCollectionPopup = !newCollectionPopup">X &nbsp;  &nbsp;</a>
-    </div>
+      </div>
     </div>
     <div class="content circles-overview container">
 
       <div class="circles-overview-header">
-      Your  Circles
-      <br />
-</div>
+        Your  Circles
+        <br />
+      </div>
       <div class="circles-overview-content">
 
 
         <?php
         include('includes/circle-cover.php');
 
-        //create an array of collections - will need to be redone with php when the database is ready
-        $collections = [
-          new circle('circle-messages.php', 'IMG_8937', 'Besties'),
-          new circle('circle-messages.php', 'IMG_2821', 'London Crew'),
-          new circle('circle-messages.php', 'IMG_6346', 'MSCCSUCL'),
-          new circle('circle-messages.php', 'IMG_8937', 'Besties'),
-          new circle('circle-messages.php', 'IMG_2821', 'London Crew'),
-          new circle('circle-messages.php', 'IMG_6346', 'MSCCSUCL'),
-          new circle('circle-messages.php', 'IMG_8937', 'Besties'),
-          new circle('circle-messages.php', 'IMG_2821', 'London Crew'),
-          new circle('circle-messages.php', 'IMG_6346', 'MSCCSUCL')
-        ];
+        require_once('includes/dbconnect.php');
+//queries for all circles that a user is in
+        $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=" . $_SESSION['UserID'];
+
+        $groups = mysqli_query($conn, $query);
+
+//creates interface for each circle
+        while($row = mysqli_fetch_assoc($groups)){
+          $collections[] = new circle('circle-messages.php?GroupID=' . $row['GroupID'] , $row['PhotoID'], $row['GroupName']);
+        }
 
         $count = 1;
         echo '<hr/> ';

@@ -16,6 +16,22 @@ if (isset($_GET['id'])) {
 
 }
 
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+}
+
+if (isset($_GET['GroupID'])) {
+    $GroupID = $_GET['GroupID'];
+}
+
+//TODO:
+require_once('includes/dbconnect.php');
+
+$query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=" . $_SESSION['UserID'];
+
+$groups = mysqli_query($conn, $query);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -49,8 +65,10 @@ if (isset($_GET['id'])) {
 
 <?php
     require_once('includes/dbconnect.php');
-    $thisGroupID = '12345';
-$query = "SELECT * FROM messages  WHERE '$thisGroupID' = groupID ORDER BY messageTime ASC";
+    require_once('includes/sendmessage.php');
+
+
+$query = 'SELECT Content, MessageTime, Username, m.UserID FROM messages AS m JOIN user AS u WHERE m.UserID = u.UserID AND '.$GroupID.'=m.groupID ORDER BY MessageTime ASC';
 $messages = mysqli_query($conn, $query);
 
  ?>
@@ -61,7 +79,7 @@ $messages = mysqli_query($conn, $query);
    <div class="row">
  <div class=" <?php echo (( $row['UserID'] ===$_SESSION['UserID']) ? 'circle-message-right' : 'circle-message-left'); ?>">
    <div class="message-sender">
-     <?= $row['UserID'] ?> @ <?= $row['MessageTime'] ?>
+     <?= $row['Username'] ?> @ <?= $row['MessageTime'] ?>
    </div>
    <div class="message-content">
            <?= $row['Content'] ?>
@@ -69,24 +87,21 @@ $messages = mysqli_query($conn, $query);
  </div>
    </div>
 
-
  <?php endwhile; ?>
-
-
-
-
 
     </div>
 <div class="container">
 
     <div class="row circle-create-message">
-      <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-inline submit message">
+      <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group form-inline submit message">
+        <input type="hidden" name="GroupID" value="<?= $GroupID ?>"/>
+        <input type="hidden" name="UserID"  value="<?= $_SESSION['UserID'] ?>"/>
         <div class="col col-xs-11">
-            <input type="text" class="form-control create-message-content" id="msg" name="messageContent" placeholder="What would you like to respond?"/>
+            <input type="text" class="form-control create-message-content" id="msg" name="Content" placeholder="<?php echo (( isset($error) && $error === 'Please fill in a message') ? 'Please fill in a message - you can\'t send nothing!' : 'What would you like to say?'); ?> "/>
         </div>
-      <div class="col col-xs-1">
+        <div class="col col-xs-1">
         <!-- TODO will this work? using a button isntead of input tag (see other forms) -->
-          <button type="submit" name="submit" class="btn btn-default airplane-btn create-message-send" value="Send"><i class="fa fa-paper-plane-o fa-3x"></i></button>
+          <button type="submit" name="submit" class="btn btn-default airplane-btn create-message-send" value="Submit"><i class="fa fa-paper-plane-o fa-3x"></i></button>
       </div>
     </form>
 </div>

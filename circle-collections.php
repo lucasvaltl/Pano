@@ -16,6 +16,9 @@ if (isset($_GET['id'])) {
 
 }
 
+if (isset($_GET['GroupID'])) {
+    $GroupID = $_GET['GroupID'];
+}
 
 ?>
 <!DOCTYPE html>
