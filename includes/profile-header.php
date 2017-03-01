@@ -56,13 +56,8 @@
             <p class="profile-info-name">
                 <h3><?=$profileUserName?></h3>
             </p>
-            <p class="profile-info-location location">
-                <i class="fa fa-map-marker fa-lg"></i>&nbsp;
-                <?=$profileUserLocation?>
-            </p>
-            <p class="profile-info-description">
-                <?=$profileUserDescription  ?>
-            </p>
+            <p class="profile-info-location location"><i class="fa fa-map-marker fa-lg"></i>&nbsp;<?=$profileUserLocation?></p>
+            <p class="profile-info-description"><?=$profileUserDescription?></p>
         </div>
 
 
@@ -104,23 +99,21 @@
     <hr />
 </div>
 
+
+
 <script>
     function editProfileClick () {
 
-        var profilePictureID = this.parentElement.id;
-        console.log("profilePictureID:" + profilePictureID);
+
 
         //contains the bulk of the info needed, from the header
-        var profileInfo = document.getElementsByClassName("container profile-info")[0].firstChild;
-        console.log("profileInfo:" + profileInfo);
+        var profileInfo = document.getElementsByClassName("container profile-info")[0];
 
-        //contains the Location string
+        //contains the Location,Description and ID items
         var locationText = document.getElementsByClassName("profile-info-location")[0].innerHTML.split('&nbsp;');
-        console.log("locationField: " + locationText[1]);
-
-        //contains the Description string
+        locationText = locationText[1];
         var descriptionText = document.getElementsByClassName("profile-info-description")[0].innerHTML;
-        console.log("descriptionText: " + descriptionText);
+        var profilePictureID = this.parentElement.id;
 
         var xhr = new XMLHttpRequest();
         var data = "Location=" + locationText + "&ShortDescrip=" + descriptionText + "&profilePictureID=" + profilePictureID;
@@ -128,39 +121,66 @@
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(data);
 
+        //on edit profile button press, form becomes editable.
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
 
-
-
-
-                profileInfo.removeChild(profileInfo);
-
                 var editProfileForm = xhr.responseText;
-                console.log(editProfileForm);
 
+                profileInfo.removeChild(profileInfo.childNodes[1]);
+                profileInfo.insertAdjacentHTML('afterbegin', editProfileForm);
 
-
-                profileInfo.insertAdjacentHTML('beforeend', editProfileForm);
+                //new listener attached to the save button
                 var saveButton = document.getElementsByClassName("save-button");
                 saveButton.item(0).addEventListener("click", saveProfileClick);
-
-            //    profileInfo.replaceChild(profileInfo, editProfileForm);
-                //profileInfo.insertAdjacentHTML('beforeend', editProfileForm);
 
             } else {
             //    alert("There was a problem with the request.");
             }
 
         }
-
-
     }
 
     function saveProfileClick(){
-        console.log('yolo');
-    }
+        //contains the bulk of the info needed, from the header
+        var profileInfo = document.getElementsByClassName("container profile-info")[0];
 
+        //contains the required details
+        var locationText = document.getElementsByClassName("profile-info-location")[0].value;
+        var descriptionText = document.getElementsByClassName("profile-info-description")[0].value;
+        var profilePictureID = this.id;
+
+        //console.log("profilePictureID: " + profilePictureID + "\nprofileInfo: " + profileInfo + "\nlocation: " + locationText + "\nDescription:" + descriptionText );
+
+        var data = "Location=" + locationText + "&ShortDescrip=" + descriptionText + "&profilePictureID=" + profilePictureID;
+
+        var xhr = new XMLHttpRequest();
+        var data = "Location=" + locationText + "&ShortDescrip=" + descriptionText + "&profilePictureID=" + profilePictureID;
+        xhr.open('POST',  '<?=SITE_ROOT?>/includes/saveprofile.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+
+        //on save, changes are saved to DB and page reverts to original layout with new changes in info
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                var savedProfileForm = xhr.responseText;
+
+                profileInfo.removeChild(profileInfo.childNodes[1]);
+                profileInfo.insertAdjacentHTML('afterbegin', savedProfileForm);
+
+                //new listener attached to the edit button
+                var editButton = document.getElementsByClassName("edit-button");
+                editButton.item(0).addEventListener("click", editProfileClick);
+
+            } else {
+            //    alert("There was a problem with the request.");
+            }
+        }
+
+
+    }
+    //listener attached to the edit button on load
     var editButton = document.getElementsByClassName("edit-button");
     editButton.item(0).addEventListener("click", editProfileClick);
 
