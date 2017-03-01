@@ -187,4 +187,17 @@
       deleteButtons.item(i).addEventListener("click", deleteComment);
   }
 
+  /*
+  var locationField = document.getElementsByClassName("profile-info-location");
+  var locationText = locationField.innerHTML;
+  console.log("locationField: " + locationField);
+  console.log("locationText: " + locationText);
+
+
+  var descriptionField = document.getElementsByClassName("profile-info-description");
+  var descriptionText = descriptionField.innerHTML;
+  console.log("descriptionField: " + descriptionField);
+  console.log("descriptionText: " + descriptionText);
+  */
+
   </script>

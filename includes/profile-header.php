@@ -47,6 +47,7 @@
  ?>
 
 <div class="container profile-info">
+
     <div class="row ">
         <div class="col col-md-3 col-xs-3 profile-info-row">
             <img src="<?=SITE_ROOT?>/images/profilepics/<?=$profilePictureID?>.jpg" class="img-circle img-responsive profile-user-picture " />
@@ -63,9 +64,12 @@
                 <?=$profileUserDescription  ?>
             </p>
         </div>
-        <div class="col col-md-3 col-xs-3 profile-info-row">
+
+
+
+        <div class="col col-md-3 col-xs-3 profile-info-row" id="<?=$profilePictureID?>">
             <?php if ($_SESSION['UserName'] == $profileUserName) : ?>
-                <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button>
+                <button type="button" class="btn btn-default pull-right edit-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button>
             <?php elseif ($are_we_friends) :?>
                 <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Remove Friend </button>
             <?php else :?>
@@ -73,8 +77,15 @@
             <?php endif;?>
         </div>
     </div>
+
+
+
+
+
+
     <hr />
 </div>
+
 <div class="container profile-options">
     <div class="row">
         <div class="col-md-3 col-xs-3   lv-icons-unclicked border-right <?php echo ($filename == 'profile-info' ? 'lv-icons-clicked': '' )?>">
@@ -92,3 +103,65 @@
     </div>
     <hr />
 </div>
+
+<script>
+    function editProfileClick () {
+
+        var profilePictureID = this.parentElement.id;
+        console.log("profilePictureID:" + profilePictureID);
+
+        //contains the bulk of the info needed, from the header
+        var profileInfo = document.getElementsByClassName("container profile-info")[0].firstChild;
+        console.log("profileInfo:" + profileInfo);
+
+        //contains the Location string
+        var locationText = document.getElementsByClassName("profile-info-location")[0].innerHTML.split('&nbsp;');
+        console.log("locationField: " + locationText[1]);
+
+        //contains the Description string
+        var descriptionText = document.getElementsByClassName("profile-info-description")[0].innerHTML;
+        console.log("descriptionText: " + descriptionText);
+
+        var xhr = new XMLHttpRequest();
+        var data = "Location=" + locationText + "&ShortDescrip=" + descriptionText + "&profilePictureID=" + profilePictureID;
+        xhr.open('POST',  '<?=SITE_ROOT?>/includes/editprofile.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+
+
+
+                profileInfo.removeChild(profileInfo);
+
+                var editProfileForm = xhr.responseText;
+                console.log(editProfileForm);
+
+
+
+                profileInfo.insertAdjacentHTML('beforeend', editProfileForm);
+                var saveButton = document.getElementsByClassName("save-button");
+                saveButton.item(0).addEventListener("click", saveProfileClick);
+
+            //    profileInfo.replaceChild(profileInfo, editProfileForm);
+                //profileInfo.insertAdjacentHTML('beforeend', editProfileForm);
+
+            } else {
+            //    alert("There was a problem with the request.");
+            }
+
+        }
+
+
+    }
+
+    function saveProfileClick(){
+        console.log('yolo');
+    }
+
+    var editButton = document.getElementsByClassName("edit-button");
+    editButton.item(0).addEventListener("click", editProfileClick);
+
+</script>
