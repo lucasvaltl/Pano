@@ -230,6 +230,7 @@ hr{
   color: white;
   background-color: transparent;
 margin: 10px 10px 10px 10px;
+vertical-align: middle;
 width: 150px;
 height: 40px;
 font-size: 1.1em;
@@ -249,6 +250,12 @@ font-size: 1.1em;
   width: 150px;
     text-decoration: none;
 }
+
+.add-padding{
+  padding-top:50px;
+}
+
+
 
 /*upload box*/
 .drag-in{
@@ -322,6 +329,23 @@ input.actual-comment{
       width: 70%;
 }
 
+button.like-button {
+    display:inline
+}
+
+.liked button.like-button {
+    display:none;
+}
+
+button.unlike-button {
+    display:none;
+}
+
+
+.liked button.unlike-button {
+    display:inline;
+}
+
 .comment-button{
   width: 20%;
 }
@@ -336,6 +360,7 @@ input.actual-comment{
 .lv-top-padding{
   padding-top: 6px;
 }
+
 
 /*profile*/
 
@@ -373,6 +398,138 @@ input.actual-comment{
   padding-right: 10px;
 }
 
+/*create collection*/
+
+.collection-name-input{
+  display: inline;
+  align-self: center;
+  height: inherit;
+    font-size: 1em;
+    color: #444!important;
+    width: 320px;
+    text-align: center;
+    padding: 0 0 0 0;
+    border: none;
+    border-bottom: 1px solid #444;
+    box-shadow: none;
+  border-radius: 0px;
+}
+
+.collection-name-input:focus{
+  box-shadow: none;
+      border-bottom: 1px solid  #61e8bf;
+}
+
+.add-padding-40{
+    padding-top: 38px;
+
+}
+
+.add-padding-30{
+    padding-top: 25px;
+}
+
+.create-collection-name, .create-collectionheader{
+color: #444;
+  font-size: 1.7em;
+}
+
+.create-collection-name .lv-button{
+  height: 40px;
+  font-size: 1em;
+  width: 140px;
+  color: #444;
+  float: none;
+}
+
+.collection-creation{
+  color: #444;
+}
+
+.create-collection-btn{
+  padding: 0 0 0 0;
+}
+
+.picture-list-col, .picture-list-row{
+  padding: 0px;
+}
+
+.picture-list-picture-container{
+   position: relative;
+}
+
+
+.picture-list-picture-container input{
+  position: absolute;
+top: -5px;
+  left: 0%;
+  text-align: center;
+  outline: none!important;
+}
+
+.create-collection-check{
+width: 100%;
+height: 100%;
+/*hide checkbox to only display angular classwitching*/
+
+}
+
+.create-collection-check{
+  -webkit-appearance: none;
+width: 100%;
+height: 100%;
+box-shadow: none;
+top: -5px;
+outline:none;
+/*hide checkbox to only display angular classwitching*/
+}
+
+.create-collection-check:checked{
+  -webkit-appearance: none;
+/*hide checkbox to only display angular classwitching*/
+background-color: white;
+  opacity: 0.5;
+  box-shadow: none;
+top: -4px;
+outline:none;
+}
+
+.create-collection-check:checked:after{
+  font-family: FontAwesome;
+   content: "\f00c";
+font-size: 4em;
+text-align: center;
+position: absolute;
+box-shadow: none;
+outline:none;
+top: 60px;
+left: 43%;
+}
+
+
+
+.picture-list-picture{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.picture-list-picture{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  /*opacity: 0.5;*/
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+}
+
+.picture-list-picture-selected{
+  opacity: 0.5;
+
+}
 
 /*friends*/
 .friend-name{
@@ -408,6 +565,9 @@ input.actual-comment{
 }
 
 /*circles*/
+
+
+
 
 /*other*/
 
