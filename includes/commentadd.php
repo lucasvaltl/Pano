@@ -34,18 +34,26 @@ if (mysqli_query($conn, $query)) {
         $commentContent = $comment['Comment'];
         $commentTimeStamp = $comment['CommentTime'];
 
-        echo ' <div class= "row post-comment">
-           <div class="comment-user-picture col-md-10 col-xs-10">
-             <a href="'. SITE_ROOT .'/profile-info.php?id='. $_SESSION['UserName'] .'" >&nbsp;
-               <img src="images/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $commentUserName . '
-             </a>:
-              &nbsp;    ' . $commentContent . '
-           </div>
-           <div col-md-2 col-xs-2">'
-           . $commentTimeStamp . '
-           </div>
-          </div>
-            <hr>';
+
+
+            echo ' <div class= "row post-comment id="' . $commentID .'"">
+               <div class="comment-user-picture col-md-9 col-xs-9">
+                 <a href="'. SITE_ROOT .'/profile-info.php?id='. $commentUserName .'" >&nbsp;
+                   <img src="images/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $commentUserName . '
+                 </a>:
+                  &nbsp;    ' . $commentContent . '
+               </div>
+               <div col-md-3 col-xs-3">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               '. $commentTimeStamp . '
+
+
+
+
+               </div>
+              </div>
+                <hr>';
+
     }
 
 } else {

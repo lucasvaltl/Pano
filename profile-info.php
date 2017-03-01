@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
                           $commentContent = $comment['Comment'];
                           $commentTimeStamp = $comment['CommentTime'];
 
-                          $comment = new comment($commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
+                          $comment = new comment($commentID, $commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
 
                           $comments[] = $comment;
 
@@ -127,13 +127,7 @@ if (isset($_GET['id'])) {
 
             ?>
 
-
-
-
-
-</div>
-
-
+        </div>
 
     </main>
     <?php

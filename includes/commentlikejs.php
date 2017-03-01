@@ -34,6 +34,11 @@
               //ensures that the comment is inserted at the end of the comments
               commentInsertion.insertAdjacentHTML('beforeend', newCommentRow);
 
+              var deleteButtons = document.getElementsByClassName("delete-comment-button");
+              for (i=0; i<deleteButtons.length; i++) {
+                  deleteButtons.item(i).addEventListener("click", deleteComment);
+              }
+
               //clears the comment field and placeholder changed to allow user
               //to see that comment has been posted successfully
               parent.childNodes[1].value = '';
@@ -46,17 +51,56 @@
                   counterUpdater.firstChild.innerHTML = commentNumber + " comments";
               }
 
+
           } else {
           //    alert("There was a problem with the request.");
           }
       }
   }
 
-  //assigning an eventListener to each comment button, to know which to act upon
-  var commentButtons = document.getElementsByClassName("comment-button");
-  for (i=0; i<commentButtons.length; i++) {
-      commentButtons.item(i).addEventListener("click", sendComment);
+  function deleteComment() {
+
+      var parent = this.parentElement;
+      var commentRow = parent.parentElement;
+      var postRow = commentRow.parentElement;
+      var postPictureID = postRow.parentElement.id;
+      var commentID = commentRow.id;
+
+      var commentCounter = "counter" + postPictureID;
+      var counterUpdater = document.getElementById(commentCounter);
+      var commentPhrase = counterUpdater.firstChild.innerHTML;
+      var commentNumber = parseInt(commentPhrase) - 1;
+
+      var xhr = new XMLHttpRequest();
+      var data = "commentID=" + commentID;
+      xhr.open('POST',  '<?=SITE_ROOT?>/includes/commentdelete.php', true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send(data);
+
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+              commentRow.remove();
+
+              //simple test to see if comment is plural or singular
+              if (commentNumber == 1){
+                  counterUpdater.firstChild.innerHTML = commentNumber + " comment";
+              } else {
+                  counterUpdater.firstChild.innerHTML = commentNumber + " comments";
+              }
+
+
+            //need to remove commentRow's html
+
+          } else {
+          //    alert("There was a problem with the request.");
+          }
+      }
+
+
+
+
   }
+
 
   function registerLike() {
 
@@ -128,12 +172,19 @@
   }
 
 
-  //assigning an event listener to each of the like-buttons and unlike-buttons
+  //assigning an event listener to each of the buttons
   var likeButtons = document.getElementsByClassName("like-button");
   var unlikeButtons = document.getElementsByClassName("unlike-button");
+  var commentButtons = document.getElementsByClassName("comment-button");
   for (i=0; i<likeButtons.length; i++) {
       likeButtons.item(i).addEventListener("click" , registerLike);
       unlikeButtons.item(i).addEventListener("click" , unregisterLike);
+      commentButtons.item(i).addEventListener("click", sendComment);
+  }
+
+  var deleteButtons = document.getElementsByClassName("delete-comment-button");
+  for (i=0; i<deleteButtons.length; i++) {
+      deleteButtons.item(i).addEventListener("click", deleteComment);
   }
 
   </script>

@@ -15,7 +15,7 @@ $query = "DELETE FROM likes
 if (mysqli_query($conn, $query)) {
     echo 'true';
 } else {
-    echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    //echo "Error: " . $query . "<br>" . mysqli_error($conn);
     echo 'false';
 }
 

@@ -76,7 +76,7 @@ include('includes/config.php');
                         $commentContent = $comment['Comment'];
                         $commentTimeStamp = $comment['CommentTime'];
 
-                        $comment = new comment($commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
+                        $comment = new comment($commentID, $commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp);
 
                         $comments[] = $comment;
 

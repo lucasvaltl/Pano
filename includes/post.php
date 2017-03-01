@@ -1,13 +1,15 @@
 <?php
 
 class comment{
+    public $commentID;
     public $commentUserID;
     public $commentUserName;
     public $commentUserPictureID;
     public $commentContent;
     public $commentTimeStamp;
 
-    public function __construct ( $commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp ){
+    public function __construct ($commentID, $commentUserID, $commentUserName, $commentUserPictureID, $commentContent, $commentTimeStamp ){
+        $this->commentID = $commentID;
         $this->commentUserID = $commentUserID;
         $this->commentUserName = $commentUserName;
         $this->commentUserPictureID = $commentUserPictureID;
@@ -48,21 +50,36 @@ class post{
     }
 
     public function returnHTML(){
+
+
+
+
+
         $currentComments = "";
           foreach ($this->comments as $comment){
-            $currentComments .= ' <div class= "row post-comment">
-               <div class="comment-user-picture col-md-10 col-xs-10">
+
+              $canUserDelete =
+                  ($_SESSION['UserName'] == $comment->commentUserName ?
+                  '<button class="delete-comment-button"><i class="fa fa-times" aria-hidden="true"></i></button>' : '' );
+
+            $currentComments .= ' <div class= "row post-comment" id="' . $comment->commentID .'">
+               <div class="comment-user-picture col-md-9 col-xs-9">
                  <a href="'. SITE_ROOT .'/profile-info.php?id='. $comment->commentUserName .'" >&nbsp;
                    <img src="images/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
                  </a>:
                   &nbsp;    ' . $comment->commentContent . '
                </div>
-               <div col-md-2 col-xs-2">'
-               . $comment->commentTimeStamp . '
+               <div col-md-3 col-xs-3">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               '. $comment->commentTimeStamp . '
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+               ' . $canUserDelete .'
+
                </div>
               </div>
                 <hr>';
-      }
+          }
 
       //if numLikes = 1, then it will display the singular rather than plural
       $likeOrLikes = ($this->numLikes == 1 ? '' : 's');
@@ -73,7 +90,7 @@ class post{
 
       $commentWithAnS =  (sizeof($this->comments) == 1 ? '' : 's');
 
-      echo '<div class="post continer">
+      echo '<div class="post continer" id="' . $this->postPictureID .'">
         <div class="post-picture">
           <img src="images/panoramas/' . $this->postPictureID . '.jpg" class="panorama">
         </div>
@@ -87,8 +104,8 @@ class post{
             </div>
             <div class="post-like-comment col-md-1 col-xs-1 " >
               <p class="lv-icons lv-top-padding ' . $typeOfStar .'"  id="' . $this->postPictureID .'">
-                <button class="like-button button-link" href=""><i class="fa fa-star-o fa-2x "></i></button>
-                <button class="unlike-button button-link" href=""><i class="fa fa-star fa-2x "></i></button>
+                <button type="button" class="like-button btn-outline" href=""><i class="fa fa-star-o fa-2x "></i></button>
+                <button type="button" class="unlike-button btn-outline" href=""><i class="fa fa-star fa-2x "></i></button>
                 <h5>' . $this->numLikes . ' like' . $likeOrLikes . '</h5>
               </p>
             </div>
@@ -99,7 +116,7 @@ class post{
                 </a>
               </p>
             </div>
-            <div class="post-content col-md-4  col-xs-4 ">
+            <div class="post-content col-md-3  col-xs-3 ">
               <div class="location lv-top-padding" >
                 <p>
                   <i class="fa fa-map-marker fa-lg"></i>&nbsp;  ' . $this->postLocation . '
@@ -111,8 +128,9 @@ class post{
                 </p>
               </div>
             </div>
-            <div col-md-2 col-xs-2">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'. $this->postTimeStamp . '
+            <div col-md-3 col-xs-3">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;'. $this->postTimeStamp . '
             </div>
           </div>
              <hr>
@@ -124,20 +142,9 @@ class post{
       <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
          <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
       </form>
-
-
-             <hr>
-
+      <hr>
       </div>
     ';
     }
 
 }
-/*
-<form action="home.php" class="row user-comment" method="post">
-  <input type="hidden" name="postPictureID" value="' . $this->postPictureID .'" />
-   <input type="text" name="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?">
-   <input type="submit" name="submit" class="btn btn-default comment-button" value="comment" />
-</form>
-?>
-*/
