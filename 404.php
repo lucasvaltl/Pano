@@ -47,7 +47,9 @@ include('includes/config.php');
 
         <br>
 
-        <button class="btn btn-primary btn-info" onclick="goBack()"><span class="glyphicon glyphicon-hand-left"></span>&nbsp;&nbsp;Go Back</button>
+        <button class="btn btn-primary btn-info" onclick="goBack()">
+
+            <span class="glyphicon glyphicon-hand-left"></span>&nbsp;&nbsp;Go Back</button>
 
         <script>
         function goBack() {

@@ -79,7 +79,6 @@ textarea {
 }
 
 
-
 /*photos*/
 
 .panorama{
@@ -547,6 +546,22 @@ left: 43%;
  a:hover .friending-icon{
   text-align: right;
   color: #888;
+}
+
+
+
+ /*SearchPage*/
+
+.search-box {
+
+    float:right;
+    color: #888;
+}
+
+.search-content {
+    text-align: center;
+    color: #444;
+    font-size:0.7em;
 }
 
 /*circles*/

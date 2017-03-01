@@ -20,7 +20,14 @@
                 <div class="logo center-center">
                     <a href="<?=SITE_ROOT?>/home.php"><img src="<?=SITE_ROOT?>/images/gradient-logo.png" class="png" id="homepagelogo"></a>
                 </div>
-            </div>
+                <div class="pull-right navbar-text">
+                    <div class="search-box">
+                        <form class="form-group" action="search.php?id=<?=SITE_ROOT?>/search.php?id=<?=$_SESSION['UserName'];?>" method="post">
+                            <input type="text" name="search" placeholder="Search for users..." />
+                            <input type="submit" value=">>" />
+                    </div>
+                </div>
+
         </nav>
     </header>
 
