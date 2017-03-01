@@ -5,7 +5,7 @@ ob_start();
 //session_start() needed to use global session variabls $_SESSION etc
 session_start();
 
-include('includes/config.php');
+require_once('includes/config.php');
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +33,7 @@ include('includes/config.php');
     <main>
 
         <?php
-        include 'includes/post.php';
+        include ('includes/post.php');
 
         $query = "SELECT * FROM posts
                     LEFT JOIN user ON user.`UserID` = posts.`UserID`
