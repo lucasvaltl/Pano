@@ -11,10 +11,10 @@ require_once('includes/dbconnect.php');
 
 $filename = basename(__FILE__, '.php');
 
-if (isset($_GET['id'])) {
-  $circleName = $_GET['id'];
-
+if(isset($_SESSION['UserID'])){
+  $UserID = $_SESSION['UserID'];
 }
+
 if (isset($_GET['GroupID'])) {
     $GroupID = $_GET['GroupID'];
 }
@@ -51,73 +51,35 @@ if (isset($_GET['GroupID'])) {
         <br />
         <hr />
 
-      <?php
-        include('includes/friends-list.php');
+        <?php
 
-        //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
+          //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
 
-        $query = ("SELECT
-                    user.`UserName` AS UserName, user.`UserID` AS UserID
-                    FROM friends LEFT JOIN user
-                    ON user.`UserID` = friends.`UserID`
-                    OR user.`UserID` = friends.`FriendID`
-                    AND user.`UserID` != '$profileUserID'
-                    WHERE friends.`UserID` = '$profileUserID'
-                    OR friends.`FriendID` = '$profileUserID'");
+          $query = "SELECT u.UserName, u.UserID FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'";
+          $members= mysqli_query($conn, $query);
+         ?>
 
+         <?php while($row = mysqli_fetch_assoc($members)) :
+  if($row['UserID'] === $UserID){
+    continue;
+  }
+           $PictureID = '3';
+           ?>
+           <div class="row friend-content">
+           <div class="col-md-3 col-xs-3">
+           <img src="<?=SITE_ROOT?>/images/profilepics/<?= $PictureID ?>.jpg" class="img-circle friend-picture" />
+            </div>
+           <div class="col-md-3 col-xs-3 friend-name">
+              <h3><?= $row['UserName']?></h3>
+           </div>
 
-        if ($result = mysqli_query($conn, $query)) {
-            //$count = mysqli_num_rows($result);
+           <div class="col col-md-6 col-xs-6 friending-icon">
+            <input type="checkbox" class="create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>" >
+             </div>
+             </div>
+             <hr>
 
-            $isFriendOfUser = false;
-
-            while ($row = mysqli_fetch_array($result)) {
-
-                $friendName = $row['UserName'];
-                $friendUserID = $row['UserID'];
-
-                //if the friend is yourself, skip the iteration
-                if ($friendName == $circleName || $friendName == $_SESSION['UserName']){
-                    continue;
-                } else {
-
-                    //otherwise check to see if the logged in user is friends with this user's friends
-                    $query2 = "SELECT * FROM friends
-                                WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'
-                                OR FriendID = '$friendUserID' AND UserID = '{$_SESSION['UserID']}'";
-
-                    if ($result2 = mysqli_query($conn, $query2)) {
-                        $count = mysqli_num_rows($result2);
-
-                        //if friends, display tick, otherwise an add friend icon will appear
-                        if ($count == 1) {
-                            $isFriendOfUser = true;
-                        }
-                    }
-                }
-
-                //create a frienditem and allow the returnHTML function to run with the parameters
-                $row = new frienditem($friendName, $friendName, '3', $isFriendOfUser);
-                echo $row->returnHTML();
-            }
-        }
-
-        /*
-        $friends = [
-        new frienditem('JudgyJudy', 'profile-info', '3', False),
-        new frienditem('Carl', 'profile-info', '4', True),
-        new frienditem('Johnson', 'profile-info', '5', False),
-        new frienditem('JakeJohnson', 'profile-info', '2', False),
-        new frienditem('MrVanDenBorn', 'profile-info', '1', true)
-        ];
-
-
-        foreach($friends as $friend){
-          echo $friend->returnHTML();
-        }
-        */
-
-       ?>
+         <?php endwhile; ?>
 
       </div>
 

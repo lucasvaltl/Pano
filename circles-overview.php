@@ -9,6 +9,7 @@ session_start();
 include('includes/config.php');
 require_once('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
+$userID = $_SESSION['UserID'];
 
 ?>
 <!DOCTYPE html>
@@ -32,15 +33,11 @@ $filename = basename(__FILE__, '.php');
   ?>
   <main>
     <div class="profile-header">
-      <?php
-      if (isset($_GET['id'])) {
-        $profileUserName = $_GET['id'];
-      }
-      ?>
+
     </div>
     <div class="popup" id="gradhome" ng-hide="newCollectionPopup">
       <div class="create-circle-link">
-        <a href="circle-creation.php?id=<?=$profileUserName?>">&nbsp;  &nbsp; &nbsp;  Create new Circle</a>
+        <a href="circle-creation.php">&nbsp;  &nbsp; &nbsp;  Create new Circle</a>
       </div>
       <div class="create-circle-close">
 

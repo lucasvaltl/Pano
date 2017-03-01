@@ -24,13 +24,12 @@ if (isset($_GET['GroupID'])) {
     $GroupID = $_GET['GroupID'];
 }
 
-//TODO:
-require_once('includes/dbconnect.php');
-
-$query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=" . $_SESSION['UserID'];
-
-$groups = mysqli_query($conn, $query);
-
+//TODO check if user is boss of group
+// require_once('includes/dbconnect.php');
+//
+// $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=" . $_SESSION['UserID'];
+//
+// $groups = mysqli_query($conn, $query);
 
 
 ?>
