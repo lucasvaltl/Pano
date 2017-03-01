@@ -330,6 +330,23 @@ input.actual-comment{
       width: 70%;
 }
 
+button.like-button {
+    display:inline
+}
+
+.liked button.like-button {
+    display:none;
+}
+
+button.unlike-button {
+    display:none;
+}
+
+
+.liked button.unlike-button {
+    display:inline;
+}
+
 .comment-button{
   width: 20%;
 }
@@ -344,6 +361,7 @@ input.actual-comment{
 .lv-top-padding{
   padding-top: 6px;
 }
+
 
 /*profile*/
 
