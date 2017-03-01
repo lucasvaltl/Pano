@@ -2,6 +2,7 @@
 // Please select DB Connection and make corresponding change in config.php
 
 // OPTION 1: Connection to Azure /////////////////////////////////
+/*
 define("DB_USERNAME", "b55e2163643140");
   define("DB_PASS", "94533d90");
   define("DB_NAME", "app_pano_database");
@@ -13,8 +14,8 @@ define("DB_USERNAME", "b55e2163643140");
      DB_HOST,
      DB_USERNAME,
      DB_PASS,
-     DB_NAME/*,
-     DB_PORT*/
+     DB_NAME//,
+     //DB_PORT
   );
   //test if connection occured
   if(mysqli_connect_errno()) {
@@ -23,10 +24,10 @@ define("DB_USERNAME", "b55e2163643140");
           " (" . mysqli_connect_errno() . ")"
       );
   }
-
+*/
 
 // OPTION 2: Connection to local DB /////////////////////////////////
-/*
+
     define("DB_USERNAME", "root");
     define("DB_PASS", "root");
     define("DB_NAME", "Pano");
@@ -50,7 +51,7 @@ define("DB_USERNAME", "b55e2163643140");
             " (" . mysqli_connect_errno() . ")"
         );
     }
-*/
+
 
 
 /*

@@ -35,28 +35,26 @@ if (isset($_GET['id'])) {
         include('includes/header.php');
      ?>
     <main>
-<form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
-      <div class="row collection-creation-header">
-        <div class="create-collection-name row">
-<div class="col col-sm-9 add-padding-40">
-  <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '320': ((CollectionName.length*13))) + 'px'}" ng-model="CollectionName">
+        <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
+            <div class="row collection-creation-header">
+                <div class="create-collection-name row">
+                    <div class="col col-sm-9 add-padding-40">
+                        <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '320': ((CollectionName.length*13))) + 'px'}" ng-model="CollectionName">                        by
+                        <?= $profileUserName ?>
+                    </div>
+                    <div class="col col-sm-2 add-padding-30">
+                        <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="Create" />
+                    </div>
+                    <div class="col col-sm-1">
 
-
-by  <?= $profileUserName ?>
-</div>
-              <div class="col col-sm-2 add-padding-30">
-                           <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="Create" />
-              </div>
-<div class="col col-sm-1">
-
-</div>
-        </div>
-        <br />
-        <hr />
-      </div>
-      <div class="content collection-creation">
-<h4>Please choose the picture(s) you want to add to this album</h4>
-        <?php
+                    </div>
+                </div>
+                <br />
+                <hr />
+            </div>
+            <div class="content collection-creation">
+                <h4>Please choose the picture(s) you want to add to this album</h4>
+                <?php
           include('includes/collection-creation-picture.php');
 
         //create an array of collections - will need to be redone with php when the database is ready
@@ -89,9 +87,9 @@ by  <?= $profileUserName ?>
 
          ?>
 
-      </div>
+            </div>
 
-</form>
+        </form>
 
     </main>
     <?php
