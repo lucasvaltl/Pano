@@ -9,51 +9,56 @@
       var postPictureID = parent.id;
       var Comment = parent.childNodes[1].value;
 
-      //these statements allow the manipulation of the comment counter
-      var commentCounter = "counter" + postPictureID;
-      var counterUpdater = document.getElementById(commentCounter);
-      var commentPhrase = counterUpdater.firstChild.innerHTML;
-      var commentNumber = parseInt(commentPhrase) + 1;
+      if (Comment == ""){
+            parent.childNodes[1].placeholder = 'Type Something!';
+      } else {
 
-      //setting up the ajax necessary to process the comment request
-      var xhr = new XMLHttpRequest();
-      var data = "Comment=" + Comment + "&postPictureID=" + postPictureID;
-      xhr.open('POST',  '<?=SITE_ROOT?>/includes/commentadd.php', true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.send(data);
+          //these statements allow the manipulation of the comment counter
+          var commentCounter = "counter" + postPictureID;
+          var counterUpdater = document.getElementById(commentCounter);
+          var commentPhrase = counterUpdater.firstChild.innerHTML;
+          var commentNumber = parseInt(commentPhrase) + 1;
 
-      //on the click of the comment button, this function happens
-      xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
+          //setting up the ajax necessary to process the comment request
+          var xhr = new XMLHttpRequest();
+          var data = "Comment=" + Comment + "&postPictureID=" + postPictureID;
+          xhr.open('POST',  '<?=SITE_ROOT?>/includes/commentadd.php', true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          xhr.send(data);
 
-              //newCommentRow contains the HTML to form a new row of comment
-              var newCommentRow = xhr.responseText;
-              var currentCommentID = "currentComments" + postPictureID;
-              var commentInsertion = document.getElementById(currentCommentID);
+          //on the click of the comment button, this function happens
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == 4 && xhr.status == 200) {
 
-              //ensures that the comment is inserted at the end of the comments
-              commentInsertion.insertAdjacentHTML('beforeend', newCommentRow);
+                  //newCommentRow contains the HTML to form a new row of comment
+                  var newCommentRow = xhr.responseText;
+                  var currentCommentID = "currentComments" + postPictureID;
+                  var commentInsertion = document.getElementById(currentCommentID);
 
-              var deleteButtons = document.getElementsByClassName("delete-comment-button");
-              for (i=0; i<deleteButtons.length; i++) {
-                  deleteButtons.item(i).addEventListener("click", deleteComment);
-              }
+                  //ensures that the comment is inserted at the end of the comments
+                  commentInsertion.insertAdjacentHTML('beforeend', newCommentRow);
 
-              //clears the comment field and placeholder changed to allow user
-              //to see that comment has been posted successfully
-              parent.childNodes[1].value = '';
-              parent.childNodes[1].placeholder = 'Comment Posted!';
+                  var deleteButtons = document.getElementsByClassName("delete-comment-button");
+                  for (i=0; i<deleteButtons.length; i++) {
+                      deleteButtons.item(i).addEventListener("click", deleteComment);
+                  }
 
-              //simple test to see if comment is plural or singular
-              if (commentNumber == 1){
-                  counterUpdater.firstChild.innerHTML = commentNumber + " comment";
+                  //clears the comment field and placeholder changed to allow user
+                  //to see that comment has been posted successfully
+                  parent.childNodes[1].value = '';
+                  parent.childNodes[1].placeholder = 'Comment Posted!';
+
+                  //simple test to see if comment is plural or singular
+                  if (commentNumber == 1){
+                      counterUpdater.firstChild.innerHTML = commentNumber + " comment";
+                  } else {
+                      counterUpdater.firstChild.innerHTML = commentNumber + " comments";
+                  }
+
+
               } else {
-                  counterUpdater.firstChild.innerHTML = commentNumber + " comments";
+              //    alert("There was a problem with the request.");
               }
-
-
-          } else {
-          //    alert("There was a problem with the request.");
           }
       }
   }
@@ -187,17 +192,6 @@
       deleteButtons.item(i).addEventListener("click", deleteComment);
   }
 
-  /*
-  var locationField = document.getElementsByClassName("profile-info-location");
-  var locationText = locationField.innerHTML;
-  console.log("locationField: " + locationField);
-  console.log("locationText: " + locationText);
-
-
-  var descriptionField = document.getElementsByClassName("profile-info-description");
-  var descriptionText = descriptionField.innerHTML;
-  console.log("descriptionField: " + descriptionField);
-  console.log("descriptionText: " + descriptionText);
-  */
-
   </script>
+
+  /*
