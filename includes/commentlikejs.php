@@ -17,23 +17,21 @@
 
 
 
-    // ===== Scroll to Top ==== (adapted from https://codepen.io/rdallaire/pen/apoyx)
+    //  Scroll to Top (adapted from https://codepen.io/rdallaire/pen/apoyx)
     $(window).scroll(function() {
-         // If page is scrolled more than 50px, fade in arrow
-        if ($(this).scrollTop() >= 50) {
-            $('#return-to-top').fadeIn(200);
+         // If page is scrolled more than 500px, fade in arrow
+        if ($(this).scrollTop() >= 500) {
+            $('#return-to-top').fadeIn(400);
         } else { //else fade out arrow
-            $('#return-to-top').fadeOut(200);
+            $('#return-to-top').fadeOut(400);
         }
     });
     //when arrow is clicked, scroll to top
-    $('#return-to-top').click(function() {      
+    $('#return-to-top').click(function() {
         $('body,html').animate({
             scrollTop : 0
-        }, 500);
+        }, 1000);
     });
-
-
 
 
     //whenever user scrolls, scrollReaction called (which follows the position of user on page)
