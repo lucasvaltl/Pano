@@ -556,6 +556,7 @@ left: 43%;
 
     float:right;
     color: #888;
+    margin-bottom: -20px;
 }
 
 .search-content {
@@ -567,6 +568,15 @@ left: 43%;
 /*circles*/
 
 
+/* loading */
+
+#loader {
+    display:none;
+}
+
+#load-more-button {
+    display:none;
+}
 
 
 /*other*/

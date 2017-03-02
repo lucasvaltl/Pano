@@ -6,7 +6,7 @@ ob_start();
 //session_start() needed to use global session variabls $_SESSION etc
 session_start();
 
-include('config.php');
+require_once('config.php');
 
 require_once('dbconnect.php');
 
