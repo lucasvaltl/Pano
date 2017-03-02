@@ -78,7 +78,7 @@ class post{
 
                </div>
               </div>
-                <hr>';
+                <hr class="comment-divider">';
           }
 
       //if numLikes = 1, then it will display the singular rather than plural
@@ -90,7 +90,7 @@ class post{
 
       $commentWithAnS =  (sizeof($this->comments) == 1 ? '' : 's');
 
-      echo '<div class="post continer" id="' . $this->postPictureID .'">
+      echo '<div class="post continer animated slideInUp" id="' . $this->postPictureID .'">
         <div class="post-picture">
           <img src="images/panoramas/' . $this->postPictureID . '.jpg" class="panorama">
         </div>
@@ -111,7 +111,7 @@ class post{
             </div>
             <div class="post-like-comment col-md-2 col-xs-2 " >
               <p class="lv-icons lv-top-padding">
-                <a href="" ng-click="showcomments' . $this->postPictureID . ' = !showcomments' . $this->postPictureID . '"><i class="fa fa-comment-o fa-2x " ></i>
+                <a href="" onclick="return false" class="comment-toggle" ><i class="fa fa-comment-o fa-2x " ></i>
                 <h5 id="counter' . $this->postPictureID.'">' . sizeof($this->comments) . ' comment'.$commentWithAnS.'</h5>
                 </a>
               </p>
@@ -135,13 +135,13 @@ class post{
           </div>
              <hr>
         </div>
-        <div id="currentComments' .$this->postPictureID .'" class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
+        <div class="currentComments" id="currentComments' .$this->postPictureID .'" class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
       ' . $currentComments . '
       </div>
-      <form class="row user-comment"  id="' . $this->postPictureID .'">
+      <div class="row user-comment "  id="' . $this->postPictureID .'">
       <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
          <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
-      </form>
+      </div>
       <hr>
       </div>
     ';

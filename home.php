@@ -33,11 +33,6 @@ require_once('includes/config.php');
     <main>
         <div id="feed-container">
 
-            <?php
-//          COMMENTS ARE BROKEN RIGHT NOW!!!!!
-            include('includes/commentlikejs.php');
-
-              ?>
 
       </div>
 
@@ -49,77 +44,12 @@ require_once('includes/config.php');
     </main>
 </body>
 
-<script>
 
-    var feedContainer = document.getElementById("feed-container");
-    var loadMore = document.getElementById("load-more-button");
-    loadMore.addEventListener("click", loadMorePosts);
-    var loader = document.getElementById("loader");
+<?php
+//          COMMENTS ARE BROKEN RIGHT NOW!!!!!
+include('includes/commentlikejs.php');
 
-
-    function showLoader() {
-        loader.style.display = 'block';
-    }
-
-    function hideLoader() {
-        loader.style.display = 'none';
-    }
-
-    function showLoadMore() {
-        loader.style.display = 'inline';
-    }
-
-    function hideLoadMore() {
-        loader.style.display = 'none';
-    }
-
-    function appendToFeedContainer(div, new_html) {
-        //putting new HTML into a temp div causes browser to parse it as elements
-        var temp = document.createElement('div');
-        temp.innerHTML = new_html;
-
-        //firstElementChild due to how DOM treats whitespace
-        var class_name = temp.firstElementChild.className;
-        var items = temp.getElementsByClassName(class_name);
-
-        var len = items.length;
-        for (i=0; i < len; i++){
-            div.appendChild(items[0]);
-        }
-    }
-
-    function setCurrentPage(page) {
-        console.log('Incrementing page to: ' + page);
-        loadMore.setAttribute('data-page', page);
-    }
-
-    function loadMorePosts () {
-        showLoader ();
-        hideLoadMore();
-
-        var page = parseInt(loadMore.getAttribute('data-page'));
-        var next_page = page + 1;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'includes/loadposts.php?page=' + next_page, true);
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.onreadystatechange = function () {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                var result = xhr.responseText;
-                console.log('Result: ' + result);
-
-                hideLoader();
-                setCurrentPage(next_page);
-
-                appendToFeedContainer(feedContainer, result);
-
-                showLoadMore();
-            }
-        };
-        xhr.send();
-    }
-
-</script>
+  ?>
 
 <?php
     include('includes/footer.php');

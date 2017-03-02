@@ -574,8 +574,8 @@ left: 43%;
     display:none;
 }
 
-.load-more-button {
-    display:inline;
+#load-more-button {
+    display:none;
 }
 
 

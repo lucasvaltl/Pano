@@ -2,7 +2,133 @@
     require_once('includes/config.php');
  ?>
 
+
+
 <script>
+
+    window.onload = loadMorePosts;
+
+    var feedContainer = document.getElementById("feed-container");
+    var loadMore = document.getElementById("load-more-button");
+    loadMore.addEventListener("click", loadMorePosts);
+    var loader = document.getElementById("loader");
+    var request_in_progress = false;
+
+
+
+    //whenever user scrolls, scrollReaction called (which follows the position of user on page)
+    window.onscroll = function () {
+        scrollReaction();
+    }
+
+    function toggleComment() {
+
+        commentList = this.parentElement.parentElement.parentElement.parentElement.nextElementSibling;
+
+        if (commentList.style.display=='none'){
+            commentList.style.display='inline';
+            commentList.classList.add("animated");
+            commentList.classList.add("slideInLeft")
+        } else {
+            commentList.style.display='none';
+        }
+    }
+
+
+    //if the user has scrolled to the end of the page, then call loadMorePosts
+    function scrollReaction() {
+        var content_height = feedContainer.offsetHeight;
+        var current_y = window.innerHeight + window.pageYOffset;
+
+        if(current_y >= content_height) {
+            loadMorePosts();
+        }
+    }
+
+    //if loading more pages, let the loader show, otherwise hide it
+    function showLoader() {
+        loader.style.display = 'block';
+    }
+
+    function hideLoader() {
+        loader.style.display = 'none';
+    }
+
+    //appends the loaded posts onto the end of the current set of posts
+    function appendToFeedContainer(div, new_posts) {
+        //putting new HTML into a temp div causes browser to parse it as elements
+        var temp = document.createElement('div');
+        temp.innerHTML = new_posts;
+
+        //firstElementChild due to how DOM treats whitespace
+        var class_name = temp.firstElementChild.className;
+        var items = temp.getElementsByClassName(class_name);
+
+        var length = items.length;
+        for (i=0; i < length; i++){
+            div.appendChild(items[0]);
+        }
+
+        //assigning an event listener to each of the buttons
+        var likeButtons = document.getElementsByClassName("like-button");
+        var unlikeButtons = document.getElementsByClassName("unlike-button");
+        var commentButtons = document.getElementsByClassName("comment-button");
+        var commentToggles = document.getElementsByClassName("comment-toggle");
+
+        for (i=0; i <commentToggles.length; i++){
+            commentToggles.item(i).addEventListener("click", toggleComment);
+        }
+
+        for (i=0; i<likeButtons.length; i++) {
+          likeButtons.item(i).addEventListener("click" , registerLike);
+          unlikeButtons.item(i).addEventListener("click" , unregisterLike);
+          commentButtons.item(i).addEventListener("click", sendComment);
+        }
+
+        var deleteButtons = document.getElementsByClassName("delete-comment-button");
+        for (i=0; i<deleteButtons.length; i++) {
+          deleteButtons.item(i).addEventListener("click", deleteComment);
+        }
+
+        var commentRows = document.getElementsByClassName('currentComments');
+        for (var i = 0; i < commentRows.length; i++){
+            commentRows[i].style.display='none';
+        }
+    }
+
+    function setCurrentPage(page) {
+        //console.log('Incrementing page to: ' + page);
+        loadMore.setAttribute('data-page', page);
+    }
+
+    function loadMorePosts () {
+        if (request_in_progress) {
+            return;
+        }
+        request_in_progress = true;
+        showLoader ();
+
+        var page = parseInt(loadMore.getAttribute('data-page'));
+        var next_page = page + 1;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'includes/loadposts.php?page=' + next_page, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                var result = xhr.responseText;
+                console.log('Result: ' + result);
+
+                hideLoader();
+                setCurrentPage(next_page);
+                appendToFeedContainer(feedContainer, result);
+
+                request_in_progress = false;
+            }
+        };
+        xhr.send();
+    }
+
 
 
     function sendComment() {
@@ -68,7 +194,10 @@
     function deleteComment() {
 
       var parent = this.parentElement;
+      //must delete both the comment and the divider
       var commentRow = parent.parentElement;
+      var divider = commentRow.nextElementSibling;
+
       var postRow = commentRow.parentElement;
       var postPictureID = postRow.parentElement.id;
       var commentID = commentRow.id;
@@ -87,6 +216,7 @@
       xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
               commentRow.remove();
+              divider.remove();
 
               //simple test to see if comment is plural or singular
               if (commentNumber == 1){
@@ -176,22 +306,6 @@
           //    alert("There was a problem with the request.");
           }
       }
-    }
-
-
-    //assigning an event listener to each of the buttons
-    var likeButtons = document.getElementsByClassName("like-button");
-    var unlikeButtons = document.getElementsByClassName("unlike-button");
-    var commentButtons = document.getElementsByClassName("comment-button");
-    for (i=0; i<likeButtons.length; i++) {
-      likeButtons.item(i).addEventListener("click" , registerLike);
-      unlikeButtons.item(i).addEventListener("click" , unregisterLike);
-      commentButtons.item(i).addEventListener("click", sendComment);
-    }
-
-    var deleteButtons = document.getElementsByClassName("delete-comment-button");
-    for (i=0; i<deleteButtons.length; i++) {
-      deleteButtons.item(i).addEventListener("click", deleteComment);
     }
 
   </script>

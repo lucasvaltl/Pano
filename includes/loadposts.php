@@ -1,5 +1,8 @@
 <?php
 
+//take this out when its live on the azure server
+sleep(1);
+
 //ob_start needed to allow redirecting after login
 ob_start();
 
@@ -8,36 +11,64 @@ session_start();
 
 require_once ('post.php');
 
+require_once('config.php');
+
+require_once('dbconnect.php');
 
 
+//gets the username from the URL of the page.
+$profileUserName = substr(strchr($_SERVER['HTTP_REFERER'], 'id='), 3);
 
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
-$posts = findPosts($page);
-
-//for each post:
-function findPosts($page) {
-
-    require_once('config.php');
-
-    require_once('dbconnect.php');
-
+//query to pick based on which page called loadposts.php
+//query tailored for the home feed
+if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
 
     $query = "SELECT * FROM posts
                 LEFT JOIN user ON user.`UserID` = posts.`UserID`
                 ORDER BY PostTime DESC";
 
-    if ($result = mysqli_query($conn, $query)) {
-        $count = mysqli_num_rows($result);
+//query tailored for the profile-info page
+} else if (strpos($_SERVER['HTTP_REFERER'],'profile-info.php')){
 
-    //    $first_post = $row;
-        $per_page = 3;
+    $query = "SELECT * FROM posts
+                LEFT JOIN user ON user.`UserID` = posts.`UserID`
+                WHERE user.`UserName` = '$profileUserName'
+                ORDER BY PostTime DESC";
+}
+
+
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+
+$posts = findPosts($page, $query, $conn);
+
+
+function findPosts($page, $query, $conn) {
+
+    if ($result = mysqli_query($conn, $query)) {
+        $total_posts = mysqli_num_rows($result);
+
+        $per_page = 5;
         $offset = (($page - 1) * $per_page) + 1;
 
-        $posts = [];
-        //while ($post = mysqli_fetch_array($result)) {
-        for ($i=0; $i < $per_page; $i++) {
+        $post_counter = 1;
+
+        //skips over the posts already put on the feed
+        while ($post_counter < $offset ) {
             $post = mysqli_fetch_array($result);
+            $post_counter++;
+        }
+
+        //if there are less posts than posts per page, set $per_page to how many are remaining
+        if (($total_posts - $offset) < $per_page) {
+            $per_page = $total_posts-$offset + 1;
+        }
+
+        for ($i=0; $i < $per_page; $i++) {
+
+            $post = mysqli_fetch_array($result);
+
+
             $postID = $post['PostID'];
             $numComments; //calculated in query 2
             $numLikes = 0; //calculated in query 3
@@ -97,7 +128,6 @@ function findPosts($page) {
             $post = new post($postPictureID, $postUserPictureID, $postUserName, $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp);
 
             echo $post->addComments($comments);
-            $posts[] = $post;
             echo $post->returnHTML();
         }
     }
