@@ -6,7 +6,7 @@ ob_start();
 //session_start() needed to use global session variabls $_SESSION etc
 session_start();
 
-include('includes/config.php');
+require_once('includes/config.php');
 require_once('includes/dbconnect.php');
 
 $filename = basename(__FILE__, '.php');
@@ -21,6 +21,8 @@ if (isset($_GET['id'])) {
 <!DOCTYPE html>
 <html>
 
+<a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -30,6 +32,7 @@ if (isset($_GET['id'])) {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Pano - <?php echo $profileUserName;?></title>
 </head>
 
@@ -49,18 +52,16 @@ if (isset($_GET['id'])) {
         <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
       </div>
 
-
-
     </main>
-    <?php
-    include('includes/header.php');
-
-
-
-  include('includes/commentlikejs.php');
-        include('includes/footer.php');
-    ?>
 
 </body>
+
+<!-- jquery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<?php
+    include('includes/commentlikejs.php');
+    include('includes/footer.php');
+?>
 
 </html>

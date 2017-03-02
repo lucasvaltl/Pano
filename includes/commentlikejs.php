@@ -16,6 +16,26 @@
 
 
 
+
+    // ===== Scroll to Top ==== (adapted from https://codepen.io/rdallaire/pen/apoyx)
+    $(window).scroll(function() {
+         // If page is scrolled more than 50px, fade in arrow
+        if ($(this).scrollTop() >= 50) {
+            $('#return-to-top').fadeIn(200);
+        } else { //else fade out arrow
+            $('#return-to-top').fadeOut(200);
+        }
+    });
+    //when arrow is clicked, scroll to top
+    $('#return-to-top').click(function() {      
+        $('body,html').animate({
+            scrollTop : 0
+        }, 500);
+    });
+
+
+
+
     //whenever user scrolls, scrollReaction called (which follows the position of user on page)
     window.onscroll = function () {
         scrollReaction();
