@@ -98,7 +98,7 @@ class post{
         <div class="row ">
           <div class="container post-meta vertical-center">
             <div class="post-user-picture col-md-3 col-xs-3">
-              <a href="'. SITE_ROOT .'/profile-info.php?id='. $_SESSION['UserName'] .'" >&nbsp;
+              <a href="'. SITE_ROOT .'/profile-info.php?id='. $this->postUserName .'" >&nbsp;
                 <img src="images/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
               </a>
             </div>

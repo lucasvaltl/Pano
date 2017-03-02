@@ -3,7 +3,9 @@
  ?>
 
 <script>
-  function sendComment() {
+
+
+    function sendComment() {
       //parent gives access to the postPictureID and Comment fields necessary
       var parent  = this.parentElement;
       var postPictureID = parent.id;
@@ -61,9 +63,9 @@
               }
           }
       }
-  }
+    }
 
-  function deleteComment() {
+    function deleteComment() {
 
       var parent = this.parentElement;
       var commentRow = parent.parentElement;
@@ -104,10 +106,10 @@
 
 
 
-  }
+    }
 
 
-  function registerLike() {
+    function registerLike() {
 
       //accessing the parent element, to gain access to the data
       //corresponding to the one being clicked
@@ -147,9 +149,9 @@
               //alert("There was a problem with the request.");
           }
       }
-  }
+    }
 
-  function unregisterLike() {
+    function unregisterLike() {
       var parent = this.parentElement;
       var postPictureID = parent.id;
       var likePhrase = parent.nextSibling.innerHTML;
@@ -174,22 +176,22 @@
           //    alert("There was a problem with the request.");
           }
       }
-  }
+    }
 
 
-  //assigning an event listener to each of the buttons
-  var likeButtons = document.getElementsByClassName("like-button");
-  var unlikeButtons = document.getElementsByClassName("unlike-button");
-  var commentButtons = document.getElementsByClassName("comment-button");
-  for (i=0; i<likeButtons.length; i++) {
+    //assigning an event listener to each of the buttons
+    var likeButtons = document.getElementsByClassName("like-button");
+    var unlikeButtons = document.getElementsByClassName("unlike-button");
+    var commentButtons = document.getElementsByClassName("comment-button");
+    for (i=0; i<likeButtons.length; i++) {
       likeButtons.item(i).addEventListener("click" , registerLike);
       unlikeButtons.item(i).addEventListener("click" , unregisterLike);
       commentButtons.item(i).addEventListener("click", sendComment);
-  }
+    }
 
-  var deleteButtons = document.getElementsByClassName("delete-comment-button");
-  for (i=0; i<deleteButtons.length; i++) {
+    var deleteButtons = document.getElementsByClassName("delete-comment-button");
+    for (i=0; i<deleteButtons.length; i++) {
       deleteButtons.item(i).addEventListener("click", deleteComment);
-  }
+    }
 
   </script>
