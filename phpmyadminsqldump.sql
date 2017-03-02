@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 23, 2017 at 04:11 AM
+-- Generation Time: Mar 02, 2017 at 09:48 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -42,6 +42,24 @@ CREATE TABLE `comments` (
   `Comment` text NOT NULL,
   `CommentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`CommentID`, `UserID`, `PhotoID`, `Comment`, `CommentTime`) VALUES
+(11257, 12400, 11111, 'Sick photo bro', '2017-02-27 00:22:06'),
+(11258, 12400, 11112, 'Lol at the ladys head', '2017-02-27 00:23:05'),
+(11267, 12399, 11112, 'This looks like London to me, not Montreal!', '2017-02-27 11:27:09'),
+(11278, 12399, 11112, 'You can tell because the walky-talky and cheese-grater buildings are on the right hand side!', '2017-02-27 11:44:26'),
+(11281, 12402, 11112, 'Oh yeah it was actually in London', '2017-02-27 17:28:30'),
+(11337, 12399, 11116, 'good old days', '2017-03-02 20:22:47'),
+(11339, 12400, 11118, 'Awesome!', '2017-03-02 20:42:41'),
+(11340, 12399, 11111, 'Nice sunset!', '2017-03-02 21:23:45'),
+(11341, 12402, 11116, 'looks cold bro', '2017-03-02 21:46:03'),
+(11342, 12402, 11113, 'Ive been here before!', '2017-03-02 21:46:29'),
+(11343, 12401, 11123, 'Better run!', '2017-03-02 21:47:27'),
+(11344, 12401, 11120, 'I could say it easily ;)', '2017-03-02 21:48:06');
 
 -- --------------------------------------------------------
 
@@ -117,6 +135,27 @@ CREATE TABLE `likes` (
   `UserID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `likes`
+--
+
+INSERT INTO `likes` (`PhotoID`, `UserID`) VALUES
+(11113, 12399),
+(11118, 12399),
+(11111, 12400),
+(11112, 12400),
+(11111, 12401),
+(11112, 12401),
+(11113, 12401),
+(11115, 12401),
+(11116, 12401),
+(11118, 12401),
+(11123, 12401),
+(11111, 12402),
+(11120, 12402),
+(11122, 12402),
+(11123, 12402);
+
 -- --------------------------------------------------------
 
 --
@@ -150,9 +189,27 @@ CREATE TABLE `photocollections mapping` (
 
 CREATE TABLE `photos` (
   `PhotoID` int(40) NOT NULL,
-  `PostID` int(40) NOT NULL,
   `LinkToFile` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `photos`
+--
+
+INSERT INTO `photos` (`PhotoID`, `LinkToFile`) VALUES
+(11111, 'IMG_8937'),
+(11112, ''),
+(11113, '11113'),
+(11114, '11114'),
+(11115, '11115'),
+(11116, '11116'),
+(11117, '11117'),
+(11118, '11118'),
+(11119, ''),
+(11120, ''),
+(11121, ''),
+(11122, ''),
+(11123, '');
 
 -- --------------------------------------------------------
 
@@ -168,6 +225,25 @@ CREATE TABLE `posts` (
   `PostTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `PostLocation` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`PostID`, `UserID`, `PhotoID`, `PostText`, `PostTime`, `PostLocation`) VALUES
+(11111, 12400, 11111, '#bestintheworld', '2017-02-24 18:28:54', 'Bergen, Austria'),
+(11112, 12402, 11112, 'Awesome experience!', '2017-02-24 20:04:56', 'Montreal, Canada'),
+(11113, 12399, 11113, '#OldTrafford #ManUtd', '2017-03-01 19:26:23', 'Manchester, England'),
+(11114, 12399, 11114, 'Beautiful #Bali #Volcano #Lake', '2017-03-01 19:33:27', 'Bali, Indonesia'),
+(11115, 12399, 11115, 'Niagara Falls!', '2017-03-01 19:36:06', 'Niagara Falls, USA/Canada'),
+(11116, 12399, 11116, 'Really cold in #Montreal!', '2017-03-01 19:36:06', 'Montreal, Canada'),
+(11117, 12399, 11117, 'Sydney Harbour!', '2017-03-01 19:37:03', 'Sydney, Australia'),
+(11118, 12399, 11118, 'So natural! #Glacier #Iceland', '2017-03-01 19:38:23', 'Iceland'),
+(11119, 12399, 11119, 'Toronto in Winter #sunset', '2017-03-02 21:29:08', 'Toronto, Canada'),
+(11120, 12399, 11120, 'Eyjafjallajokull #Iceland #tryandsayit', '2017-03-02 21:40:07', 'Eyjafjallajokull, Iceland'),
+(11121, 12399, 11121, 'Malaysian sunset', '2017-03-02 21:41:30', 'Malaysia'),
+(11122, 12399, 11122, '#nara #weclimbedamountain', '2017-03-02 21:41:30', 'Nara, Japan'),
+(11123, 12399, 11123, 'Singaporean thunderstorm approaching #needtofindshelter', '2017-03-02 21:42:25', 'Pulau Ubin, Singapore');
 
 -- --------------------------------------------------------
 
@@ -213,7 +289,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Password`, `Location`, `ShortDescrip`, `DateCreated`, `SettingID`) VALUES
-(12399, 'Li', 'Xie', 'Liko', 'liko@mail.com', '$2y$10$SW1DWeNQuLcFdbWs2PgXiO5VqCrUDdzJ173sEi/tLmL9oWsXWmI4G', 'London', 'Yolo', '2017-02-21 18:24:29', 2),
+(12399, 'Li', 'Xie', 'Liko', 'liko@mail.com', '$2y$10$SW1DWeNQuLcFdbWs2PgXiO5VqCrUDdzJ173sEi/tLmL9oWsXWmI4G', 'London, England', 'Pano is one of the best social media sites ever made!', '2017-02-21 18:24:29', 2),
 (12400, 'Lucas', 'Valtl', 'Lucas', 'lucas@pano.com', '$2y$10$KZHC1VBrAWtUZJPrcwyb9uL1TWIwJqP9FIYT7O2k4BNvK5PX8ZYay', 'London', 'I like Pano', '2017-02-21 18:25:19', 3),
 (12401, 'Florian', 'Obst', 'Florian', 'florian@pano.com', '$2y$10$JCCx7lZflspi.B55V7j8bOEuJG.gM1MlpeQbrZDeYiT8oh0MLRm2m', 'London', 'Go Pano Go', '2017-02-21 18:25:47', 3),
 (12402, 'Johannes', 'Landgraf', 'Johannes', 'johannes@pano.com', '$2y$10$6Bq0sco8ddlwFUy47oNAA.Nm.QvD7wmMtYaA.z6iuRsjLOOLyHWHm', 'London', 'Pano is great', '2017-02-21 18:26:32', 3),
@@ -350,7 +426,7 @@ ALTER TABLE `collections`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11345;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -365,12 +441,12 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `PhotoID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `PhotoID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11124;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `PostID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `PostID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11124;
 --
 -- AUTO_INCREMENT for table `user`
 --
