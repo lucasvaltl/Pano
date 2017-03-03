@@ -692,8 +692,35 @@ width: 270px;
   bottom: 70px;
   color: #444;
   padding: 0;
-    width: 90%;
+  width: 90%;
 }
+
+.name-column{
+  text-align: left;
+}
+
+.friend-name{
+  text-align: left;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.admin-icon{
+  text-align: center;
+font-size: 1em;
+  color: #61e8bf;
+  border: 1px solid #61e8bf;
+  border-radius: 3px;
+  width: 50px;
+  height: 25px;
+  padding: 3px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+
+
+
 
 /*needs to be adapted one pictures can be uploaded!*/
 .create-circle-picID{

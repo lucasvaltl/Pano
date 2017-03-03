@@ -54,26 +54,36 @@ if (isset($_GET['GroupID'])) {
         <?php
 
           //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
+  $query = "SELECT CreatorID  FROM groups  WHERE GroupID='$GroupID'";
+$CreatorID = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
-          $query = "SELECT u.UserName, u.UserID FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'";
+          $query = "SELECT u.UserName, u.UserID  FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'";
           $members= mysqli_query($conn, $query);
          ?>
 
          <?php while($row = mysqli_fetch_assoc($members)) :
-  if($row['UserID'] === $UserID){
-    continue;
-  }
+//PictureID placeholder
            $PictureID = '3';
            ?>
            <div class="row friend-content">
            <div class="col-md-3 col-xs-3">
            <img src="<?=SITE_ROOT?>/images/profilepics/<?= $PictureID ?>.jpg" class="img-circle friend-picture" />
             </div>
-           <div class="col-md-3 col-xs-3 friend-name">
-              <h3><?= $row['UserName']?></h3>
-           </div>
+           <div class="col-md-5 col-xs-4 name-column ">
+<div class="friend-name">
+    <?= $row['UserName']?>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php
+if($row['UserID']=== $CreatorID['CreatorID']){
+echo '<div class="admin-icon">
+Admin
+  </div>';
+}
+ ?>
 
-           <div class="col col-md-6 col-xs-6 friending-icon">
+    </div>
+           <div class="col col-md-4 col-xs-3 friending-icon">
             <input type="checkbox" class="create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>" >
              </div>
              </div>
