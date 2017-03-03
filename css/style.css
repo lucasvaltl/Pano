@@ -602,7 +602,7 @@ left: 43%;
     z-index: 2;
 }
 #return-to-top i {
-    color: #fff;
+    color: #540d6e;
     margin: 0;
     position: relative;
     left: 0px;
@@ -618,7 +618,7 @@ left: 43%;
     background: #540d6e;
 }
 #return-to-top:hover i {
-    color: #fff;
+    color: #61e8bf;
     top: 5px;
 }
 
