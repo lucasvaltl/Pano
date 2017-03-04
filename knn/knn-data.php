@@ -24,7 +24,7 @@ $data = [];
 $query = "SELECT PhotoID FROM likes WHERE UserID  = '{$_SESSION['UserID']}'";
 
 //$numTotalLikes is the total number of likes of the logged in user
-$numTotalLikes = 0;
+$numTotalLikes;
 $photosLiked = [];
 
 if ($result = mysqli_query($conn, $query)) {
@@ -35,15 +35,12 @@ if ($result = mysqli_query($conn, $query)) {
 }
 
 //===========================================================================
-//$numTotalFriends is number of total froends of the logged in user
+//$numTotalFriends is number of total friends of the logged in user
 
 $query = "SELECT UserID from friends
-			WHERE FriendID = '{$_SESSION['UserID']}'
-			UNION ALL
-			SELECT FriendID from friends
 			WHERE UserID = '{$_SESSION['UserID']}'";
 
-$numTotalFriends = 0;
+$numTotalFriends;
 
 if ($result = mysqli_query($conn, $query)) {
 	$numTotalFriends = mysqli_num_rows($result);
@@ -62,7 +59,7 @@ $query = "SELECT UserID from user
 
 //$sampleSize is how many users are not friends with the user,
 // and $usersInSample is an array of UserIDs of those users
-$sampleSize = 0;
+$sampleSize;
 $usersInSample = [];
 if ($result = mysqli_query($conn, $query)) {
 	$sampleSize = mysqli_num_rows($result);
@@ -96,7 +93,7 @@ foreach ($usersInSample as $key => $userID) {
 		WHERE t1.PhotoID = t2.PhotoID AND t1.UserID = '{$_SESSION['UserID']}' AND t2.UserID = $userID
 		AND t1.UserID <> t2.UserID";
 
-	$numSharedLikes = 0;
+	$numSharedLikes;
 
 	if ($result = mysqli_query($conn, $query)){
 		$numSharedLikes = mysqli_num_rows($result);
@@ -111,12 +108,20 @@ foreach ($usersInSample as $key => $userID) {
 	$query = "SELECT my.FriendID
 			FROM friends AS my
 			JOIN friends AS their USING (FriendID)
-			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$userID')
-			AND my.FriendID NOT IN (
-			SELECT UserID from user WHERE UserID = '$userID'
-		)";
+			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$userID')";
 
-	$numMutualFriends = 0;
+		/*
+
+		SELECT my.FriendID
+			FROM friends AS my
+			JOIN friends AS their USING (FriendID)
+			WHERE  (my.UserID = 12399 AND their.UserID = 12400)
+			AND my.FriendID NOT IN (
+			SELECT UserID from user WHERE UserID = 12400)
+
+			*/
+
+	$numMutualFriends=0;
 
 	if ($result = mysqli_query($conn, $query)){
 		$numMutualFriends = mysqli_num_rows($result);
@@ -150,7 +155,7 @@ else
 
 //random data generator
 //$data = [];
-
+/*
 for ($i=0; $i < 50; $i++){
 	$rX = rand(0, 1000);
 	$rY = rand(0, 1000);
@@ -159,6 +164,7 @@ for ($i=0; $i < 50; $i++){
 	$data[] = array($rX, $rY, $user, $user);
 
 }
+*/
 
 
 $kNN = new kNN($data, $currentUserPoint, 5, array(2,3));

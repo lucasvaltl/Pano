@@ -48,7 +48,7 @@ function findPosts($page, $query, $conn) {
     if ($result = mysqli_query($conn, $query)) {
         $total_posts = mysqli_num_rows($result);
 
-        $per_page = 5;
+        $per_page = 8;
         $offset = (($page - 1) * $per_page) + 1;
 
         $post_counter = 1;

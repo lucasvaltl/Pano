@@ -47,24 +47,24 @@ if (isset($_GET['id'])) {
       <?php
         include('includes/friends-list.php');
 
-        //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
 
+        //join query to associate a UserID with their UserName.
         $query = ("SELECT
                     user.`UserName` AS UserName, user.`UserID` AS UserID
                     FROM friends LEFT JOIN user
                     ON user.`UserID` = friends.`UserID`
-                    OR user.`UserID` = friends.`FriendID`
                     AND user.`UserID` != '$profileUserID'
-                    WHERE friends.`UserID` = '$profileUserID'
-                    OR friends.`FriendID` = '$profileUserID'");
+                    WHERE friends.`FriendID` = '$profileUserID'");
 
 
         if ($result = mysqli_query($conn, $query)) {
             //$count = mysqli_num_rows($result);
 
-            $isFriendOfUser = false;
+
 
             while ($row = mysqli_fetch_array($result)) {
+
+                $isFriendOfUser = false;
 
                 $friendName = $row['UserName'];
                 $friendUserID = $row['UserID'];
@@ -72,20 +72,18 @@ if (isset($_GET['id'])) {
                 //if the friend is yourself, skip the iteration
                 if ($friendName == $profileUserName || $friendName == $_SESSION['UserName']){
                     continue;
-                } else {
+                }
 
-                    //otherwise check to see if the logged in user is friends with this user's friends
-                    $query2 = "SELECT * FROM friends
-                                WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'
-                                OR FriendID = '$friendUserID' AND UserID = '{$_SESSION['UserID']}'";
+                //otherwise check to see if the logged in user is friends with this user's friends
+                $query2 = "SELECT * FROM friends
+                            WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'";
 
-                    if ($result2 = mysqli_query($conn, $query2)) {
-                        $count = mysqli_num_rows($result2);
+                if ($result2 = mysqli_query($conn, $query2)) {
+                    $count = mysqli_num_rows($result2);
 
-                        //if friends, display tick, otherwise an add friend icon will appear
-                        if ($count == 1) {
-                            $isFriendOfUser = true;
-                        }
+                    //if friends, display tick, otherwise an add friend icon will appear
+                    if ($count != 0) {
+                        $isFriendOfUser = true;
                     }
                 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 02, 2017 at 09:48 PM
+-- Generation Time: Mar 04, 2017 at 05:37 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -59,7 +59,9 @@ INSERT INTO `comments` (`CommentID`, `UserID`, `PhotoID`, `Comment`, `CommentTim
 (11341, 12402, 11116, 'looks cold bro', '2017-03-02 21:46:03'),
 (11342, 12402, 11113, 'Ive been here before!', '2017-03-02 21:46:29'),
 (11343, 12401, 11123, 'Better run!', '2017-03-02 21:47:27'),
-(11344, 12401, 11120, 'I could say it easily ;)', '2017-03-02 21:48:06');
+(11344, 12401, 11120, 'I could say it easily ;)', '2017-03-02 21:48:06'),
+(11345, 12409, 11123, 'i could hide easily up in this vantage point...', '2017-03-03 20:03:10'),
+(11346, 12409, 11120, 'i could hide in that mountain, and youd never know...', '2017-03-03 20:03:44');
 
 -- --------------------------------------------------------
 
@@ -104,10 +106,44 @@ CREATE TABLE `friends` (
 --
 
 INSERT INTO `friends` (`UserID`, `FriendID`) VALUES
+(12400, 12399),
+(12401, 12399),
+(12402, 12399),
+(12404, 12399),
+(12407, 12399),
 (12399, 12400),
-(12402, 12400),
+(12401, 12400),
+(12399, 12401),
 (12400, 12401),
-(12399, 12402);
+(12402, 12401),
+(12409, 12401),
+(12399, 12402),
+(12401, 12402),
+(12404, 12402),
+(12405, 12403),
+(12406, 12403),
+(12407, 12403),
+(12408, 12403),
+(12399, 12404),
+(12402, 12404),
+(12408, 12404),
+(12403, 12405),
+(12406, 12405),
+(12408, 12405),
+(12403, 12406),
+(12405, 12406),
+(12407, 12406),
+(12410, 12406),
+(12399, 12407),
+(12403, 12407),
+(12406, 12407),
+(12403, 12408),
+(12404, 12408),
+(12405, 12408),
+(12401, 12409),
+(12413, 12409),
+(12406, 12410),
+(12409, 12413);
 
 -- --------------------------------------------------------
 
@@ -140,6 +176,8 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`PhotoID`, `UserID`) VALUES
+(11111, 12399),
+(11112, 12399),
 (11113, 12399),
 (11118, 12399),
 (11111, 12400),
@@ -154,7 +192,56 @@ INSERT INTO `likes` (`PhotoID`, `UserID`) VALUES
 (11111, 12402),
 (11120, 12402),
 (11122, 12402),
-(11123, 12402);
+(11123, 12402),
+(11118, 12403),
+(11112, 12404),
+(11113, 12404),
+(11114, 12404),
+(11115, 12404),
+(11116, 12404),
+(11117, 12404),
+(11118, 12404),
+(11119, 12404),
+(11120, 12404),
+(11121, 12404),
+(11122, 12404),
+(11123, 12404),
+(11111, 12405),
+(11112, 12405),
+(11114, 12405),
+(11121, 12405),
+(11123, 12405),
+(11112, 12406),
+(11113, 12406),
+(11119, 12406),
+(11123, 12406),
+(11114, 12407),
+(11115, 12407),
+(11116, 12407),
+(11117, 12407),
+(11118, 12407),
+(11119, 12407),
+(11121, 12407),
+(11122, 12407),
+(11112, 12408),
+(11113, 12408),
+(11114, 12408),
+(11115, 12408),
+(11116, 12408),
+(11117, 12408),
+(11118, 12408),
+(11119, 12408),
+(11120, 12408),
+(11121, 12408),
+(11122, 12408),
+(11123, 12408),
+(11118, 12409),
+(11119, 12409),
+(11120, 12409),
+(11121, 12409),
+(11122, 12409),
+(11123, 12409),
+(11118, 12410);
 
 -- --------------------------------------------------------
 
@@ -209,7 +296,25 @@ INSERT INTO `photos` (`PhotoID`, `LinkToFile`) VALUES
 (11120, ''),
 (11121, ''),
 (11122, ''),
-(11123, '');
+(11123, ''),
+(11124, ''),
+(11125, ''),
+(11126, ''),
+(11127, ''),
+(11128, ''),
+(11129, ''),
+(11130, ''),
+(11131, ''),
+(11132, ''),
+(11133, ''),
+(11134, ''),
+(11135, ''),
+(11136, ''),
+(11137, ''),
+(11138, ''),
+(11139, ''),
+(11140, ''),
+(11141, '');
 
 -- --------------------------------------------------------
 
@@ -231,19 +336,32 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`PostID`, `UserID`, `PhotoID`, `PostText`, `PostTime`, `PostLocation`) VALUES
-(11111, 12400, 11111, '#bestintheworld', '2017-02-24 18:28:54', 'Bergen, Austria'),
-(11112, 12402, 11112, 'Awesome experience!', '2017-02-24 20:04:56', 'Montreal, Canada'),
-(11113, 12399, 11113, '#OldTrafford #ManUtd', '2017-03-01 19:26:23', 'Manchester, England'),
+(11111, 12400, 11111, '#bestintheworld', '2017-03-04 18:28:54', 'Bergen, Austria'),
+(11112, 12402, 11112, 'Awesome experience!', '2017-03-04 12:04:56', 'Montreal, Canada'),
+(11113, 12399, 11113, '#OldTrafford #ManUtd', '2017-03-04 12:26:23', 'Manchester, England'),
 (11114, 12399, 11114, 'Beautiful #Bali #Volcano #Lake', '2017-03-01 19:33:27', 'Bali, Indonesia'),
 (11115, 12399, 11115, 'Niagara Falls!', '2017-03-01 19:36:06', 'Niagara Falls, USA/Canada'),
 (11116, 12399, 11116, 'Really cold in #Montreal!', '2017-03-01 19:36:06', 'Montreal, Canada'),
 (11117, 12399, 11117, 'Sydney Harbour!', '2017-03-01 19:37:03', 'Sydney, Australia'),
-(11118, 12399, 11118, 'So natural! #Glacier #Iceland', '2017-03-01 19:38:23', 'Iceland'),
+(11118, 12399, 11118, 'So natural! #Glacier #Iceland', '2017-03-04 17:38:23', 'Iceland'),
 (11119, 12399, 11119, 'Toronto in Winter #sunset', '2017-03-02 21:29:08', 'Toronto, Canada'),
 (11120, 12399, 11120, 'Eyjafjallajokull #Iceland #tryandsayit', '2017-03-02 21:40:07', 'Eyjafjallajokull, Iceland'),
 (11121, 12399, 11121, 'Malaysian sunset', '2017-03-02 21:41:30', 'Malaysia'),
 (11122, 12399, 11122, '#nara #weclimbedamountain', '2017-03-02 21:41:30', 'Nara, Japan'),
-(11123, 12399, 11123, 'Singaporean thunderstorm approaching #needtofindshelter', '2017-03-02 21:42:25', 'Pulau Ubin, Singapore');
+(11123, 12399, 11123, 'Singaporean thunderstorm approaching #needtofindshelter', '2017-03-02 21:42:25', 'Pulau Ubin, Singapore'),
+(11124, 12403, 11124, 'Sydney at Night', '2017-03-04 16:57:28', 'Sydney, Australia'),
+(11125, 12404, 11125, 'Swiss Beauty', '2017-03-04 16:58:32', 'Bern, Switzerland'),
+(11126, 12408, 11126, 'Dirt track or snow mountain?', '2017-03-03 16:59:46', 'Snowy Mountains, Australia'),
+(11127, 12409, 11127, '#averageday', '2017-03-04 17:01:01', 'Moscow, Russia'),
+(11128, 12406, 11128, 'Icelandic waterfall', '2017-03-04 17:08:55', 'Iceland'),
+(11130, 12410, 11129, 'North Korea is beautiful... #pyongyang', '2017-03-04 17:10:45', 'Pyongyang, North Korea'),
+(11131, 12412, 11130, 'Biarritz', '2017-03-01 17:12:11', 'Biarritz, France'),
+(11132, 12413, 11131, '#TrafalgarSquare #London #pigeonseverywhere', '2017-03-04 17:15:36', 'London, England'),
+(11133, 12408, 11132, '#NYC #skyline #beautiful', '2017-03-01 17:17:24', 'New York City, USA'),
+(11134, 12402, 11133, '#SonyCentre #Berlin', '2017-03-04 17:20:23', 'Berlin, Germany'),
+(11135, 12407, 11134, '#phoenix #arizona #sunset', '2017-03-02 17:22:19', 'Phoenix, Arizona, USA'),
+(11136, 12414, 11135, 'Montreal at Night #montreal', '2017-03-04 17:23:38', 'Montreal, Canada'),
+(11137, 12410, 11136, 'Hollywood, Los Angeles #coolsign', '2017-03-04 17:28:24', 'Los Angeles, USA');
 
 -- --------------------------------------------------------
 
@@ -293,7 +411,18 @@ INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress
 (12400, 'Lucas', 'Valtl', 'Lucas', 'lucas@pano.com', '$2y$10$KZHC1VBrAWtUZJPrcwyb9uL1TWIwJqP9FIYT7O2k4BNvK5PX8ZYay', 'London', 'I like Pano', '2017-02-21 18:25:19', 3),
 (12401, 'Florian', 'Obst', 'Florian', 'florian@pano.com', '$2y$10$JCCx7lZflspi.B55V7j8bOEuJG.gM1MlpeQbrZDeYiT8oh0MLRm2m', 'London', 'Go Pano Go', '2017-02-21 18:25:47', 3),
 (12402, 'Johannes', 'Landgraf', 'Johannes', 'johannes@pano.com', '$2y$10$6Bq0sco8ddlwFUy47oNAA.Nm.QvD7wmMtYaA.z6iuRsjLOOLyHWHm', 'London', 'Pano is great', '2017-02-21 18:26:32', 3),
-(12403, 'Noob', 'Master', 'Noob123', 'noob@mail.com', '$2y$10$bfqBPR5mPB0nuuY4SAEOo.M090R/7Q3x/b/N10T5Hpkku7U3kcLfG', 'London', 'I am a noob', '2017-02-22 22:57:13', 3);
+(12403, 'Noob', 'Master', 'Noob123', 'noob@mail.com', '$2y$10$bfqBPR5mPB0nuuY4SAEOo.M090R/7Q3x/b/N10T5Hpkku7U3kcLfG', 'London', 'I am a noob', '2017-02-22 22:57:13', 3),
+(12404, 'Secret', 'Guy', 'PanoMaster', 'pano@mail.com', '$2y$10$ty.2qdk5XT4G0JKIPep5VeLmYeeOF4qA.0CzerybEIauymnIGIzHa', 'Manchester', 'I am just a test account. Nothing special here really.', '2017-03-03 19:22:06', 3),
+(12405, 'John', 'Smith', 'braveAsian', 'brave@brave.com', '$2y$10$uIqDRSHJcUTOKoClHm4pH.R46lAjMea.bJTbLqHbGkFnP8Wk/jWIm', 'Hawaii', 'I killed a lion once', '2017-03-03 19:28:37', 3),
+(12406, 'Samuel', 'Yoloman', 'yolo_merchant', 'yolo@yolo.com', '$2y$10$24/4oboKR4gqDakyRHr1MejMpXjAmdGhWIziY2fV0bxtXq4HtTeCq', 'Edinburgh', 'I buy and sell yolo', '2017-03-03 19:50:23', 3),
+(12407, 'Max', 'Power', 'power_ranger246', 'power@power.com', '$2y$10$82YF6Km3trd/N3Q./ZKHt.cZduYyiFu2yXj2EAICXzhCzLNu./jk2', 'Reading', 'I like power rangers', '2017-03-03 19:52:31', 3),
+(12408, 'Crash', 'Bandicoot', 'CrashBandicoot', 'crash@crash.com', '$2y$10$hTY.hC9Zr.wzkVRfCMVhMeHbtjtqhufX/AU.YP5JdZypyAKwy/sGO', 'CrashLand', 'I have a remake coming out soon!', '2017-03-03 19:54:34', 3),
+(12409, 'Ghost', 'Sniper', 'ghostsniper64', 'ghosty@snipes.com', '$2y$10$JK3i/3aFD2GzQdOU5QUi6u44NPvau6jBwfF4UpT/ZCed/8cVPf96a', 'London', 'I hide in the grass and wait for people to come out of cover.', '2017-03-03 20:02:49', 3),
+(12410, 'Daniel', 'Hernandez', 'SuperSuperMario', 'supermario@supermail.com', '$2y$10$/BwLMoyPhfcEpfIshpJux.V0QBLj6tio5lWok.kF6gLlovP6ecpAi', 'Paris', 'Hi Im Daniel Hernandez, and I love photography. Pano is great!', '2017-03-04 15:49:00', 3),
+(12411, 'Harry', 'Johnson', 'GreatElephant_gal', 'GreatElephant_gal@master.com', '$2y$10$oAXkitKKp8J8xMOXYj/34uzHMc1vL4ljNY8uMsYP7vh.Yx8VDp3gy', 'Manchester', 'Hi Im Harry Johnson, and I love photography. Pano is great!', '2017-03-04 15:49:00', 3),
+(12412, 'Michelle', 'Andersen', 'SleepySpeaker123', 'SleepySpeaker123@panoapp.com', '$2y$10$Yb.GLoF0j/DSu4GHKTx.EuCaAcCuJoAJHNyITWjr3hWvbRjs9.H5S', 'Manchester', 'Hi Im Michelle Andersen, and I love photography. Pano is great!', '2017-03-04 15:49:01', 3),
+(12413, 'Harry', 'Zhao', 'SneakyBowl', 'SneakyBowl@ok.com', '$2y$10$KdoT.k5gUvSDr2EYhrS5fO3uNH.wq7QRMJ.B0KctJrlAWeHogptvm', 'Milan', 'Hi Im Harry Zhao, and I love photography. Pano is great!', '2017-03-04 15:49:01', 3),
+(12414, 'Michelle', 'Gunaydin', 'SleepyTuna', 'SleepyTuna@ok.com', '$2y$10$ynszWRXh4wjeEnqFxJ.0w.7.IqG37l.e3muy01JEWLMkhjI2XBcLm', 'Berlin', 'Hi Im Michelle Gunaydin, and I love photography. Pano is great!', '2017-03-04 15:49:01', 3);
 
 -- --------------------------------------------------------
 
@@ -404,7 +533,8 @@ ALTER TABLE `privacy settings`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserID`);
+  ADD PRIMARY KEY (`UserID`),
+  ADD UNIQUE KEY `UserName` (`UserName`);
 
 --
 -- Indexes for table `usergroup mapping`
@@ -426,7 +556,7 @@ ALTER TABLE `collections`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11345;
+  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11347;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -441,17 +571,17 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `PhotoID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11124;
+  MODIFY `PhotoID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11142;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `PostID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11124;
+  MODIFY `PostID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11138;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12404;
+  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12415;
 --
 -- Constraints for dumped tables
 --
