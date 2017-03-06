@@ -9,6 +9,9 @@ session_start();
 require_once('includes/config.php');
 require_once('includes/dbconnect.php' );
 
+//=============BE CAREFUL WHEN RUNNING THE PAGE - ONLY REFRESH OR OPEN THE PAGE WHEN YOU HAVE CHOSEN THE CORRECT SETTINGS=========
+
+
 
 // =============Creating a bunch of random users and registering them to Pano ========================
 
@@ -21,7 +24,7 @@ $rLastNames = array("Walker", "Jones", "Johnson", "Gunaydin", "Hernandez", "Ande
 
 $rUserName1 = array("Super", "Great", "Sneaky", "Silly", "Lazy", "Crazy", "Angry", "Sleepy", "Awesome", "Faulted", "Special", "Fried", "Dragon", "TheReal", "TheOneAndOnly", "TheUndisputed", "The", "A", "aSmall", "mega", "silly", "amazing", "troubled");
 $rUserName2 = array("Potato", "Zebra", "Dinosaur", "Bowl", "Elephant", "Tuna", "Bottle", "Speaker", "Orangutan", "Monkey", "_Snake", "Monster", "monster", "Book", "Ant", "AntEater", "Player", "Legend", "Pro");
-$rUserName3 = array("123", "", "246", "1", "_dude", "_gal", , "_fan", "master", "666", "", "", "", "Master", "Fan", "Dude", "Man", "Girl", "King", "Kid", "_kid", "Lad", "Lass");
+$rUserName3 = array("123", "", "246", "1", "_dude", "_gal", "_fan", "master", "666", "", "", "", "Master", "Fan", "Dude", "Man", "Girl", "King", "Kid", "_kid", "Lad", "Lass");
 
 $rEmailAddress = array("@lol.com", "@mail.com", "@panoapp.com", "@supermail.com", "@panoapp.com", "@ok.com", "@master.com", "@ucl.ac.uk");
 
@@ -30,7 +33,7 @@ $password = 'password';
 $rLocations = array("Manchester", "London", "Birmingham", "Dublin", "Berlin", "Madrid", "Paris", "Milan", "Munich", "Barcelona", "Belfast", "Edinburgh", "Newcastle", "Marseille", "Montpellier", "Hong Kong", "New York", "Washington DC", "Toronto", "Montreal", "Vancouver", "Chicago", "San Francisco");
 
 
-$userCount = 20;
+$userCount = 3;
 
 for ($i = 0; $i < $userCount; $i++){
 
@@ -54,18 +57,18 @@ for ($i = 0; $i < $userCount; $i++){
     VALUES ('$FirstName', '$LastName', '$UserName', '$EmailAddress', '$Password', '$Location', '$ShortDescrip')";
 
     if (mysqli_query($conn, $query)) {
-        echo "New record created successfully";
+        echo "New record created successfully <br>";
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }
 
 
 }
-*/
+
 
 // ===================Getting random users to like random posts =========================
 
-/*
+
 //query to get all ids of users
 $query = "SELECT UserID FROM user";
 
@@ -105,11 +108,11 @@ for ($i = 0; $i < $likeCount; $i++) {
         echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
     }
 }
-*/
+
 
 //=========================Getting random users to friend eachother ========================
 
-/*
+
 $friendCount = 200;
 
 for ($i = 0; $i < $likeCount; $i++) {
@@ -124,7 +127,7 @@ for ($i = 0; $i < $likeCount; $i++) {
     }
 }
 
-
+*/
 
 function array_random($arr, $num = 1) {
     shuffle($arr);
@@ -136,7 +139,7 @@ function array_random($arr, $num = 1) {
     return $num == 1 ? $r[0] : $r;
 }
 
-*/
+
 
 
 
