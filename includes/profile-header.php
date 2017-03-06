@@ -28,9 +28,7 @@
     if ($_SESSION['UserName'] != $profileUserName) {
 
         $query = "SELECT * FROM friends WHERE
-                    UserID = '$profileUserID' AND FriendID = '{$_SESSION['UserID']}'
-                    OR
-                    UserID = '{$_SESSION['UserID']}' AND FriendID = '$profileUserID'";
+                    UserID = '$profileUserID' AND FriendID = '{$_SESSION['UserID']}'";
 
         if ($result = mysqli_query($conn, $query)) {
             $count = mysqli_num_rows($result);

@@ -584,8 +584,8 @@ left: 43%;
     position: fixed;
     bottom: 70px;
     right: 20px;
-    background: #61e8bf;
     background: #540d6e;
+    background: #61e8bf;
     width: 50px;
     height: 50px;
     display: block;
@@ -602,7 +602,7 @@ left: 43%;
     z-index: 2;
 }
 #return-to-top i {
-    color: #fff;
+    color: #540d6e;
     margin: 0;
     position: relative;
     left: 0px;
@@ -615,10 +615,10 @@ left: 43%;
     transition: all 0.3s ease;
 }
 #return-to-top:hover {
-    background: #61e8bf;
+    background: #540d6e;
 }
 #return-to-top:hover i {
-    color: #fff;
+    color: #61e8bf;
     top: 5px;
 }
 

@@ -74,22 +74,21 @@ include('includes/header.php');
                         //if the friend is yourself, skip the iteration
                         if ($friendName == $profileUserName || $friendName == $_SESSION['UserName']){
                             continue;
-                        } else {
+                        }
 
-                            //otherwise check to see if the logged in user is friends with this user's friends
-                            $sql2 = "SELECT * FROM friends
-                                WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'
-                                OR FriendID = '$friendUserID' AND UserID = '{$_SESSION['UserID']}'";
+                        //otherwise check to see if the logged in user is friends with this user's friends
+                        $sql2 = "SELECT * FROM friends
+                            WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'";
 
-                            if ($result2 = mysqli_query($conn, $sql2)) {
-                                $count = mysqli_num_rows($result2);
+                        if ($result2 = mysqli_query($conn, $sql2)) {
+                            $count = mysqli_num_rows($result2);
 
-                                //if friends, display tick, otherwise an add friend icon will appear
-                                if ($count == 1) {
-                                    $isFriendOfUser = true;
-                                }
+                            //if friends, display tick, otherwise an add friend icon will appear
+                            if ($count == 1) {
+                                $isFriendOfUser = true;
                             }
                         }
+
 
                         //create a frienditem and allow the returnHTML function to run with the parameters
                         $row = new frienditem($friendUserID, $friendName, $friendName, '3', $isFriendOfUser);
