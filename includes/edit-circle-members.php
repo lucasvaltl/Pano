@@ -1,7 +1,6 @@
 <?php
-if(isset($_POST['Submit'])){
+if(isset($_POST['submit'])){
 if($_POST['submit'] === 'Delete'){
-
   $expected = ['submit'];
   $required = ['submit'];
 
@@ -18,13 +17,9 @@ foreach ($membersToDelete as $member) {
   if (!mysqli_query($conn, $query)) {
     die('Error: ' . mysqli_error($conn));
           exit();
-  } else {
-  header("Location: circle-members.php?GroupID=". urlencode($GroupID));
   }
 }
-
-
-}elseif ($_POST['submit'] === 'Add Members') {
+} elseif ($_POST['submit'] === 'Add Members') {
 
   $keys = array_keys($_POST);
   $count = 1;
@@ -43,5 +38,23 @@ foreach ($membersToDelete as $member) {
 
   }
 
-} 
+} elseif ($_POST['submit'] === 'Exit Circle'){
+  $expected = ['submit'];
+  $required = ['submit'];
+$query = "DELETE from usergroupmapping WHERE GroupID='$GroupID' and UserID='$UserID' ";
+if (!mysqli_query($conn, $query)) {
+  die('Error: ' . mysqli_error($conn));
+        exit();
+} else {
+header("Location: circles-overview.php");
+}
+} elseif ($_POST['submit'] === 'Enter Circle'){
+  $expected = ['submit'];
+  $required = ['submit'];
+$query = "INSERT INTO usergroupmapping (GroupID, UserID) VALUES ('$GroupID', '$UserID')";
+if (!mysqli_query($conn, $query)) {
+  die('Error: ' . mysqli_error($conn));
+        exit();
+}
+}
 }

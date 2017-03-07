@@ -1,6 +1,6 @@
 <?php
 
-include_once('exit-group.php'); //?GroupID='.$GroupID
+//include_once('exit-group.php'); //?GroupID='.$GroupID
 
 $isPartOfCircle = false;
     //Query for general group info
@@ -49,11 +49,13 @@ $isPartOfCircle = false;
             $UserID = $_SESSION['UserID'];
             if ($isPartOfCircle && ($CreatorID != $UserID)):
               ?>
-            <form action="<?=SITE_ROOT?>/circle-messages.php?GroupID=<?php echo $GroupID;?>" type="post" class="form-group">
+            <form action="<?=SITE_ROOT?>/circle-members.php?GroupID=<?= $GroupID;?>" method="post" class="form-group">
                 <button type="submit"  name="submit" class="btn btn-default pull-right" Value="Exit Circle"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Exit Circle</button>
             </form>
           <?php elseif($CreatorID != $UserID) :?>
-                <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Enter Circle </button>
+            <form action="<?=SITE_ROOT?>/circle-members.php?GroupID=<?= $GroupID;?>" method="post" class="form-group">
+                <button type="submit"  name="submit" class="btn btn-default pull-right" Value="Enter Circle"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Enter Circle</button>
+            </form>
             <?php endif;?>
         </div>
     </div>

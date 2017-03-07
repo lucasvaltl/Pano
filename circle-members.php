@@ -67,11 +67,9 @@ include_once('includes/edit-circle-members.php');
       <input type="submit" name="submit" class="btn btn-default lv-button delete-circle-members" value="Delete" />
         <?php endif; ?>
         </div>
-
         </div>
         <br />
         <hr />
-
         <?php
 
         $query = "SELECT u.UserName, u.UserID  FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'";
