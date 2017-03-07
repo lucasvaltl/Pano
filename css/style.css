@@ -836,6 +836,16 @@ color: #444;
         border: 1px solid  #61e8bf;
 }
 
+.create-circle-friend-name {
+  font-size: 1em;
+  margin-top: 20px;
+}
+
+.create-circle-friending-icon{
+right: 50px;
+bottom: 15px;
+}
+
 .create-circle-check{
     -webkit-appearance: none;
   /*hide checkbox to only display angular classwitching*/

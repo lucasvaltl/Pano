@@ -160,11 +160,13 @@ if($UserID === $CreatorID):
          <div class="col-md-3 col-xs-3">
          <img src="<?=SITE_ROOT?>/images/profilepics/<?= $PictureID ?>.jpg" class="img-circle friend-picture" />
           </div>
-         <div class="col-md-3 col-xs-3 friend-name">
-            <h3><?= $row['UserName']?></h3>
+         <div class="col  col-sm-5 col-xs-4 name-column ">
+           <div class="friend-name">
+             <?= $row['UserName']?>
+           </div>
          </div>
 
-         <div class="col col-md-6 col-xs-6 friending-icon">
+         <div class="col col-sm-3 col-md-offset-1 col-xs-3 friending-icon">
           <input type="checkbox" class="create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>" >
            </div>
            </div>
