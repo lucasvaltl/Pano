@@ -31,13 +31,14 @@ include('includes/config.php');
       ?>
 
     <main>
-      <div class="friend-recommendations" id="gradhome">
+      <div class="friend-recommendations " id="gradhome">
         <div class="row recommendations-title">
           These are some people that share your interests:
         </div>
         <div class="row">
-
-          <div class="col-xs-15 border-right">
+<?php for ($i=0; $i < 5 ; $i++):
+?>
+          <div class="col-xs-15  border-right margin-10">
             <div class="row recommendation-picture">
               <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
             </div>
@@ -45,53 +46,10 @@ include('includes/config.php');
       Judgyjudy
             </div>
             <div class=" row recommendation-friending-icon">
-              <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon"></i></a>
+              <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon smallscreen-smaller"></i></a>
             </div>
           </div>
-          <div class="col-xs-15 border-right">
-            <div class="row recommendation-picture">
-              <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
-            </div>
-            <div class="row recommendation-friend-name">
-      Judgyjudy
-            </div>
-            <div class=" row recommendation-friending-icon">
-              <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon"></i></a>
-            </div>
-          </div>
-          <div class="col-xs-15 border-right">
-            <div class="row recommendation-picture">
-              <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
-            </div>
-            <div class="row recommendation-friend-name">
-      Judgyjudy
-            </div>
-            <div class=" row recommendation-friending-icon">
-              <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon"></i></a>
-            </div>
-          </div>
-          <div class="col-xs-15 border-right">
-            <div class="row recommendation-picture">
-              <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
-            </div>
-            <div class="row recommendation-friend-name">
-            Judgyjudy
-            </div>
-            <div class=" row recommendation-friending-icon">
-              <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon"></i></a>
-            </div>
-            </div>
-          <div class="col-xs-15">
-            <div class="row recommendation-picture">
-              <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
-            </div>
-            <div class="row recommendation-friend-name">
-            Judgyjudy
-            </div>
-            <div class=" row recommendation-friending-icon">
-              <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon"></i></a>
-            </div>
-            </div>
+      <?php endfor; ?>
         </div>
                 </div>
       <div>

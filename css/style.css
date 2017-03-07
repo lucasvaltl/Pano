@@ -913,3 +913,25 @@ margin-bottom: 10px;
 .recommendation-friending-icon, a .recommendation-friending-icon{
   color: white;
 }
+
+.margin-10{
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px){
+.smallscreen-smaller{
+    font-size: 2em;
+}
+.recommendation-friend-name{
+  font-size: 1em;
+}
+}
+
+@media (max-width: 480px){
+.smallscreen-smaller{
+    font-size: 2em;
+}
+.recommendation-friend-name{
+  font-size: 0.7em;
+}
+}
