@@ -347,7 +347,14 @@ input.actual-comment{
 }
 
 button.like-button {
-    display:inline
+    display:inline;
+    color: #61e8bf;
+    background: none;
+    border: none;
+}
+
+button.like-button:focus {
+  outline: none !important;
 }
 
 .liked button.like-button {
@@ -361,6 +368,13 @@ button.unlike-button {
 
 .liked button.unlike-button {
     display:inline;
+    color: #61e8bf;
+    background: none;
+    border: none;
+}
+
+.liked button.unlike-button:focus{
+    outline: none !important;
 }
 
 .comment-button{
