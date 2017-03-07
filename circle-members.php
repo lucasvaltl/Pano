@@ -72,7 +72,7 @@ include_once('includes/edit-circle-members.php');
         <hr />
         <?php
 
-        $query = "SELECT u.UserName, u.UserID  FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'";
+        $query = "SELECT u.UserName, u.UserID  FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'  ORDER BY u.UserName";
         $members= mysqli_query($conn, $query);
         ?>
 
@@ -146,7 +146,7 @@ if($UserID === $CreatorID):
 
         //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
 //TODO delete the or when merging into master - not needed anymore due to database change...
-        $query = "SELECT user.`UserName` AS UserName, user.`UserID` AS UserID FROM friends LEFT JOIN user ON user.`UserID` = friends.`UserID` OR user.`UserID` = friends.`FriendID` AND user.`UserID` != '$UserID' WHERE (friends.`UserID` = '$UserID' OR friends.`FriendID` = '$UserID') AND (user.`UserID` NOT IN (SELECT u.UserID FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'))";
+        $query = "SELECT user.`UserName` AS UserName, user.`UserID` AS UserID FROM friends LEFT JOIN user ON user.`UserID` = friends.`UserID` OR user.`UserID` = friends.`FriendID` AND user.`UserID` != '$UserID' WHERE (friends.`UserID` = '$UserID') AND (user.`UserID` NOT IN (SELECT u.UserID FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'))";
         $friends = mysqli_query($conn, $query);
        ?>
 

@@ -4,10 +4,10 @@ $missing = [];
 
 if (isset($_POST['create'])) {
 
-  $expected = ['CreatorID', 'PicID', 'GroupName', 'ShortDescrip'];
-  $required = ['CreatorID', 'PicID', 'GroupName', 'ShortDescrip'];
+  $expected = ['CreatorID', 'PhotoID', 'GroupName', 'ShortDescrip'];
+  $required = ['CreatorID', 'PhotoID', 'GroupName', 'ShortDescrip'];
   $CreatorID= mysqli_real_escape_string($conn, $_POST['CreatorID']);
-  $PicID= mysqli_real_escape_string ($conn, $_POST['PicID']);
+  $PhotoID= mysqli_real_escape_string ($conn, $_POST['PhotoID']);
   $GroupName= mysqli_real_escape_string ($conn, $_POST['GroupName']);
   $ShortDescrip = mysqli_real_escape_string ($conn, $_POST['ShortDescrip']);
 
@@ -20,7 +20,7 @@ if (isset($_POST['create'])) {
   }
   $members[] = $CreatorID;
   // check for errors
-  if (!isset($CreatorID) || $CreatorID == '' || !isset($PicID) || $PicID == '' ||  !isset($GroupName) ||$GroupName == '' || !isset($ShortDescrip) || $ShortDescrip == ''  ) {
+  if (!isset($CreatorID) || $CreatorID == '' || !isset($PhotoID) || $PhotoID == '' ||  !isset($GroupName) ||$GroupName == '' || !isset($ShortDescrip) || $ShortDescrip == ''  ) {
     //needs to be improved
     $error = "Not all required fields have been filled in";
     header("Location: circle-creation.php?error=" . urlencode($error));
@@ -28,7 +28,8 @@ if (isset($_POST['create'])) {
   }
   // If no errors detected, insert message into database
   else{
-    $query = "INSERT INTO groups (CreatorID, PhotoID, GroupName, ShortDescrip ) VALUES ('$CreatorID', '$PicID', '$GroupName', '$ShortDescrip')";
+      $_SESSION['PhotoID']= $PhotoID;
+    $query = "INSERT INTO groups (CreatorID, PhotoID, GroupName, ShortDescrip ) VALUES ('$CreatorID', '$PhotoID', '$GroupName', '$ShortDescrip')";
     if (!mysqli_query($conn, $query)) {
       die('Error: ' . mysqli_error($conn));
     }  else {

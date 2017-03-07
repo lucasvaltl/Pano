@@ -2,8 +2,8 @@
 -- version 4.6.5.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Mar 06, 2017 at 07:05 PM
+-- Host: localhost
+-- Generation Time: Mar 07, 2017 at 08:20 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `Pano`
+-- Database: `pano`
 --
 
 -- --------------------------------------------------------
@@ -999,7 +999,6 @@ INSERT INTO `likes` (`PhotoID`, `UserID`) VALUES
 (11134, 12399),
 (11135, 12399),
 (11141, 12399),
-(11111, 12400),
 (11112, 12400),
 (11121, 12400),
 (11123, 12400),
@@ -1695,13 +1694,13 @@ INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usergroup mapping`
+-- Table structure for table `usergroupmapping`
 --
 
-CREATE TABLE `usergroup mapping` (
+CREATE TABLE `usergroupmapping` (
   `GroupID` int(40) NOT NULL,
   `UserID` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Indexes for dumped tables
@@ -1805,9 +1804,9 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `UserName` (`UserName`);
 
 --
--- Indexes for table `usergroup mapping`
+-- Indexes for table `usergroupmapping`
 --
-ALTER TABLE `usergroup mapping`
+ALTER TABLE `usergroupmapping`
   ADD PRIMARY KEY (`GroupID`,`UserID`),
   ADD KEY `UserGroupUserConstraint` (`UserID`);
 
@@ -1928,8 +1927,8 @@ ALTER TABLE `posts`
   ADD CONSTRAINT `PostsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
--- Constraints for table `usergroup mapping`
+-- Constraints for table `usergroupmapping`
 --
-ALTER TABLE `usergroup mapping`
+ALTER TABLE `usergroupmapping`
   ADD CONSTRAINT `UserGroupGroupConstraint` FOREIGN KEY (`GroupID`) REFERENCES `groups` (`GroupID`),
   ADD CONSTRAINT `UserGroupUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);

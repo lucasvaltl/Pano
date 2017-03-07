@@ -44,11 +44,11 @@ include_once('includes/createcircle.php');
       </div>
       <div class="row">
         <div class="col-sm-3 create-circle-picID">
-          <input type="text" class="form-control circle-create-input" id="usr" name="PicID" placeholder="PicID" ng-style="{'width': (PicID.length == 0 ? '30': ((PicID.length*14.5))) + 'px'}" ng-model="PicID">
+          <input type="text" class="form-control circle-create-input"  name="PhotoID" placeholder="PhotoID" ng-style="{'width': (PhotoID.length == 0 ? '30': ((PhotoID.length*14.5))) + 'px'}" ng-model="PhotoID">
         </div>
 
         <div class="col-sm-6 create-circle-name">
-          <input type="text" class="form-control collection-name-input" id="usr" name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14.5))) + 'px'}" ng-model="CollectionName">
+          <input type="text" class="form-control collection-name-input"  name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14.5))) + 'px'}" ng-model="CollectionName">
         </div>
 
         <div class="col-sm-3 create-circle-button">
@@ -81,8 +81,7 @@ include_once('includes/createcircle.php');
                     ON user.`UserID` = friends.`UserID`
                     OR user.`UserID` = friends.`FriendID`
                     AND user.`UserID` != '$UserID'
-                    WHERE friends.`UserID` = '$UserID'
-                    OR friends.`FriendID` = '$UserID'");
+                    WHERE friends.`UserID` = '$UserID'");
         $friends = mysqli_query($conn, $query);
        ?>
 

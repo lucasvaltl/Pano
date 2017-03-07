@@ -50,6 +50,7 @@ $userID = $_SESSION['UserID'];
         Your  Circles
         <br />
       </div>
+      <hr />
       <div class="circles-overview-content">
 
 
@@ -62,13 +63,14 @@ $userID = $_SESSION['UserID'];
 
         $groups = mysqli_query($conn, $query);
 
+        if ($groups->num_rows != 0){
+//TODO make dependent on if array is not empty
 //creates interface for each circle
         while($row = mysqli_fetch_assoc($groups)){
           $collections[] = new circle('circle-messages.php?GroupID=' . $row['GroupID'] , $row['PhotoID'], $row['GroupName']);
         }
 
         $count = 1;
-        echo '<hr/> ';
         //insert the collections into the page
         foreach($collections as $collection){
 
@@ -86,7 +88,10 @@ $userID = $_SESSION['UserID'];
           $count += 1;
 
         }
-
+} else {
+  echo '
+  <h2 class="center-center"> Unfortunately you are not in any groups yet. Try searching for groups and entering them!</h2>';
+}
         ?>
       </div>
 
