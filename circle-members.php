@@ -19,6 +19,8 @@ if (isset($_GET['GroupID'])) {
   $GroupID = $_GET['GroupID'];
 }
 
+include_once('includes/edit-circle-members.php');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +34,7 @@ if (isset($_GET['GroupID'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="css/offset.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Pano - <?php echo $circleName;?></title>
+  <title>Pano - <?php echo $GroupID;?></title>
 </head>
 
 <body ng-app="">
@@ -46,36 +48,56 @@ if (isset($_GET['GroupID'])) {
       ?>
     </div>
     <div class="circle-members-content" >
-      <div class="content friends-content container">
-        <h2><?= $circleName ?>'s Members</h2>
+      <form action="<?= $_SERVER['PHP_SELF'] . '?GroupID='.$GroupID; ?>" method="post">
+      <div class="content friends-content container form-group">
+        <div class="row">
+          <div class="col col-sm-2">
+          </div>
+          <div class="col col-sm-6 col-sm-offset-1">
+            <h2><?= $circleName ?>'s Members</h2>
+          </div>
+          <div class="col col-sm-3  delete-circle-members" >
+            <?php
+            //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
+            $query = "SELECT CreatorID  FROM groups  WHERE GroupID='$GroupID'";
+            $CreatorID = mysqli_fetch_assoc(mysqli_query($conn, $query));
+            $CreatorID = $CreatorID['CreatorID'];
+            if($UserID === $CreatorID):
+             ?>
+      <input type="submit" name="submit" class="btn btn-default lv-button delete-circle-members" value="Delete" />
+        <?php endif; ?>
+        </div>
+
+        </div>
         <br />
         <hr />
 
         <?php
 
-        //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
-        $query = "SELECT CreatorID  FROM groups  WHERE GroupID='$GroupID'";
-        $CreatorID = mysqli_fetch_assoc(mysqli_query($conn, $query));
-
         $query = "SELECT u.UserName, u.UserID  FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'";
         $members= mysqli_query($conn, $query);
         ?>
 
-        <?php while($row = mysqli_fetch_assoc($members)) :
+        <?php
+        while($row = mysqli_fetch_assoc($members)) :
+            //create isadmin for alter use - assume false at start of every loop
+            $isAdmin = false;
           //PictureID placeholder
           $PictureID = '3';
+
           ?>
           <div class="row friend-content">
-            <div class="col-md-3 col-xs-3">
+            <div class="col col-sm-3 col-xs-3">
               <img src="<?=SITE_ROOT?>/images/profilepics/<?= $PictureID ?>.jpg" class="img-circle friend-picture" />
             </div>
-            <div class="col-md-5 col-xs-4 name-column ">
+            <div class="col  col-sm-5 col-xs-4 name-column ">
               <div class="friend-name">
                 <?= $row['UserName']?>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <?php
-              if($row['UserID']=== $CreatorID['CreatorID']){
+              if($row['UserID']=== $CreatorID){
+                $isAdmin = true;
                 echo '<div class="admin-icon">
                 Admin
                 </div>';
@@ -83,16 +105,87 @@ if (isset($_GET['GroupID'])) {
               ?>
 
             </div>
-            <div class="col col-md-4 col-xs-3 friending-icon">
-              <input type="checkbox" class="create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>" >
+
+            <div class="col col-sm-3 col-md-offset-1 col-xs-3 friending-icon">
+              <?php
+              // only display unfriending options when user is admin
+                      if($UserID === $CreatorID && !$isAdmin):
+              ?>
+              <input type="checkbox" class="inverted-create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>" >
+          <?php endif; ?>
             </div>
+
           </div>
           <hr>
 
         <?php endwhile; ?>
-
       </div>
+    </form>
 
+
+  <form action="<?= $_SERVER['PHP_SELF'] . '?GroupID='.$GroupID; ?>" method="post">
+
+<div class="content friends-content container form-group">
+
+<?php
+if($UserID === $CreatorID):
+ ?>
+    <div class="row">
+      <div class="col col-sm-2">
+      </div>
+      <div class="col col-sm-6 col-sm-offset-1">
+        <h2>Add new Members</h2>
+      </div>
+      <div class="col col-sm-3  delete-circle-members" >
+  <input type="submit" name="submit" class="btn btn-default lv-button add-circle-members" value="Add Members" />
+    </div>
+    </div>
+    <br />
+    <hr />
+
+    <div class="potential-members">
+      <?php
+
+        //$query = "SELECT UserID FROM friends WHERE UserID = '$profileUserID' OR FriendID = '$profileUserID'";
+//TODO delete the or when merging into master - not needed anymore due to database change...
+        $query = "SELECT user.`UserName` AS UserName, user.`UserID` AS UserID FROM friends LEFT JOIN user ON user.`UserID` = friends.`UserID` OR user.`UserID` = friends.`FriendID` AND user.`UserID` != '$UserID' WHERE (friends.`UserID` = '$UserID' OR friends.`FriendID` = '$UserID') AND (user.`UserID` NOT IN (SELECT u.UserID FROM usergroupmapping AS ugm JOIN user AS u ON ugm.UserID = u.UserID WHERE ugm.GroupID='$GroupID'))";
+        $friends = mysqli_query($conn, $query);
+       ?>
+
+       <?php while($row = mysqli_fetch_assoc($friends)) :
+      if($row['UserID'] === $UserID){
+      continue;
+      }
+         $PictureID = '3';
+         ?>
+         <div class="row friend-content">
+         <div class="col-md-3 col-xs-3">
+         <img src="<?=SITE_ROOT?>/images/profilepics/<?= $PictureID ?>.jpg" class="img-circle friend-picture" />
+          </div>
+         <div class="col-md-3 col-xs-3 friend-name">
+            <h3><?= $row['UserName']?></h3>
+         </div>
+
+         <div class="col col-md-6 col-xs-6 friending-icon">
+          <input type="checkbox" class="create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>" >
+           </div>
+           </div>
+           <hr>
+
+       <?php endwhile; ?>
+
+
+  <?php endif; ?>
+
+
+
+
+    </div>
+
+
+
+</div>
+</form>
 
     </div>
   </main>

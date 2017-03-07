@@ -707,15 +707,26 @@ width: 270px;
 
 .admin-icon{
   text-align: center;
-font-size: 1em;
+font-size: 0.9em;
   color: #61e8bf;
   border: 1px solid #61e8bf;
   border-radius: 3px;
   width: 50px;
-  height: 25px;
+  height: 27px;
   padding: 3px;
-  margin-top: 20px;
+  margin-top: 16px;
   display: inline-block;
+}
+
+.delete-circle-members{
+  color: #444;
+top: 10px;
+
+}
+
+.add-circle-members{
+  color: #444;
+top: 10px;
 }
 
 
@@ -800,12 +811,12 @@ color: #444;
 .create-circle-check:after{
   font-family: FontAwesome;
    content: "\f00d";
-font-size: 2em;
+font-size: 2.5em;
 color: #888;
 text-align: center;
 position: absolute;
-top: 10px;
-right: 30px;
+top: 20px;
+right: 10px;
 box-shadow: none;
 outline:none;
 }
@@ -820,15 +831,60 @@ outline:none;
 .create-circle-check:checked:after{
   font-family: FontAwesome;
    content: "\f00c";
-font-size: 2em;
+font-size: 2.5em;
 color: #888;
 text-align: center;
 position: absolute;
-top: 10px;
-right: 27px;
+top: 20px;
+right: 8px;
 box-shadow: none;
 outline:none;
 }
+
+.inverted-create-circle-check{
+    -webkit-appearance: none;
+  /*hide checkbox to only display angular classwitching*/
+    box-shadow: none;
+  outline:none;
+}
+
+.inverted-create-circle-check:after{
+  font-family: FontAwesome;
+   content: "\f00c";
+font-size: 2.5em;
+color: #888;
+text-align: center;
+position: absolute;
+top: 20px;
+right: 8px;
+box-shadow: none;
+outline:none;
+}
+
+.inverted-create-circle-check:checked{
+  -webkit-appearance: none;
+/*hide checkbox to only display angular classwitching*/
+  box-shadow: none;
+outline:none;
+}
+
+.inverted-create-circle-check:checked:after{
+  font-family: FontAwesome;
+   content: "\f00d";
+font-size: 2.5em;
+color: #888;
+text-align: center;
+position: absolute;
+top: 20px;
+right: 10px;
+box-shadow: none;
+outline:none;
+}
+
+@media (min-width: 1000px){
+.friending-icon {
+    right: 110px;
+}}
 
 
 
@@ -898,7 +954,6 @@ color: white;
 
 .recommendation-friend-name{
 font-size: 1.5em;
-
 }
 
 .recommendation-friend-name, .friend-picture, .recommendation-friending-icon, .recommendation-picture{
