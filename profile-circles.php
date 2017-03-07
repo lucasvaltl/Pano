@@ -75,10 +75,6 @@ $filename = basename(__FILE__, '.php');
 
         ?>
 
-
-
-
-
       </div>
 
 

@@ -31,6 +31,7 @@ if (isset($_GET['id'])) {
 </head>
 
 <body ng-app="">
+
   <?php
   include('includes/header.php');
   ?>
@@ -59,6 +60,7 @@ if (isset($_GET['id'])) {
         <h4>Please choose the picture(s) you want to add to this album</h4>
         <?php
         include('includes/collection-creation-picture.php');
+
 
         //create an array of collections - will need to be redone with php when the database is ready
 
@@ -90,9 +92,12 @@ if (isset($_GET['id'])) {
 
         ?>
 
-      </div>
+            </div>
+
 
     </form>
+
+
 
   </main>
   <?php

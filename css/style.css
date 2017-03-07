@@ -346,6 +346,23 @@ input.actual-comment{
       width: 70%;
 }
 
+button.like-button {
+    display:inline
+}
+
+.liked button.like-button {
+    display:none;
+}
+
+button.unlike-button {
+    display:none;
+}
+
+
+.liked button.unlike-button {
+    display:inline;
+}
+
 .comment-button{
   width: 20%;
 }
@@ -360,6 +377,7 @@ input.actual-comment{
 .lv-top-padding{
   padding-top: 6px;
 }
+
 
 /*profile*/
 
@@ -549,6 +567,23 @@ left: 43%;
  a:hover .friending-icon{
   text-align: right;
   color: #888;
+}
+
+
+
+ /*SearchPage*/
+
+.search-box {
+
+    float:right;
+    color: #888;
+    margin-bottom: -20px;
+}
+
+.search-content {
+    text-align: center;
+    color: #444;
+    font-size:0.7em;
 }
 
 /*circles*/
@@ -921,6 +956,60 @@ right: 20px;
 
 .create-message-content{
   margin-top: 6px;
+}
+
+/* loading */
+
+#loader {
+    display:none;
+}
+
+#load-more-button {
+    display:none;
+}
+
+/* back to top */
+
+#return-to-top {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background: #540d6e;
+    background: #61e8bf;
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+#return-to-top i {
+    color: #540d6e;
+    margin: 0;
+    position: relative;
+    left: 0px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top:hover {
+    background: #540d6e;
+}
+#return-to-top:hover i {
+    color: #61e8bf;
+    top: 5px;
 }
 
 
