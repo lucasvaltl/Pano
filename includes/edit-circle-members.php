@@ -1,4 +1,5 @@
 <?php
+if(isset($_POST['Submit'])){
 if($_POST['submit'] === 'Delete'){
 
   $expected = ['submit'];
@@ -42,4 +43,5 @@ foreach ($membersToDelete as $member) {
 
   }
 
+} 
 }

@@ -1,50 +1,7 @@
 <?php
-// COMMENTED OUT FOR DEVELOPMENT - NEEDS TO BE ADAPTED TO CIRCLES
-    // //loads up the user information for the current profile page
-    // $query = "SELECT * FROM user WHERE UserName = '$circleName'";
-    //
-    // if ($result = mysqli_query($conn, $query)) {
-    //
-    //     $count = mysqli_num_rows($result);
-    //     $row = mysqli_fetch_array($result);
-    //
-    //     if ($count == 1 ){
-    //         $profilePictureID = 1;
-    //         $profileUserID = $row['UserID'];
-    //         $profileUserFirstName = $row['FirstName'];
-    //         $profileUserLastName = $row['LastName'];
-    //         $profileUserLocation = $row['Location'];
-    //         $profileUserDescription = $row['ShortDescrip'];
-    //
-    //     } else {
-    //
-    //         header("Location: 404.php");
-    //     }
-    // }
-    //
-    // //checks to see if the logged in user is friends with the page of the current user profile,
-    // //as long as not viewing own profile page. Subsequently affects visibility of either add or remove friend buttons
-    // $are_we_friends = false;
-    //
-    // if ($_SESSION['UserName'] != $circleName) {
-    //
-    //     $query = "SELECT * FROM friends WHERE
-    //                 UserID = '$profileUserID' AND FriendID = '{$_SESSION['UserID']}'
-    //                 OR
-    //                 UserID = '{$_SESSION['UserID']}' AND FriendID = '$profileUserID'";
-    //
-    //     if ($result = mysqli_query($conn, $query)) {
-    //         $count = mysqli_num_rows($result);
-    //         $row = mysqli_fetch_array($result);
-    //
-    //         if ($count == 1) {
-    //             $are_we_friends = true;
-    //         } else {
-    //             $are_we_friends = false;
-    //         }
-    //     }
-    //
-    // }
+
+include_once('exit-group.php'); //?GroupID='.$GroupID
+
 $isPartOfCircle = false;
     //Query for general group info
   $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g WHERE g.GroupID=" . $GroupID;
@@ -85,9 +42,17 @@ $isPartOfCircle = false;
             </p>
         </div>
         <div class="col col-md-3 col-xs-3 profile-info-row">
-            <?php if ($isPartOfCircle) :?>
-                <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Exit Circle</button>
-            <?php else :?>
+            <?php
+            $query = "SELECT CreatorID  FROM groups  WHERE GroupID='$GroupID'";
+            $CreatorID = mysqli_fetch_assoc(mysqli_query($conn, $query));
+            $CreatorID = $CreatorID['CreatorID'];
+            $UserID = $_SESSION['UserID'];
+            if ($isPartOfCircle && ($CreatorID != $UserID)):
+              ?>
+            <form action="<?=SITE_ROOT?>/circle-messages.php?GroupID=<?php echo $GroupID;?>" type="post" class="form-group">
+                <button type="submit"  name="submit" class="btn btn-default pull-right" Value="Exit Circle"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Exit Circle</button>
+            </form>
+          <?php elseif($CreatorID != $UserID) :?>
                 <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Enter Circle </button>
             <?php endif;?>
         </div>
