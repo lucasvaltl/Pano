@@ -8,10 +8,16 @@ session_start();
 
 include('includes/config.php');
 require_once('includes/dbconnect.php');
+
 $filename = basename(__FILE__, '.php');
 
 if (isset($_GET['id'])) {
-  $profileUserName = $_GET['id'];
+  $circleName = $_GET['id'];
+
+}
+
+if (isset($_GET['GroupID'])) {
+    $GroupID = $_GET['GroupID'];
 }
 
 ?>
@@ -27,77 +33,59 @@ if (isset($_GET['id'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="css/offset.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Pano - Profile</title>
+  <title>Pano - <?php echo $circleName;?></title>
 </head>
 
 <body ng-app="">
-
   <?php
   include('includes/header.php');
   ?>
   <main>
-    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
-      <div class="row collection-creation-header">
-        <div class="create-collection-name row">
-          <div class="col col-sm-9 add-padding-40">
-            <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14))) + 'px'}" ng-model="CollectionName">
+    <div class="circle-profile-header">
+      <?php
+      include('includes/circle-header.php');
+      ?>
+    </div>
 
-
-            by  <?= $profileUserName ?>
-
-          </div>
-          <div class="col col-sm-2 add-padding-30">
-            <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="Create" />
-          </div>
-          <div class="col col-sm-1">
-
-          </div>
-        </div>
+      <div class="content container circle-collections-content collections-content">
+        <h2><?= $circleName ?>'s Collections</h2>
         <br />
-        <hr />
-      </div>
-      <div class="content collection-creation">
-        <h4>Please choose the picture(s) you want to add to this album</h4>
         <?php
-        include('includes/collection-creation-picture.php');
-
+        include('includes/collection-cover.php');
 
         //create an array of collections - will need to be redone with php when the database is ready
+        $link = 'profile-collection.php?id='. $circleName;
 
-        for ($i=0; $i <3 ; $i++) {
-          $pictures[] = new picture('IMG_8937');
-          $pictures[] = new picture('IMG_2821');
-          $pictures[] = new picture('IMG_6346');
-
-        }
-
+        $collections = [
+          new collections($link, 'IMG_8937', 'Outside'),
+          new collections($link,'IMG_2821', 'Nature'),
+          new collections($link, 'IMG_8937', 'Outside'),
+          new collections($link, 'IMG_8937', 'Outside'),
+          new collections($link, 'IMG_8937', 'Outside')
+        ];
 
         $count = 1;
+        echo '<hr/> ';
         //insert the collections into the page
-        foreach($pictures as $picture){
+        foreach($collections as $collection){
 
           // insert a new row every two elements
-          if($count % 3 == 0){
-            echo '<div class="row picture-list-row"> ';
+          if($count % 2 != 0){
+            echo '<div class="row"> ';
+            $collection->setBorderRight();
           }
           //insert post
-          $picture->returnHTML();
+          $collection->returnHTML();
           //close row every two elements and insert a dividor
-          if($count % 3 == 0){
-            echo '</div>';
+          if($count % 2 == 0){
+            echo '</div> <hr/> ';
           }
           $count += 1;
 
         }
 
         ?>
-
-            </div>
-
-
-    </form>
-
-
+      </div>
 
   </main>
   <?php
