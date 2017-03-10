@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2017 at 08:20 PM
+-- Generation Time: Mar 10, 2017 at 07:13 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `pano`
+-- Database: `Pano`
 --
 
 -- --------------------------------------------------------
@@ -38,7 +38,7 @@ CREATE TABLE `collections` (
 CREATE TABLE `comments` (
   `CommentID` int(40) NOT NULL,
   `UserID` int(20) NOT NULL,
-  `PhotoID` int(40) NOT NULL,
+  `PostID` varchar(200) NOT NULL,
   `Comment` text NOT NULL,
   `CommentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -47,21 +47,17 @@ CREATE TABLE `comments` (
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`CommentID`, `UserID`, `PhotoID`, `Comment`, `CommentTime`) VALUES
-(11257, 12400, 11111, 'Sick photo bro', '2017-02-27 00:22:06'),
-(11258, 12400, 11112, 'Lol at the ladys head', '2017-02-27 00:23:05'),
-(11267, 12399, 11112, 'This looks like London to me, not Montreal!', '2017-02-27 11:27:09'),
-(11278, 12399, 11112, 'You can tell because the walky-talky and cheese-grater buildings are on the right hand side!', '2017-02-27 11:44:26'),
-(11281, 12402, 11112, 'Oh yeah it was actually in London', '2017-02-27 17:28:30'),
-(11337, 12399, 11116, 'good old days', '2017-03-02 20:22:47'),
-(11339, 12400, 11118, 'Awesome!', '2017-03-02 20:42:41'),
-(11340, 12399, 11111, 'Nice sunset!', '2017-03-02 21:23:45'),
-(11341, 12402, 11116, 'looks cold bro', '2017-03-02 21:46:03'),
-(11342, 12402, 11113, 'Ive been here before!', '2017-03-02 21:46:29'),
-(11343, 12401, 11123, 'Better run!', '2017-03-02 21:47:27'),
-(11344, 12401, 11120, 'I could say it easily ;)', '2017-03-02 21:48:06'),
-(11345, 12409, 11123, 'i could hide easily up in this vantage point...', '2017-03-03 20:03:10'),
-(11346, 12409, 11120, 'i could hide in that mountain, and youd never know...', '2017-03-03 20:03:44');
+INSERT INTO `comments` (`CommentID`, `UserID`, `PostID`, `Comment`, `CommentTime`) VALUES
+(11347, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'nudeeees!', '2017-03-10 17:27:40'),
+(11348, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'huh', '2017-03-10 17:32:38'),
+(11349, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'hkihkjhkj', '2017-03-10 17:40:01'),
+(11350, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'comment 23', '2017-03-10 17:42:28'),
+(11351, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'efdsay<', '2017-03-10 17:46:45'),
+(11352, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'fwedqsaa', '2017-03-10 17:47:51'),
+(11353, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'VEFDSF', '2017-03-10 17:50:16'),
+(11354, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'aökdasd', '2017-03-10 18:07:49'),
+(11355, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'as', '2017-03-10 18:07:53'),
+(11356, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'asd', '2017-03-10 18:09:06');
 
 -- --------------------------------------------------------
 
@@ -968,6 +964,13 @@ CREATE TABLE `groups` (
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`GroupID`, `GroupName`, `CreatorID`, `PhotoID`, `ShortDescrip`, `CreatedTime`) VALUES
+(1, '$GroupName', 12400, 0, '$ShortDescrip', '2017-03-10 16:34:21');
+
 -- --------------------------------------------------------
 
 --
@@ -975,7 +978,7 @@ CREATE TABLE `groups` (
 --
 
 CREATE TABLE `likes` (
-  `PhotoID` int(40) NOT NULL,
+  `PostID` varchar(200) NOT NULL,
   `UserID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -983,506 +986,12 @@ CREATE TABLE `likes` (
 -- Dumping data for table `likes`
 --
 
-INSERT INTO `likes` (`PhotoID`, `UserID`) VALUES
-(11111, 12399),
-(11112, 12399),
-(11124, 12399),
-(11125, 12399),
-(11126, 12399),
-(11127, 12399),
-(11128, 12399),
-(11129, 12399),
-(11130, 12399),
-(11131, 12399),
-(11132, 12399),
-(11133, 12399),
-(11134, 12399),
-(11135, 12399),
-(11141, 12399),
-(11112, 12400),
-(11121, 12400),
-(11123, 12400),
-(11125, 12400),
-(11126, 12400),
-(11131, 12400),
-(11133, 12400),
-(11140, 12400),
-(11141, 12400),
-(11111, 12401),
-(11112, 12401),
-(11113, 12401),
-(11114, 12401),
-(11115, 12401),
-(11116, 12401),
-(11117, 12401),
-(11118, 12401),
-(11119, 12401),
-(11123, 12401),
-(11124, 12401),
-(11131, 12401),
-(11140, 12401),
-(11141, 12401),
-(11111, 12402),
-(11112, 12402),
-(11114, 12402),
-(11116, 12402),
-(11117, 12402),
-(11118, 12402),
-(11119, 12402),
-(11120, 12402),
-(11121, 12402),
-(11122, 12402),
-(11123, 12402),
-(11124, 12402),
-(11127, 12402),
-(11128, 12402),
-(11134, 12402),
-(11136, 12402),
-(11137, 12402),
-(11138, 12402),
-(11139, 12402),
-(11111, 12403),
-(11116, 12403),
-(11117, 12403),
-(11118, 12403),
-(11124, 12403),
-(11125, 12403),
-(11127, 12403),
-(11128, 12403),
-(11133, 12403),
-(11134, 12403),
-(11140, 12403),
-(11141, 12403),
-(11112, 12404),
-(11113, 12404),
-(11114, 12404),
-(11115, 12404),
-(11116, 12404),
-(11117, 12404),
-(11118, 12404),
-(11119, 12404),
-(11120, 12404),
-(11121, 12404),
-(11122, 12404),
-(11123, 12404),
-(11124, 12404),
-(11127, 12404),
-(11128, 12404),
-(11131, 12404),
-(11132, 12404),
-(11133, 12404),
-(11134, 12404),
-(11139, 12404),
-(11111, 12405),
-(11112, 12405),
-(11113, 12405),
-(11114, 12405),
-(11115, 12405),
-(11116, 12405),
-(11117, 12405),
-(11121, 12405),
-(11123, 12405),
-(11125, 12405),
-(11126, 12405),
-(11130, 12405),
-(11134, 12405),
-(11135, 12405),
-(11138, 12405),
-(11139, 12405),
-(11140, 12405),
-(11141, 12405),
-(11111, 12406),
-(11112, 12406),
-(11113, 12406),
-(11114, 12406),
-(11117, 12406),
-(11118, 12406),
-(11119, 12406),
-(11120, 12406),
-(11122, 12406),
-(11123, 12406),
-(11125, 12406),
-(11127, 12406),
-(11128, 12406),
-(11131, 12406),
-(11133, 12406),
-(11134, 12406),
-(11140, 12406),
-(11141, 12406),
-(11113, 12407),
-(11114, 12407),
-(11115, 12407),
-(11116, 12407),
-(11117, 12407),
-(11118, 12407),
-(11119, 12407),
-(11121, 12407),
-(11122, 12407),
-(11124, 12407),
-(11126, 12407),
-(11127, 12407),
-(11129, 12407),
-(11130, 12407),
-(11131, 12407),
-(11132, 12407),
-(11138, 12407),
-(11139, 12407),
-(11141, 12407),
-(11112, 12408),
-(11113, 12408),
-(11114, 12408),
-(11115, 12408),
-(11116, 12408),
-(11117, 12408),
-(11118, 12408),
-(11119, 12408),
-(11120, 12408),
-(11121, 12408),
-(11122, 12408),
-(11123, 12408),
-(11124, 12408),
-(11125, 12408),
-(11126, 12408),
-(11127, 12408),
-(11129, 12408),
-(11133, 12408),
-(11134, 12408),
-(11135, 12408),
-(11137, 12408),
-(11138, 12408),
-(11141, 12408),
-(11112, 12409),
-(11113, 12409),
-(11118, 12409),
-(11119, 12409),
-(11120, 12409),
-(11121, 12409),
-(11122, 12409),
-(11123, 12409),
-(11126, 12409),
-(11138, 12409),
-(11140, 12409),
-(11111, 12410),
-(11113, 12410),
-(11115, 12410),
-(11117, 12410),
-(11118, 12410),
-(11119, 12410),
-(11124, 12410),
-(11127, 12410),
-(11128, 12410),
-(11130, 12410),
-(11132, 12410),
-(11136, 12410),
-(11140, 12410),
-(11111, 12411),
-(11113, 12411),
-(11114, 12411),
-(11115, 12411),
-(11116, 12411),
-(11118, 12411),
-(11119, 12411),
-(11120, 12411),
-(11122, 12411),
-(11125, 12411),
-(11131, 12411),
-(11136, 12411),
-(11138, 12411),
-(11141, 12411),
-(11112, 12412),
-(11116, 12412),
-(11118, 12412),
-(11120, 12412),
-(11121, 12412),
-(11122, 12412),
-(11123, 12412),
-(11124, 12412),
-(11126, 12412),
-(11128, 12412),
-(11129, 12412),
-(11130, 12412),
-(11131, 12412),
-(11132, 12412),
-(11135, 12412),
-(11111, 12413),
-(11115, 12413),
-(11116, 12413),
-(11117, 12413),
-(11125, 12413),
-(11126, 12413),
-(11130, 12413),
-(11133, 12413),
-(11135, 12413),
-(11138, 12413),
-(11139, 12413),
-(11140, 12413),
-(11141, 12413),
-(11112, 12414),
-(11117, 12414),
-(11118, 12414),
-(11121, 12414),
-(11124, 12414),
-(11126, 12414),
-(11128, 12414),
-(11129, 12414),
-(11130, 12414),
-(11132, 12414),
-(11134, 12414),
-(11135, 12414),
-(11136, 12414),
-(11139, 12414),
-(11112, 12415),
-(11119, 12415),
-(11120, 12415),
-(11122, 12415),
-(11125, 12415),
-(11127, 12415),
-(11130, 12415),
-(11132, 12415),
-(11134, 12415),
-(11135, 12415),
-(11111, 12416),
-(11117, 12416),
-(11118, 12416),
-(11119, 12416),
-(11120, 12416),
-(11121, 12416),
-(11123, 12416),
-(11127, 12416),
-(11129, 12416),
-(11137, 12416),
-(11138, 12416),
-(11111, 12417),
-(11112, 12417),
-(11114, 12417),
-(11124, 12417),
-(11135, 12417),
-(11136, 12417),
-(11139, 12417),
-(11140, 12417),
-(11141, 12417),
-(11116, 12418),
-(11117, 12418),
-(11119, 12418),
-(11124, 12418),
-(11126, 12418),
-(11127, 12418),
-(11128, 12418),
-(11134, 12418),
-(11135, 12418),
-(11138, 12418),
-(11140, 12418),
-(11111, 12419),
-(11112, 12419),
-(11113, 12419),
-(11116, 12419),
-(11119, 12419),
-(11120, 12419),
-(11122, 12419),
-(11123, 12419),
-(11126, 12419),
-(11130, 12419),
-(11133, 12419),
-(11134, 12419),
-(11135, 12419),
-(11136, 12419),
-(11138, 12419),
-(11139, 12419),
-(11140, 12419),
-(11141, 12419),
-(11111, 12420),
-(11112, 12420),
-(11113, 12420),
-(11115, 12420),
-(11117, 12420),
-(11123, 12420),
-(11125, 12420),
-(11128, 12420),
-(11132, 12420),
-(11133, 12420),
-(11136, 12420),
-(11138, 12420),
-(11140, 12420),
-(11112, 12421),
-(11118, 12421),
-(11120, 12421),
-(11121, 12421),
-(11122, 12421),
-(11124, 12421),
-(11126, 12421),
-(11128, 12421),
-(11129, 12421),
-(11133, 12421),
-(11135, 12421),
-(11136, 12421),
-(11140, 12421),
-(11111, 12422),
-(11115, 12422),
-(11122, 12422),
-(11124, 12422),
-(11127, 12422),
-(11130, 12422),
-(11136, 12422),
-(11137, 12422),
-(11138, 12422),
-(11140, 12422),
-(11141, 12422),
-(11111, 12423),
-(11113, 12423),
-(11114, 12423),
-(11115, 12423),
-(11116, 12423),
-(11117, 12423),
-(11119, 12423),
-(11120, 12423),
-(11121, 12423),
-(11127, 12423),
-(11128, 12423),
-(11130, 12423),
-(11132, 12423),
-(11134, 12423),
-(11138, 12423),
-(11112, 12424),
-(11114, 12424),
-(11117, 12424),
-(11120, 12424),
-(11121, 12424),
-(11122, 12424),
-(11123, 12424),
-(11125, 12424),
-(11141, 12424),
-(11112, 12425),
-(11115, 12425),
-(11119, 12425),
-(11127, 12425),
-(11131, 12425),
-(11132, 12425),
-(11133, 12425),
-(11114, 12426),
-(11118, 12426),
-(11119, 12426),
-(11120, 12426),
-(11122, 12426),
-(11126, 12426),
-(11129, 12426),
-(11130, 12426),
-(11133, 12426),
-(11135, 12426),
-(11139, 12426),
-(11114, 12427),
-(11117, 12427),
-(11119, 12427),
-(11120, 12427),
-(11121, 12427),
-(11123, 12427),
-(11124, 12427),
-(11128, 12427),
-(11131, 12427),
-(11135, 12427),
-(11137, 12427),
-(11139, 12427),
-(11140, 12427),
-(11115, 12428),
-(11117, 12428),
-(11120, 12428),
-(11122, 12428),
-(11124, 12428),
-(11130, 12428),
-(11131, 12428),
-(11133, 12428),
-(11136, 12428),
-(11141, 12428),
-(11113, 12429),
-(11126, 12429),
-(11127, 12429),
-(11128, 12429),
-(11136, 12429),
-(11137, 12429),
-(11140, 12429),
-(11111, 12430),
-(11114, 12430),
-(11115, 12430),
-(11117, 12430),
-(11118, 12430),
-(11120, 12430),
-(11122, 12430),
-(11124, 12430),
-(11125, 12430),
-(11127, 12430),
-(11129, 12430),
-(11130, 12430),
-(11132, 12430),
-(11135, 12430),
-(11137, 12430),
-(11140, 12430),
-(11141, 12430),
-(11114, 12431),
-(11116, 12431),
-(11119, 12431),
-(11122, 12431),
-(11127, 12431),
-(11130, 12431),
-(11139, 12431),
-(11140, 12431),
-(11111, 12432),
-(11112, 12432),
-(11114, 12432),
-(11115, 12432),
-(11117, 12432),
-(11122, 12432),
-(11129, 12432),
-(11136, 12432),
-(11137, 12432),
-(11138, 12432),
-(11139, 12432),
-(11140, 12432),
-(11111, 12433),
-(11112, 12433),
-(11116, 12433),
-(11123, 12433),
-(11128, 12433),
-(11138, 12433),
-(11115, 12434),
-(11120, 12434),
-(11121, 12434),
-(11124, 12434),
-(11126, 12434),
-(11132, 12434),
-(11139, 12434),
-(11141, 12434),
-(11112, 12435),
-(11114, 12435),
-(11122, 12435),
-(11125, 12435),
-(11130, 12435),
-(11136, 12435),
-(11114, 12436),
-(11116, 12436),
-(11117, 12436),
-(11118, 12436),
-(11119, 12436),
-(11121, 12436),
-(11122, 12436),
-(11125, 12436),
-(11126, 12436),
-(11128, 12436),
-(11112, 12437),
-(11116, 12437),
-(11125, 12437),
-(11128, 12437),
-(11129, 12437),
-(11133, 12437),
-(11138, 12437),
-(11141, 12437),
-(11134, 12438),
-(11138, 12438),
-(11111, 12439),
-(11115, 12439),
-(11121, 12439),
-(11125, 12439),
-(11127, 12439),
-(11116, 12440),
-(11124, 12440);
+INSERT INTO `likes` (`PostID`, `UserID`) VALUES
+('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12401),
+('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401),
+('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401),
+('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401),
+('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12409);
 
 -- --------------------------------------------------------
 
@@ -1501,61 +1010,13 @@ CREATE TABLE `messages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `photocollections mapping`
+-- Table structure for table `photocollectionsmapping`
 --
 
-CREATE TABLE `photocollections mapping` (
+CREATE TABLE `photocollectionsmapping` (
   `CollectionID` int(40) NOT NULL,
-  `PhotoID` int(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `photos`
---
-
-CREATE TABLE `photos` (
-  `PhotoID` int(40) NOT NULL,
-  `LinkToFile` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `photos`
---
-
-INSERT INTO `photos` (`PhotoID`, `LinkToFile`) VALUES
-(11111, 'IMG_8937'),
-(11112, ''),
-(11113, '11113'),
-(11114, '11114'),
-(11115, '11115'),
-(11116, '11116'),
-(11117, '11117'),
-(11118, '11118'),
-(11119, ''),
-(11120, ''),
-(11121, ''),
-(11122, ''),
-(11123, ''),
-(11124, ''),
-(11125, ''),
-(11126, ''),
-(11127, ''),
-(11128, ''),
-(11129, ''),
-(11130, ''),
-(11131, ''),
-(11132, ''),
-(11133, ''),
-(11134, ''),
-(11135, ''),
-(11136, ''),
-(11137, ''),
-(11138, ''),
-(11139, ''),
-(11140, ''),
-(11141, '');
+  `PostID` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -1564,9 +1025,8 @@ INSERT INTO `photos` (`PhotoID`, `LinkToFile`) VALUES
 --
 
 CREATE TABLE `posts` (
-  `PostID` int(40) NOT NULL,
+  `PostID` varchar(200) NOT NULL,
   `UserID` int(20) NOT NULL,
-  `PhotoID` int(40) NOT NULL,
   `PostText` text NOT NULL,
   `PostTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `PostLocation` varchar(150) NOT NULL
@@ -1576,50 +1036,29 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`PostID`, `UserID`, `PhotoID`, `PostText`, `PostTime`, `PostLocation`) VALUES
-(11111, 12400, 11111, '#bestintheworld', '2017-03-04 18:28:54', 'Bergen, Austria'),
-(11112, 12402, 11112, 'Awesome experience!', '2017-03-04 12:04:56', 'Montreal, Canada'),
-(11113, 12399, 11113, '#OldTrafford #ManUtd', '2017-03-04 12:26:23', 'Manchester, England'),
-(11114, 12399, 11114, 'Beautiful #Bali #Volcano #Lake', '2017-03-01 19:33:27', 'Bali, Indonesia'),
-(11115, 12399, 11115, 'Niagara Falls!', '2017-03-01 19:36:06', 'Niagara Falls, USA/Canada'),
-(11116, 12399, 11116, 'Really cold in #Montreal!', '2017-03-01 19:36:06', 'Montreal, Canada'),
-(11117, 12399, 11117, 'Sydney Harbour!', '2017-03-01 19:37:03', 'Sydney, Australia'),
-(11118, 12399, 11118, 'So natural! #Glacier #Iceland', '2017-03-04 17:38:23', 'Iceland'),
-(11119, 12399, 11119, 'Toronto in Winter #sunset', '2017-03-02 21:29:08', 'Toronto, Canada'),
-(11120, 12399, 11120, 'Eyjafjallajokull #Iceland #tryandsayit', '2017-03-02 21:40:07', 'Eyjafjallajokull, Iceland'),
-(11121, 12399, 11121, 'Malaysian sunset', '2017-03-02 21:41:30', 'Malaysia'),
-(11122, 12399, 11122, '#nara #weclimbedamountain', '2017-03-02 21:41:30', 'Nara, Japan'),
-(11123, 12399, 11123, 'Singaporean thunderstorm approaching #needtofindshelter', '2017-03-02 21:42:25', 'Pulau Ubin, Singapore'),
-(11124, 12403, 11124, 'Sydney at Night', '2017-03-04 16:57:28', 'Sydney, Australia'),
-(11125, 12404, 11125, 'Swiss Beauty', '2017-03-04 16:58:32', 'Bern, Switzerland'),
-(11126, 12408, 11126, 'Dirt track or snow mountain?', '2017-03-03 16:59:46', 'Snowy Mountains, Australia'),
-(11127, 12409, 11127, '#averageday', '2017-03-04 17:01:01', 'Moscow, Russia'),
-(11128, 12406, 11128, 'Icelandic waterfall', '2017-03-04 17:08:55', 'Iceland'),
-(11130, 12410, 11129, 'North Korea is beautiful... #pyongyang', '2017-03-04 17:10:45', 'Pyongyang, North Korea'),
-(11131, 12412, 11130, 'Biarritz', '2017-03-01 17:12:11', 'Biarritz, France'),
-(11132, 12413, 11131, '#TrafalgarSquare #London #pigeonseverywhere', '2017-03-04 17:15:36', 'London, England'),
-(11133, 12408, 11132, '#NYC #skyline #beautiful', '2017-03-01 17:17:24', 'New York City, USA'),
-(11134, 12402, 11133, '#SonyCentre #Berlin', '2017-03-04 17:20:23', 'Berlin, Germany'),
-(11135, 12407, 11134, '#phoenix #arizona #sunset', '2017-03-02 17:22:19', 'Phoenix, Arizona, USA'),
-(11136, 12414, 11135, 'Montreal at Night #montreal', '2017-03-04 17:23:38', 'Montreal, Canada'),
-(11137, 12410, 11136, 'Hollywood, Los Angeles #coolsign', '2017-03-04 17:28:24', 'Los Angeles, USA');
+INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`) VALUES
+('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12401, 'Does this work? In my free time i like to go nude :) #fkk', '2017-03-10 17:23:33', 'Eastern Germany'),
+('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401, 'Hello World', '2017-03-10 17:15:17', 'Sierra Nevada'),
+('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401, 'Hello world?', '2017-03-10 17:17:24', 'Sierra Nevada'),
+('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401, 'best day of my life!!!!', '2017-03-10 18:09:57', 'hehe'),
+('c95d295b630fe9da6d424b074fee4422a8a8de147e520ecf608d22862ec74013', 12401, 'profile', '2017-03-10 17:01:03', 'bitte');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `privacy settings`
+-- Table structure for table `privacysettings`
 --
 
-CREATE TABLE `privacy settings` (
+CREATE TABLE `privacysettings` (
   `SettingID` int(5) NOT NULL,
   `Description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
--- Dumping data for table `privacy settings`
+-- Dumping data for table `privacysettings`
 --
 
-INSERT INTO `privacy settings` (`SettingID`, `Description`) VALUES
+INSERT INTO `privacysettings` (`SettingID`, `Description`) VALUES
 (1, 'Friends Only'),
 (2, 'Friends of Friends'),
 (3, 'Public');
@@ -1720,7 +1159,7 @@ ALTER TABLE `collections`
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`CommentID`,`UserID`),
   ADD KEY `CommentsUserConstraint` (`UserID`),
-  ADD KEY `CommentsPostConstraint` (`PhotoID`);
+  ADD KEY `CommentsPostConstraint` (`PostID`);
 
 --
 -- Indexes for table `friendrecommendations`
@@ -1758,7 +1197,7 @@ ALTER TABLE `groups`
 -- Indexes for table `likes`
 --
 ALTER TABLE `likes`
-  ADD PRIMARY KEY (`PhotoID`,`UserID`),
+  ADD PRIMARY KEY (`PostID`,`UserID`),
   ADD KEY `LikesUserConstraint` (`UserID`);
 
 --
@@ -1770,30 +1209,23 @@ ALTER TABLE `messages`
   ADD KEY `MessagesUserConstraint` (`UserID`);
 
 --
--- Indexes for table `photocollections mapping`
+-- Indexes for table `photocollectionsmapping`
 --
-ALTER TABLE `photocollections mapping`
-  ADD PRIMARY KEY (`CollectionID`,`PhotoID`),
-  ADD KEY `PhotoCollectionsPhotosConstraint` (`PhotoID`);
-
---
--- Indexes for table `photos`
---
-ALTER TABLE `photos`
-  ADD PRIMARY KEY (`PhotoID`);
+ALTER TABLE `photocollectionsmapping`
+  ADD PRIMARY KEY (`CollectionID`),
+  ADD KEY `PhotoCollectionsPostConstraint` (`PostID`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`PostID`),
-  ADD KEY `PostsUserConstraint` (`UserID`),
-  ADD KEY `PostsPhotosConstraint` (`PhotoID`);
+  ADD KEY `PostsUserConstraint` (`UserID`);
 
 --
--- Indexes for table `privacy settings`
+-- Indexes for table `privacysettings`
 --
-ALTER TABLE `privacy settings`
+ALTER TABLE `privacysettings`
   ADD PRIMARY KEY (`SettingID`);
 
 --
@@ -1823,27 +1255,17 @@ ALTER TABLE `collections`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11347;
+  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11357;
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `GroupID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `GroupID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
   MODIFY `MessageID` int(40) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `photos`
---
-ALTER TABLE `photos`
-  MODIFY `PhotoID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11142;
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `PostID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11138;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -1864,7 +1286,7 @@ ALTER TABLE `collections`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `CommentsPostConstraint` FOREIGN KEY (`PhotoID`) REFERENCES `photos` (`PhotoID`),
+  ADD CONSTRAINT `CommentsPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`),
   ADD CONSTRAINT `CommentsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
@@ -1902,7 +1324,7 @@ ALTER TABLE `groups`
 -- Constraints for table `likes`
 --
 ALTER TABLE `likes`
-  ADD CONSTRAINT `LikesPostConstraint` FOREIGN KEY (`PhotoID`) REFERENCES `photos` (`PhotoID`),
+  ADD CONSTRAINT `LikesPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`),
   ADD CONSTRAINT `LikesUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
@@ -1913,17 +1335,16 @@ ALTER TABLE `messages`
   ADD CONSTRAINT `MessagesUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
--- Constraints for table `photocollections mapping`
+-- Constraints for table `photocollectionsmapping`
 --
-ALTER TABLE `photocollections mapping`
+ALTER TABLE `photocollectionsmapping`
   ADD CONSTRAINT `PhotoCollectionsCollectionConstraint` FOREIGN KEY (`CollectionID`) REFERENCES `collections` (`CollectionID`),
-  ADD CONSTRAINT `PhotoCollectionsPhotosConstraint` FOREIGN KEY (`PhotoID`) REFERENCES `photos` (`PhotoID`);
+  ADD CONSTRAINT `PhotoCollectionsPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`);
 
 --
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `PostsPhotosConstraint` FOREIGN KEY (`PhotoID`) REFERENCES `photos` (`PhotoID`),
   ADD CONSTRAINT `PostsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
