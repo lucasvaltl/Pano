@@ -70,11 +70,10 @@ function findPosts($page, $query, $conn) {
 
 
             $postID = $post['PostID'];
-            $numComments; //calculated in query 2
+            $numComments = 0; //calculated in query 2
             $numLikes = 0; //calculated in query 3
             $hasUserLiked = false;
             $postUserName = $post['UserName'];
-            $postPictureID = $post['PhotoID'];
             $postUserPictureID = 1;
             $postDescription = $post['PostText'];
             $postLocation = $post['PostLocation'];
@@ -86,7 +85,7 @@ function findPosts($page, $query, $conn) {
             //gathers all the comments data for a photo
             $query2 = "SELECT * FROM comments
                         LEFT JOIN user ON user.`UserID` = comments.`UserID`
-                        WHERE PhotoID = $postPictureID
+                        WHERE PostID = '$postID'
                         ORDER BY CommentTime ASC";
 
             if ($result2 = mysqli_query($conn, $query2)) {
@@ -111,7 +110,7 @@ function findPosts($page, $query, $conn) {
             //gathers all the like data for a photo
             $query3 = "SELECT * FROM likes
                         LEFT JOIN user ON user.`UserID` = likes.`UserID`
-                        WHERE PhotoID = $postPictureID";
+                        WHERE likes.`PostID` = '$postID'";
 
             if ($result3 = mysqli_query($conn, $query3)) {
                 $numLikes = mysqli_num_rows($result3);
@@ -125,7 +124,7 @@ function findPosts($page, $query, $conn) {
                 }
             }
 
-            $post = new post($postPictureID, $postUserPictureID, $postUserName, $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp);
+            $post = new post($postID, $postUserPictureID, $postUserName , $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp);
 
             echo $post->addComments($comments);
             echo $post->returnHTML();

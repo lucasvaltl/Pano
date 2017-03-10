@@ -8,7 +8,7 @@ require_once('dbconnect.php');
 
 $postPictureID = $_POST['postPictureID'];
 
-$query = "INSERT INTO likes (PhotoID, UserID)
+$query = "INSERT INTO likes (PostID, UserID)
             VALUES ('$postPictureID','{$_SESSION['UserID']}')";
 
 if (mysqli_query($conn, $query)) {
