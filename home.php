@@ -37,7 +37,29 @@ require_once('includes/config.php');
       ?>
 
     <main>
+      <div class="row notification-title grad">
+        Some people want to be your friends:
+      </div>
+<div class="row notification grad" >
+  <div class="col-xs-1">
 
+  </div>
+  <div class="col-xs-2">
+  <img src="images/profilepics/2.jpg" class="img-circle notification-picture">
+  </div>
+  <div class="col-xs-3 notification-request-name">
+    Friend Name
+  </div>
+  <div class="col-xs-3">
+
+  </div>
+  <div class="col-xs-1 notification-request-icon">
+<i class="fa fa-user fa-2x"></i>
+  </div>
+  <div class="col-xs-2">
+
+  </div>
+</div>
         <div id="feed-container">
 
 
@@ -50,7 +72,7 @@ require_once('includes/config.php');
       <div id="loader">
         <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
       </div>
-      
+
     </main>
 </body>
 

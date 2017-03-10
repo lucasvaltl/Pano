@@ -12,6 +12,18 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 
+.grad{
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#540d6e+0,584a85+37,61e8bf+100 */
+  background: #540d6e; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #540d6e 0%, #584a85 37%, #61e8bf 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #540d6e 0%,#584a85 37%,#61e8bf 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #540d6e 0%,#584a85 37%,#61e8bf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#540d6e', endColorstr='#61e8bf',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /*font alterations*/
 
 body{
@@ -642,6 +654,32 @@ left: 43%;
  a:hover .friending-icon{
   text-align: right;
   color: #888;
+}
+
+/*friend notifications*/
+
+
+
+.notification-title{
+    border-bottom: white solid 1px;
+}
+.notification{
+  border-bottom: white solid 1px;
+  height: 60px;
+}
+
+.notification-picture{
+  height: 55px;
+  padding-top:5px;
+}
+
+.notification-request-name{
+  font-size: 1.3em;
+  padding-top: 17px;
+}
+
+.notification-request-icon{
+  padding-top: 17px;
 }
 
 
