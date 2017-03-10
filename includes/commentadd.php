@@ -14,14 +14,14 @@ $Comment = $_POST['Comment'];
 $postPictureID = $_POST['postPictureID'];
 
 
-$query = "INSERT INTO comments (UserID, PhotoID, Comment)
+$query = "INSERT INTO comments (UserID, PostID, Comment)
             VALUES ('{$_SESSION['UserID']}', '$postPictureID', '$Comment')";
 
 if (mysqli_query($conn, $query)) {
 
     $query2 = "SELECT * FROM comments
                 LEFT JOIN user ON user.`UserID` = comments.`UserID`
-                WHERE PhotoID = $postPictureID
+                WHERE PostID = '$postPictureID'
                 ORDER BY CommentTime DESC
                 LIMIT 1";
 

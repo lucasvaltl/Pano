@@ -18,7 +18,7 @@
 
             <div class="pull-right navbar-text">
                 <div class="search-box">
-                    <form class="form-group" action="search.php?id=<?=$_SESSION['UserName'];?>" method="post">
+                    <form class="form-group" action="search.php" method="post">
                         <input type="text" name="search" placeholder="Search for users..." />
                         <input type="submit" value=">>" />
                     </form>

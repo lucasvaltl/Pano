@@ -16,7 +16,6 @@
 
 
 
-
     //  Scroll to Top (adapted from https://codepen.io/rdallaire/pen/apoyx)
     $(window).scroll(function() {
          // If page is scrolled more than 500px, fade in arrow
@@ -137,6 +136,7 @@
         loadMore.setAttribute('data-page', page);
     }
 
+
     function loadMorePosts () {
         if (request_in_progress) {
             return;
@@ -153,7 +153,7 @@
         xhr.onreadystatechange = function () {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
-                console.log('Result: ' + result);
+                // console.log('Result: ' + result);
 
                 hideLoader();
                 setCurrentPage(next_page);
@@ -171,6 +171,7 @@
       //parent gives access to the postPictureID and Comment fields necessary
       var parent  = this.parentElement;
       var postPictureID = parent.id;
+
       var Comment = parent.childNodes[1].value;
 
       if (Comment == ""){
