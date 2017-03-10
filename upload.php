@@ -73,7 +73,6 @@ if (isset($_SESSION['UserID'])) {
             <input type="submit" name="submit" class="btn btn-default lv-button create-collection-btn" value="Upload" />
         </div>
       </form>
-      <?php var_dump($_POST) ?>
     </main>
 
     <?php
