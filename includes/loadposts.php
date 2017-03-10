@@ -9,7 +9,7 @@ ob_start();
 //session_start() needed to use global session variabls $_SESSION etc
 session_start();
 
-require_once ('post.php');
+require_once('post.php');
 
 require_once('config.php');
 
@@ -43,7 +43,17 @@ $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $posts = findPosts($page, $query, $conn);
 
 
+function addRecommendedFriendsRow($conn) {
+    require_once('dbconnect.php');
+    include('friendrecommendation.php');
+}
+
+
 function findPosts($page, $query, $conn) {
+
+    if ($page == 2){
+        addRecommendedFriendsRow($conn);
+    }
 
     if ($result = mysqli_query($conn, $query)) {
         $total_posts = mysqli_num_rows($result);
@@ -128,7 +138,10 @@ function findPosts($page, $query, $conn) {
 
             echo $post->addComments($comments);
             echo $post->returnHTML();
+
+
         }
+
     }
 }
 ?>

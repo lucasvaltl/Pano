@@ -1113,6 +1113,7 @@ a:hover{
   text-decoration: none;
 }
 
+
 .friend-recommendations, a i .friend-recommendations{
 text-align: center;
 color: white;
@@ -1136,7 +1137,7 @@ margin-bottom: 10px;
 
 .friend-recommendation-picture{
   padding-top: 10px;
-height: 60%
+  width: 40%
 }
 
 .recommendation-friending-icon, a .recommendation-friending-icon{

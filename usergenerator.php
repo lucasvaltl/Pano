@@ -129,6 +129,33 @@ for ($i = 0; $i < $likeCount; $i++) {
 
 */
 
+//==================Adding all users to the friendrecommendations table====================
+
+/*
+//query to get all ids of users
+$query = "SELECT UserID FROM user";
+
+if ($result = mysqli_query($conn, $query)) {
+    $userIDs = [];
+
+    while ($user = mysqli_fetch_array($result)){
+        $userID = $user['UserID'];
+        $userIDs [] = $userID;
+    }
+    //print_r($userIDs);
+
+    foreach ($userIDs as $userID){
+        echo " $userID";
+        $query = "INSERT INTO friendrecommendations (UserID) VALUES ('$userID')";
+
+        if ($result = mysqli_query($conn, $query)) {
+            echo "success bro";
+        }
+    }
+}
+*/
+
+
 function array_random($arr, $num = 1) {
     shuffle($arr);
 
