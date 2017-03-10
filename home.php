@@ -37,9 +37,10 @@ require_once('includes/config.php');
       ?>
 
     <main>
+
+
         <div id="feed-container">
-
-
+                <!--LOADING OF POSTS GO IN HERE, FROM loadpost.php via commentlikejs.php -->
       </div>
 
       <button id="load-more-button" data-page="0" type="button">Load More</button>
@@ -47,7 +48,7 @@ require_once('includes/config.php');
       <div id="loader">
         <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
       </div>
-      
+
     </main>
 </body>
 
@@ -58,6 +59,7 @@ require_once('includes/config.php');
 <?php
     include('includes/commentlikejs.php');
     include('includes/footer.php');
+    include('knn/knn-data.php');
 ?>
 
 </html>

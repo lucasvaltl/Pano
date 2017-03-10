@@ -5,14 +5,16 @@
 	@web 	www.moxyphp.com
 	@desc 	Classifies X based on k-nearest points
 */
-//ob_start needed to allow redirecting after login
-ob_start();
 
-//session_start() needed to use global session variabls $_SESSION etc
+/*
+ob_start();
 session_start();
 
 require_once('../includes/config.php');
 require_once('../includes/dbconnect.php' );
+*/
+
+
 include('knn.php');
 
 
@@ -133,7 +135,7 @@ foreach ($usersInSample as $key => $userID) {
 	//===========================================================================
 
 	//add the data for this user to the dataset
-	$data[] = array($likeRate, $mutualFriendRate, $userName, $userName);
+	$data[] = array($likeRate, $mutualFriendRate, $userID, $userName);
 
 }
 
@@ -150,7 +152,7 @@ $query = "SELECT COUNT(*)
 if (isset($_GET['x']))
 	$currentUserPoint = array(intval($_GET['x']),intval($_GET['y']),'','');
 else
-	$currentUserPoint = array(150,125,'','');
+	$currentUserPoint = array(999,999,'','');
 
 
 //random data generator
@@ -173,12 +175,40 @@ $kNN = new kNN($data, $currentUserPoint, 5, array(2,3));
 
 $cx = $kNN->calculate();
 
-$yolos = $kNN->classify(2);
+$recommendations = $kNN->classify(2);
 
+
+/*
 echo  "Hi there " . $_SESSION['UserName'] . ", your recommended friends are: ";
-foreach ($yolos as $yolo){
-	echo $yolo . ', ';
+foreach ($recommendations as $recommendation){
+	echo $recommendation . ', ';
+
 }
+
+*/
+
+for ($i=0; $i < 5; $i++){
+	echo $recommendations[$i];
+}
+
+$query = "UPDATE friendrecommendations
+			SET FriendID1 = '$recommendations[0]',
+			FriendID2 = '$recommendations[1]',
+			FriendID3 = '$recommendations[2]',
+			FriendID4 = '$recommendations[3]',
+			FriendID5 = '$recommendations[4]'
+			WHERE UserID = '{$_SESSION['UserID']}'";
+
+if ($result = mysqli_query($conn, $query)) {
+//	echo "success bro";
+} else {
+	echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
+}
+
+
+//============= THE FOLLOWING PRINTS A TEST GRAPH FOR VISUALISATION ===========
+
+/*
 
 echo "<br><br>X-axis: Like Rate. Y-axis: Mutual Friend Rate.";
 
@@ -239,3 +269,4 @@ height: 10px; background-color: green; display: block;}
 .currentUserPoint{background-color:red;}
 .nearest{background-color:blue;}
 </style>
+*/

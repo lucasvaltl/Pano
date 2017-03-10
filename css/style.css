@@ -637,3 +637,57 @@ left: 43%;
 a:hover{
   text-decoration: none;
 }
+
+
+.friend-recommendations, a i .friend-recommendations{
+text-align: center;
+color: white;
+
+}
+
+.recommendations-title{
+  font-size: 1.5em;
+  color: white;
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+.recommendation-friend-name{
+font-size: 1.5em;
+
+}
+
+.recommendation-friend-name, .friend-picture, .recommendation-friending-icon, .recommendation-picture{
+margin-bottom: 10px;
+}
+
+.friend-recommendation-picture{
+  padding-top: 10px;
+width: 40%
+}
+
+.recommendation-friending-icon, a .recommendation-friending-icon{
+  color: white;
+}
+
+.margin-10{
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px){
+.smallscreen-smaller{
+    font-size: 2em;
+}
+.recommendation-friend-name{
+  font-size: 1em;
+}
+}
+
+@media (max-width: 480px){
+.smallscreen-smaller{
+    font-size: 2em;
+}
+.recommendation-friend-name{
+  font-size: 0.7em;
+}
+}

@@ -141,7 +141,14 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
                 $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
                 $_SESSION['SettingID'] = $row['SettingID'];
 
-                header("Location: home.php");
+                $query2 = "INSERT INTO friendrecommendations (UserID) VALUES ('{$_SESSION['UserID']}')";
+
+                if ($result2 = mysqli_query($conn, $query2)) {
+                    header("Location: home.php");
+                } else {
+                    echo "Error: " . $query . "<br>" . mysqli_error($conn);
+                }
+
             }
         }
 
