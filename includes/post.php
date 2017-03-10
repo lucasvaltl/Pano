@@ -24,19 +24,19 @@ class post{
     public $numLikes;
     public $hasUserLiked;
     public $postUserName = "";
-    public $postPictureID;
+    public $PostID;
     public $postUserPictureID;
     public $postDescription;
     public $postLocation;
     public $postTimeStamp;
     public $comments = array();
 
-    public function __construct ($postPictureID, $postUserPictureID, $postUserName, $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp){
+    public function __construct ($PostID, $postUserPictureID, $postUserName, $numLikes, $hasUserLiked, $numComments, $postDescription, $postLocation, $postTimeStamp){
       $this->numComments = $numComments;
       $this->numLikes = $numLikes;
       $this->hasUserLiked = $hasUserLiked;
       $this->postUserName = $postUserName;
-      $this->postPictureID = $postPictureID;
+      $this->PostID = $PostID;
       $this->postUserPictureID = $postUserPictureID;
       $this->postDescription = $postDescription;
       $this->postLocation = $postLocation;
@@ -90,9 +90,9 @@ class post{
 
       $commentWithAnS =  (sizeof($this->comments) == 1 ? '' : 's');
 
-      echo '<div class="post continer animated slideInUp" id="' . $this->postPictureID .'">
+      echo '<div class="post continer animated slideInUp" id="' . $this->PostID .'">
         <div class="post-picture">
-          <img src="images/panoramas/' . $this->postPictureID . '.jpg" class="panorama">
+          <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $this->PostID . '.jpg" class="panorama">
         </div>
 
         <div class="row ">
@@ -103,7 +103,7 @@ class post{
               </a>
             </div>
             <div class="post-like-comment col-md-1 col-xs-1 " >
-              <p class="lv-icons lv-top-padding ' . $typeOfStar .'"  id="' . $this->postPictureID .'">
+              <p class="lv-icons lv-top-padding ' . $typeOfStar .'"  id="' . $this->PostID .'">
                 <button type="button" class="like-button btn-outline" href=""><i class="fa fa-star-o fa-2x "></i></button>
                 <button type="button" class="unlike-button btn-outline" href=""><i class="fa fa-star fa-2x "></i></button>
                 <h5>' . $this->numLikes . ' like' . $likeOrLikes . '</h5>
@@ -112,7 +112,7 @@ class post{
             <div class="post-like-comment col-md-2 col-xs-2 " >
               <p class="lv-icons lv-top-padding">
                 <a href="" onclick="return false" class="comment-toggle" ><i class="fa fa-comment-o fa-2x " ></i>
-                <h5 id="counter' . $this->postPictureID.'">' . sizeof($this->comments) . ' comment'.$commentWithAnS.'</h5>
+                <h5 id="counter' . $this->PostID.'">' . sizeof($this->comments) . ' comment'.$commentWithAnS.'</h5>
                 </a>
               </p>
             </div>
@@ -135,10 +135,10 @@ class post{
           </div>
              <hr>
         </div>
-        <div class="currentComments" id="currentComments' .$this->postPictureID .'" class="row  animated" ng-class="\'showcomments' . $this->postPictureID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->postPictureID . '">
+        <div class="currentComments" id="currentComments' .$this->PostID .'" class="row  animated" ng-class="\'showcomments' . $this->PostID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->PostID . '">
       ' . $currentComments . '
       </div>
-      <div class="row user-comment "  id="' . $this->postPictureID .'">
+      <div class="row user-comment "  id="' . $this->PostID .'">
       <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
          <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
       </div>

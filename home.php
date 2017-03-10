@@ -37,10 +37,13 @@ require_once('includes/config.php');
       ?>
 
     <main>
+
         <div id="feed-container">
 
 
       </div>
+
+
 
       <button id="load-more-button" data-page="0" type="button">Load More</button>
 

@@ -1,0 +1,6 @@
+{
+  "require": {
+    "microsoft/windowsazure": "*",
+    "microsoft/azure-storage": "*"
+  }
+}

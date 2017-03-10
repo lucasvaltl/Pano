@@ -9,7 +9,7 @@ require_once('dbconnect.php');
 $postPictureID = $_POST['postPictureID'];
 
 $query = "DELETE FROM likes
-            WHERE `likes`.`PhotoID` = '$postPictureID'
+            WHERE `likes`.`PostID` = '$postPictureID'
             AND `likes`.`UserID` = '{$_SESSION['UserID']}'";
 
 if (mysqli_query($conn, $query)) {
