@@ -1,7 +1,5 @@
 <?php
 
-
-
     //loads up the user information for the current profile page
     $query = "SELECT * FROM user WHERE UserName = '$profileUserName'";
 
@@ -26,6 +24,7 @@
     //checks to see if the logged in user is friends with the page of the current user profile,
     //as long as not viewing own profile page. Subsequently affects visibility of either add or remove friend buttons
     $are_we_friends = false;
+    $friendRequestSent = false;
 
     if ($_SESSION['UserName'] != $profileUserName) {
 
@@ -44,6 +43,19 @@
         }
 
     }
+
+    $sql3 = "SELECT * FROM `friendrequests` WHERE FriendID='$profileUserID' AND UserID='{$_SESSION['UserID']}'";
+
+    if ($result3 = mysqli_query($conn, $sql3)) {
+        $count2 = mysqli_num_rows($result3);
+
+        //if friends, display tick, otherwise an add friend icon will appear
+        if ($count2 == 1) {
+            $friendRequestSent = true;
+        }
+
+        $typeOfRequestIcon = ($friendRequestSent ? "requested" : "");
+    }
  ?>
 
 
@@ -61,17 +73,15 @@
             <p class="profile-info-description"><?=$profileUserDescription?></p>
         </div>
 
-
-
         <div class="col col-md-3 col-xs-3 profile-info-row" id="<?=$profilePictureID?>">
             <?php if ($_SESSION['UserName'] == $profileUserName) : ?>
-                <button type="button" class=";btn btn-default pull-right edit-button" ><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button>
+                <button type="button" class="btn btn-default pull-right edit-button" ><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button>
             <?php elseif ($are_we_friends) :?>
-                <button id="remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>Remove Friend </button>
-                <button id="confirm-remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-ok"></span>Friend Removed </button>
+                <button id="remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Remove Friend </button>
+                <button id="confirm-remove-friend-button" type="button" class="btn btn-default pull-right "><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Friend Removed </button>
             <?php else :?>
-                <button id="add-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Friend </button>
-                <button id="cancel-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel Request </button>
+                <button id="add-friend-button" type="button" class="btn btn-default pull-right  <?=$typeOfRequestIcon?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Friend </button>
+                <button id="cancel-friend-button" type="button" class="btn btn-default pull-right <?=$typeOfRequestIcon?>"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel Request </button>
             <?php endif;?>
         </div>
     </div>
@@ -79,7 +89,7 @@
 
     <?php
 
-    include('includes/friendRequestJS.php');
+     include('includes/friendRequestJS.php');
 
     ?>
 
@@ -111,17 +121,11 @@
 <script>
 
 
-    if (document.getElementsByClassName('edit-button') == null) {
+    if (document.getElementsByClassName('edit-button') != null) {
         //listener attached to the edit button on load
         var editButton = document.getElementsByClassName("edit-button");
         editButton.item(0).addEventListener("click", editProfileClick);
     } else console.log("zht");
-
-
-
-
-   // if (url.includes.())
-
 
 
     function editProfileClick () {

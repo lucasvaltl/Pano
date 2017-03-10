@@ -393,7 +393,7 @@ button#remove-friend-button {
 
 }
 
-button#remove-friend-button.requested {
+button#remove-friend-button.deleted {
     display:none;
 }
 
@@ -401,7 +401,7 @@ button#confirm-remove-friend-button {
     display:none;
 }
 
-button#confirm-remove-friend-button.requested {
+button#confirm-remove-friend-button.deleted {
     display:inline;
 }
 

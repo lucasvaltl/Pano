@@ -44,14 +44,10 @@ public function returnHTML(){
             $output .= '
       <button class="send-request-button '.$typeOfRequestIcon.'" id="'.$this->friendID.'"> <i class="fa fa-3x fa-user-plus friending-icon " ></i> </button>
       <button class="cancel-request-button '.$typeOfRequestIcon.'" id="'.$this->friendID.'">  <i class="fa fa-3x fa-user-times friending-icon" ></i>  </button>
-      </div> 
+      </div>
       </div>
       <hr>';
         }
         return $output;
     }
 }
-
-
-
-

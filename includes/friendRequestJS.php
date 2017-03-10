@@ -6,25 +6,23 @@ require_once ('config.php');
 
 <script>
 
+    //using the url to decide which listesters to add to which buttons
     var url = window.location.href;
-
 
     if (url.includes("profile-info.php")) {
 
-
         if (document.getElementById("add-friend-button")!== null){
-            var sendRequestButtonProfile = document.getElementById("add-friend-button")
+            var sendRequestButtonProfile = document.getElementById("add-friend-button");
+            var cancelRequestButtonProfile = document.getElementById("cancel-friend-button");
             sendRequestButtonProfile.addEventListener("click", sendFriendRequestFromProfile);
+            cancelRequestButtonProfile.addEventListener("click", cancelFriendRequestFromProfile);
         } else {console.log("addfriendbutton")};
-
 
         if (document.getElementById("remove-friend-button")!== null){
             console.log("arrived");
-            var cancelRequestButtonProfile = document.getElementById("remove-friend-button")
-            cancelRequestButtonProfile.addEventListener("click",deleteFriendFromProfile);
+            var deleteFriendButtonProfile = document.getElementById("remove-friend-button");
+            deleteFriendButtonProfile.addEventListener("click",deleteFriendFromProfile);
         } else console.log("xyolo");
-
-
 
     } else if (url.includes("search.php")) {
 
@@ -34,21 +32,19 @@ require_once ('config.php');
         for (i = 0; i < sendRequestButtonSearch.length; i++) {
             sendRequestButtonSearch.item(i).addEventListener("click",sendFriendRequestFromSearch);
             cancelRequestButtonSearch.item(i).addEventListener("click",cancelFriendRequestFromSearch);
-    }
-
-
+        }
 
     }
 
-    function sendFriendRequestFromSearch()
-    {
+    //======= from search.php ==============
+
+    function sendFriendRequestFromSearch() {
 
         // gets the friend ID from the
         var friendID = this.id;
         var childRequestButton = this;
         var childCancelButton = childRequestButton.nextElementSibling;
         sendFriendRequest(friendID, childRequestButton, childCancelButton);
-
     }
 
     function cancelFriendRequestFromSearch() {
@@ -57,66 +53,73 @@ require_once ('config.php');
         var friendID = this.id;
         var childCancelButton = this;
         var childRequestButton = childCancelButton.previousElementSibling;
-
         cancelFriendRequest(friendID,childCancelButton,childRequestButton);
-
     }
+
+
+
+
+    //======= from profile-header.php ==============
 
 
   function sendFriendRequestFromProfile() {
 
-        // gets the friend ID from the
-        var friendID = this.id;
+
+        var friendID = this.parentElement.parentElement.parentElement.id;
         var childRequestButton = this;
         var childCancelButton = childRequestButton.nextElementSibling;
         sendFriendRequest(friendID, childRequestButton, childCancelButton);
-
     }
 
     function cancelFriendRequestFromProfile() {
 
-        console.log("cancelled");
-
-        // gets the friend ID from the
         var friendID = this.parentElement.parentElement.parentElement.id;
-
-        console.log("FriendID : " + friendID);
-
-
-        var childRequestButton = this;
-        var childCancelButton = childRequestButton.nextElementSibling;
-
-        console.log(childRequestButton);
-
+        var childCancelButton = this;
+        var childRequestButton = childCancelButton.previousElementSibling;
         cancelFriendRequest(friendID, childRequestButton, childCancelButton);
-
     }
 
     function deleteFriendFromProfile() {
 
-        console.log("cancelled");
-
-        // gets the friend ID from the
         var friendID = this.parentElement.parentElement.parentElement.id;
-
-        console.log("FriendID : " + friendID);
-
-
-        var childRequestButton = this;
-        var childCancelButton = childRequestButton.nextElementSibling;
-
-        console.log(childRequestButton);
-
-        cancelFriendRequest(friendID, childRequestButton, childCancelButton);
+        var childDeleteFriendButton = this;
+        var childConfirmDeleteFriendButton = childDeleteFriendButton.nextElementSibling;
+        deleteFriend(friendID, childDeleteFriendButton, childConfirmDeleteFriendButton);
 
     }
 
 
+
+
+    //=========== deleting a friend===============
+
+    function deleteFriend(friendID, childConfirmDeleteFriendButton, childDeleteFriendButton) {
+
+        //setting up the data to be passed through to the php page to process the database updating
+        var xhr = new XMLHttpRequest();
+        var data = "postFriendID=" + friendID;
+        xhr.open('POST', '<?=SITE_ROOT?>/includes/deletefriend.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var result = xhr.responseText;
+                //console.log("Result" + result);
+
+                childDeleteFriendButton.classList.add("deleted");
+                childConfirmDeleteFriendButton.classList.add("deleted");
+
+            } else {
+                //alert("There was a problem with the request.");
+            }
+        }
+    }
+
+    //=========== sending a friend request ===============
+
+
     function sendFriendRequest(friendID, childRequestButton, childCancelButton) {
-
-        console.log(childRequestButton);
-
-        console.log(friendID);
 
         //setting up the data to be passed through to the php page to process the database updating
         var xhr = new XMLHttpRequest();
@@ -125,15 +128,11 @@ require_once ('config.php');
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(data);
 
-        //upon return, the 'liked' class is added to the parent class list,
-        //which drives the toggling functionality of the two different like buttons
-        //and also the dynamic updating of number of likes
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
-                console.log("Result" + result);
-                //this 'liked' class will allow the like-button and unlike-button to toggle on and off
-                //in terms of their individual visiblity, based on the presence of 'liked'
+                //console.log("Result" + result);
+
                 childRequestButton.classList.add("requested");
                 childCancelButton.classList.add("requested");
 
@@ -144,46 +143,11 @@ require_once ('config.php');
     }
 
 
-    function deleteFriend(friendID, childCancelButton, childRequestButton) {
-
-
-        console.log(childCancelButton);
-
-        console.log(friendID);
-
-        //setting up the data to be passed through to the php page to process the database updating
-        var xhr = new XMLHttpRequest();
-        var data = "postFriendID=" + friendID;
-        xhr.open('POST', '<?=SITE_ROOT?>/includes/deletefriend.php', true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send(data);
-
-        //upon return, the 'liked' class is added to the parent class list,
-        //which drives the toggling functionality of the two different like buttons
-        //and also the dynamic updating of number of likes
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var result = xhr.responseText;
-                console.log("Result" + result);
-                //this 'liked' class will allow the like-button and unlike-button to toggle on and off
-                //in terms of their individual visiblity, based on the presence of 'liked'
-                childRequestButton.classList.remove("requested");
-                childCancelButton.classList.remove("requested");
-
-            } else {
-                //alert("There was a problem with the request.");
-            }
-        }
-    }
+    //=========== cancelling a friend===============
 
 
 
     function cancelFriendRequest(friendID, childCancelButton, childRequestButton) {
-
-
-        console.log(childCancelButton);
-
-        console.log(friendID);
 
         //setting up the data to be passed through to the php page to process the database updating
         var xhr = new XMLHttpRequest();
@@ -192,15 +156,11 @@ require_once ('config.php');
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(data);
 
-        //upon return, the 'liked' class is added to the parent class list,
-        //which drives the toggling functionality of the two different like buttons
-        //and also the dynamic updating of number of likes
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
-                console.log("Result" + result);
-                //this 'liked' class will allow the like-button and unlike-button to toggle on and off
-                //in terms of their individual visiblity, based on the presence of 'liked'
+                //console.log("Result" + result);
+
                 childRequestButton.classList.remove("requested");
                 childCancelButton.classList.remove("requested");
 
