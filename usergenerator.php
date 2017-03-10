@@ -64,11 +64,11 @@ for ($i = 0; $i < $userCount; $i++){
 
 
 }
-
+*/
 
 // ===================Getting random users to like random posts =========================
 
-
+/*
 //query to get all ids of users
 $query = "SELECT UserID FROM user";
 
@@ -81,41 +81,43 @@ if ($result = mysqli_query($conn, $query)) {
     }
     //print_r($userIDs);
 }
-
-//query to get all photoIDs of the different photos
-$query = "SELECT PhotoID FROM photos";
+*/
+/*
+//query to get all PostIDs of the different posts
+$query = "SELECT PostID FROM posts";
 
 if ($result = mysqli_query($conn, $query)) {
-    $photoIDs = [];
+    $PostIDs = [];
 
     while ($photo = mysqli_fetch_array($result)){
-        $photoID = $photo['PhotoID'];
-        $photoIDs[] = $photoID;
+        $PostID = $photo['PostID'];
+        $PostIDs[] = $PostID;
     }
-    //print_r($photoIDs);
+    //print_r($PostIDs);
 }
 
-$likeCount = 200;
+$likeCount = 10;
 
 for ($i = 0; $i < $likeCount; $i++) {
     $chosenUserID = (array_random($userIDs));
-    $chosenPhotoID = (array_random($photoIDs));
+    $chosenPostID = (array_random($PostIDs));
 
-    $query = "INSERT INTO likes (PhotoID, UserID) VALUES ('$chosenPhotoID', $chosenUserID)";
+    $query = "INSERT INTO likes (PostID, UserID) VALUES ('$chosenPostID', $chosenUserID)";
     if (mysqli_query($conn, $query)) {
         echo "New record created successfully <br>";
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
     }
 }
+*/
 
 
 //=========================Getting random users to friend eachother ========================
 
 
-$friendCount = 200;
+$friendCount = 20;
 
-for ($i = 0; $i < $likeCount; $i++) {
+for ($i = 0; $i < $friendCount; $i++) {
     $chosenUserID = (array_random($userIDs));
     $chosenFriendID = (array_random($userIDs));
 
@@ -127,7 +129,7 @@ for ($i = 0; $i < $likeCount; $i++) {
     }
 }
 
-*/
+
 
 //==================Adding all users to the friendrecommendations table====================
 
@@ -153,8 +155,8 @@ if ($result = mysqli_query($conn, $query)) {
         }
     }
 }
-*/
 
+*/
 
 function array_random($arr, $num = 1) {
     shuffle($arr);

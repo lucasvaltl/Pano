@@ -12,9 +12,8 @@ session_start();
 
 require_once('../includes/config.php');
 require_once('../includes/dbconnect.php' );
+
 */
-
-
 include('knn.php');
 
 
@@ -23,7 +22,7 @@ $data = [];
 
 //===========================================================================
 //Find out how many likes the user has
-$query = "SELECT PhotoID FROM likes WHERE UserID  = '{$_SESSION['UserID']}'";
+$query = "SELECT PostID FROM likes WHERE UserID  = '{$_SESSION['UserID']}'";
 
 //$numTotalLikes is the total number of likes of the logged in user
 $numTotalLikes;
@@ -32,7 +31,7 @@ $photosLiked = [];
 if ($result = mysqli_query($conn, $query)) {
 	$numTotalLikes = mysqli_num_rows($result);
 	while($row = mysqli_fetch_assoc($result)){
-		$photosLiked[] = $row['PhotoID'];
+		$photosLiked[] = $row['PostID'];
 	}
 }
 
@@ -92,7 +91,7 @@ foreach ($usersInSample as $key => $userID) {
 
 	$query = "SELECT *
 		FROM likes t1, likes t2
-		WHERE t1.PhotoID = t2.PhotoID AND t1.UserID = '{$_SESSION['UserID']}' AND t2.UserID = $userID
+		WHERE t1.PostID = t2.PostID AND t1.UserID = '{$_SESSION['UserID']}' AND t2.UserID = $userID
 		AND t1.UserID <> t2.UserID";
 
 	$numSharedLikes;
@@ -144,7 +143,7 @@ foreach ($usersInSample as $key => $userID) {
 //gets number of common likes between 2 users (the user and the potential friend)
 $query = "SELECT COUNT(*)
 	FROM likes t1, likes t2
-	WHERE t1.PhotoID = t2.PhotoID AND t1.UserID = 12399 AND t2.UserID = 12401
+	WHERE t1.PostID = t2.PostID AND t1.UserID = 12399 AND t2.UserID = 12401
 	AND t1.UserID <> t2.UserID";
 
 
@@ -208,8 +207,8 @@ if ($result = mysqli_query($conn, $query)) {
 
 //============= THE FOLLOWING PRINTS A TEST GRAPH FOR VISUALISATION ===========
 
-/*
 
+/*
 echo "<br><br>X-axis: Like Rate. Y-axis: Mutual Friend Rate.";
 
 //echo "Classified as: <b>" . $determineType . "</b>";
