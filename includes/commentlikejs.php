@@ -90,8 +90,9 @@
             for (i=0; i < length; i++){
                 div.appendChild(items[0]);
             }
+            var class_name = temp.firstElementChild.nextElementSibling.className;
         }
-        var class_name = temp.firstElementChild.nextElementSibling.className;
+
 
         console.log("yolo" + class_name);
 
