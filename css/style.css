@@ -377,6 +377,67 @@ button.unlike-button {
     outline: none !important;
 }
 
+
+button.send-request-button {
+    display:inline;
+    background: none;
+    border: none;
+
+}
+
+ button.send-request-button.requested {
+    display:none;
+}
+
+button.cancel-request-button {
+    display:none;
+}
+
+button.cancel-request-button.requested {
+    display:inline;
+    background: none;
+    border: none;
+}
+
+/* profile page buttons */
+
+button#add-friend-button {
+    display:inline;
+
+}
+
+button#add-friend-button.requested {
+    display:none;
+}
+
+button#cancel-friend-button {
+    display:none;
+}
+
+button#cancel-friend-button.requested {
+    display:inline;
+}
+
+
+button#remove-friend-button {
+    display:inline;
+
+}
+
+button#remove-friend-button.deleted {
+    display:none;
+}
+
+button#confirm-remove-friend-button {
+    display:none;
+}
+
+button#confirm-remove-friend-button.deleted {
+    display:inline;
+}
+
+
+
 .comment-button{
   width: 20%;
 }

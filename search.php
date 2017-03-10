@@ -67,12 +67,13 @@ include('includes/header.php');
                     while($row = mysqli_fetch_array($result)){
 
                         $isFriendOfUser = false;
+                        $friendRequestSent= false;
 
                         $friendName = $row['UserName'];
                         $friendUserID = $row['UserID'];
 
                         //if the friend is yourself, skip the iteration
-                        if ($friendName == $profileUserName || $friendName == $_SESSION['UserName']){
+                        if ($friendName == $_SESSION['UserName']){
                             continue;
                         }
 
@@ -89,9 +90,20 @@ include('includes/header.php');
                             }
                         }
 
+                        $sql3 = "SELECT * FROM `friendrequests` WHERE FriendID='$friendUserID' AND UserID='{$_SESSION['UserID']}'";
+
+                        if ($result3 = mysqli_query($conn, $sql3)) {
+                            $count2 = mysqli_num_rows($result3);
+
+                            //if friends, display tick, otherwise an add friend icon will appear
+                            if ($count2 == 1) {
+                                $friendRequestSent = true;
+                            }
+                        }
+
 
                         //create a frienditem and allow the returnHTML function to run with the parameters
-                        $row = new frienditem($friendUserID, $friendName, $friendName, '3', $isFriendOfUser);
+                        $row = new frienditem($friendUserID, $friendName, $friendName, '3', $isFriendOfUser,$friendRequestSent);
                         echo $row->returnHTML();
                     }
 
@@ -116,8 +128,10 @@ include('includes/header.php');
 </main>
 <?php
 include('includes/footer.php');
+include('includes/friendRequestJS.php');
 ?>
 
 </body>
 
 </html>
+

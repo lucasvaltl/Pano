@@ -16,7 +16,6 @@
 
 
 
-
     //  Scroll to Top (adapted from https://codepen.io/rdallaire/pen/apoyx)
     $(window).scroll(function() {
          // If page is scrolled more than 500px, fade in arrow
@@ -118,6 +117,7 @@
         //console.log('Incrementing page to: ' + page);
         loadMore.setAttribute('data-page', page);
     }
+
 
     function loadMorePosts () {
         if (request_in_progress) {
