@@ -7,36 +7,23 @@ class frienditem{
     private $friendLink;
     private $friendPictureID;
     private $isFriendOfUser;
+    private $friendRequestSent;
 
-    public function __construct($friendID, $friendName, $friendLink, $friendPictureID,  $isFriendOfUser){
+    public function __construct($friendID, $friendName, $friendLink, $friendPictureID,  $isFriendOfUser, $friendRequestSent){
         $this->friendID =$friendID;
         $this->friendName =$friendName;
         $this->friendLink =$friendLink;
         $this->friendPictureID =$friendPictureID;
         $this->isFriendOfUser =$isFriendOfUser;
-    }
-
-
-
-    function friendRequest($friendID,$userID) {
-
-        include('dbconnect.php');
-
-        $sql = "INSERT INTO `friendrequests` ('UserID', 'FriendID') VALUES ('" . $userID . "', '" . $friendID . "');";
-        if (isset($conn)) {
-            if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        }
-
+        $this->friendRequestSent=$friendRequestSent;
     }
 
 
 public function returnHTML(){
 
-        $output = '<div class="row search-content">
+    $typeOfRequestIcon = ($this->friendRequestSent ? 'requested' :'');
+
+    $output = '<div class="row search-content">
     <div class="col-md-6 col-xs-6 friend-name">
     <a href="'.SITE_ROOT.'/profile-info.php?id='.$this->friendLink.'">&nbsp;
     <img src="'.SITE_ROOT.'/images/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
@@ -54,25 +41,14 @@ public function returnHTML(){
         }else{
 
             //add dummy functionality to "friend". needs to be enhanced once connected to the database. Currently based on angular
-            $output .= '<!-- need to implement friending here! -->
-      <a href="" class="" onclick= "friendRequest()" ng-click="isfriend'.$this->friendName.' = !isfriend'.$this->friendName.'"> <i  class="fa fa-3x fa-check friending-icon" ng-show="isfriend'.$this->friendName.'" ></i>
-      <i  class="fa fa-3x fa-user-plus friending-icon" ng-hide="isfriend'.$this->friendName.'"></i>
-      </a>
+            $output .= '
+      <button class="send-request-button '.$typeOfRequestIcon.'" id="'.$this->friendID.'"> <i class="fa fa-3x fa-user-plus friending-icon " ></i> </button>
+      <button class="cancel-request-button '.$typeOfRequestIcon.'" id="'.$this->friendID.'">  <i class="fa fa-3x fa-user-times friending-icon" ></i>  </button>
       </div> 
-      
-      
-      
-<script> function friendRequest(){<?php friendRequest($this->friendID,$_SESSION[\'UserID\']) ?>
-</script>
-
-
-
       </div>
       <hr>';
-
         }
         return $output;
-
     }
 }
 

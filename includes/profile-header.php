@@ -1,5 +1,7 @@
 <?php
 
+
+
     //loads up the user information for the current profile page
     $query = "SELECT * FROM user WHERE UserName = '$profileUserName'";
 
@@ -44,15 +46,16 @@
     }
  ?>
 
-<div class="container profile-info">
 
-    <div class="row ">
+<div class="container profile-info" id="<?=$profileUserID?>">
+
+    <div class="row">
         <div class="col col-md-3 col-xs-3 profile-info-row">
             <img src="<?=SITE_ROOT?>/images/profilepics/<?=$profilePictureID?>.jpg" class="img-circle img-responsive profile-user-picture " />
         </div>
         <div class="col col-md-6  col-xs-6 container">
             <p class="profile-info-name">
-                <h3><?=$profileUserName?></h3>
+                <h3 id="profile-username"><?=$profileUserName?></h3>
             </p>
             <p class="profile-info-location location"><i class="fa fa-map-marker fa-lg"></i>&nbsp;<?=$profileUserLocation?></p>
             <p class="profile-info-description"><?=$profileUserDescription?></p>
@@ -62,17 +65,23 @@
 
         <div class="col col-md-3 col-xs-3 profile-info-row" id="<?=$profilePictureID?>">
             <?php if ($_SESSION['UserName'] == $profileUserName) : ?>
-                <button type="button" class="btn btn-default pull-right edit-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button>
+                <button type="button" class=";btn btn-default pull-right edit-button" ><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button>
             <?php elseif ($are_we_friends) :?>
-                <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Remove Friend </button>
+                <button id="remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>Remove Friend </button>
+                <button id="confirm-remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-ok"></span>Friend Removed </button>
             <?php else :?>
-                <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Friend </button>
+                <button id="add-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Friend </button>
+                <button id="cancel-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel Request </button>
             <?php endif;?>
         </div>
     </div>
 
 
+    <?php
 
+    include('includes/friendRequestJS.php');
+
+    ?>
 
 
 
@@ -100,6 +109,21 @@
 
 
 <script>
+
+
+    if (document.getElementsByClassName('edit-button') == null) {
+        //listener attached to the edit button on load
+        var editButton = document.getElementsByClassName("edit-button");
+        editButton.item(0).addEventListener("click", editProfileClick);
+    } else console.log("zht");
+
+
+
+
+   // if (url.includes.())
+
+
+
     function editProfileClick () {
 
 
@@ -178,8 +202,6 @@
 
 
     }
-    //listener attached to the edit button on load
-    var editButton = document.getElementsByClassName("edit-button");
-    editButton.item(0).addEventListener("click", editProfileClick);
+
 
 </script>
