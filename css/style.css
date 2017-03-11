@@ -411,6 +411,24 @@ button.cancel-request-button.requested {
     border: none;
 }
 
+button#accept-friend-button {
+    display:inline;
+}
+
+ button#accept-friend-button.accepted {
+    display:none;
+}
+
+button#accepted-friend-button {
+    display:none;
+}
+
+button#accepted-friend-button.accepted {
+    display:inline;
+}
+
+
+
 /* profile page buttons */
 
 button#add-friend-button {
@@ -680,6 +698,43 @@ left: 43%;
 
 .notification-request-icon{
   padding-top: 17px;
+}
+
+
+button.request-accept-button {
+    display:inline;
+    background: none;
+    border: none;
+}
+
+button.request-accept-button.pressed {
+    display:none;
+}
+
+button.request-reject-button.pressed {
+    display:none;
+}
+
+button.request-reject-button {
+    display:inline;
+    background: none;
+    border: none;
+}
+
+.request-accept-message {
+    display:none;
+}
+
+.request-reject-message {
+    display:none;
+}
+
+.request-accept-message.pressed {
+    display:inline;
+}
+
+.request-reject-message.pressed {
+    display:inline;
 }
 
 
