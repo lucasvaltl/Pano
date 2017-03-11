@@ -25,6 +25,7 @@
     //as long as not viewing own profile page. Subsequently affects visibility of either add or remove friend buttons
     $are_we_friends = false;
     $friendRequestSent = false;
+    $friendRequestReceived = false;
 
     if ($_SESSION['UserName'] != $profileUserName) {
 
@@ -56,6 +57,19 @@
 
         $typeOfRequestIcon = ($friendRequestSent ? "requested" : "");
     }
+
+    $sql4 = "SELECT * FROM `friendrequests` WHERE UserID='$profileUserID' AND FriendID='{$_SESSION['UserID']}'";
+
+    if ($result4 = mysqli_query($conn, $sql4)) {
+        $count3 = mysqli_num_rows($result4);
+
+        //if friends, display tick, otherwise an add friend icon will appear
+        if ($count3 == 1) {
+            $friendRequestReceived = true;
+        }
+
+        $typeOfRequestIcon = ($friendRequestSent ? "requested" : "");
+    }
  ?>
 
 
@@ -79,6 +93,9 @@
             <?php elseif ($are_we_friends) :?>
                 <button id="remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Remove Friend </button>
                 <button id="confirm-remove-friend-button" type="button" class="btn btn-default pull-right "><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Friend Removed </button>
+            <?php elseif ($friendRequestReceived) :?>
+                <button id="accept-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Accept Request </button>
+                <button id="accepted-friend-button" type="button" class="btn btn-default pull-right "><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Request Accepted </button>
             <?php else :?>
                 <button id="add-friend-button" type="button" class="btn btn-default pull-right  <?=$typeOfRequestIcon?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Friend </button>
                 <button id="cancel-friend-button" type="button" class="btn btn-default pull-right <?=$typeOfRequestIcon?>"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel Request </button>
@@ -121,11 +138,46 @@
 <script>
 
 
-    if (document.getElementsByClassName('edit-button') != null) {
+    var acceptButton = document.getElementById('accept-friend-button');
+    if (acceptButton != null){
+        acceptButton.addEventListener("click", acceptFriendRequest);
+    }
+
+
+
         //listener attached to the edit button on load
-        var editButton = document.getElementsByClassName("edit-button");
+    var editButton = document.getElementsByClassName("edit-button");
+    if (editButton.length > 0){
         editButton.item(0).addEventListener("click", editProfileClick);
     } else console.log("zht");
+
+
+    function acceptFriendRequest () {
+        console.log("yolo");
+
+        var FriendID = this.parentElement.parentElement.parentElement.id;
+        console.log("friend:" + FriendID);
+        var requestAcceptButton = this;
+        var requestAcceptedButton = requestAcceptButton.nextElementSibling;
+
+
+        var xhr = new XMLHttpRequest();
+        var data = "FriendID=" + FriendID;
+        xhr.open('POST',  '<?=SITE_ROOT?>/includes/processaddfriend.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var result = xhr.responseText;
+                requestAcceptButton.classList.add('accepted');
+                requestAcceptedButton.classList.add('accepted');
+            } else {
+            //    alert("There was a problem with the request.");
+            }
+        }
+
+    }
 
 
     function editProfileClick () {

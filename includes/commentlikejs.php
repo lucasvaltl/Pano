@@ -74,15 +74,15 @@
     //appends the loaded posts onto the end of the current set of posts
     function appendToFeedContainer(div, new_posts) {
 
-        console.log(new_posts);
+
         //putting new HTML into a temp div causes browser to parse it as elements
         var temp = document.createElement('div');
         temp.innerHTML = new_posts;
 
 
-
         //firstElementChild due to how DOM treats whitespace
         var class_name = temp.firstElementChild.className;
+
 
         if (class_name == 'friend-recommendations-container'){
             var items = temp.getElementsByClassName(class_name);
@@ -94,7 +94,7 @@
         }
 
 
-        console.log("yolo" + class_name);
+        //console.log("yolo" + class_name);
 
         var items = temp.getElementsByClassName(class_name);
 
@@ -130,6 +130,7 @@
         for (var i = 0; i < commentRows.length; i++){
             commentRows[i].style.display='none';
         }
+
     }
 
     function setCurrentPage(page) {
