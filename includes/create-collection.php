@@ -4,14 +4,23 @@ $missing = [];
 
 if (isset($_POST['create'])) {
 
-  $expected = ['OwnerName',  'GroupID', 'Caption'];
-  $required = ['OwnerName',   'Caption'];
+  $count = 4;   //for later access to the pictures stored in the POST array - they come after all of the other fields
+  $expected = ['OwnerName',  'GroupID', 'Caption', 'PrivacySetting'];
+  $required = ['OwnerName',   'Caption', 'PrivacySetting'];
   $OwnerName = mysqli_real_escape_string($conn, $_POST['OwnerName']);
   if(isset($_POST['GroupID'])){
       $GroupID= mysqli_real_escape_string ($conn, $_POST['GroupID']);
+        $count = 5; //change the count given that now there is another variable before the pictures in the POST array
   }
   $Caption = mysqli_real_escape_string ($conn, $_POST['Caption']);
+  $PrivacySetting = mysqli_real_escape_string ($conn, $_POST['PrivacySetting']);
 
+  //make sure that the GroupID is only allowed if if privacy setting is set to groups
+  if($PrivacySetting != 4){
+    $GroupID = null;
+  }
+
+//get user ID which is needed to create cction
 $query ="SELECT UserID from user WHERE UserName='$OwnerName'";
 
 if($result = mysqli_query($conn, $query)){
@@ -21,9 +30,9 @@ if($result = mysqli_query($conn, $query)){
   die('Error: ' . mysqli_error($conn));
 }
 
-
+//convert the the keys  from the post array that store the postIDs into an array of pictures. This is a hack that needed to be done given in order to make the front end look pretty and in order to have several independent checkboxes in the form.
   $keys = array_keys($_POST);
-  $count = 3;
+
   $sizeOfPost = count($_POST);
   while($count <  $sizeOfPost){
     $photos[] = $keys[$count];
@@ -31,7 +40,7 @@ if($result = mysqli_query($conn, $query)){
   }
 
   // check for errors
-  if (!isset($OwnerID) || $OwnerID == '' ||  !isset($Caption) ||$Caption == ''  ) {
+  if (!isset($OwnerID) || $OwnerID == '' ||  !isset($Caption) ||$Caption == ''  || !isset($PrivacySetting) || $PrivacySetting == '' ) {
     //TODO needs to be improved
     $error = "Not all required fields have been filled in";
     header("Location: collection-creation.php?error="  . urlencode($error));
@@ -39,11 +48,11 @@ if($result = mysqli_query($conn, $query)){
   }
   // If no errors detected, insert message into database
   else{
-
+    //if the group privacy option was selected, insert into the db with the GroupID
       if(isset($GroupID)){
-          $query = "INSERT INTO collections (OwnerID, GroupID, Caption ) VALUES ('$OwnerID', '$GroupID', '$Caption')";
+          $query = "INSERT INTO collections (OwnerID, GroupID, Caption, SettingID ) VALUES ('$OwnerID', '$GroupID', '$Caption', $PrivacySetting)";
       } else{
-            $query = "INSERT INTO collections (OwnerID, Caption ) VALUES ('$OwnerID',  '$Caption')";
+            $query = "INSERT INTO collections (OwnerID, Caption, SettingID ) VALUES ('$OwnerID',  '$Caption', $PrivacySetting)";
       }
 
     if (!mysqli_query($conn, $query)) {
@@ -51,7 +60,7 @@ if($result = mysqli_query($conn, $query)){
     }  else {
 
 
-      //look for groupID of newly created group
+      //look for groupID of newly created group and add all pictures to the collection
       $query = "SELECT MAX(CollectionID) as CollectionID FROM collections WHERE OwnerID='$OwnerID' ";
       $result =  mysqli_query($conn, $query);
       $count = mysqli_num_rows($result);
@@ -67,7 +76,7 @@ if($result = mysqli_query($conn, $query)){
           }
 
         }
-              header("Location: profile-collection.php?GroupID=". urlencode($CollectionID));
+              header("Location: profile-collection.php?CollectionID=". urlencode($CollectionID));
       } else {
         die('Error looking for the newly created collection' . mysqli_error($conn));
               exit();

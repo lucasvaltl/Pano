@@ -560,6 +560,28 @@ color: #444;
   padding: 0 0 0 0;
 }
 
+.privacy-setting, .privacy-group-setting{
+width: 200px;
+    appearance: none;
+  font-size: 0.8em;
+  /*align center in all browsers*/
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+  text-align-last: center;
+  outline: none;
+}
+
+.privacy-setting-description, .privacy-group-description{
+    font-size: 0.8em;
+}
+
+.privacy-setting:focus{
+  border: 1px solid  #61e8bf;
+  outline: none;
+}
+
 .picture-list-col, .picture-list-row{
   padding: 0px;
 }

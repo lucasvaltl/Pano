@@ -10,6 +10,10 @@ include('includes/config.php');
 require_once('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
 
+if(isset($_GET['CollectionID'])){
+  $CollectionID = $_GET['CollectionID'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,46 +37,29 @@ $filename = basename(__FILE__, '.php');
     <main>
 
       <div class="profile-header">
-        <?php
-        if (isset($_GET['id'])) {
-            $profileUserName = $_GET['id'];
-        }
-         ?>
       </div>
       <div class="content collection-content">
         <?php
-$thisCollection ='Outside';
+        $query = "SELECT  c.Caption, u.UserName, c.SettingID, c.GroupID  FROM collections AS c LEFT JOIN user AS u on c.OwnerID = u.UserID WHERE c.CollectionID='$CollectionID'";
+        if($result = mysqli_query($conn, $query)){
+          if(mysqli_num_rows($result) == 1){
+            $row = mysqli_fetch_array($result);
+          }
+        }
          ?>
-        <h2><?= $thisCollection ?> by  <?= $profileUserName ?></h2>
+        <h2><?= $row['Caption'] ?> by  <?= $row['UserName'] ?></h2>
 
         <br />
         <hr />
+        <div  id="feed-container" >
 
+        </div>
 
-        <?php
-      include 'includes/post.php';
+        <button id="load-more-button" data-page="0" type="button">Load More</button>
 
-      $posts= [
-
-      new post("IMG_8937", "1", "curious_clark", "234", "1", "#bestintheworld", "Bergen, Austria" ),
-      new post("IMG_2821", "2", "judgyjudy", "2134", "1", "#justWOW", "Iguacu Falls, Brazil" ),
-      new post("IMG_6346", "3", "classy_claire", "33", "1", "This is the best city in the world! Who Aggrees?", "London, UK" )
-      ];
-
-      $comments=[
-      new comment("LikelyLucy","3","wow amazing stuff here"),
-      new comment("judgyjudy","2","Great Work"),
-      new comment("GrannyGiu","5","Not so sure...I would add more color")
-      ];
-
-      foreach ($posts as $post){
-        $post->addComments($comments);
-      }
-
-      foreach ($posts as $post){
-        $post->returnHTML();
-      }
-        ?>
+        <div id="loader">
+          <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
+        </div>
 
       </div>
 
@@ -85,4 +72,11 @@ $thisCollection ='Outside';
 
 </body>
 
+<!-- jquery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<?php
+    include('includes/commentlikejs.php');
+    include('includes/footer.php');
+?>
 </html>

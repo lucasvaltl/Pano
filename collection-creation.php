@@ -44,14 +44,43 @@ if(isset($_POST['create'])){
       <input type="hidden" name="OwnerName" value="<?=$profileUserName?>">
       <div class="row collection-creation-header">
         <div class="create-collection-name row">
-          <div class="col col-sm-9 add-padding-40">
+          <div class="col col-sm-12 add-padding-40">
             <input type="text" class="form-control collection-name-input" id="usr" name="Caption" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14))) + 'px'}" ng-model="CollectionName">
 
 
             by  <?= $profileUserName ?>
 
           </div>
-          <div class="col col-sm-2 add-padding-30">
+          <div class="row  add-padding-30">
+            <p class="privacy-setting-description">
+              Who do you want to share this collection with?
+            </p>
+          <select class="privacy-setting" name="PrivacySetting" ng-model="PrivacySetting">
+            <?php
+            $query = "SELECT * from privacysettings";
+            $results = mysqli_query($conn, $query);
+            while($row = mysqli_fetch_array($results)):
+             ?>
+            <option value="<?=$row['SettingID'] ?>" ><?=$row['Description'] ?></option>
+          <?php endwhile; ?>
+          </select>
+          </div>
+          <div class="row group selection add-padding-30" ng-show="PrivacySetting == '4'">
+<p class="privacy-group-description">
+Which group do you want to share this collection with?
+</p>
+<select class="privacy-group-setting" name="GroupID">
+  <option selected value></option>
+  <?php
+  $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=" . $_SESSION['UserID'];
+  $results = mysqli_query($conn, $query);
+  while($row = mysqli_fetch_array($results)):
+   ?>
+  <option value="<?=$row['GroupID'] ?>" ><?=$row['GroupName'] ?></option>
+<?php endwhile; ?>
+</select>
+          </div>
+          <div class="row add-padding-30">
             <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="create" />
           </div>
           <div class="col col-sm-1">
