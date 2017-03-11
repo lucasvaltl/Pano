@@ -51,15 +51,7 @@
                 </div>
             </div>
             <?php
-
-
-            /*<a href="'. SITE_ROOT .'/profile-info.php?id='. $this->postUserName .'" >&nbsp;
-              <img src="images/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
-            </a>
-*/
-
         }
-
     }
 
  ?>
@@ -78,15 +70,9 @@
 
     function acceptRequest(){
         var requestAcceptButton = this;
-        console.log("AcceptButton: " + requestAcceptButton);
         var requestRejectButton = this.parentElement.nextElementSibling.firstElementChild;
-        console.log("RejectButton: " + requestRejectButton);
         var FriendID = requestAcceptButton.parentElement.parentElement.id;
-        console.log(FriendID);
-
         var Message = this.parentElement.previousElementSibling.firstElementChild;
-        console.log("message:" + Message);
-
 
         var xhr = new XMLHttpRequest();
         var data = "FriendID=" + FriendID;
@@ -107,18 +93,11 @@
     }
 
     function rejectRequest(){
-        console.log("rejected");
         var requestRejectButton = this;
-        console.log("RejectButton: " + requestRejectButton);
         var requestAcceptButton = this.parentElement.previousElementSibling.firstElementChild;
-        console.log("AcceptButton: " + requestAcceptButton);
         var FriendID = requestRejectButton.parentElement.parentElement.id;
-        console.log("FriendID" + FriendID);
-
-
-        //var Message = this.parentElement.previousElementSibling.firstElementChild;
         var Message = this.parentElement.previousElementSibling.previousElementSibling.firstElementChild.nextElementSibling;
-        console.log("message:" + Message);
+
 
         var xhr = new XMLHttpRequest();
         var data = "FriendID=" + FriendID;
@@ -129,9 +108,7 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
-                console.log("result:" + result);
-                //TODO FRIEND REQUEST NOT ACCEPTED
-                //get rid of the two buttons and change it to text saying friendship accepted!
+
                 requestAcceptButton.classList.add('pressed');
                 requestRejectButton.classList.add('pressed');
                 Message.classList.add('pressed');
