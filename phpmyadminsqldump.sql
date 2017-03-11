@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 10, 2017 at 08:36 PM
+-- Generation Time: Mar 11, 2017 at 11:08 AM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `Pano`
+-- Database: `pano`
 --
 
 -- --------------------------------------------------------
@@ -28,6 +28,19 @@ CREATE TABLE `collections` (
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `SettingID` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `collections`
+--
+
+INSERT INTO `collections` (`CollectionID`, `GroupID`, `OwnerID`, `Caption`, `CreatedTime`, `SettingID`) VALUES
+(8, NULL, 12400, 'jzhtwfed', '2017-03-10 23:06:36', 1),
+(9, NULL, 12400, 'gtqsw', '2017-03-10 23:08:20', 1),
+(10, NULL, 12400, 'juhzefws', '2017-03-10 23:10:14', 1),
+(11, NULL, 12400, 'hzgtfqedws', '2017-03-10 23:16:56', 1),
+(12, NULL, 12400, 'ikzjdthsgfdsa', '2017-03-10 23:19:17', 1),
+(13, NULL, 12400, 'ö.li,kumjzhtgrf', '2017-03-10 23:19:37', 1),
+(14, NULL, 12400, 'oljn', '2017-03-10 23:20:08', 1);
 
 -- --------------------------------------------------------
 
@@ -57,7 +70,8 @@ INSERT INTO `comments` (`CommentID`, `UserID`, `PostID`, `Comment`, `CommentTime
 (11353, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'VEFDSF', '2017-03-10 17:50:16'),
 (11354, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'aökdasd', '2017-03-10 18:07:49'),
 (11355, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'as', '2017-03-10 18:07:53'),
-(11356, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'asd', '2017-03-10 18:09:06');
+(11356, 12401, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 'asd', '2017-03-10 18:09:06'),
+(11357, 12400, '77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 'really nice tits!', '2017-03-10 23:58:36');
 
 -- --------------------------------------------------------
 
@@ -80,7 +94,7 @@ CREATE TABLE `friendrecommendations` (
 
 INSERT INTO `friendrecommendations` (`UserID`, `FriendID1`, `FriendID2`, `FriendID3`, `FriendID4`, `FriendID5`) VALUES
 (12399, 12409, 12431, 12437, 12435, 12421),
-(12400, NULL, NULL, NULL, NULL, NULL),
+(12400, 12429, 12424, 12412, 12430, 12408),
 (12401, NULL, NULL, NULL, NULL, NULL),
 (12402, 12414, 12417, 12406, 12403, 12428),
 (12403, NULL, NULL, NULL, NULL, NULL),
@@ -120,7 +134,8 @@ INSERT INTO `friendrecommendations` (`UserID`, `FriendID1`, `FriendID2`, `Friend
 (12437, NULL, NULL, NULL, NULL, NULL),
 (12438, NULL, NULL, NULL, NULL, NULL),
 (12439, NULL, NULL, NULL, NULL, NULL),
-(12440, NULL, NULL, NULL, NULL, NULL);
+(12440, NULL, NULL, NULL, NULL, NULL),
+(12444, 12427, 12415, 12440, 12437, 12412);
 
 -- --------------------------------------------------------
 
@@ -133,6 +148,13 @@ CREATE TABLE `friendrequests` (
   `FriendID` int(20) NOT NULL,
   `Status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `friendrequests`
+--
+
+INSERT INTO `friendrequests` (`UserID`, `FriendID`, `Status`) VALUES
+(12444, 12400, 0);
 
 -- --------------------------------------------------------
 
@@ -1041,7 +1063,10 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`GroupID`, `GroupName`, `CreatorID`, `PhotoID`, `ShortDescrip`, `CreatedTime`) VALUES
-(1, '$GroupName', 12400, 0, '$ShortDescrip', '2017-03-10 16:34:21');
+(1, '$GroupName', 12400, 0, '$ShortDescrip', '2017-03-10 16:34:21'),
+(2, 'asd', 12400, 0, 'asd', '2017-03-10 21:39:58'),
+(3, 'Awesome Name', 12400, 0, 'hmmm', '2017-03-10 21:48:17'),
+(4, 'FynnsFuckers', 12444, 0, 'i love it', '2017-03-11 00:00:03');
 
 -- --------------------------------------------------------
 
@@ -1060,6 +1085,8 @@ CREATE TABLE `likes` (
 
 INSERT INTO `likes` (`PostID`, `UserID`) VALUES
 ('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12399),
+('176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e', 12400),
+('77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 12400),
 ('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12401),
 ('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401),
 ('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401),
@@ -1097,6 +1124,13 @@ CREATE TABLE `messages` (
   `MessageTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`MessageID`, `GroupID`, `UserID`, `Content`, `MessageTime`) VALUES
+(1, 4, 12444, 'Love Law life', '2017-03-11 00:00:10');
+
 -- --------------------------------------------------------
 
 --
@@ -1107,6 +1141,21 @@ CREATE TABLE `photocollectionsmapping` (
   `CollectionID` int(40) NOT NULL,
   `PostID` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `photocollectionsmapping`
+--
+
+INSERT INTO `photocollectionsmapping` (`CollectionID`, `PostID`) VALUES
+(8, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e'),
+(9, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e'),
+(10, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e'),
+(11, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e'),
+(13, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e'),
+(14, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e'),
+(11, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa'),
+(12, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa'),
+(14, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa');
 
 -- --------------------------------------------------------
 
@@ -1127,12 +1176,15 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`) VALUES
+('176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e', 12400, 'Best view ever!', '2017-03-10 20:42:45', 'Austria'),
 ('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12401, 'Does this work? In my free time i like to go nude :) #fkk', '2017-03-10 17:23:33', 'Eastern Germany'),
 ('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401, 'Hello World', '2017-03-10 17:15:17', 'Sierra Nevada'),
+('77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 12400, 'Nice Tits', '2017-03-10 23:57:47', 'Titland'),
 ('b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5', 12399, 'Iceland is awesome #glacier', '2017-03-10 20:24:07', 'Iceland'),
 ('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401, 'Hello world?', '2017-03-10 17:17:24', 'Sierra Nevada'),
 ('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401, 'best day of my life!!!!', '2017-03-10 18:09:57', 'hehe'),
-('c95d295b630fe9da6d424b074fee4422a8a8de147e520ecf608d22862ec74013', 12401, 'profile', '2017-03-10 17:01:03', 'bitte');
+('c95d295b630fe9da6d424b074fee4422a8a8de147e520ecf608d22862ec74013', 12401, 'profile', '2017-03-10 17:01:03', 'bitte'),
+('d64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa', 12400, 'wuhu', '2017-03-10 22:21:57', 'London');
 
 -- --------------------------------------------------------
 
@@ -1152,7 +1204,8 @@ CREATE TABLE `privacysettings` (
 INSERT INTO `privacysettings` (`SettingID`, `Description`) VALUES
 (1, 'Friends Only'),
 (2, 'Friends of Friends'),
-(3, 'Public');
+(3, 'Public'),
+(4, 'With a Group Only');
 
 -- --------------------------------------------------------
 
@@ -1222,7 +1275,8 @@ INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress
 (12440, 'Sarah', 'Johnson', 'SillyElephant_kid', 'SillyElephant_kid@supermail.com', '$2y$10$/ngHYtHUGYfb.oiBJg1i8eXr6c84psrqk4Uj6oKxDaESCIP1uMiyu', 'Toronto', 'Hi Im Sarah Johnson, and I love photography. Pano is great!', '2017-03-04 17:45:36', 3),
 (12441, 'Jonathan', 'Gunaydin', 'SneakyBook1', 'SneakyBook1@panoapp.com', '$2y$10$n9xQ5aPLWrBgc.epM73MEuJhETRHjS8FjllXcFuKxkM4O1hC6mpSe', 'London', 'Hi Im Jonathan Gunaydin, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3),
 (12442, 'Jess', 'Nguyen', 'AwesomeBottle', 'AwesomeBottle@ucl.ac.uk', '$2y$10$uEiGBhZFZSaiopI0HaDWne0Rhmi/me42yZbb8H9ZYtVCkCi8jiZtS', 'San Francisco', 'Hi Im Jess Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3),
-(12443, 'Michelle', 'Nguyen', 'amazingBottleLass', 'amazingBottleLass@master.com', '$2y$10$Zk1hKuMQU15mhjEJYqviH.I5/JU25XyVhi6ceDKXEosysyywLlXlm', 'Chicago', 'Hi Im Michelle Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3);
+(12443, 'Michelle', 'Nguyen', 'amazingBottleLass', 'amazingBottleLass@master.com', '$2y$10$Zk1hKuMQU15mhjEJYqviH.I5/JU25XyVhi6ceDKXEosysyywLlXlm', 'Chicago', 'Hi Im Michelle Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3),
+(12444, 'Fynn', 'Dewald', 'fynn', 'fynn@gmail.com', '$2y$10$GnDQaLqudLFIIPX9208zRO62AnjG8T42IsknR3wn0Fcjv42VNOOZ.', 'London', 'I love Law', '2017-03-10 23:59:17', 3);
 
 -- --------------------------------------------------------
 
@@ -1236,6 +1290,20 @@ CREATE TABLE `usergroupmapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
+-- Dumping data for table `usergroupmapping`
+--
+
+INSERT INTO `usergroupmapping` (`GroupID`, `UserID`) VALUES
+(2, 12400),
+(3, 12400),
+(3, 12419),
+(3, 12426),
+(2, 12427),
+(3, 12427),
+(3, 12433),
+(4, 12444);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -1245,7 +1313,8 @@ CREATE TABLE `usergroupmapping` (
 ALTER TABLE `collections`
   ADD PRIMARY KEY (`CollectionID`),
   ADD KEY `CollectionsOwnerConstraint` (`OwnerID`),
-  ADD KEY `CollectionsGroupConstraint` (`GroupID`);
+  ADD KEY `CollectionsGroupConstraint` (`GroupID`),
+  ADD KEY `CollectionsPrivacyConstraint` (`SettingID`);
 
 --
 -- Indexes for table `comments`
@@ -1306,7 +1375,7 @@ ALTER TABLE `messages`
 -- Indexes for table `photocollectionsmapping`
 --
 ALTER TABLE `photocollectionsmapping`
-  ADD PRIMARY KEY (`CollectionID`),
+  ADD PRIMARY KEY (`CollectionID`,`PostID`),
   ADD KEY `PhotoCollectionsPostConstraint` (`PostID`);
 
 --
@@ -1344,27 +1413,27 @@ ALTER TABLE `usergroupmapping`
 -- AUTO_INCREMENT for table `collections`
 --
 ALTER TABLE `collections`
-  MODIFY `CollectionID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `CollectionID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11357;
+  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11358;
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `GroupID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `GroupID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `MessageID` int(40) NOT NULL AUTO_INCREMENT;
+  MODIFY `MessageID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12444;
+  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12445;
 --
 -- Constraints for dumped tables
 --
@@ -1374,7 +1443,8 @@ ALTER TABLE `user`
 --
 ALTER TABLE `collections`
   ADD CONSTRAINT `CollectionsGroupConstraint` FOREIGN KEY (`GroupID`) REFERENCES `groups` (`GroupID`),
-  ADD CONSTRAINT `CollectionsOwnerConstraint` FOREIGN KEY (`OwnerID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `CollectionsOwnerConstraint` FOREIGN KEY (`OwnerID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `CollectionsPrivacyConstraint` FOREIGN KEY (`SettingID`) REFERENCES `privacysettings` (`SettingID`);
 
 --
 -- Constraints for table `comments`

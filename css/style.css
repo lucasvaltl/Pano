@@ -100,8 +100,27 @@ textarea {
 /*photos*/
 
 .panorama{
-  width:100%;
-  height: auto;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+/*adapt size of panoramas to screen*/
+@media (min-width: 768px) {
+.panorama {
+    height: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+.panorama{
+        height: 400px;
+    }
+}
+
+@media (min-width: 1200px) {
+.panorama{
+    height: 475px;
+    }
 }
 
 .post-picture{
@@ -518,12 +537,26 @@ button#confirm-remove-friend-button.deleted {
     color: #fff;
 }
 
+ .collection-identifier{
+   font-size: 1.5em;
+   padding-top: 10px;
+   color: #444;
+ }
 
+.profile-collections-title{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
 .alignright{
   float: right;
   text-align: right;
   padding-right: 10px;
+}
+
+.collection-edit-button{
+  margin-top: 22px;
 }
 
 /*create collection*/
@@ -557,9 +590,9 @@ button#confirm-remove-friend-button.deleted {
     padding-top: 25px;
 }
 
-.create-collection-name, .create-collectionheader{
+.create-collection-name, .collection-creation-header{
 color: #444;
-  font-size: 1.7em;
+  font-size: 1.3em;
 }
 
 .create-collection-name .lv-button{
@@ -576,6 +609,29 @@ color: #444;
 
 .create-collection-btn{
   padding: 0 0 0 0;
+    color: #444;
+}
+
+.privacy-setting, .privacy-group-setting{
+width: 200px;
+    appearance: none;
+  font-size: 0.8em;
+  /*align center in all browsers*/
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+  text-align-last: center;
+  outline: none;
+}
+
+.privacy-setting-description, .privacy-group-description{
+    font-size: 0.8em;
+}
+
+.privacy-setting:focus{
+  border: 1px solid  #61e8bf;
+  outline: none;
 }
 
 .picture-list-col, .picture-list-row{

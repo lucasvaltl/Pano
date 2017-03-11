@@ -58,40 +58,49 @@ if (isset($_GET['id'])) {
       <h2><?= $profileUserName ?>'s Collections</h2>
       <br />
       <?php
-      include('includes/collection-cover.php');
+      $query="SELECT CollectionID, Caption from collections WHERE OwnerID=(SELECT UserID from user WHERE UserName='$profileUserName')";
 
-      //create an array of collections - will need to be redone with php when the database is ready
-      $link = 'profile-collection.php?id='. $profileUserName;
+      //create an array of collections
+      if($collections = mysqli_query($conn, $query)){
 
-      $collections = [
-        new collections($link, 'IMG_8937', 'Outside'),
-        new collections($link,'IMG_2821', 'Nature'),
-        new collections($link, 'IMG_8937', 'Outside'),
-        new collections($link, 'IMG_8937', 'Outside'),
-        new collections($link, 'IMG_8937', 'Outside')
-      ];
+        $count = 1;
+        echo '<hr/> ';
+        //insert the collections into the page
+        while($collection = mysqli_fetch_array($collections)){
+          //add first picture as cover to every collection
+          $query="SELECT  PostID from photocollectionsmapping WHERE CollectionID=$collection[CollectionID] LIMIT 1";
+          if($result = mysqli_query($conn, $query) ){
+            $cover = mysqli_fetch_array($result);
+          }
+          // insert a new row every two elements
+          if($count % 2 != 0){
+            echo '<div class="row"> ';
+            $borderRight = 'border-right';
+          }
+          //insert post
+          echo  ' <div class="col col-sm-6 ' . $borderRight . '">
+          <a href="'.SITE_ROOT.'/profile-collection.php?CollectionID='.$collection['CollectionID'].'">
+          <p>
+          <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $cover['PostID'] . '.jpg" class="img-responsive  profile-collections-title" alt="Collection does not contain Images"/>
+          </p>
+          <p>
+          <h4>'.$collection['Caption'].'</h4>
+          </p>
+          </a>
+          </div>';
 
-      $count = 1;
-      echo '<hr/> ';
-      //insert the collections into the page
-      foreach($collections as $collection){
-
-        // insert a new row every two elements
-        if($count % 2 != 0){
-          echo '<div class="row"> ';
-          $collection->setBorderRight();
+          //close row every two elements and insert a dividor
+          if($count % 2 == 0){
+            echo '</div> <hr/> ';
+          }
+          $count += 1;
+          //reset variables do default
+          $borderRight = '';
+          $cover = null;
         }
-        //insert post
-        $collection->returnHTML();
-        //close row every two elements and insert a dividor
-        if($count % 2 == 0){
-          echo '</div> <hr/> ';
-        }
-        $count += 1;
-
       }
-
       ?>
+
     </div>
 
 
