@@ -39,16 +39,36 @@ if(isset($_GET['CollectionID'])){
       <div class="profile-header">
       </div>
       <div class="content collection-content">
-        <?php
-        $query = "SELECT  c.Caption, u.UserName, c.SettingID, c.GroupID  FROM collections AS c LEFT JOIN user AS u on c.OwnerID = u.UserID WHERE c.CollectionID='$CollectionID'";
-        if($result = mysqli_query($conn, $query)){
-          if(mysqli_num_rows($result) == 1){
-            $row = mysqli_fetch_array($result);
+        <div class="row collection-identifier">
+          Collection:
+        </div>
+      <div class="row collection-header">
+        <div class="col col-md-1">
+        </div>
+        <div class="col col-md-2">
+        </div>
+        <div class="col col-md-6 collection-name">
+          <?php
+          $query = "SELECT  c.Caption, u.UserName, c.SettingID, c.GroupID, c.OwnerID  FROM collections AS c LEFT JOIN user AS u on c.OwnerID = u.UserID WHERE c.CollectionID='$CollectionID'";
+          if($result = mysqli_query($conn, $query)){
+            if(mysqli_num_rows($result) == 1){
+              $row = mysqli_fetch_array($result);
+            }
           }
-        }
-         ?>
-        <h2><?= $row['Caption'] ?> by  <?= $row['UserName'] ?></h2>
+           ?>
+          <h2><?= $row['Caption'] ?> by  <?= $row['UserName'] ?></h2>
+        </div>
+        <div class="col col-md-2">
+          <?php
+          //display an edit button if the user is the owner of the collection
+          if ($_SESSION['UserID'] == $row['OwnerID']) : ?>
+              <a href="<?=SITE_ROOT?>/collection-edit.php?CollectionID=<?=$CollectionID?>"><button type="button" class="btn btn-default edit-button collection-edit-button" ><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button></a>
+            <?php endif; ?>
+        </div>
+        <div class="col col-md-1">
+        </div>
 
+      </div>
         <br />
         <hr />
         <div  id="feed-container" >
@@ -62,7 +82,6 @@ if(isset($_GET['CollectionID'])){
         </div>
 
       </div>
-
 
 
     </main>

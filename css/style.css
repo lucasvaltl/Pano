@@ -519,7 +519,11 @@ button#confirm-remove-friend-button.deleted {
     color: #fff;
 }
 
-
+ .collection-identifier{
+   font-size: 1.5em;
+   padding-top: 10px;
+   color: #444;
+ }
 
 .profile-collections-title{
   width: 100%;
@@ -531,6 +535,10 @@ button#confirm-remove-friend-button.deleted {
   float: right;
   text-align: right;
   padding-right: 10px;
+}
+
+.collection-edit-button{
+  margin-top: 22px;
 }
 
 /*create collection*/
@@ -564,9 +572,9 @@ button#confirm-remove-friend-button.deleted {
     padding-top: 25px;
 }
 
-.create-collection-name, .create-collectionheader{
+.create-collection-name, .collection-creation-header{
 color: #444;
-  font-size: 1.7em;
+  font-size: 1.3em;
 }
 
 .create-collection-name .lv-button{
@@ -583,6 +591,7 @@ color: #444;
 
 .create-collection-btn{
   padding: 0 0 0 0;
+    color: #444;
 }
 
 .privacy-setting, .privacy-group-setting{
