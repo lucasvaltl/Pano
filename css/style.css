@@ -100,8 +100,27 @@ textarea {
 /*photos*/
 
 .panorama{
-  width:100%;
-  height: auto;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+/*adapt size of panoramas to screen*/
+@media (min-width: 768px) {
+.panorama {
+    height: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+.panorama{
+        height: 400px;
+    }
+}
+
+@media (min-width: 1200px) {
+.panorama{
+    height: 475px;
+    }
 }
 
 .post-picture{
@@ -501,6 +520,12 @@ button#confirm-remove-friend-button.deleted {
 }
 
 
+
+.profile-collections-title{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
 .alignright{
   float: right;
