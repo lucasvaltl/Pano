@@ -29,6 +29,8 @@ $filename = basename(__FILE__, '.php');
         include('includes/header.php');
      ?>
     <main>
+
+
       <div class="profile-header">
         <?php
         if (isset($_GET['id'])) {
@@ -37,45 +39,54 @@ $filename = basename(__FILE__, '.php');
         }
          ?>
       </div>
+
       <div class="content circles-content container">
+
+
         <h2><?= $profileUserName ?>'s Circles</h2>
         <br />
+
         <?php
         include('includes/circle-cover.php');
 
-        //create an array of collections - will need to be redone with php when the database is ready
-        $collections = [
-        new circle('circle-profile.php', 'IMG_8937', 'Besties'),
-        new circle('circle-profile.php', 'IMG_2821', 'London Crew'),
-        new circle('circle-profile.php', 'IMG_6346', 'MSCCSUCL'),
-            new circle('circle-profile.php', 'IMG_2821', 'MSCCSUCL'),
-            new circle('circle-profile.php', 'IMG_8937', 'MSCCSUCL'),
-            new circle('circle-profile.php', 'IMG_6346', 'MSCCSUCL')
-        ];
+        require_once('includes/dbconnect.php');
+        //queries for all circles that the user is in
+        $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=(SELECT UserID from user WHERE UserName='$profileUserName')";
+
+        $groups = mysqli_query($conn, $query);
+
+        if ($groups->num_rows != 0){
+
+        while($row = mysqli_fetch_assoc($groups)){
+          $collections[] = new circle('circle-messages.php?GroupID=' . $row['GroupID'] , $row['PhotoID'], $row['GroupName']);
+        }
 
         $count = 1;
-          echo '<hr/> ';
         //insert the collections into the page
         foreach($collections as $collection){
 
-        // insert a new row every two elements
-        if($count % 2 != 0){
-        echo '<div class="row"> ';
-        $collection->setBorderRight();
-        }
-        //insert post
-        $collection->returnHTML();
-        //close row every two elements and insert a dividor
-        if($count % 2 == 0){
-          echo '</div> <hr/> ';
-        }
-        $count += 1;
+          // insert a new row every two elements
+          if($count % 2 != 0){
+            echo '<div class="row"> ';
+            $collection->setBorderRight();
+          }
+          //insert post
+          $collection->returnHTML();
+          //close row every two elements and insert a dividor
+          if($count % 2 == 0){
+            echo '</div> <hr/> ';
+          }
+          $count += 1;
 
         }
-
+} else {
+  echo '
+  <h2 class="center-center">'.$profileUserName.' is not in any groups yet</h2>';
+}
         ?>
 
       </div>
+
 
 
 

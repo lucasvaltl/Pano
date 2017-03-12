@@ -13,7 +13,6 @@ $filename = basename(__FILE__, '.php');
 
 if (isset($_GET['id'])) {
     $profileUserName = $_GET['id'];
-    include('includes/profile-header.php');
 }
 
 
@@ -40,17 +39,47 @@ if (isset($_GET['id'])) {
     <?php
         include('includes/header.php');
      ?>
+     <div class="profile-header">
+       <?php
+       if (isset($_GET['id'])) {
+         include('includes/profile-header.php');
+       }
+       ?>
+     </div>
+
+
     <main>
+
+    <?php if ($display_page) : ?>
 
       <div class="profile-content" id="feed-container" >
 
       </div>
+
+  <?php else : ?>
+      <div class="container content center-center profile-privacy animated zoomIn ">
+
+          <h2>Sorry!</h2>
+
+          <br>
+
+          <h3><?=$profileUserName?>'s Pano Feed is not visible to you!</h3>
+
+          <br>
+
+      </div>
+
+
+  <?php endif ?>
 
       <button id="load-more-button" data-page="0" type="button">Load More</button>
 
       <div id="loader">
         <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
       </div>
+
+
+
 
     </main>
 

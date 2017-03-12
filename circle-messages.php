@@ -99,7 +99,6 @@ $messages = mysqli_query($conn, $query);
             <input type="text" class="form-control create-message-content" id="msg" name="Content" placeholder="<?php echo (( isset($error) && $error === 'Please fill in a message') ? 'Please fill in a message - you can\'t send nothing!' : 'What would you like to say?'); ?> "/>
         </div>
         <div class="col col-xs-1">
-        <!-- TODO will this work? using a button isntead of input tag (see other forms) -->
           <button type="submit" name="submit" class="btn btn-default airplane-btn create-message-send" value="Submit"><i class="fa fa-paper-plane-o fa-3x"></i></button>
       </div>
     </form>

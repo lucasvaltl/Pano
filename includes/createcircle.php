@@ -11,6 +11,7 @@ if (isset($_POST['create'])) {
   $GroupName= mysqli_real_escape_string ($conn, $_POST['GroupName']);
   $ShortDescrip = mysqli_real_escape_string ($conn, $_POST['ShortDescrip']);
 
+//convert the the keys  from the post array that store the postIDs into an array of members. This is a hack that needed to be done given in order to make the front end look pretty and in order to have several independent checkboxes in the form.
   $keys = array_keys($_POST);
   $count = 5;
   $sizeOfPost = count($_POST);

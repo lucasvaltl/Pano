@@ -187,7 +187,7 @@ foreach ($recommendations as $recommendation){
 */
 
 for ($i=0; $i < 5; $i++){
-	echo $recommendations[$i];
+	//echo $recommendations[$i];
 }
 
 $query = "UPDATE friendrecommendations

@@ -140,6 +140,7 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
                 $_SESSION['Location'] = $row['Location'];
                 $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
                 $_SESSION['SettingID'] = $row['SettingID'];
+                $_SESSION['ProfilePictureID'] = $row['ProfilePictureID'];
 
                 $query2 = "INSERT INTO friendrecommendations (UserID) VALUES ('{$_SESSION['UserID']}')";
 

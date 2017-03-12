@@ -9,12 +9,13 @@
         $row = mysqli_fetch_array($result);
 
         if ($count == 1 ){
-            $profilePictureID = 1;
             $profileUserID = $row['UserID'];
             $profileUserFirstName = $row['FirstName'];
             $profileUserLastName = $row['LastName'];
             $profileUserLocation = $row['Location'];
             $profileUserDescription = $row['ShortDescrip'];
+            $profileSettingID = $row['SettingID'];
+            $profilePictureID = $row['ProfilePictureID'];
 
         } else {
             header("Location: 404.php");
@@ -25,6 +26,7 @@
     //as long as not viewing own profile page. Subsequently affects visibility of either add or remove friend buttons
     $are_we_friends = false;
     $friendRequestSent = false;
+    $friendRequestReceived = false;
 
     if ($_SESSION['UserName'] != $profileUserName) {
 
@@ -41,7 +43,6 @@
                 $are_we_friends = false;
             }
         }
-
     }
 
     $sql3 = "SELECT * FROM `friendrequests` WHERE FriendID='$profileUserID' AND UserID='{$_SESSION['UserID']}'";
@@ -56,6 +57,19 @@
 
         $typeOfRequestIcon = ($friendRequestSent ? "requested" : "");
     }
+
+    $sql4 = "SELECT * FROM `friendrequests` WHERE UserID='$profileUserID' AND FriendID='{$_SESSION['UserID']}'";
+
+    if ($result4 = mysqli_query($conn, $sql4)) {
+        $count3 = mysqli_num_rows($result4);
+
+        //if friends, display tick, otherwise an add friend icon will appear
+        if ($count3 == 1) {
+            $friendRequestReceived = true;
+        }
+
+        $typeOfRequestIcon = ($friendRequestSent ? "requested" : "");
+    }
  ?>
 
 
@@ -63,7 +77,7 @@
 
     <div class="row">
         <div class="col col-md-3 col-xs-3 profile-info-row">
-            <img src="<?=SITE_ROOT?>/images/profilepics/<?=$profilePictureID?>.jpg" class="img-circle img-responsive profile-user-picture " />
+            <img src="https://apppanoblob.blob.core.windows.net/profilepics/<?=$profilePictureID?>.jpg" class="img-circle img-responsive profile-user-picture " />
         </div>
         <div class="col col-md-6  col-xs-6 container">
             <p class="profile-info-name">
@@ -79,6 +93,9 @@
             <?php elseif ($are_we_friends) :?>
                 <button id="remove-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Remove Friend </button>
                 <button id="confirm-remove-friend-button" type="button" class="btn btn-default pull-right "><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Friend Removed </button>
+            <?php elseif ($friendRequestReceived) :?>
+                <button id="accept-friend-button" type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Accept Request </button>
+                <button id="accepted-friend-button" type="button" class="btn btn-default pull-right "><span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Request Accepted </button>
             <?php else :?>
                 <button id="add-friend-button" type="button" class="btn btn-default pull-right  <?=$typeOfRequestIcon?>"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Add Friend </button>
                 <button id="cancel-friend-button" type="button" class="btn btn-default pull-right <?=$typeOfRequestIcon?>"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Cancel Request </button>
@@ -93,11 +110,37 @@
 
     ?>
 
-
-
     <hr />
 </div>
 
+
+<?php
+
+    $display_page = false;
+    if ($_SESSION['UserID'] == $profileUserID || $profileSettingID == 3){
+        $display_page = true;
+    } else if ($profileSettingID == 2){
+        $friendshipQuery = "SELECT my.FriendID
+    			FROM friends AS my
+    			JOIN friends AS their USING (FriendID)
+    			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$profileUserID')";
+
+        if ($result = mysqli_query($conn, $friendshipQuery)){
+            if ($count = mysqli_num_rows($result) > 0){
+                $display_page = true;
+            }
+        }
+    } else if ($profileSettingID == 1){
+        $friendshipQuery = "SELECT * FROM friends WHERE UserID = '{$_SESSION['UserID']}' AND FriendID = '$profileUserID'";
+
+        if ($result = mysqli_query($conn, $friendshipQuery)){
+            if ($count = mysqli_num_rows($result) > 0){
+                $display_page = false;
+            }
+        }
+    }
+
+ ?>
 <div class="container profile-options">
     <div class="row">
         <div class="col-md-3 col-xs-3   lv-icons-unclicked border-right <?php echo ($filename == 'profile-info' ? 'lv-icons-clicked': '' )?>">
@@ -116,20 +159,46 @@
     <hr />
 </div>
 
-
 <script>
 
 
-    if (document.getElementsByClassName('edit-button') != null) {
-        //listener attached to the edit button on load
-        var editButton = document.getElementsByClassName("edit-button");
-        editButton.item(0).addEventListener("click", editProfileClick);
-    } else console.log("zht");
+    var acceptButton = document.getElementById('accept-friend-button');
+    if (acceptButton != null){
+        acceptButton.addEventListener("click", acceptFriendRequest);
+    }
 
+        //listener attached to the edit button on load
+    var editButton = document.getElementsByClassName("edit-button");
+    if (editButton.length > 0){
+        editButton.item(0).addEventListener("click", editProfileClick);
+    }
+
+    function acceptFriendRequest () {
+
+        var FriendID = this.parentElement.parentElement.parentElement.id;
+        //console.log("friend:" + FriendID);
+        var requestAcceptButton = this;
+        var requestAcceptedButton = requestAcceptButton.nextElementSibling;
+
+
+        var xhr = new XMLHttpRequest();
+        var data = "FriendID=" + FriendID;
+        xhr.open('POST',  '<?=SITE_ROOT?>/includes/processaddfriend.php', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var result = xhr.responseText;
+                requestAcceptButton.classList.add('accepted');
+                requestAcceptedButton.classList.add('accepted');
+            } else {
+            //    alert("There was a problem with the request.");
+            }
+        }
+    }
 
     function editProfileClick () {
-
-
 
         //contains the bulk of the info needed, from the header
         var profileInfo = document.getElementsByClassName("container profile-info")[0];
@@ -162,7 +231,6 @@
             } else {
             //    alert("There was a problem with the request.");
             }
-
         }
     }
 
@@ -202,8 +270,6 @@
             //    alert("There was a problem with the request.");
             }
         }
-
-
     }
 
 

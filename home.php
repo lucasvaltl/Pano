@@ -20,7 +20,7 @@ require_once('includes/config.php');
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-      <link rel="stylesheet" href="css/offset.css">
+    <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Pano - Newsfeed</title>
@@ -37,40 +37,22 @@ require_once('includes/config.php');
       ?>
 
     <main>
-      <div class="row notification-title grad">
-        Some people want to be your friends:
-      </div>
-<div class="row notification grad" >
-  <div class="col-xs-1">
 
-  </div>
-  <div class="col-xs-2">
-  <img src="images/profilepics/2.jpg" class="img-circle notification-picture">
-  </div>
-  <div class="col-xs-3 notification-request-name">
-    Friend Name
-  </div>
-  <div class="col-xs-3">
+        <?php
+            include('includes/acceptfriendrequests.php');
+         ?>
 
-  </div>
-  <div class="col-xs-1 notification-request-icon">
-<i class="fa fa-user fa-2x"></i>
-  </div>
-  <div class="col-xs-2">
-
-  </div>
-</div>
         <div id="feed-container">
-                <!--LOADING OF POSTS GO IN HERE, FROM loadpost.php via commentlikejs.php -->
-      </div>
+            <!--LOADING OF POSTS GO IN HERE, FROM loadpost.php via commentlikejs.php -->
+        </div>
 
 
 
-      <button id="load-more-button" data-page="0" type="button">Load More</button>
+        <button id="load-more-button" data-page="0" type="button">Load More</button>
 
-      <div id="loader">
-        <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
-      </div>
+        <div id="loader">
+            <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
+        </div>
 
     </main>
 </body>

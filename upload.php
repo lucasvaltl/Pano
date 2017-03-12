@@ -28,7 +28,9 @@ if (isset($_SESSION['UserID'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2qniLS_JRqdMIDCuy0L3ac7usMi6fbi4&v=3.exp&sensor=false&libraries=places"></script>
     <link rel="stylesheet" href="css/offset.css">
+    <link rel="stylesheet" href="dropzone.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Pano - Upload</title>
 </head>
@@ -43,19 +45,11 @@ if (isset($_SESSION['UserID'])) {
 
           <!-- Include dropzone -->
           <script src="dropzone.js"></script>
-          <link rel="stylesheet" href="dropzone.css">
-          <form action="includes/upload.php" class="dropzone" type="post">
-          <input type="hidden" name="hashname" value="<?= $blob_name ?>">
-          <input type="hidden" name="picType" value="panoramas">
+          <form action="includes/upload.php" class="dropzone dropzone-panorama" type="post">
+              <input type="hidden" name="hashname" value="<?= $blob_name ?>">
+              <input type="hidden" name="picType" value="panoramas">
+              <div class="dz-message data-dz-message profile-pic-message"><span>Drag your panorama into here. Or just click.</span></div>
           </form>
-
-            <p>
-                <br />
-                <h2>Drag your panorama here please!</h2>
-            </p>
-            <p class="lv-bigplus">
-                +
-            </p>
         </div>
         <br />
         <br />
@@ -66,14 +60,22 @@ if (isset($_SESSION['UserID'])) {
             <label class="upload-form" for="ShortDescrip">Please describe the Picture</label>
             <textarea type="textarea" class="form-control" rows="5" maxlength="150" name="ShortDescrip" placeholder="You can use hashtags if you like ;) "></textarea>
             <br />
-            <label class="upload-form" for="Location">Where was the picture taken?</label>
-            <textarea type="textarea" class="form-control" rows="5" maxlength="150" name="Location" placeholder="In what awesome place did you take this?"></textarea>
+            <label  class="upload-form" for="Location">Where was the picture taken?</label>
+            <input id="searchTextField" type="text" class="form-control" size="50" name="Location" placeholder="In what awesome place did you take this?"></input>
+            <script type="text/javascript">
+            function initialize() {
+
+            var input = document.getElementById('searchTextField');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+            </script>
             <br />
 
-            <input type="submit" name="submit" class="btn btn-default lv-button create-collection-btn" value="Upload" />
+            <input type="submit" name="submit" class="btn btn-default lv-button create-post-btn" value="Upload" />
         </div>
       </form>
-      <?php var_dump($_POST) ?>
     </main>
 
     <?php

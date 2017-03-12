@@ -26,7 +26,7 @@ public function returnHTML(){
     $output = '<div class="row search-content">
     <div class="col-md-6 col-xs-6 friend-name">
     <a href="'.SITE_ROOT.'/profile-info.php?id='.$this->friendLink.'">&nbsp;
-    <img src="'.SITE_ROOT.'/images/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
+    <img src="https://apppanoblob.blob.core.windows.net/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
     </a>
     </div>
     <div class="col col-md-6 col-xs-6 friending-icon">';

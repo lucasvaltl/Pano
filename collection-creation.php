@@ -7,11 +7,15 @@ ob_start();
 session_start();
 
 include('includes/config.php');
-require_once('includes/dbconnect.php');
+require('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
 
-if (isset($_GET['id'])) {
-  $profileUserName = $_GET['id'];
+
+  $profileUserName = $_SESSION['UserName'];
+
+
+if(isset($_POST['create'])){
+  include('includes/create-collection.php');
 }
 
 ?>
@@ -37,17 +41,47 @@ if (isset($_GET['id'])) {
   ?>
   <main>
     <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
+      <input type="hidden" name="OwnerName" value="<?=$profileUserName?>">
       <div class="row collection-creation-header">
         <div class="create-collection-name row">
-          <div class="col col-sm-9 add-padding-40">
-            <input type="text" class="form-control collection-name-input" id="usr" name="CollectionName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14))) + 'px'}" ng-model="CollectionName">
+          <div class="col col-sm-12 add-padding-40">
+            <input type="text" class="form-control collection-name-input" id="usr" name="Caption" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14))) + 'px'}" ng-model="CollectionName">
 
 
             by  <?= $profileUserName ?>
 
           </div>
-          <div class="col col-sm-2 add-padding-30">
-            <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="Create" />
+          <div class="row  add-padding-30">
+            <p class="privacy-setting-description">
+              Who do you want to share this collection with?
+            </p>
+          <select class="privacy-setting" name="PrivacySetting" ng-model="PrivacySetting">
+            <?php
+            $query = "SELECT * from privacysettings";
+            $results = mysqli_query($conn, $query);
+            while($row = mysqli_fetch_array($results)):
+             ?>
+            <option value="<?=$row['SettingID'] ?>" ><?=$row['Description'] ?></option>
+          <?php endwhile; ?>
+          </select>
+          </div>
+          <div class="row group selection add-padding-30" ng-show="PrivacySetting == '4'">
+<p class="privacy-group-description">
+Which group do you want to share this collection with?
+</p>
+<select class="privacy-group-setting" name="GroupID">
+  <option selected value></option>
+  <?php
+  $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=" . $_SESSION['UserID'];
+  $results = mysqli_query($conn, $query);
+  while($row = mysqli_fetch_array($results)):
+   ?>
+  <option value="<?=$row['GroupID'] ?>" ><?=$row['GroupName'] ?></option>
+<?php endwhile; ?>
+</select>
+          </div>
+          <div class="row add-padding-30">
+            <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="create" />
           </div>
           <div class="col col-sm-1">
 
@@ -59,42 +93,42 @@ if (isset($_GET['id'])) {
       <div class="content collection-creation">
         <h4>Please choose the picture(s) you want to add to this album</h4>
         <?php
-        include('includes/collection-creation-picture.php');
 
 
         //create an array of collections - will need to be redone with php when the database is ready
-
-        for ($i=0; $i <3 ; $i++) {
-          $pictures[] = new picture('IMG_8937');
-          $pictures[] = new picture('IMG_2821');
-          $pictures[] = new picture('IMG_6346');
-
-        }
+        $query="SELECT PostID from posts WHERE UserID=(SELECT UserID from user WHERE UserName='$profileUserName')";
 
 
-        $count = 1;
-        //insert the collections into the page
-        foreach($pictures as $picture){
+        if($pictures = mysqli_query($conn, $query)){
 
-          // insert a new row every two elements
-          if($count % 3 == 0){
-            echo '<div class="row picture-list-row"> ';
+          $count = 1;
+          //insert the collections into the page
+          foreach($pictures as $picture){
+
+            // insert a new row every two elements
+            if($count % 3 == 0){
+              echo '<div class="row picture-list-row"> ';
+            }
+            echo '
+            <div class="col col-sm-4 picture-list-col picture-list-picture-container">
+            <img src="https://apppanoblob.blob.core.windows.net/panoramas/'.$picture['PostID'].'.jpg" class="img-responsive  picture-list-picture"/>
+
+            <input type="checkbox" class="create-collection-check" value="checked" name="'.$picture['PostID'].'" id="'.$picture['PostID'].'"/>
+            </div>
+            ';
+            //close row every two elements and insert a dividor
+            if($count % 3 == 0){
+              echo '</div>';
+            }
+            $count += 1;
+
           }
-          //insert post
-          $picture->returnHTML();
-          //close row every two elements and insert a dividor
-          if($count % 3 == 0){
-            echo '</div>';
-          }
-          $count += 1;
-
         }
-
         ?>
 
-            </div>
+      </div>
 
-
+<?php var_dump($_POST); ?>
     </form>
 
 

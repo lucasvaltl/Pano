@@ -1,4 +1,3 @@
-
 #gradhome{
   border-width: thick;
   border-color: white;
@@ -75,13 +74,12 @@ font-family: 'Lato-Light', sans-serif;
 /*alignment*/
 
 body{
-padding-top: 60px;
-padding-bottom: 70px;
-height: 100%;
+    padding-top: 60px;
+    padding-bottom: 70px;
+    height: 100%;
 }
 
 .center-center {
-
     position: absolute;
     top: 50%;
     left: 50%;
@@ -100,8 +98,75 @@ textarea {
 /*photos*/
 
 .panorama{
-  width:100%;
-  height: auto;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+/*adapt size of panoramas to screen*/
+@media (min-width: 768px) {
+.panorama {
+    height: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+.panorama{
+        height: 400px;
+    }
+}
+
+@media (min-width: 1200px) {
+.panorama{
+    height: 500px;
+    }
+}
+
+@media (min-width: 1500px) {
+.panorama{
+    height:600px;
+    }
+}
+
+@media (min-width: 1800px) {
+.panorama{
+    height: 700px;
+    }
+}
+
+@media (min-width: 2100px) {
+.panorama{
+    height: 800px;
+    }
+}
+
+@media (min-width: 2400px) {
+.panorama{
+    height: 900px;
+    }
+}
+
+@media (min-width: 2700px) {
+.panorama{
+    height: 1000px;
+    }
+}
+
+@media (min-width: 3000px) {
+.panorama{
+    height: 1100px;
+    }
+}
+
+@media (min-width: 3600px) {
+.panorama{
+    height: 1300px;
+    }
+}
+
+@media (min-width: 3900px) {
+.panorama{
+    height: 1400px;
+    }
 }
 
 .post-picture{
@@ -114,6 +179,24 @@ a .profile-picture{
   width: auto;
 }
 
+.profile-picture:hover,.profile-picture:focus {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.profile-privacy{
+    color:black;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    z-index: 2;
+    padding: 0 10px;
+    background-color: white;
+}
+
+
 .profile-info .profile-user-picture {
   max-height: 135px;
   width: auto;
@@ -122,6 +205,14 @@ a .profile-picture{
 .comment-picture{
   height: 30px;
   width: auto;
+}
+
+.comment-picture:hover,.comment-picture:focus,
+.friend-picture:hover,.friend-picture:focus {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
 .friend-picture{
@@ -159,6 +250,15 @@ hr{
    border-top: thin solid lightgrey;
      box-shadow: 2px 0px 0px 0px lightgrey;
 }
+
+.footer-icon:focus,.footer-icon:hover{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+
 
 /*icons*/
 
@@ -215,6 +315,13 @@ hr{
 #homepagelogo{
   height: auto;
   width: 170px;
+}
+
+#homepagelogo:hover,#homepagelogo:focus{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
 .lv-icons a i {
@@ -365,8 +472,12 @@ button.like-button {
     border: none;
 }
 
-button.like-button:focus {
+button.like-button:focus,.like-button:hover {
   outline: none !important;
+  -moz-transform: scale(1.3);
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+  transition: 0.3s;
 }
 
 .liked button.like-button {
@@ -385,8 +496,20 @@ button.unlike-button {
     border: none;
 }
 
-.liked button.unlike-button:focus{
+.liked button.unlike-button:focus,.unlike-button:hover{
     outline: none !important;
+    -moz-transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    transition: 0.3s;
+}
+
+a.fa-comment-o:focus,.fa-comment-o:hover {
+  outline: none !important;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 
@@ -412,6 +535,7 @@ button.cancel-request-button.requested {
 }
 
 
+
 /* collaborative filtering request buttons */
 
 button.send-request-button-coll {
@@ -433,9 +557,23 @@ button.cancel-request-button-coll.requested {
     display:inline;
     background: none;
     border: none;
+
+button#accept-friend-button {
+    display:inline;
 }
 
+ button#accept-friend-button.accepted {
+    display:none;
+}
 
+button#accepted-friend-button {
+    display:none;
+}
+
+button#accepted-friend-button.accepted {
+    display:inline;
+
+}
 
 
 /* profile page buttons */
@@ -527,12 +665,33 @@ button#confirm-remove-friend-button.deleted {
     color: #fff;
 }
 
+ .collection-identifier{
+   font-size: 1.5em;
+   padding-top: 10px;
+   color: #444;
+ }
 
+.profile-collections-title{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
 .alignright{
   float: right;
   text-align: right;
   padding-right: 10px;
+}
+
+.collection-edit-button{
+  margin-top: 22px;
+}
+
+.delete-collection-btn{
+  color: #ff3366;
+  border-color: #ff3366;
+  width: 200px;
+  padding-top: 3px;
 }
 
 /*create collection*/
@@ -566,9 +725,13 @@ button#confirm-remove-friend-button.deleted {
     padding-top: 25px;
 }
 
-.create-collection-name, .create-collectionheader{
+.add-padding-20{
+    padding-top: 15px;
+}
+
+.create-collection-name, .collection-creation-header{
 color: #444;
-  font-size: 1.7em;
+  font-size: 1.3em;
 }
 
 .create-collection-name .lv-button{
@@ -585,6 +748,29 @@ color: #444;
 
 .create-collection-btn{
   padding: 0 0 0 0;
+    color: #444;
+}
+
+.privacy-setting, .privacy-group-setting{
+width: 200px;
+    appearance: none;
+  font-size: 0.8em;
+  /*align center in all browsers*/
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+  text-align-last: center;
+  outline: none;
+}
+
+.privacy-setting-description, .privacy-group-description{
+    font-size: 0.8em;
+}
+
+.privacy-setting:focus{
+  border: 1px solid  #61e8bf;
+  outline: none;
 }
 
 .picture-list-col, .picture-list-row{
@@ -683,6 +869,15 @@ left: 43%;
   color: #888;
 }
 
+.fa-check:hover,.fa-check:focus,
+.fa-user-plus:hover,.fa-user-plus:focus,
+.fa-user-times:hover,.fa-user-times:focus{
+    -moz-transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    transition: 0.3s;
+}
+
 /*friend notifications*/
 
 
@@ -700,6 +895,13 @@ left: 43%;
   padding-top:5px;
 }
 
+.notification-picture:hover,.notification-picture:focus {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
 .notification-request-name{
   font-size: 1.3em;
   padding-top: 17px;
@@ -710,21 +912,98 @@ left: 43%;
 }
 
 
+button.request-accept-button {
+    display:inline;
+    background: none;
+    border: none;
+}
 
- /*SearchPage*/
+button.request-accept-button.pressed {
+    display:none;
+}
+
+button.request-reject-button.pressed {
+    display:none;
+}
+
+button.request-reject-button {
+    display:inline;
+    background: none;
+    border: none;
+}
+
+.request-accept-message {
+    display:none;
+}
+
+.request-reject-message {
+    display:none;
+}
+
+.request-accept-message.pressed {
+    display:inline;
+}
+
+.request-reject-message.pressed {
+    display:inline;
+}
+
+
+
+ /*Search*/
+.search-icon{
+  font-size: 1.6em;
+  margin-bottom: 2px;
+    color: #444
+}
 
 .search-box {
-
+  margin: 10px;
+  margin-top: 7px;
     float:right;
     color: #888;
-    margin-bottom: -20px;
 }
 
 .search-content {
     text-align: center;
     color: #444;
-    font-size:0.7em;
+    font-size:0.8em;
 }
+
+.search-input{
+      font-size:1.3em;
+  border: none;
+  outline: none;
+  border-bottom: #444 solid 1px;
+}
+
+.search-input:focus{
+  border-bottom: 1px  solid #61e8bf;
+}
+
+.search-btn {
+  -webkit-appearance: none;
+  font-size: 1.6em;
+  color: #61e8bf;
+  border: none;
+  outline: none;
+  background: none;
+  padding-bottom: 0px;
+}
+
+.search-btn:focus,.search-btn:hover{
+    -moz-transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+    transition: 0.3s;
+}
+
+.navbar-text{
+  margin: 10px;
+padding-top: 5px;
+  font-size: 1.3em;
+}
+
 
 /*circles*/
 
@@ -1163,7 +1442,70 @@ right: 20px;
 }
 
 
+/*dropzone / drag and drop*/
 
+.dropzone{
+  background-color: transparent;
+  border: none;
+}
+
+.dz-message, .dropzone .dz-message{
+  font-family: 'Lato-Light', sans-serif;
+  font-size: 2em;
+  font-weight: 100;
+  margin-top: 20px;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+
+      border-radius: 10px;
+}
+
+.dropzone .dz-preview .dz-image{
+  border-radius: 10px;
+overflow: hidden;
+width: 350px;
+height: 120px;
+position: relative;
+display: block;
+z-index: 10;
+}
+
+/*vertically center on all screen sizes*/
+@media(min-width:450px){
+  .dz-message, .dropzone .dz-message{
+      padding-top: 0px;
+        margin-top: 2em;
+  }
+}
+@media(min-width:830px){
+  .dz-message, .dropzone .dz-message{
+      padding-top: 20px;
+  }
+}
+.dropzone-plus{
+  font-size: 6em;
+}
+
+.dropzone-panorama{
+    height: 250px;
+
+}
+
+.dropzone-panorama:after{
+  content: "+";
+  font-size: 8em;
+  position: absolute;
+  top: 220px;
+  right: 46%;
+}
+
+.dropzone-profilepic{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+
+}
 /*other*/
 
 .login-help, .login-help a {
@@ -1203,6 +1545,13 @@ margin-bottom: 10px;
 .friend-recommendation-picture{
   padding-top: 10px;
   width: 40%
+}
+
+.friend-recommendation-picture:hover,.friend-recommendation-picture:focus{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
 .recommendation-friending-icon, a .recommendation-friending-icon{
