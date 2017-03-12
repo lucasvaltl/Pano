@@ -1536,6 +1536,9 @@ a:hover{
   text-decoration: none;
 }
 
+.recommendation-friending-icon .friending-icon{
+  color: white;
+}
 
 .friend-recommendations, a i .friend-recommendations{
 text-align: center;
@@ -1556,6 +1559,7 @@ font-size: 1.5em;
 
 .recommendation-friend-name, .friend-picture, .recommendation-friending-icon, .recommendation-picture{
 margin-bottom: 10px;
+color: white;
 }
 
 .friend-recommendation-picture{
