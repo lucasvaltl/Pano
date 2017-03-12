@@ -54,6 +54,8 @@ if (isset($_GET['id'])) {
       ?>
     </div>
 
+    <?php if ($display_page) : ?>
+
     <div class="content container collections-content">
       <h2><?= $profileUserName ?>'s Collections</h2>
       <br />
@@ -102,6 +104,21 @@ if (isset($_GET['id'])) {
       ?>
 
     </div>
+
+    <?php else : ?>
+        <div class="container content center-center profile-privacy animated zoomIn ">
+
+            <h2>Sorry!</h2>
+
+            <br>
+
+            <h3><?=$profileUserName?>'s profile is not visible to you!</h3>
+
+            <br>
+
+        </div>
+
+      <?php endif ?>
 
 
   </main>
