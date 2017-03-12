@@ -559,6 +559,13 @@ button#confirm-remove-friend-button.deleted {
   margin-top: 22px;
 }
 
+.delete-collection-btn{
+  color: #ff3366;
+  border-color: #ff3366;
+  width: 200px;
+  padding-top: 3px;
+}
+
 /*create collection*/
 
 .collection-name-input{
@@ -588,6 +595,10 @@ button#confirm-remove-friend-button.deleted {
 
 .add-padding-30{
     padding-top: 25px;
+}
+
+.add-padding-20{
+    padding-top: 15px;
 }
 
 .create-collection-name, .collection-creation-header{
@@ -795,20 +806,52 @@ button.request-reject-button {
 
 
 
- /*SearchPage*/
+ /*Search*/
+.search-icon{
+  font-size: 1.6em;
+  margin-bottom: 2px;
+    color: #444
+}
 
 .search-box {
-
+  margin: 10px;
+  margin-top: 7px;
     float:right;
     color: #888;
-    margin-bottom: -20px;
 }
 
 .search-content {
     text-align: center;
     color: #444;
-    font-size:0.7em;
+    font-size:0.8em;
 }
+
+.search-input{
+      font-size:1.3em;
+  border: none;
+  outline: none;
+  border-bottom: #444 solid 1px;
+}
+
+.search-input:focus{
+  border-bottom: 1px  solid #61e8bf;
+}
+
+.search-btn{
+    font-size: 1.6em;
+  color: #61e8bf;
+  border: none;
+  outline: none;
+  background: none;
+  padding-bottom: 0px;
+}
+
+.navbar-text{
+  margin: 10px;
+padding-top: 5px;
+  font-size: 1.3em;
+}
+
 
 /*circles*/
 

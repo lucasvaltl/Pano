@@ -16,7 +16,7 @@ $filename = basename(__FILE__, '.php');
 $profileUserName = $_SESSION['UserName'];
 
 
-if(isset($_POST['edit'])){
+if(isset($_POST['edit']) || isset($_POST['delete'])  ){
   include('includes/edit-collection.php');
 }
 
@@ -63,13 +63,13 @@ if(isset($_GET['CollectionID'])){
       <input type="hidden" name="CollectionID" value="<?=$CollectionID?>">
       <div class="row collection-creation-header">
         <div class="create-collection-name row">
-          <div class="col col-sm-12 add-padding-40">
+          <div class="col col-sm-12 add-padding-30">
             <input type="text" class="form-control collection-name-input" id="usr" name="Caption"placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*18))) + 'px'}" ng-model="CollectionName" ng-init="CollectionName='<?=$row1['Caption']?>'">
             by  <?= $profileUserName ?>
           </div>
         </div>
-        <div class="row  add-padding-30">
-          <p class="privacy-setting-description add-padding-30">
+        <div class="row  add-padding-20">
+          <p class="privacy-setting-description">
             Who do you want to share this collection with?
           </p>
           <select class="privacy-setting" name="PrivacySetting" ng-model="PrivacySetting" ng-init="PrivacySetting = '<?=$row1['SettingID'] ?>'">
@@ -82,7 +82,7 @@ if(isset($_GET['CollectionID'])){
             <?php endwhile; ?>
           </select>
         </div>
-        <div class="row group selection add-padding-30" ng-show="PrivacySetting == '4'">
+        <div class="row group selection add-padding-20" ng-show="PrivacySetting == '4'">
           <p class="privacy-group-description">
             Which group do you want to share this collection with?
           </p>
@@ -100,7 +100,8 @@ if(isset($_GET['CollectionID'])){
         <div class="row add-padding-30">
           <input type="submit" name="edit" class="btn btn-default lv-button create-collection-btn" value="Edit" />
         </div>
-        <div class="col col-sm-1">
+        <div class="row add-padding-20">
+          <input type="submit" name="delete" class="btn btn-default lv-button delete-collection-btn" value="Delete Collection" />
         </div>
       </div>
       <br />
@@ -156,7 +157,6 @@ if(isset($_GET['CollectionID'])){
 
     </div>
 
-    <?php var_dump($picturesInCollection); ?>
   </form>
 
 

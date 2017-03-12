@@ -12,7 +12,6 @@ $filename = basename(__FILE__, '.php');
 
 if (isset($_GET['id'])) {
     $profileUserName = $_GET['id'];
-    include('includes/profile-header.php');
 }
 
 ?>
@@ -35,6 +34,13 @@ if (isset($_GET['id'])) {
     <?php
         include('includes/header.php');
      ?>
+     <div class="profile-header">
+       <?php
+       if (isset($_GET['id'])) {
+         include('includes/profile-header.php');
+       }
+       ?>
+     </div>
     <main>
       <div class="profile-header">
 

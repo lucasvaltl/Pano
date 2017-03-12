@@ -62,7 +62,7 @@ if(isset($_GET['CollectionID'])){
           <?php
           //display an edit button if the user is the owner of the collection
           if ($_SESSION['UserID'] == $row['OwnerID']) : ?>
-              <a href="<?=SITE_ROOT?>/collection-edit.php?CollectionID=<?=$CollectionID?>"><button type="button" class="btn btn-default edit-button collection-edit-button" ><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit Profile </button></a>
+              <a href="<?=SITE_ROOT?>/collection-edit.php?CollectionID=<?=$CollectionID?>"><button type="button" class="btn btn-default edit-button collection-edit-button" ><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit </button></a>
             <?php endif; ?>
         </div>
         <div class="col col-md-1">
