@@ -24,9 +24,10 @@
 <!-- Profile -->
             <?php if (isset($_SESSION['UserName'])) : ?>
             <div class="pull-right navbar-text">
-                <img class="comment-picture img-circle" src="http://lorempixel.com/40/40/people">
-                &nbsp; &nbsp;
-                <?=$_SESSION['UserName'];?>
+                <a href="<?=SITE_ROOT?>/profile-info.php?id=<?php echo $_SESSION['UserName'];?>">
+                    <img class="comment-picture img-circle" src="http://lorempixel.com/40/40/people">
+                    &nbsp; &nbsp;<?=$_SESSION['UserName'];?>
+                </a>
             <?php else : ?>
             <div class="pull-right navbar-text">
                 <a href="<?=SITE_ROOT?>/login.php">Log in!</a>
