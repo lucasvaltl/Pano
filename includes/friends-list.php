@@ -17,7 +17,7 @@ class frienditem{
     $output = '<div class="row friend-content">
     <div class="col-md-6 col-xs-6 friend-name">
     <a href="'.SITE_ROOT.'/profile-info.php?id='.$this->friendLink.'">&nbsp;
-    <img src="'.SITE_ROOT.'/images/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
+    <img src="https://apppanoblob.blob.core.windows.net/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
     </a>
     </div>
     <div class="col col-md-6 col-xs-6 friending-icon">';
@@ -28,7 +28,7 @@ class frienditem{
       </div>
       <hr>';
     }else{
-      //add dummy functionality to "friend". needs to be enhanced once connected to the database. Currently based on angular
+
       $output .= '<!-- need to implement friending here! -->
       <a href="" class="" ng-click="isfriend'.$this->friendName.' = !isfriend'.$this->friendName.'"> <i  class="fa fa-3x fa-check friending-icon" ng-show="isfriend'.$this->friendName.'" ></i>
       <i  class="fa fa-3x fa-user-plus friending-icon" ng-hide="isfriend'.$this->friendName.'"></i>

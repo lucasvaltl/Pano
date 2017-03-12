@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
 
         //join query to associate a UserID with their UserName.
         $query = ("SELECT
-                    user.`UserName` AS UserName, user.`UserID` AS UserID
+                    user.`UserName` AS UserName, user.`UserID` AS UserID, user.`ProfilePictureID` AS ProfilePictureID
                     FROM friends LEFT JOIN user
                     ON user.`UserID` = friends.`UserID`
                     AND user.`UserID` != '$profileUserID'
@@ -77,6 +77,7 @@ if (isset($_GET['id'])) {
 
                     $friendName = $row['UserName'];
                     $friendUserID = $row['UserID'];
+                    $friendProfilePictureID = $row['ProfilePictureID'];
 
                     //if the friend is yourself, skip the iteration
                     if ($friendName == $profileUserName || $friendName == $_SESSION['UserName']){
@@ -97,7 +98,7 @@ if (isset($_GET['id'])) {
                     }
 
                     //create a frienditem and allow the returnHTML function to run with the parameters
-                    $row = new frienditem($friendName, $friendName, '3', $isFriendOfUser);
+                    $row = new frienditem($friendName, $friendName, $friendProfilePictureID, $isFriendOfUser);
                     echo $row->returnHTML();
                 }
             }

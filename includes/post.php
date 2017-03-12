@@ -65,7 +65,8 @@ class post{
             $currentComments .= ' <div class= "row post-comment" id="' . $comment->commentID .'">
                <div class="comment-user-picture col-md-9 col-xs-9">
                  <a href="'. SITE_ROOT .'/profile-info.php?id='. $comment->commentUserName .'" >&nbsp;
-                   <img src="images/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
+
+                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
                  </a>:
                   &nbsp;    ' . $comment->commentContent . '
                </div>
@@ -99,7 +100,7 @@ class post{
           <div class="container post-meta vertical-center">
             <div class="post-user-picture col-md-3 col-xs-3">
               <a href="'. SITE_ROOT .'/profile-info.php?id='. $this->postUserName .'" >&nbsp;
-                <img src="images/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
+                <img src="https://apppanoblob.blob.core.windows.net/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
               </a>
             </div>
             <div class="post-like-comment col-md-1 col-xs-1 " >

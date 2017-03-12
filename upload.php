@@ -17,7 +17,6 @@ if (isset($_SESSION['UserID'])) {
 
   include('includes/dbconnect.php');
   include('includes/upload-post.php');
-  include('includes/updateprofilepic');
 
 ?>
 

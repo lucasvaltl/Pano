@@ -9,13 +9,13 @@
         $row = mysqli_fetch_array($result);
 
         if ($count == 1 ){
-            $profilePictureID = 1;
             $profileUserID = $row['UserID'];
             $profileUserFirstName = $row['FirstName'];
             $profileUserLastName = $row['LastName'];
             $profileUserLocation = $row['Location'];
             $profileUserDescription = $row['ShortDescrip'];
             $profileSettingID = $row['SettingID'];
+            $profilePictureID = $row['ProfilePictureID'];
 
         } else {
             header("Location: 404.php");
@@ -77,7 +77,7 @@
 
     <div class="row">
         <div class="col col-md-3 col-xs-3 profile-info-row">
-            <img src="<?=SITE_ROOT?>/images/profilepics/<?=$profilePictureID?>.jpg" class="img-circle img-responsive profile-user-picture " />
+            <img src="https://apppanoblob.blob.core.windows.net/profilepics/<?=$profilePictureID?>.jpg" class="img-circle img-responsive profile-user-picture " />
         </div>
         <div class="col col-md-6  col-xs-6 container">
             <p class="profile-info-name">

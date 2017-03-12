@@ -21,14 +21,16 @@ if ($result = mysqli_query($conn, $query)) {
 
 
     $friendRecommendations = array($friend1, $friend2, $friend3, $friend4, $friend5);
+    $friendProfilePictureIDs = [];
 
     for ($i = 0; $i < 5; $i++) {
-        $query2 = "SELECT * FROM user
+        $query2 = "SELECT UserName, ProfilePictureID FROM user
                     WHERE UserID = '$friendRecommendations[$i]'";
 
         if ($result2 = mysqli_query($conn, $query2)) {
             $friendUserName = mysqli_fetch_array($result2);
             $friendRecommendations[$i] = $friendUserName['UserName'];
+            $friendProfilePictureIDs[$i] = $friendUserName['ProfilePictureID'];
         }
     }
 
@@ -45,7 +47,7 @@ if ($result = mysqli_query($conn, $query)) {
                     <div class="col-xs-15  border-right margin-10">
                         <a href="'. SITE_ROOT .'/profile-info.php?id='. $friendRecommendations[$i] .'" >&nbsp;
                           <div class="row recommendation-picture">
-                            <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
+                            <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $friendProfilePictureIDs[$i].'.jpg" class="img-circle friend-recommendation-picture" />
                           </div>
                           <div class="row recommendation-friend-name" style="color:white">
                             '.$friendRecommendations[$i].'

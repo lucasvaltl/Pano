@@ -103,7 +103,7 @@ function findPosts($page, $query, $conn, $displayRecommendations) {
             $numLikes = 0; //calculated in query 3
             $hasUserLiked = false;
             $postUserName = $post['UserName'];
-            $postUserPictureID = 1;
+            $postUserPictureID = $post['ProfilePictureID'];
             $postDescription = $post['PostText'];
             $postLocation = $post['PostLocation'];
             $postTimeStamp = $post['PostTime'];
@@ -125,7 +125,7 @@ function findPosts($page, $query, $conn, $displayRecommendations) {
                     $commentID = $comment['CommentID'];
                     $commentUserID = $comment['UserID'];
                     $commentUserName = $comment['UserName'];
-                    $commentUserPictureID = 2;
+                    $commentUserPictureID = $comment['ProfilePictureID'];
                     $commentContent = $comment['Comment'];
                     $commentTimeStamp = $comment['CommentTime'];
 
