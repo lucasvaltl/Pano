@@ -119,10 +119,9 @@
 <?php
 
     $display_page = false;
-    if ($_SESSION['UserID'] == $profileUserID){
+    if ($_SESSION['UserID'] == $profileUserID || $profileSettingID == 3){
         $display_page = true;
-    }
-    else if ($profileSettingID == 2){
+    } else if ($profileSettingID == 2){
         $friendshipQuery = "SELECT my.FriendID
     			FROM friends AS my
     			JOIN friends AS their USING (FriendID)
@@ -143,8 +142,6 @@
         }
     }
 
-    if ($display_page) :
-
  ?>
 <div class="container profile-options">
     <div class="row">
@@ -164,7 +161,7 @@
     <hr />
 </div>
 
-<?php endif ?>
+
 
 
 

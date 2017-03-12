@@ -63,7 +63,7 @@ if (isset($_GET['id'])) {
 
           <br>
 
-          <h3><?=$profileUserName?>'s profile is not visible to you!</h3>
+          <h3><?=$profileUserName?>'s Pano Feed is not visible to you!</h3>
 
           <br>
 
