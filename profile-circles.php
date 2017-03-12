@@ -29,6 +29,8 @@ $filename = basename(__FILE__, '.php');
         include('includes/header.php');
      ?>
     <main>
+
+
       <div class="profile-header">
         <?php
         if (isset($_GET['id'])) {
@@ -37,7 +39,11 @@ $filename = basename(__FILE__, '.php');
         }
          ?>
       </div>
+
+      <?php if ($display_page) : ?>
       <div class="content circles-content container">
+
+
         <h2><?= $profileUserName ?>'s Circles</h2>
         <br />
 
@@ -45,7 +51,7 @@ $filename = basename(__FILE__, '.php');
         include('includes/circle-cover.php');
 
         require_once('includes/dbconnect.php');
-//queries for all circles that the user is in
+        //queries for all circles that the user is in
         $query = "SELECT g.GroupID, g.GroupName, g.ShortDescrip, g.PhotoID  FROM groups AS g INNER JOIN usergroupmapping AS u ON g.GroupID=u.GroupID WHERE u.UserID=(SELECT UserID from user WHERE UserName='$profileUserName')";
 
         $groups = mysqli_query($conn, $query);
@@ -81,6 +87,21 @@ $filename = basename(__FILE__, '.php');
         ?>
 
       </div>
+
+  <?php else : ?>
+      <div class="container content center-center profile-privacy animated zoomIn ">
+
+          <h2>Sorry!</h2>
+
+          <br>
+
+          <h3><?=$profileUserName?>'s profile is not visible to you!</h3>
+
+          <br>
+
+      </div>
+
+    <?php endif ?>
 
 
 

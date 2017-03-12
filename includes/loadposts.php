@@ -26,14 +26,20 @@ $displayRecommendations = false;
 //query to pick based on which page called loadposts.php
 //query tailored for the home feed
 if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
-  $displayRecommendations = true;
-    $query = "SELECT * FROM posts
+    $displayRecommendations = true;
+
+     $query = "SELECT * FROM posts
                 LEFT JOIN user ON user.`UserID` = posts.`UserID`
-                ORDER BY PostTime DESC";
+                WHERE user.`UserID` = '{$_SESSION['UserID']}'
+                OR user.`UserID` IN
+                    (SELECT FriendID
+                    FROM friends
+                    WHERE UserID = '{$_SESSION['UserID']}')
+                    ORDER BY PostTime DESC";
+
 
 //query tailored for the profile-info page
 } else if (strpos($_SERVER['HTTP_REFERER'],'profile-info.php')){
-  $displayRecommendations = true;
     $query = "SELECT * FROM posts
                 LEFT JOIN user ON user.`UserID` = posts.`UserID`
                 WHERE user.`UserName` = '$profileUserName'
@@ -54,7 +60,6 @@ $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
 $posts = findPosts($page, $query, $conn, $displayRecommendations);
 
-//display friend requests only if on profile or home
 
 function addRecommendedFriendsRow($conn) {
     require_once('dbconnect.php');

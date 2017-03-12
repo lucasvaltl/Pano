@@ -44,11 +44,15 @@ if (isset($_GET['id'])) {
     <main>
       <div class="profile-header">
 
+     <?php if ($display_page) : ?>
+
       </div>
       <div class="content friends-content container">
         <h2><?= $profileUserName ?>'s Friends</h2>
         <br />
         <hr />
+
+
 
       <?php
         include('includes/friends-list.php');
@@ -99,24 +103,25 @@ if (isset($_GET['id'])) {
             }
         }
 
-        /*
-        $friends = [
-        new frienditem('JudgyJudy', 'profile-info', '3', False),
-        new frienditem('Carl', 'profile-info', '4', True),
-        new frienditem('Johnson', 'profile-info', '5', False),
-        new frienditem('JakeJohnson', 'profile-info', '2', False),
-        new frienditem('MrVanDenBorn', 'profile-info', '1', true)
-        ];
-
-
-        foreach($friends as $friend){
-          echo $friend->returnHTML();
-        }
-        */
 
        ?>
 
       </div>
+
+      <?php else : ?>
+          <div class="container content center-center profile-privacy animated zoomIn ">
+
+              <h2>Sorry!</h2>
+
+              <br>
+
+              <h3><?=$profileUserName?>'s profile is not visible to you!</h3>
+
+              <br>
+
+          </div>
+
+      <?php endif ?>
 
     </main>
     <?php

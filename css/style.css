@@ -1,4 +1,3 @@
-
 #gradhome{
   border-width: thick;
   border-color: white;
@@ -138,6 +137,17 @@ a .profile-picture{
     transform: scale(1.1);
     transition: 0.3s;
 }
+
+.profile-privacy{
+    color:black;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    z-index: 2;
+    padding: 0 10px;
+    background-color: white;
+}
+
 
 .profile-info .profile-user-picture {
   max-height: 135px;
@@ -1457,6 +1467,13 @@ margin-bottom: 10px;
 .friend-recommendation-picture{
   padding-top: 10px;
   width: 40%
+}
+
+.friend-recommendation-picture:hover,.friend-recommendation-picture:focus{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
 .recommendation-friending-icon, a .recommendation-friending-icon{

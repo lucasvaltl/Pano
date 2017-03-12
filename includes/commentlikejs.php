@@ -103,8 +103,6 @@
             div.appendChild(items[0]);
         }
 
-
-
         //assigning an event listener to each of the buttons
         var likeButtons = document.getElementsByClassName("like-button");
         var unlikeButtons = document.getElementsByClassName("unlike-button");

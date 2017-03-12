@@ -43,12 +43,14 @@ if ($result = mysqli_query($conn, $query)) {
 
     echo '
                     <div class="col-xs-15  border-right margin-10">
-                      <div class="row recommendation-picture">
-                        <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
-                      </div>
-                      <div class="row recommendation-friend-name">
-                '.$friendRecommendations[$i].'
-                      </div>
+                        <a href="'. SITE_ROOT .'/profile-info.php?id='. $friendRecommendations[$i] .'" >&nbsp;
+                          <div class="row recommendation-picture">
+                            <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
+                          </div>
+                          <div class="row recommendation-friend-name" style="color:white">
+                            '.$friendRecommendations[$i].'
+                          </div>
+                        </a>
                       <div class=" row recommendation-friending-icon">
                         <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon smallscreen-smaller"></i></a>
                       </div>

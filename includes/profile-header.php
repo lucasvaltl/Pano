@@ -15,6 +15,7 @@
             $profileUserLastName = $row['LastName'];
             $profileUserLocation = $row['Location'];
             $profileUserDescription = $row['ShortDescrip'];
+            $profileSettingID = $row['SettingID'];
 
         } else {
             header("Location: 404.php");
@@ -42,7 +43,6 @@
                 $are_we_friends = false;
             }
         }
-
     }
 
     $sql3 = "SELECT * FROM `friendrequests` WHERE FriendID='$profileUserID' AND UserID='{$_SESSION['UserID']}'";
@@ -115,6 +115,37 @@
     <hr />
 </div>
 
+
+<?php
+
+    $display_page = false;
+    if ($_SESSION['UserID'] == $profileUserID){
+        $display_page = true;
+    }
+    else if ($profileSettingID == 2){
+        $friendshipQuery = "SELECT my.FriendID
+    			FROM friends AS my
+    			JOIN friends AS their USING (FriendID)
+    			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$profileUserID')";
+
+        if ($result = mysqli_query($conn, $friendshipQuery)){
+            if ($count = mysqli_num_rows($result) > 0){
+                $display_page = true;
+            }
+        }
+    } else if ($profileSettingID == 1){
+        $friendshipQuery = "SELECT * FROM friends WHERE UserID = '{$_SESSION['UserID']}' AND FriendID = '$profileUserID'";
+
+        if ($result = mysqli_query($conn, $friendshipQuery)){
+            if ($count = mysqli_num_rows($result) > 0){
+                $display_page = false;
+            }
+        }
+    }
+
+    if ($display_page) :
+
+ ?>
 <div class="container profile-options">
     <div class="row">
         <div class="col-md-3 col-xs-3   lv-icons-unclicked border-right <?php echo ($filename == 'profile-info' ? 'lv-icons-clicked': '' )?>">
@@ -133,6 +164,8 @@
     <hr />
 </div>
 
+<?php endif ?>
+
 
 
 <script>
@@ -149,14 +182,13 @@
     var editButton = document.getElementsByClassName("edit-button");
     if (editButton.length > 0){
         editButton.item(0).addEventListener("click", editProfileClick);
-    } else console.log("zht");
+    }
 
 
     function acceptFriendRequest () {
-        console.log("yolo");
 
         var FriendID = this.parentElement.parentElement.parentElement.id;
-        console.log("friend:" + FriendID);
+        //console.log("friend:" + FriendID);
         var requestAcceptButton = this;
         var requestAcceptedButton = requestAcceptButton.nextElementSibling;
 

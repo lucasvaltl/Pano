@@ -71,9 +71,11 @@ if(isset($_GET['CollectionID'])){
       </div>
         <br />
         <hr />
+
         <div  id="feed-container" >
 
         </div>
+        <?php if ($display_page) : ?>
 
         <button id="load-more-button" data-page="0" type="button">Load More</button>
 
@@ -82,6 +84,21 @@ if(isset($_GET['CollectionID'])){
         </div>
 
       </div>
+
+      <?php else : ?>
+          <div class="container content center-center profile-privacy animated zoomIn ">
+
+              <h2>Sorry!</h2>
+
+              <br>
+
+              <h3><?=$profileUserName?>'s profile is not visible to you!</h3>
+
+              <br>
+
+          </div>
+
+        <?php endif ?>
 
 
     </main>
