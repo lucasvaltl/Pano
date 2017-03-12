@@ -110,8 +110,6 @@
 
     ?>
 
-
-
     <hr />
 </div>
 
@@ -161,10 +159,6 @@
     <hr />
 </div>
 
-
-
-
-
 <script>
 
 
@@ -173,14 +167,11 @@
         acceptButton.addEventListener("click", acceptFriendRequest);
     }
 
-
-
         //listener attached to the edit button on load
     var editButton = document.getElementsByClassName("edit-button");
     if (editButton.length > 0){
         editButton.item(0).addEventListener("click", editProfileClick);
     }
-
 
     function acceptFriendRequest () {
 
@@ -205,13 +196,9 @@
             //    alert("There was a problem with the request.");
             }
         }
-
     }
 
-
     function editProfileClick () {
-
-
 
         //contains the bulk of the info needed, from the header
         var profileInfo = document.getElementsByClassName("container profile-info")[0];
@@ -244,7 +231,6 @@
             } else {
             //    alert("There was a problem with the request.");
             }
-
         }
     }
 
@@ -284,8 +270,6 @@
             //    alert("There was a problem with the request.");
             }
         }
-
-
     }
 
 

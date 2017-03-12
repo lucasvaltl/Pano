@@ -70,7 +70,9 @@ if (isset($_GET['id'])) {
     }
 
 
-      $query="SELECT CollectionID, Caption, SettingID, GroupID from collections WHERE OwnerID=(SELECT UserID from user WHERE UserName='$profileUserName')";
+      $query= "SELECT CollectionID, Caption, SettingID, GroupID
+                FROM collections
+                WHERE OwnerID=(SELECT UserID FROM user WHERE UserName='$profileUserName')";
 
       //create an array of collections
       if($collections = mysqli_query($conn, $query)) {
@@ -107,12 +109,7 @@ if (isset($_GET['id'])) {
 
                   } else if ($collectionSettingID == 1){
                       $friendshipQuery = "SELECT * FROM friends WHERE UserID = '{$_SESSION['UserID']}' AND FriendID = '$profileUserID'";
-
-                      if ($result = mysqli_query($conn, $friendshipQuery)) {
-                          if ($count = mysqli_num_rows($result) > 0){
-                              $display_collection = true;
-                          }
-                      }
+                      $display_collection = checkQueryExistence($conn, $friendshipQuery);
                   }
 
                   // insert a new row every two elements
