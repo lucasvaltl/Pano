@@ -534,6 +534,30 @@ button.cancel-request-button.requested {
     border: none;
 }
 
+
+
+/* collaborative filtering request buttons */
+
+button.send-request-button-coll {
+    display:inline;
+    background: none;
+    border: none;
+
+}
+
+button.send-request-button-coll.requested {
+    display:none;
+}
+
+button.cancel-request-button-coll {
+    display:none;
+}
+
+button.cancel-request-button-coll.requested {
+    display:inline;
+    background: none;
+    border: none;
+
 button#accept-friend-button {
     display:inline;
 }
@@ -548,8 +572,8 @@ button#accepted-friend-button {
 
 button#accepted-friend-button.accepted {
     display:inline;
-}
 
+}
 
 
 /* profile page buttons */

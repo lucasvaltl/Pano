@@ -36,6 +36,28 @@ require_once ('config.php');
 
     }
 
+    //======= from friendrecommendation.php ==============
+
+    function sendFriendRequestFromCollFilter() {
+
+        // gets the friend ID from the
+        var friendID = this.id;
+        var childRequestButton = this;
+        var childCancelButton = childRequestButton.nextElementSibling;
+        sendFriendRequest(friendID, childRequestButton, childCancelButton);
+    }
+
+    function cancelFriendRequestFromCollFilter() {
+
+        // gets the friend ID from the
+        var friendID = this.id;
+        var childCancelButton = this;
+        var childRequestButton = childCancelButton.previousElementSibling;
+        cancelFriendRequest(friendID,childCancelButton,childRequestButton);
+    }
+
+
+
     //======= from search.php ==============
 
     function sendFriendRequestFromSearch() {
@@ -87,6 +109,9 @@ require_once ('config.php');
         deleteFriend(friendID, childDeleteFriendButton, childConfirmDeleteFriendButton);
 
     }
+
+
+
 
 
 
