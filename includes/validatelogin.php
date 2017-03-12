@@ -27,6 +27,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['Location'] = $row['Location'];
             $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
             $_SESSION['SettingID'] = $row['SettingID'];
+            $_SESSION['ProfilePictureID'] = $row['ProfilePictureID'];
             $invalid_credentials = false;
             header("Location: home.php");
         } else {

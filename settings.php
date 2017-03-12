@@ -17,6 +17,7 @@ include('includes/config.php');
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="dropzone.css">
     <title>Pano - Settings</title>
 </head>
 
@@ -27,15 +28,32 @@ include('includes/config.php');
         require_once('includes/dbconnect.php');
         include('includes/header.php');
         include('includes/validatesettingchange.php');
+        include('includes/updateprofilepic.php');
 
      ?>
 
     <main>
         <div class="center-center">
+            <br />
+            <p>
+                <h2>Change Profile Picture:</h2>
+            </p>
+
+            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-profilepic" type="post">
+                <input type="hidden" name="hashname" value="<?=$_SESSION['UserID']?>">
+                <input type="hidden" name="picType" value="profilepics">
+                  <div class="dz-message data-dz-message"><span>..</span></div><br>
+            </form>
+            <form action="<?= $_SERVER['PHP_SELF'];?>" method="post">
+                 <input type="submit" name="confirmPic" class="btn btn-default lv-button" value="Confirm Pic" />
+             </form>
+
+            <br><br><br>
+            <p>
+                <h2>Privacy Options:</h2>
+            </p>
             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
-                <p>
-                    <h2>Privacy Options:</h2>
-                </p>
+
                 <br />
                 <p>
                     <label class="radio-inline"><input type="radio" name="SettingID" value="1"
@@ -58,7 +76,6 @@ include('includes/config.php');
 
                 <br />
                 <br />
-                <br />
 
                 <div class="row">
 
@@ -73,7 +90,7 @@ include('includes/config.php');
                     <?php endif;?>
 
                         <br />
-                        <label for="pwd">Please Confirm your Current Password for Settings to Update:</label>
+                        <label for="pwd">Please Confirm your Current Password for Privacy Settings to Update:</label>
                         <input type="password" class="form-control" id="pwd" name="Password" placeholder="Password">
                         <br>
                         <label for="pwd">New Password: (Only type something if you wish to change your password)</label>
@@ -99,5 +116,6 @@ include('includes/config.php');
     ?>
 
 </body>
+<script src="dropzone.js"></script>
 
 </html>

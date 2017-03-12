@@ -30,7 +30,7 @@ if (isset($_SESSION['UserID'])) {
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2qniLS_JRqdMIDCuy0L3ac7usMi6fbi4&v=3.exp&sensor=false&libraries=places"></script>
     <link rel="stylesheet" href="css/offset.css">
-        <link rel="stylesheet" href="dropzone.css">
+    <link rel="stylesheet" href="dropzone.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Pano - Upload</title>
 </head>
@@ -46,9 +46,9 @@ if (isset($_SESSION['UserID'])) {
           <!-- Include dropzone -->
           <script src="dropzone.js"></script>
           <form action="includes/upload.php" class="dropzone dropzone-panorama" type="post">
-          <input type="hidden" name="hashname" value="<?= $blob_name ?>">
-          <input type="hidden" name="picType" value="panoramas">
-          <div class="dz-message" data-dz-message><span>Drag your panorama into here. Or just click.</span></div>
+              <input type="hidden" name="hashname" value="<?= $blob_name ?>">
+              <input type="hidden" name="picType" value="panoramas">
+              <div class="dz-message data-dz-message profile-pic-message"><span>Drag your panorama into here. Or just click.</span></div>
           </form>
         </div>
         <br />

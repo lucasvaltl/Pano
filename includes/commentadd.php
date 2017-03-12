@@ -30,7 +30,7 @@ if (mysqli_query($conn, $query)) {
 
         $commentID = $comment['CommentID'];
         $commentUserName = $comment['UserName'];
-        $commentUserPictureID = 2;
+        $commentUserPictureID = $comment['ProfilePictureID'];
         $commentContent = $comment['Comment'];
         $commentTimeStamp = $comment['CommentTime'];
 
@@ -39,7 +39,7 @@ if (mysqli_query($conn, $query)) {
             echo ' <div class= "row post-comment id="' . $commentID .'"">
                <div class="comment-user-picture col-md-9 col-xs-9">
                  <a href="'. SITE_ROOT .'/profile-info.php?id='. $commentUserName .'" >&nbsp;
-                   <img src="images/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $commentUserName . '
+                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $commentUserName . '
                  </a>:
                   &nbsp;    ' . $commentContent . '
                </div>

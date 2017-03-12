@@ -25,7 +25,7 @@
             <?php if (isset($_SESSION['UserName'])) : ?>
             <div class="pull-right navbar-text">
                 <a href="<?=SITE_ROOT?>/profile-info.php?id=<?php echo $_SESSION['UserName'];?>">
-                    <img class="comment-picture img-circle" src="http://lorempixel.com/40/40/people">
+                    <img class="comment-picture img-circle" src="https://apppanoblob.blob.core.windows.net/profilepics/<?=$_SESSION['ProfilePictureID']?>.jpg">
                     &nbsp; &nbsp;<?=$_SESSION['UserName'];?>
                 </a>
             <?php else : ?>

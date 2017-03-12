@@ -71,6 +71,7 @@ include('includes/header.php');
 
                         $friendName = $row['UserName'];
                         $friendUserID = $row['UserID'];
+                        $friendProfilePictureID = $row['ProfilePictureID'];
 
                         //if the friend is yourself, skip the iteration
                         if ($friendName == $_SESSION['UserName']){
@@ -103,7 +104,7 @@ include('includes/header.php');
 
 
                         //create a frienditem and allow the returnHTML function to run with the parameters
-                        $row = new frienditem($friendUserID, $friendName, $friendName, '3', $isFriendOfUser,$friendRequestSent);
+                        $row = new frienditem($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent);
                         echo $row->returnHTML();
                     }
 
@@ -134,4 +135,3 @@ include('includes/friendRequestJS.php');
 </body>
 
 </html>
-
