@@ -199,7 +199,8 @@ a .profile-picture{
 
 .profile-info .profile-user-picture {
   max-height: 135px;
-  width: auto;
+  width: 135px;
+  object-fit: cover;
 }
 
 .comment-picture{
@@ -1490,7 +1491,6 @@ z-index: 10;
 
 .dropzone-panorama{
     height: 250px;
-
 }
 
 .dropzone-panorama:after{
@@ -1501,12 +1501,27 @@ z-index: 10;
   right: 46%;
 }
 
-.dropzone-profilepic{
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
 
+
+.dropzone-profilepic{
+    border-radius: 50%;
+      background-color: transparent;
 }
+
+
+.seperator-settings{
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.padding-top-20{
+  padding-top: 20px;
+}
+.larger-font{
+  font-size: 1.2em;
+}
+
 /*other*/
 
 .login-help, .login-help a {
