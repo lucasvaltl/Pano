@@ -13,6 +13,7 @@ session_start();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2qniLS_JRqdMIDCuy0L3ac7usMi6fbi4&v=3.exp&sensor=false&libraries=places"></script>
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -142,7 +143,7 @@ session_start();
                                     <div class="alert alert-danger">You forgot to add your location!</div>
                                 <?php endif; ?>
                             </label>
-                            <input type="text" class="form-control" id="location" name="Location" placeholder="Location"
+                            <input id="searchTextField" type="text" class="form-control" id="location" name="Location" placeholder="Location"
                                 <?php
                                 if ($errors || $missing) {
                                     echo 'value="' . htmlentities($Location) . '"';
@@ -168,7 +169,15 @@ session_start();
                         <div class="login-help">
                             <a href="login.php">Already a member? Log in over here!</a>
                         </div>
+                        <script type="text/javascript">
+                        function initialize() {
 
+                        var input = document.getElementById('searchTextField');
+                        var autocomplete = new google.maps.places.Autocomplete(input);
+                        }
+
+                        google.maps.event.addDomListener(window, 'load', initialize);
+                        </script>
                     </div>
                 </div>
             </div>
