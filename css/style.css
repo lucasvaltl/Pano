@@ -1459,6 +1459,13 @@ margin-bottom: 10px;
   width: 40%
 }
 
+.friend-recommendation-picture:hover,.friend-recommendation-picture:focus{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
 .recommendation-friending-icon, a .recommendation-friending-icon{
   color: white;
 }
