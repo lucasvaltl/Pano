@@ -1,5 +1,6 @@
 <?php
     require_once('includes/config.php');
+    include('friendRequestJS.php');
  ?>
 
 
@@ -74,7 +75,7 @@
     //appends the loaded posts onto the end of the current set of posts
     function appendToFeedContainer(div, new_posts) {
 
-        console.log(new_posts);
+        //console.log(new_posts);
         //putting new HTML into a temp div causes browser to parse it as elements
         var temp = document.createElement('div');
         temp.innerHTML = new_posts;
@@ -90,10 +91,18 @@
             for (i=0; i < length; i++){
                 div.appendChild(items[0]);
             }
+
+            var sendRequestButtonCollFilter = document.getElementsByClassName("send-request-button-coll");
+            var cancelRequestButtonCollFilter = document.getElementsByClassName("cancel-request-button-coll");
+
+            for (i = 0; i < sendRequestButtonCollFilter.length; i++) {
+                sendRequestButtonCollFilter.item(i).addEventListener("click",sendFriendRequestFromCollFilter);
+                cancelRequestButtonCollFilter.item(i).addEventListener("click",cancelFriendRequestFromCollFilter);
+            }
         }
         var class_name = temp.firstElementChild.nextElementSibling.className;
 
-        console.log("yolo" + class_name);
+        //console.log("yolo" + class_name);
 
         var items = temp.getElementsByClassName(class_name);
 
