@@ -110,8 +110,6 @@
 
     ?>
 
-
-
     <hr />
 </div>
 
@@ -119,10 +117,9 @@
 <?php
 
     $display_page = false;
-    if ($_SESSION['UserID'] == $profileUserID){
+    if ($_SESSION['UserID'] == $profileUserID || $profileSettingID == 3){
         $display_page = true;
-    }
-    else if ($profileSettingID == 2){
+    } else if ($profileSettingID == 2){
         $friendshipQuery = "SELECT my.FriendID
     			FROM friends AS my
     			JOIN friends AS their USING (FriendID)
@@ -143,8 +140,6 @@
         }
     }
 
-    if ($display_page) :
-
  ?>
 <div class="container profile-options">
     <div class="row">
@@ -164,10 +159,6 @@
     <hr />
 </div>
 
-<?php endif ?>
-
-
-
 <script>
 
 
@@ -176,14 +167,11 @@
         acceptButton.addEventListener("click", acceptFriendRequest);
     }
 
-
-
         //listener attached to the edit button on load
     var editButton = document.getElementsByClassName("edit-button");
     if (editButton.length > 0){
         editButton.item(0).addEventListener("click", editProfileClick);
     }
-
 
     function acceptFriendRequest () {
 
@@ -208,13 +196,9 @@
             //    alert("There was a problem with the request.");
             }
         }
-
     }
 
-
     function editProfileClick () {
-
-
 
         //contains the bulk of the info needed, from the header
         var profileInfo = document.getElementsByClassName("container profile-info")[0];
@@ -247,7 +231,6 @@
             } else {
             //    alert("There was a problem with the request.");
             }
-
         }
     }
 
@@ -287,8 +270,6 @@
             //    alert("There was a problem with the request.");
             }
         }
-
-
     }
 
 

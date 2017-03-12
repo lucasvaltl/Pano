@@ -9,7 +9,7 @@ require_once ('config.php');
     //using the url to decide which listesters to add to which buttons
     var url = window.location.href;
 
-    if (url.includes("profile-info.php")) {
+    if (url.includes("profile")) {
 
         if (document.getElementById("add-friend-button")!== null){
             var sendRequestButtonProfile = document.getElementById("add-friend-button");
