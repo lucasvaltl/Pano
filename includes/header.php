@@ -11,7 +11,7 @@
                        <i class="fa fa-search search-icon"></i>
                          &nbsp;
                         <input type="text" class="search-input" name="search" placeholder="Search for users..." />
-                        <input class="search-btn" type="submit" value=">" />
+                        <button class="search-btn" type="submit" value=""><i class="fa fa-chevron-right"></i> </button>
                     </form>
                 </div>
             </div>

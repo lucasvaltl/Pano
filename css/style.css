@@ -837,8 +837,9 @@ button.request-reject-button {
   border-bottom: 1px  solid #61e8bf;
 }
 
-.search-btn{
-    font-size: 1.6em;
+.search-btn {
+  -webkit-appearance: none;
+  font-size: 1.6em;
   color: #61e8bf;
   border: none;
   outline: none;
