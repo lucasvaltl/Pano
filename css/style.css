@@ -557,6 +557,7 @@ button.cancel-request-button-coll.requested {
     display:inline;
     background: none;
     border: none;
+}
 
 button#accept-friend-button {
     display:inline;

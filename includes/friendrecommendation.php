@@ -22,7 +22,7 @@ if ($result = mysqli_query($conn, $query)) {
 
 
     $friendRecommendations = array($friend1, $friend2, $friend3, $friend4, $friend5);
-  
+
 //TODO li double check this
     $friendIDs = $friendRecommendations;
 
@@ -56,17 +56,6 @@ if ($result = mysqli_query($conn, $query)) {
 
     echo '
                     <div class="col-xs-15  border-right margin-10">
-//start of fix
-                      <div class="row recommendation-picture">
-                      <img src="images/profilepics/2.jpg" class="img-circle friend-recommendation-picture" />
-                      </div>
-                      <div class="row recommendation-friend-name">
-                '.$friendRecommendations[$i].'
-                      </div>
-                      <button class="send-request-button-coll" id="'.$friendIDs[$i].'"> <i class="fa fa-3x fa-user-plus friending-icon" ></i> </button>
-                      <button class="cancel-request-button-coll" id="'.$friendIDs[$i].'">  <i class="fa fa-3x fa-user-times friending-icon" ></i>  </button>
-        
-//middle of fix
                         <a href="'. SITE_ROOT .'/profile-info.php?id='. $friendRecommendations[$i] .'" >&nbsp;
                           <div class="row recommendation-picture">
                             <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $friendProfilePictureIDs[$i].'.jpg" class="img-circle friend-recommendation-picture" />
@@ -76,9 +65,11 @@ if ($result = mysqli_query($conn, $query)) {
                           </div>
                         </a>
                       <div class=" row recommendation-friending-icon">
-                        <a href=""><i class="fa fa-3x fa-user-plus recommendation-friending-icon smallscreen-smaller"></i></a>
+                      <button class="send-request-button-coll" id="'.$friendIDs[$i].'"> <i class="fa fa-3x fa-user-plus friending-icon" ></i> </button>
+                      <button class="cancel-request-button-coll" id="'.$friendIDs[$i].'">  <i class="fa fa-3x fa-user-times friending-icon" ></i>
+
                       </div>
-//end of fix
+
                     </div>';
     }
 
@@ -100,6 +91,3 @@ if ($result = mysqli_query($conn, $query)) {
 
 
 ?>
-
-
-
