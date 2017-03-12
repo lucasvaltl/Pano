@@ -29,6 +29,7 @@ if (isset($_SESSION['UserID'])) {
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <link rel="stylesheet" href="css/offset.css">
+        <link rel="stylesheet" href="dropzone.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Pano - Upload</title>
 </head>
@@ -43,19 +44,11 @@ if (isset($_SESSION['UserID'])) {
 
           <!-- Include dropzone -->
           <script src="dropzone.js"></script>
-          <link rel="stylesheet" href="dropzone.css">
-          <form action="includes/upload.php" class="dropzone" type="post">
+          <form action="includes/upload.php" class="dropzone dropzone-panorama" type="post">
           <input type="hidden" name="hashname" value="<?= $blob_name ?>">
           <input type="hidden" name="picType" value="panoramas">
+          <div class="dz-message" data-dz-message><span>Drag your panorama into here. Or just click.</span></div>
           </form>
-
-            <p>
-                <br />
-                <h2>Drag your panorama here please!</h2>
-            </p>
-            <p class="lv-bigplus">
-                +
-            </p>
         </div>
         <br />
         <br />
@@ -70,7 +63,7 @@ if (isset($_SESSION['UserID'])) {
             <textarea type="textarea" class="form-control" rows="5" maxlength="150" name="Location" placeholder="In what awesome place did you take this?"></textarea>
             <br />
 
-            <input type="submit" name="submit" class="btn btn-default lv-button create-collection-btn" value="Upload" />
+            <input type="submit" name="submit" class="btn btn-default lv-button create-post-btn" value="Upload" />
         </div>
       </form>
     </main>

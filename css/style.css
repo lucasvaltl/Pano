@@ -1291,6 +1291,63 @@ right: 20px;
 }
 
 
+/*dropzone / drag and drop*/
+
+.dropzone{
+  background-color: transparent;
+  border: none;
+}
+
+.dz-message, .dropzone .dz-message{
+  font-family: 'Lato-Light', sans-serif;
+  font-size: 2em;
+  font-weight: 100;
+  margin-top: 20px;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+
+      border-radius: 10px;
+}
+
+.dropzone .dz-preview .dz-image{
+  border-radius: 10px;
+overflow: hidden;
+width: 350px;
+height: 120px;
+position: relative;
+display: block;
+z-index: 10;
+}
+
+/*vertically center on all screen sizes*/
+@media(min-width:450px){
+  .dz-message, .dropzone .dz-message{
+      padding-top: 0px;
+        margin-top: 2em;
+  }
+}
+@media(min-width:830px){
+  .dz-message, .dropzone .dz-message{
+      padding-top: 20px;
+  }
+}
+.dropzone-plus{
+  font-size: 6em;
+}
+
+.dropzone-panorama{
+    height: 250px;
+
+}
+
+.dropzone-panorama:after{
+  content: "+";
+  font-size: 8em;
+  position: absolute;
+  top: 220px;
+  right: 46%;
+}
 
 /*other*/
 
