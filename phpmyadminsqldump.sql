@@ -3,7 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
+
 -- Generation Time: Mar 13, 2017 at 11:45 PM
+
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -11,7 +13,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `Pano`
+-- Database: `pano`
 --
 
 -- --------------------------------------------------------
@@ -1207,6 +1209,7 @@ INSERT INTO `photocollectionsmapping` (`CollectionID`, `PostID`) VALUES
 -- --------------------------------------------------------
 
 --
+
 -- Table structure for table `posts`
 --
 
@@ -1231,7 +1234,6 @@ INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`)
 ('5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5', 12399, '#hollywood #fromtheback', '2017-03-12 15:44:00', 'Los Angeles, USA'),
 ('5b3113b514f25ee329d7068bd791b5a0c2b4915e206e6e1e5d64e7c73635e822', 12399, '#NiagaraFalls ', '2017-03-12 11:13:23', 'Niagara Falls, Canada/USA'),
 ('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401, 'Hello World', '2017-03-10 17:15:17', 'Sierra Nevada'),
-('77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 12400, 'Nice Tits', '2017-03-10 23:57:47', 'Titland'),
 ('b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49', 12445, '#trafalgarsquare #london', '2017-03-12 15:46:36', 'London, United Kingdom'),
 ('b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3', 12399, '#snowymountains #switzerland #cool', '2017-03-13 23:38:42', 'Swiss Alps, Airolo, Switzerland'),
 ('b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5', 12399, 'Iceland is awesome #glacier', '2017-03-10 20:24:07', 'Iceland'),
@@ -1239,6 +1241,7 @@ INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`)
 ('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401, 'best day of my life!!!!', '2017-03-10 18:09:57', 'hehe'),
 ('c89fb764661ef45e83c821e38a0a7d09aa1f4ab035e938bde2fa6b9723b95d29', 12399, 'North Korea is great', '2017-03-13 10:59:06', 'Pyongyang, North Korea'),
 ('c95d295b630fe9da6d424b074fee4422a8a8de147e520ecf608d22862ec74013', 12401, 'profile', '2017-03-10 17:01:03', 'bitte'),
+('c982020a0701adccb5e95a84ee626a5286639ad3b8a6113024afe3774c8b2be7', 12450, 'besties', '2017-03-12 21:14:54', 'Brazil'),
 ('d1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb', 12445, '#phoenix #sunset', '2017-03-12 15:47:22', 'Phoenix, AZ, United States'),
 ('d64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa', 12400, 'wuhu', '2017-03-10 22:21:57', 'London'),
 ('d8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3', 12399, 'Iceland Mountains #mountains #cool #icelandisgreat', '2017-03-12 22:45:03', 'Iceland'),
@@ -1469,80 +1472,10 @@ INSERT INTO `usergroupmapping` (`GroupID`, `UserID`) VALUES
 (3, 12433),
 (4, 12444);
 
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `collections`
---
-ALTER TABLE `collections`
-  ADD PRIMARY KEY (`CollectionID`),
-  ADD KEY `CollectionsOwnerConstraint` (`OwnerID`),
-  ADD KEY `CollectionsGroupConstraint` (`GroupID`),
-  ADD KEY `CollectionsPrivacyConstraint` (`SettingID`);
-
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`CommentID`,`UserID`),
-  ADD KEY `CommentsUserConstraint` (`UserID`),
-  ADD KEY `CommentsPostConstraint` (`PostID`);
-
---
--- Indexes for table `friendrecommendations`
---
-ALTER TABLE `friendrecommendations`
-  ADD PRIMARY KEY (`UserID`),
-  ADD KEY `Friend1Constraint` (`FriendID1`),
-  ADD KEY `Friend2Constraint` (`FriendID2`),
-  ADD KEY `Friend3Constraint` (`FriendID3`),
-  ADD KEY `Friend4Constraint` (`FriendID4`),
-  ADD KEY `Friend5Constraint` (`FriendID5`);
-
---
--- Indexes for table `friendrequests`
---
-ALTER TABLE `friendrequests`
-  ADD PRIMARY KEY (`UserID`,`FriendID`),
-  ADD KEY `FriendConstraint` (`FriendID`);
-
---
--- Indexes for table `friends`
---
-ALTER TABLE `friends`
-  ADD PRIMARY KEY (`UserID`,`FriendID`),
-  ADD KEY `FriendsFriendConstraint` (`FriendID`);
-
---
--- Indexes for table `groups`
---
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`GroupID`),
-  ADD KEY `GroupsCreatorConstraint` (`CreatorID`);
-
---
--- Indexes for table `likes`
---
-ALTER TABLE `likes`
-  ADD PRIMARY KEY (`PostID`,`UserID`),
-  ADD KEY `LikesUserConstraint` (`UserID`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`MessageID`),
-  ADD KEY `MessagesGroupConstraint` (`GroupID`),
-  ADD KEY `MessagesUserConstraint` (`UserID`);
-
---
--- Indexes for table `photocollectionsmapping`
---
-ALTER TABLE `photocollectionsmapping`
-  ADD PRIMARY KEY (`CollectionID`,`PostID`),
-  ADD KEY `PhotoCollectionsPostConstraint` (`PostID`);
 
 --
 -- Indexes for table `posts`
@@ -1552,6 +1485,7 @@ ALTER TABLE `posts`
   ADD KEY `PostsUserConstraint` (`UserID`);
 
 --
+
 -- Indexes for table `privacysettings`
 --
 ALTER TABLE `privacysettings`
@@ -1620,81 +1554,16 @@ ALTER TABLE `tags`
 ALTER TABLE `user`
   MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12448;
 --
+
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `collections`
---
-ALTER TABLE `collections`
-  ADD CONSTRAINT `CollectionsGroupConstraint` FOREIGN KEY (`GroupID`) REFERENCES `groups` (`GroupID`),
-  ADD CONSTRAINT `CollectionsOwnerConstraint` FOREIGN KEY (`OwnerID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `CollectionsPrivacyConstraint` FOREIGN KEY (`SettingID`) REFERENCES `privacysettings` (`SettingID`);
-
---
--- Constraints for table `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `CommentsPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`),
-  ADD CONSTRAINT `CommentsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `friendrecommendations`
---
-ALTER TABLE `friendrecommendations`
-  ADD CONSTRAINT `ForeignKeyConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `Friend1Constraint` FOREIGN KEY (`FriendID1`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `Friend2Constraint` FOREIGN KEY (`FriendID2`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `Friend3Constraint` FOREIGN KEY (`FriendID3`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `Friend4Constraint` FOREIGN KEY (`FriendID4`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `Friend5Constraint` FOREIGN KEY (`FriendID5`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `friendrequests`
---
-ALTER TABLE `friendrequests`
-  ADD CONSTRAINT `FriendConstraint` FOREIGN KEY (`FriendID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `UserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `friends`
---
-ALTER TABLE `friends`
-  ADD CONSTRAINT `FriendsFriendConstraint` FOREIGN KEY (`FriendID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `FriendsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `groups`
---
-ALTER TABLE `groups`
-  ADD CONSTRAINT `GroupsCreatorConstraint` FOREIGN KEY (`CreatorID`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `likes`
---
-ALTER TABLE `likes`
-  ADD CONSTRAINT `LikesPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`),
-  ADD CONSTRAINT `LikesUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `messages`
---
-ALTER TABLE `messages`
-  ADD CONSTRAINT `MessagesGroupConstraint` FOREIGN KEY (`GroupID`) REFERENCES `groups` (`GroupID`),
-  ADD CONSTRAINT `MessagesUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
-
---
--- Constraints for table `photocollectionsmapping`
---
-ALTER TABLE `photocollectionsmapping`
-  ADD CONSTRAINT `PhotoCollectionsCollectionConstraint` FOREIGN KEY (`CollectionID`) REFERENCES `collections` (`CollectionID`),
-  ADD CONSTRAINT `PhotoCollectionsPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`);
 
 --
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `PostsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+
 
 --
 -- Constraints for table `tagspostsmapping`
@@ -1709,3 +1578,4 @@ ALTER TABLE `tagspostsmapping`
 ALTER TABLE `usergroupmapping`
   ADD CONSTRAINT `UserGroupGroupConstraint` FOREIGN KEY (`GroupID`) REFERENCES `groups` (`GroupID`),
   ADD CONSTRAINT `UserGroupUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+

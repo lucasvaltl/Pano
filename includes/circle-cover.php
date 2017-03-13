@@ -27,7 +27,7 @@ $output =  ' <div class="col col-sm-6  ' . $this->borderRight . '">
     <a href="'.SITE_ROOT.'/' . $this->collectionLinkA . '">
 
     <p class="mask-container">
-          <img src="'.SITE_ROOT.'/images/panoramas/'.$this->collectionImageIDA.'.jpg" class="img-responsive  circle-cover center-center" />
+          <img src="https://apppanoblob.blob.core.windows.net/circlepics/'.$this->collectionImageIDA.'.jpg" class="img-circle  circle-cover-large center-center" />
     </p>
 
     <p>

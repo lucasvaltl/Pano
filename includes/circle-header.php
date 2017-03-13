@@ -31,7 +31,9 @@ $isPartOfCircle = false;
 <div class="container profile-info">
     <div class="row ">
         <div class="col col-md-3 col-xs-3 profile-info-row">
-            <img src="<?=SITE_ROOT?>/images/panoramas/<?=$circleProfilePictureID?>.jpg" class="img-responsive circle-cover " />
+
+            <img src="https://apppanoblob.blob.core.windows.net/circlepics/<?=$circleProfilePictureID?>.jpg" class="img-circle  circle-cover " />
+
         </div>
         <div class="col col-md-6  col-xs-6 container">
             <p class="profile-info-name">
@@ -59,7 +61,7 @@ $isPartOfCircle = false;
             <?php endif;?>
         </div>
     </div>
-    <hr />
+    <hr class="grey-hr" />
 </div>
 <div class="container profile-options">
     <div class="row">
@@ -73,5 +75,5 @@ $isPartOfCircle = false;
             <a href="<?=SITE_ROOT?>/circle-members.php?GroupID=<?php echo $GroupID;?>"> <i class="fa fa-users fa-3x"></i></a>
         </div>
     </div>
-    <hr />
+    <hr class="grey-hr" />
 </div>
