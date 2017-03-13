@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 13, 2017 at 08:16 PM
+-- Generation Time: Mar 13, 2017 at 08:33 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -17,96 +17,58 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `posts`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `posts` (
+  `PostID` varchar(200) NOT NULL,
   `UserID` int(20) NOT NULL,
-  `FirstName` varchar(30) NOT NULL,
-  `LastName` varchar(30) NOT NULL,
-  `UserName` varchar(30) NOT NULL,
-  `EmailAddress` varchar(80) NOT NULL,
-  `Password` char(64) NOT NULL,
-  `Location` varchar(150) NOT NULL,
-  `ShortDescrip` varchar(150) NOT NULL,
-  `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `SettingID` int(5) NOT NULL DEFAULT '3',
-  `ProfilePictureID` varchar(200) DEFAULT NULL
+  `PostText` text NOT NULL,
+  `PostTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `PostLocation` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `posts`
 --
 
-INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Password`, `Location`, `ShortDescrip`, `DateCreated`, `SettingID`, `ProfilePictureID`) VALUES
-(12399, 'Li', 'Xie', 'Liko', 'liko@mail.com', '$2y$10$SW1DWeNQuLcFdbWs2PgXiO5VqCrUDdzJ173sEi/tLmL9oWsXWmI4G', 'London', '                                        Yolo', '2017-02-21 18:24:29', 2, '12399'),
-(12400, 'Lucas', 'Valtl', 'Lucas', 'lucas@pano.com', '$2y$10$KZHC1VBrAWtUZJPrcwyb9uL1TWIwJqP9FIYT7O2k4BNvK5PX8ZYay', 'London', '   I like Pano', '2017-02-21 18:25:19', 3, '12400'),
-(12401, 'Florian', 'Obst', 'Florian', 'florian@pano.com', '$2y$10$JCCx7lZflspi.B55V7j8bOEuJG.gM1MlpeQbrZDeYiT8oh0MLRm2m', 'London', 'Go Pano Go', '2017-02-21 18:25:47', 3, '0'),
-(12402, 'Johannes', 'Landgraf', 'Johannes', 'johannes@pano.com', '$2y$10$6Bq0sco8ddlwFUy47oNAA.Nm.QvD7wmMtYaA.z6iuRsjLOOLyHWHm', 'London', 'Pano is great', '2017-02-21 18:26:32', 3, '0'),
-(12403, 'Noob', 'Master', 'Noob123', 'noob@mail.com', '$2y$10$bfqBPR5mPB0nuuY4SAEOo.M090R/7Q3x/b/N10T5Hpkku7U3kcLfG', 'London', 'I am a noob', '2017-02-22 22:57:13', 3, '0'),
-(12404, 'Secret', 'Guy', 'PanoMaster', 'pano@mail.com', '$2y$10$ty.2qdk5XT4G0JKIPep5VeLmYeeOF4qA.0CzerybEIauymnIGIzHa', 'Manchester', 'I am just a test account. Nothing special here really.', '2017-03-03 19:22:06', 3, '0'),
-(12405, 'John', 'Smith', 'braveAsian', 'brave@brave.com', '$2y$10$uIqDRSHJcUTOKoClHm4pH.R46lAjMea.bJTbLqHbGkFnP8Wk/jWIm', 'Hawaii', 'I killed a lion once', '2017-03-03 19:28:37', 3, '0'),
-(12406, 'Samuel', 'Yoloman', 'yolo_merchant', 'yolo@yolo.com', '$2y$10$24/4oboKR4gqDakyRHr1MejMpXjAmdGhWIziY2fV0bxtXq4HtTeCq', 'Edinburgh', 'I buy and sell yolo', '2017-03-03 19:50:23', 3, '0'),
-(12407, 'Max', 'Power', 'power_ranger246', 'power@power.com', '$2y$10$82YF6Km3trd/N3Q./ZKHt.cZduYyiFu2yXj2EAICXzhCzLNu./jk2', 'Reading', 'I like power rangers', '2017-03-03 19:52:31', 3, '0'),
-(12408, 'Crash', 'Bandicoot', 'CrashBandicoot', 'crash@crash.com', '$2y$10$hTY.hC9Zr.wzkVRfCMVhMeHbtjtqhufX/AU.YP5JdZypyAKwy/sGO', 'CrashLand', 'I have a remake coming out soon!', '2017-03-03 19:54:34', 3, '0'),
-(12409, 'Ghost', 'Sniper', 'ghostsniper64', 'ghosty@snipes.com', '$2y$10$JK3i/3aFD2GzQdOU5QUi6u44NPvau6jBwfF4UpT/ZCed/8cVPf96a', 'London', 'I hide in the grass and wait for people to come out of cover.', '2017-03-03 20:02:49', 3, '0'),
-(12410, 'Daniel', 'Hernandez', 'SuperSuperMario', 'supermario@supermail.com', '$2y$10$/BwLMoyPhfcEpfIshpJux.V0QBLj6tio5lWok.kF6gLlovP6ecpAi', 'Paris', 'Hi Im Daniel Hernandez, and I love photography. Pano is great!', '2017-03-04 15:49:00', 3, '0'),
-(12411, 'Harry', 'Johnson', 'GreatElephant_gal', 'GreatElephant_gal@master.com', '$2y$10$oAXkitKKp8J8xMOXYj/34uzHMc1vL4ljNY8uMsYP7vh.Yx8VDp3gy', 'Manchester', 'Hi Im Harry Johnson, and I love photography. Pano is great!', '2017-03-04 15:49:00', 3, '0'),
-(12412, 'Michelle', 'Andersen', 'SleepySpeaker123', 'SleepySpeaker123@panoapp.com', '$2y$10$Yb.GLoF0j/DSu4GHKTx.EuCaAcCuJoAJHNyITWjr3hWvbRjs9.H5S', 'Manchester', 'Hi Im Michelle Andersen, and I love photography. Pano is great!', '2017-03-04 15:49:01', 3, '0'),
-(12413, 'Harry', 'Zhao', 'SneakyBowl', 'SneakyBowl@ok.com', '$2y$10$KdoT.k5gUvSDr2EYhrS5fO3uNH.wq7QRMJ.B0KctJrlAWeHogptvm', 'Milan', 'Hi Im Harry Zhao, and I love photography. Pano is great!', '2017-03-04 15:49:01', 3, '0'),
-(12414, 'Michelle', 'Gunaydin', 'SleepyTuna', 'SleepyTuna@ok.com', '$2y$10$ynszWRXh4wjeEnqFxJ.0w.7.IqG37l.e3muy01JEWLMkhjI2XBcLm', 'Berlin', 'Hi Im Michelle Gunaydin, and I love photography. Pano is great!', '2017-03-04 15:49:01', 3, '0'),
-(12415, 'Andrew', 'Lee', 'SpecialDinosaur246', 'SpecialDinosaur246@lol.com', '$2y$10$Z.tMlyWSrOXXSPqC5zHCKumDyGf1oEq8bdtP.J2Vi4obWk2Ab0fZK', 'Berlin', 'Hi Im Andrew Lee, and I love photography. Pano is great!', '2017-03-04 17:41:05', 3, '0'),
-(12416, 'Jess', 'Nguyen', 'SneakyBowl666', 'SneakyBowl666@ucl.ac.uk', '$2y$10$ZNL1ghJVZNazi5UzgQpksOJQ8xl9/gKawez0D4evHEOLIqwwwTxaO', 'Montreal', 'Hi Im Jess Nguyen, and I love photography. Pano is great!', '2017-03-04 17:41:05', 3, '0'),
-(12417, 'Peter', 'Nguyen', 'FaultedDinosaur', 'FaultedDinosaur@lol.com', '$2y$10$.yrKEyyor5V566fZQJ3LiuKYx1663ssKtjX0/S2ozyTmQAtnvIAxi', 'Dublin', 'Hi Im Peter Nguyen, and I love photography. Pano is great!', '2017-03-04 17:41:06', 3, '0'),
-(12418, 'Sarah', 'Kuznetzov', 'Sneakymonster', 'Sneakymonster@ucl.ac.uk', '$2y$10$cF8bJRyWrSbqQxiDFQ0MJuEyP6GM3Gi/Ij9wtSMf1qZf3KpQn.vAG', 'Belfast', 'Hi Im Sarah Kuznetzov, and I love photography. Pano is great!', '2017-03-04 17:41:06', 3, '0'),
-(12419, 'Claire', 'Johnson', 'A_Snake', 'A_Snake@panoapp.com', '$2y$10$CA7tYdn05nhzH.NcOihWYeq3BTI1wlU3n3D4RrY6zLZd5IZS1HYla', 'Paris', 'Hi Im Claire Johnson, and I love photography. Pano is great!', '2017-03-04 17:41:06', 3, '0'),
-(12420, 'Peter', 'Muller', 'DragonTuna246', 'DragonTuna246@lol.com', '$2y$10$q6jhAS4yjspxMeS6kexptOAY5hkjBOZpHF8RpwTzQf/QVuybxpEDq', 'Birmingham', 'Hi Im Peter Muller, and I love photography. Pano is great!', '2017-03-04 17:41:07', 3, '0'),
-(12421, 'Daniel', 'Kuznetzov', 'AngryBookLass', 'AngryBookLass@panoapp.com', '$2y$10$YvVCoTLquPP4f/eGUAt2LOfFHfPLLJvcwJoDSaFm1yJExr2Rw0RrO', 'Toronto', 'Hi Im Daniel Kuznetzov, and I love photography. Pano is great!', '2017-03-04 17:41:07', 3, '0'),
-(12422, 'Sally', 'Thompson', 'TheOneAndOnlyBook', 'TheOneAndOnlyBook@panoapp.com', '$2y$10$tWwQRZGyhvN3W0YFKRZ/cO2nmRDJax5XJaQ386H64ArHweOJuWKt6', 'Montpellier', 'Hi Im Sally Thompson, and I love photography. Pano is great!', '2017-03-04 17:41:07', 3, '0'),
-(12423, 'Michelle', 'Nguyen', 'ThePotato246', 'ThePotato246@mail.com', '$2y$10$puNV95xYewpXqnjpjJs3e..ZR5w34WM49olMz4r987PMSn5DfMGVO', 'Montreal', 'Hi Im Michelle Nguyen, and I love photography. Pano is great!', '2017-03-04 17:41:08', 3, '0'),
-(12424, 'Sarah', 'Walker', 'AwesomeElephant', 'AwesomeElephant@supermail.com', '$2y$10$MzVHC1FqYqfCE6qIHjOHpuPKAjvF71HYIBYc0gtwYw.7uAFfuxT8S', 'New York', 'Hi Im Sarah Walker, and I love photography. Pano is great!', '2017-03-04 17:41:08', 3, '0'),
-(12425, 'Sally', 'Zhao', 'SpecialSpeaker', 'SpecialSpeaker@mail.com', '$2y$10$ePFiP9oFHIUB.sA9OOqcUOnLbJxvxjzRmpdUVP8Uk37varieSeUX2', 'Dublin', 'Hi Im Sally Zhao, and I love photography. Pano is great!', '2017-03-04 17:41:08', 3, '0'),
-(12426, 'Andrew', 'Ling', 'AwesomePlayer', 'AwesomePlayer@ok.com', '$2y$10$OagxNAnEnYb3Tt6sWISvZ.WRaFOMwA1BD1dFgh8lbAEyQUDeBxJU2', 'Paris', 'Hi Im Andrew Ling, and I love photography. Pano is great!', '2017-03-04 17:41:08', 1, '0'),
-(12427, 'Maisie', 'Nguyen', 'amazingAntKing', 'amazingAntKing@lol.com', '$2y$10$486TAGeixbzIawI.Te4Oo.zQWkAvgS5Pw7EC5nR3JvVy0mH0CxFw2', 'Edinburgh', 'Hi Im Maisie Nguyen, and I love photography. Pano is great!', '2017-03-04 17:41:09', 3, '0'),
-(12428, 'Drew', 'Thompson', 'TheRealPro_gal', 'TheRealPro_gal@lol.com', '$2y$10$JnMDeXlvqje.tLJD3ot9xOvqlk4gizfx/OsddKMrEKdFLohTDikR6', 'Dublin', 'Hi Im Drew Thompson, and I love photography. Pano is great!', '2017-03-04 17:41:09', 3, '0'),
-(12429, 'Sarah', 'Kuznetzov', 'GreatTunaGirl', 'GreatTunaGirl@panoapp.com', '$2y$10$L251KOwaRdmX5VvfYLhgweFArOjVXZsn8GCEzUxMWaRqTHrh1YA26', 'San Francisco', 'Hi Im Sarah Kuznetzov, and I love photography. Pano is great!', '2017-03-04 17:41:09', 3, '0'),
-(12430, 'John', 'Garcia', 'LazyOrangutan_fan', 'LazyOrangutan_fan@master.com', '$2y$10$KB18toUgrXrTfUyTE4lyXeqqGwGHR/HpVEDrDxBZDW3zmJxwjXDn6', 'New York', 'Hi Im John Garcia, and I love photography. Pano is great!', '2017-03-04 17:41:10', 3, '0'),
-(12431, 'Peter', 'Johnson', 'TheUndisputedZebraGirl', 'TheUndisputedZebraGirl@mail.com', '$2y$10$SWpIgYIkBAQvff9w3Xvnb.cjhP89Jacdbm.HdUvVMa5gx3evR/Dxe', 'New York', 'Hi Im Peter Johnson, and I love photography. Pano is great!', '2017-03-04 17:41:10', 3, '0'),
-(12432, 'Harry', 'Gonzalez', 'TheMonsterGirl', 'TheMonsterGirl@master.com', '$2y$10$CUuxgJPVv66St84h73TSpOViGE2um7iiHmSf64WTJzKukEKfG1LTS', 'London', 'Hi Im Harry Gonzalez, and I love photography. Pano is great!', '2017-03-04 17:41:10', 3, '0'),
-(12433, 'Peter', 'Martina', 'AngryBowl', 'AngryBowl@panoapp.com', '$2y$10$HfVaYunUE1IDslmpt4MKru0MFKcK9c0bKMUXjjFeU83HQbZyLE822', 'Berlin', 'Hi Im Peter Martina, and I love photography. Pano is great!', '2017-03-04 17:41:11', 3, '0'),
-(12434, 'Harry', 'Nguyen', 'SuperMonsterKing', 'SuperMonsterKing@lol.com', '$2y$10$LR/g.H/0zvPYGMEN1fVRWugMhi3a08EMc4peWaRLMNfUbdNKhTEqm', 'Montpellier', 'Hi Im Harry Nguyen, and I love photography. Pano is great!', '2017-03-04 17:41:11', 3, '0'),
-(12435, 'Peter', 'Wu', 'TheUndisputedElephantmaster', 'TheUndisputedElephantmaster@panoapp.com', '$2y$10$l3myL66wU3Hre93YdnfPvujLuiOWyQKP/FHybh8vp7KtIfFfEHZim', 'Washington DC', 'Hi Im Peter Wu, and I love photography. Pano is great!', '2017-03-04 17:43:20', 3, '0'),
-(12436, 'Drew', 'Wu', 'CrazyAntEaterLass', 'CrazyAntEaterLass@panoapp.com', '$2y$10$uBChQ4n4VbtIqFTYOuvQUuKFdMg6ZQXGM5Wl3gj/JFOLK6of1E61m', 'Montpellier', 'Hi Im Drew Wu, and I love photography. Pano is great!', '2017-03-04 17:43:21', 3, '0'),
-(12437, 'Claire', 'Ivanov', 'SillyOrangutanMaster', 'SillyOrangutanMaster@panoapp.com', '$2y$10$wzFw7t1iYEfUrRmEx3FCjeYbvHSjqrK894LYGRvrx.MJgyuYsYnW6', 'New York', 'Hi Im Claire Ivanov, and I love photography. Pano is great!', '2017-03-04 17:43:21', 3, '0'),
-(12438, 'Michelle', 'Park', 'SuperProGirl', 'SuperProGirl@supermail.com', '$2y$10$Z3FAB4AlszXqhqy.b5xf8eoeqiEKZK9NsAX19WnzFHD1soAZ9K.Vu', 'Montreal', 'Hi Im Michelle Park, and I love photography. Pano is great!', '2017-03-04 17:45:35', 3, '0'),
-(12439, 'Sally', 'Martina', 'CrazyAntEaterKid', 'CrazyAntEaterKid@master.com', '$2y$10$e0iOOAQbjN/SvqZmmzCZJe.AqOG.Nveci2sSU6zSLV4r2XPRafhUC', 'Chicago', 'Hi Im Sally Martina, and I love photography. Pano is great!', '2017-03-04 17:45:35', 3, '0'),
-(12440, 'Sarah', 'Johnson', 'SillyElephant_kid', 'SillyElephant_kid@supermail.com', '$2y$10$/ngHYtHUGYfb.oiBJg1i8eXr6c84psrqk4Uj6oKxDaESCIP1uMiyu', 'Toronto', 'Hi Im Sarah Johnson, and I love photography. Pano is great!', '2017-03-04 17:45:36', 3, '0'),
-(12441, 'Jonathan', 'Gunaydin', 'SneakyBook1', 'SneakyBook1@panoapp.com', '$2y$10$n9xQ5aPLWrBgc.epM73MEuJhETRHjS8FjllXcFuKxkM4O1hC6mpSe', 'London', 'Hi Im Jonathan Gunaydin, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3, '0'),
-(12442, 'Jess', 'Nguyen', 'AwesomeBottle', 'AwesomeBottle@ucl.ac.uk', '$2y$10$uEiGBhZFZSaiopI0HaDWne0Rhmi/me42yZbb8H9ZYtVCkCi8jiZtS', 'San Francisco', 'Hi Im Jess Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3, '0'),
-(12443, 'Michelle', 'Nguyen', 'amazingBottleLass', 'amazingBottleLass@master.com', '$2y$10$Zk1hKuMQU15mhjEJYqviH.I5/JU25XyVhi6ceDKXEosysyywLlXlm', 'Chicago', 'Hi Im Michelle Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3, '0'),
-(12444, 'Fynn', 'Dewald', 'fynn', 'fynn@gmail.com', '$2y$10$GnDQaLqudLFIIPX9208zRO62AnjG8T42IsknR3wn0Fcjv42VNOOZ.', 'London', 'I love Law', '2017-03-10 23:59:17', 3, '0'),
-(12445, 'Yolo', 'Wizard', 'YoloWizard', 'yolo@wizard.com', '$2y$10$HVyaVW7tXvjBDGmyz7ivu.3Tz5fh3QfRMItPH6OD5o8HqvisDqqFW', 'Hodor', 'I stack shields', '2017-03-12 14:45:26', 2, '0'),
-(12448, 'Steve', 'O', 'steve-o', 'stevie@wonder.com', '$2y$10$yY2Lq8bhvtVp4kVl8Xwbhu4RDOCrYPQLyYu5MBZ7EelvCB9y9x742', 'Los Angeles, CA, United States', 'I like stunts and hurting my self', '2017-03-12 20:55:28', 3, '12448'),
-(12449, 'Seb', 'VZ', 'sebestian', 'sebastian@hotmail.com', '$2y$10$XwYhdPZjfwD9WTyqLZfghuW8TZEMoUKLoHOiinLepbw.Oox8ztAZa', 'Dublin, Ireland', 'I love Oranje', '2017-03-12 21:07:15', 3, '12449'),
-(12450, 'Seb', 'VZ', 'sebastian', 'asda@asd.com', '$2y$10$3BLhQTqNmQjoCjDkI6/ur.c3foPw1ZU1j5rsQtw/aqkOJcDNR/guC', 'Dublin, Ireland', 'gtafed', '2017-03-12 21:12:31', 2, NULL);
+INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`) VALUES
+('0b6ae7ad32e6b39d0460bdde67ff88632d8e94727242c25240688ba167f29dc7', 12399, '#OldTrafford #ManchesterUnited #BestTeamInTheWorld', '2017-03-12 02:18:31', 'Manchester, England'),
+('176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e', 12400, 'Best view ever!', '2017-03-10 20:42:45', 'Austria'),
+('22640e7e92f84b2e4840c036172ab1e8c4ec2b5086663461ee8c3c8f5241668c', 12399, '#Bali #Indonesia #Volcano #Lake', '2017-03-12 20:05:26', 'Bali, Indonesia'),
+('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12401, 'Does this work? In my free time i like to go nude :) #fkk', '2017-03-10 17:23:33', 'Eastern Germany'),
+('49ed69f7acd55f24b134db4176beeeb42ab566019d0230eb1953d28da664e2a3', 12399, '#montreal #canada #socold', '2017-03-12 18:41:31', 'Montreal, QC, Canada'),
+('5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5', 12399, '#hollywood #fromtheback', '2017-03-12 15:44:00', 'Los Angeles, USA'),
+('5b3113b514f25ee329d7068bd791b5a0c2b4915e206e6e1e5d64e7c73635e822', 12399, '#NiagaraFalls ', '2017-03-12 11:13:23', 'Niagara Falls, Canada/USA'),
+('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401, 'Hello World', '2017-03-10 17:15:17', 'Sierra Nevada'),
+('b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49', 12445, '#trafalgarsquare #london', '2017-03-12 15:46:36', 'London, United Kingdom'),
+('b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5', 12399, 'Iceland is awesome #glacier', '2017-03-10 20:24:07', 'Iceland'),
+('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401, 'Hello world?', '2017-03-10 17:17:24', 'Sierra Nevada'),
+('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401, 'best day of my life!!!!', '2017-03-10 18:09:57', 'hehe'),
+('c95d295b630fe9da6d424b074fee4422a8a8de147e520ecf608d22862ec74013', 12401, 'profile', '2017-03-10 17:01:03', 'bitte'),
+('c982020a0701adccb5e95a84ee626a5286639ad3b8a6113024afe3774c8b2be7', 12450, 'besties', '2017-03-12 21:14:54', 'Brazil'),
+('d1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb', 12445, '#phoenix #sunset', '2017-03-12 15:47:22', 'Phoenix, AZ, United States'),
+('d64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa', 12400, 'wuhu', '2017-03-10 22:21:57', 'London'),
+('da11a03ed0c1109b391c17793c55b63f31f054ca6652f80fd3364d76079a1757', 12399, '#weclimbedamountain', '2017-03-12 11:03:26', 'Nara, Japan'),
+('ed9351ef3520b703ff02f353ac925094b81aef7219c1199d4c688384fbdaf540', 12426, 'Sydney at Night #sydneyharbourbridge', '2017-03-12 11:26:15', 'Sydney, Australia');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `user`
+-- Indexes for table `posts`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`UserID`),
-  ADD UNIQUE KEY `UserName` (`UserName`);
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`PostID`),
+  ADD KEY `PostsUserConstraint` (`UserID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Constraints for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `user`
+-- Constraints for table `posts`
 --
-ALTER TABLE `user`
-  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12452;
+ALTER TABLE `posts`
+  ADD CONSTRAINT `PostsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
