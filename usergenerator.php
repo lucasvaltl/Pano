@@ -114,7 +114,7 @@ for ($i = 0; $i < $likeCount; $i++) {
 
 //=========================Getting random users to friend eachother ========================
 
-
+/*
 $friendCount = 20;
 
 for ($i = 0; $i < $friendCount; $i++) {
@@ -128,6 +128,7 @@ for ($i = 0; $i < $friendCount; $i++) {
         echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
     }
 }
+*/
 
 
 
@@ -157,7 +158,7 @@ if ($result = mysqli_query($conn, $query)) {
 }
 
 */
-
+/*
 function array_random($arr, $num = 1) {
     shuffle($arr);
 
@@ -167,7 +168,107 @@ function array_random($arr, $num = 1) {
     }
     return $num == 1 ? $r[0] : $r;
 }
+*/
 
+
+//===========================Adding all hashtags from posts into the tags table ======
+
+//get all posts with hashtags in them
+/*$query = "SELECT PostText, PostID FROM posts
+WHERE PostText REGEXP '^#[[:alnum:]]' OR PostText REGEXP ' #[[:alnum:]]'";
+
+
+if ($result = mysqli_query($conn, $query)){
+
+//for each post, match all hashtags and put them into an array, so they can be fed into the tags table (if they are unique hashtags)
+    while ($row = mysqli_fetch_array($result)){
+        $string = strtolower($row['PostText']);
+        $PostID = $row['PostID'];
+        $hashtags= FALSE;
+        preg_match_all("/(#\w+)/u", $string, $matches);
+        if ($matches) {
+           $hashtagsArray = array_count_values($matches[0]);
+           $hashtags = array_keys($hashtagsArray);
+
+       }
+
+       for ($i=0; $i<sizeof($hashtags); $i++){
+           print_r($hashtags[$i]);
+           print_r($PostID);
+           $query2 = "INSERT INTO tags (TagName)
+                        VALUES ('$hashtags[$i]')";
+
+
+            if ($result2 = mysqli_query($conn, $query2)) {
+                echo "yolo";
+            } else {
+                echo "Error: " . $query2 . "<br>" . mysqli_error($conn);
+            }
+
+
+       }
+       echo"<br>";
+    }
+} else {
+    echo "Error: " . $query . "<br>" . mysqli_error($conn);
+}
+*/
+
+//=========================Mapping Tags and Post together in tagspostsmapping ========
+/*
+$query = "SELECT PostText, PostID FROM posts
+WHERE PostText REGEXP '^#[[:alnum:]]' OR PostText REGEXP ' #[[:alnum:]]';";
+
+if ($result = mysqli_query($conn, $query)){
+
+    while ($row = mysqli_fetch_array($result)){
+        $string = strtolower($row['PostText']);
+        $PostID = $row['PostID'];
+        $hashtags= FALSE;
+        preg_match_all("/(#\w+)/u", $string, $matches);
+        if ($matches) {
+           $hashtagsArray = array_count_values($matches[0]);
+           $hashtags = array_keys($hashtagsArray);
+
+       }
+
+       $query2 = "SELECT * FROM tags";
+
+       if ($result2 = mysqli_query($conn, $query2)){
+           while ($row2 = mysqli_fetch_array($result2)){
+               $TagID = $row2['TagID'];
+               $TagName = $row2['TagName'];
+
+               for ($i=0; $i<sizeof($hashtags); $i++){
+                   print_r($hashtags[$i]);
+                   echo "<br>";
+                   print_r($PostID);
+                   echo "<br><br>";
+
+                   if ($hashtags[$i] == $TagName){
+                       $query3 = "INSERT INTO tagspostsmapping (TagID, PostID) VALUES ('$TagID', '$PostID')";
+                            if ($result3 = mysqli_query($conn, $query3)){
+                                echo "yolo";
+                            }else {
+                                echo "Error: " . $query3 . "<br>" . mysqli_error($conn);
+                            }
+                   }
+               }
+           }
+       }else {
+           echo "Error: " . $query2 . "<br>" . mysqli_error($conn);
+       }
+   }
+
+
+
+    //$query.= "INSERT INTO tagspostsmapping (TagID, PostID) VALUES ('$hashtags[$i]', '$PostID');";
+
+
+}else {
+    echo "Error: " . $query . "<br>" . mysqli_error($conn);
+}
+*/
 
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 12, 2017 at 08:42 PM
+-- Generation Time: Mar 13, 2017 at 06:46 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -43,7 +43,8 @@ INSERT INTO `collections` (`CollectionID`, `GroupID`, `OwnerID`, `Caption`, `Cre
 (14, NULL, 12400, 'oljn', '2017-03-10 23:20:08', 3),
 (15, NULL, 12399, 'Sick photos', '2017-03-12 02:15:05', 3),
 (16, NULL, 12445, 'My trip to London', '2017-03-12 15:51:14', 1),
-(17, 5, 12399, 'For the team', '2017-03-12 16:22:43', 4);
+(17, 5, 12399, 'For the team', '2017-03-12 16:22:43', 4),
+(18, NULL, 12399, 'My Trip to Iceland', '2017-03-12 22:47:15', 3);
 
 -- --------------------------------------------------------
 
@@ -153,17 +154,19 @@ INSERT INTO `friendrecommendations` (`UserID`, `FriendID1`, `FriendID2`, `Friend
 
 CREATE TABLE `friendrequests` (
   `UserID` int(20) NOT NULL,
-  `FriendID` int(20) NOT NULL,
-  `Status` tinyint(1) NOT NULL DEFAULT '0'
+  `FriendID` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `friendrequests`
 --
 
-INSERT INTO `friendrequests` (`UserID`, `FriendID`, `Status`) VALUES
-(12399, 12417, 0),
-(12399, 12445, 0);
+INSERT INTO `friendrequests` (`UserID`, `FriendID`) VALUES
+(12399, 12409),
+(12399, 12417),
+(12399, 12431),
+(12399, 12437),
+(12399, 12445);
 
 -- --------------------------------------------------------
 
@@ -1064,7 +1067,7 @@ CREATE TABLE `groups` (
   `GroupID` int(40) NOT NULL,
   `GroupName` varchar(50) NOT NULL,
   `CreatorID` int(20) NOT NULL COMMENT 'Needs to be changed before a user gets deleted!!',
-  `PhotoID` int(40) NOT NULL,
+  `PhotoID` varchar(200) NOT NULL,
   `ShortDescrip` varchar(150) NOT NULL,
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1074,11 +1077,16 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`GroupID`, `GroupName`, `CreatorID`, `PhotoID`, `ShortDescrip`, `CreatedTime`) VALUES
-(1, '$GroupName', 12400, 0, '$ShortDescrip', '2017-03-10 16:34:21'),
-(2, 'asd', 12400, 0, 'asd', '2017-03-10 21:39:58'),
-(3, 'Awesome Name', 12400, 0, 'hmmm', '2017-03-10 21:48:17'),
-(4, 'FynnsFuckers', 12444, 0, 'i love it', '2017-03-11 00:00:03'),
-(5, 'Pano Development Team', 12399, 534543, 'This is the Circle for the Pano Development Team', '2017-03-12 00:10:44');
+(1, '$GroupName', 12400, '0', '$ShortDescrip', '2017-03-10 16:34:21'),
+(2, 'asd', 12400, '0', 'asd', '2017-03-10 21:39:58'),
+(3, 'Awesome Name', 12400, '0', 'hmmm', '2017-03-10 21:48:17'),
+(4, 'FynnsFuckers', 12444, '0', 'i love it', '2017-03-11 00:00:03'),
+(5, 'Pano Development Team', 12399, '534543', 'This is the Circle for the Pano Development Team', '2017-03-12 00:10:44'),
+(6, 'Awesome Group', 12399, '5', 'Just testing, nothing to see here!', '2017-03-12 23:36:27'),
+(7, 'TEsting', 12399, '12399', 'fdsfdsfsfdsfdsf', '2017-03-12 23:38:44'),
+(8, 'fdsfdsf', 12399, '0', 'fdsfdsfdsffegrgr', '2017-03-12 23:41:48'),
+(9, 'Awesome group!!!!!!', 12399, '234ab9ca9de807abe1cfc493a23297fd26d1e6a571a5a28c1a48a946280a0834', 'This is an awesome group!', '2017-03-12 23:49:46'),
+(10, 'tstrintintgr', 12399, '22ea2246aff6ff15bdb27e1b82b1866cbde08024976934f2dc9ff24cd0ad6149', 'fdsfsdfdsfdsfdsf', '2017-03-12 23:59:35');
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1151,24 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`MessageID`, `GroupID`, `UserID`, `Content`, `MessageTime`) VALUES
 (1, 4, 12444, 'Love Law life', '2017-03-11 00:00:10'),
-(2, 5, 12399, 'This is coming along nicely!', '2017-03-12 19:59:07');
+(2, 5, 12399, 'This is coming along nicely!', '2017-03-12 19:59:07'),
+(3, 9, 12399, 'OOOO', '2017-03-12 23:52:17'),
+(4, 9, 12399, 'greg', '2017-03-13 00:15:52'),
+(5, 9, 12399, 'gregregreg', '2017-03-13 00:15:56'),
+(6, 9, 12399, 'grgregregregregreg', '2017-03-13 00:15:58'),
+(7, 9, 12399, 'gregrgregregergregregerg', '2017-03-13 00:16:03'),
+(8, 9, 12399, 'grgregregrgre', '2017-03-13 00:16:06'),
+(9, 9, 12399, 'gregregreg', '2017-03-13 00:16:09'),
+(10, 9, 12399, 'gregregregergre', '2017-03-13 00:16:12'),
+(11, 9, 12399, 'grgregregreg', '2017-03-13 00:16:15'),
+(12, 9, 12399, 'hhtrhtr', '2017-03-13 00:17:52'),
+(13, 5, 12399, 'tegergregregre', '2017-03-13 00:18:01'),
+(14, 5, 12399, 'lolololol', '2017-03-13 00:18:11'),
+(15, 5, 12399, 'fefewfwe', '2017-03-13 00:18:39'),
+(16, 10, 12399, 'thtrhtrh', '2017-03-13 00:20:16'),
+(17, 10, 12399, 'yololol', '2017-03-13 00:38:28'),
+(18, 9, 12399, 'fdfdsfdsf', '2017-03-13 00:39:31'),
+(19, 9, 12399, 'fdsfdsfdsfds', '2017-03-13 00:39:34');
 
 -- --------------------------------------------------------
 
@@ -1172,9 +1197,11 @@ INSERT INTO `photocollectionsmapping` (`CollectionID`, `PostID`) VALUES
 (17, '5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5'),
 (16, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
 (15, 'b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5'),
+(18, 'b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5'),
 (11, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa'),
 (12, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa'),
 (14, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa'),
+(18, 'd8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3'),
 (17, 'da11a03ed0c1109b391c17793c55b63f31f054ca6652f80fd3364d76079a1757');
 
 -- --------------------------------------------------------
@@ -1209,9 +1236,11 @@ INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`)
 ('b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5', 12399, 'Iceland is awesome #glacier', '2017-03-10 20:24:07', 'Iceland'),
 ('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401, 'Hello world?', '2017-03-10 17:17:24', 'Sierra Nevada'),
 ('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401, 'best day of my life!!!!', '2017-03-10 18:09:57', 'hehe'),
+('c89fb764661ef45e83c821e38a0a7d09aa1f4ab035e938bde2fa6b9723b95d29', 12399, 'North Korea is great', '2017-03-13 10:59:06', 'Pyongyang, North Korea'),
 ('c95d295b630fe9da6d424b074fee4422a8a8de147e520ecf608d22862ec74013', 12401, 'profile', '2017-03-10 17:01:03', 'bitte'),
 ('d1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb', 12445, '#phoenix #sunset', '2017-03-12 15:47:22', 'Phoenix, AZ, United States'),
 ('d64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa', 12400, 'wuhu', '2017-03-10 22:21:57', 'London'),
+('d8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3', 12399, 'Iceland Mountains #mountains #cool #icelandisgreat', '2017-03-12 22:45:03', 'Iceland'),
 ('da11a03ed0c1109b391c17793c55b63f31f054ca6652f80fd3364d76079a1757', 12399, '#weclimbedamountain', '2017-03-12 11:03:26', 'Nara, Japan'),
 ('ed9351ef3520b703ff02f353ac925094b81aef7219c1199d4c688384fbdaf540', 12426, 'Sydney at Night #sydneyharbourbridge', '2017-03-12 11:26:15', 'Sydney, Australia');
 
@@ -1239,6 +1268,88 @@ INSERT INTO `privacysettings` (`SettingID`, `Description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `TagID` int(20) NOT NULL,
+  `TagName` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`TagID`, `TagName`) VALUES
+(4, '#bali'),
+(3, '#bestteamintheworld'),
+(10, '#canada'),
+(21, '#cool'),
+(8, '#fkk'),
+(13, '#fromtheback'),
+(17, '#glacier'),
+(12, '#hollywood'),
+(22, '#icelandisgreat'),
+(5, '#indonesia'),
+(7, '#lake'),
+(16, '#london'),
+(2, '#manchesterunited'),
+(9, '#montreal'),
+(20, '#mountains'),
+(14, '#niagarafalls'),
+(1, '#oldtrafford'),
+(18, '#phoenix'),
+(11, '#socold'),
+(19, '#sunset'),
+(24, '#sydneyharbourbridge'),
+(15, '#trafalgarsquare'),
+(6, '#volcano'),
+(23, '#weclimbedamountain');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tagspostsmapping`
+--
+
+CREATE TABLE `tagspostsmapping` (
+  `TagID` int(20) NOT NULL,
+  `PostID` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tagspostsmapping`
+--
+
+INSERT INTO `tagspostsmapping` (`TagID`, `PostID`) VALUES
+(1, '0b6ae7ad32e6b39d0460bdde67ff88632d8e94727242c25240688ba167f29dc7'),
+(2, '0b6ae7ad32e6b39d0460bdde67ff88632d8e94727242c25240688ba167f29dc7'),
+(3, '0b6ae7ad32e6b39d0460bdde67ff88632d8e94727242c25240688ba167f29dc7'),
+(4, '22640e7e92f84b2e4840c036172ab1e8c4ec2b5086663461ee8c3c8f5241668c'),
+(5, '22640e7e92f84b2e4840c036172ab1e8c4ec2b5086663461ee8c3c8f5241668c'),
+(6, '22640e7e92f84b2e4840c036172ab1e8c4ec2b5086663461ee8c3c8f5241668c'),
+(7, '22640e7e92f84b2e4840c036172ab1e8c4ec2b5086663461ee8c3c8f5241668c'),
+(8, '49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335'),
+(9, '49ed69f7acd55f24b134db4176beeeb42ab566019d0230eb1953d28da664e2a3'),
+(10, '49ed69f7acd55f24b134db4176beeeb42ab566019d0230eb1953d28da664e2a3'),
+(11, '49ed69f7acd55f24b134db4176beeeb42ab566019d0230eb1953d28da664e2a3'),
+(12, '5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5'),
+(13, '5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5'),
+(14, '5b3113b514f25ee329d7068bd791b5a0c2b4915e206e6e1e5d64e7c73635e822'),
+(15, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
+(16, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
+(17, 'b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5'),
+(18, 'd1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb'),
+(19, 'd1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb'),
+(20, 'd8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3'),
+(21, 'd8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3'),
+(22, 'd8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3'),
+(23, 'da11a03ed0c1109b391c17793c55b63f31f054ca6652f80fd3364d76079a1757'),
+(24, 'ed9351ef3520b703ff02f353ac925094b81aef7219c1199d4c688384fbdaf540');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -1261,8 +1372,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress`, `Password`, `Location`, `ShortDescrip`, `DateCreated`, `SettingID`, `ProfilePictureID`) VALUES
-(12399, 'Li', 'Xie', 'Liko', 'liko@mail.com', '$2y$10$SW1DWeNQuLcFdbWs2PgXiO5VqCrUDdzJ173sEi/tLmL9oWsXWmI4G', 'London', '                                        Yolo', '2017-02-21 18:24:29', 2, '12399'),
-(12400, 'Lucas', 'Valtl', 'Lucas', 'lucas@pano.com', '$2y$10$KZHC1VBrAWtUZJPrcwyb9uL1TWIwJqP9FIYT7O2k4BNvK5PX8ZYay', 'London', '   I like Pano', '2017-02-21 18:25:19', 3, '0'),
+(12399, 'Li', 'Xie', 'Liko', 'liko@mail.com', '$2y$10$SW1DWeNQuLcFdbWs2PgXiO5VqCrUDdzJ173sEi/tLmL9oWsXWmI4G', 'London, United Kingdom', ' Pano is a great app - one of the best!', '2017-02-21 18:24:29', 2, '12399'),
+(12400, 'Lucas', 'Valtl', 'Lucas', 'lucas@pano.com', '$2y$10$KZHC1VBrAWtUZJPrcwyb9uL1TWIwJqP9FIYT7O2k4BNvK5PX8ZYay', 'London', '   I like Pano', '2017-02-21 18:25:19', 3, '12400'),
 (12401, 'Florian', 'Obst', 'Florian', 'florian@pano.com', '$2y$10$JCCx7lZflspi.B55V7j8bOEuJG.gM1MlpeQbrZDeYiT8oh0MLRm2m', 'London', 'Go Pano Go', '2017-02-21 18:25:47', 3, '0'),
 (12402, 'Johannes', 'Landgraf', 'Johannes', 'johannes@pano.com', '$2y$10$6Bq0sco8ddlwFUy47oNAA.Nm.QvD7wmMtYaA.z6iuRsjLOOLyHWHm', 'London', 'Pano is great', '2017-02-21 18:26:32', 3, '0'),
 (12403, 'Noob', 'Master', 'Noob123', 'noob@mail.com', '$2y$10$bfqBPR5mPB0nuuY4SAEOo.M090R/7Q3x/b/N10T5Hpkku7U3kcLfG', 'London', 'I am a noob', '2017-02-22 22:57:13', 3, '0'),
@@ -1326,11 +1437,25 @@ CREATE TABLE `usergroupmapping` (
 
 INSERT INTO `usergroupmapping` (`GroupID`, `UserID`) VALUES
 (5, 12399),
+(6, 12399),
+(7, 12399),
+(8, 12399),
+(9, 12399),
+(10, 12399),
 (2, 12400),
 (3, 12400),
 (5, 12400),
+(6, 12400),
+(7, 12400),
+(9, 12400),
+(10, 12400),
 (5, 12401),
+(6, 12401),
+(9, 12401),
 (5, 12402),
+(8, 12405),
+(9, 12405),
+(9, 12406),
 (3, 12419),
 (3, 12426),
 (2, 12427),
@@ -1427,6 +1552,20 @@ ALTER TABLE `privacysettings`
   ADD PRIMARY KEY (`SettingID`);
 
 --
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`TagID`),
+  ADD UNIQUE KEY `TagName` (`TagName`);
+
+--
+-- Indexes for table `tagspostsmapping`
+--
+ALTER TABLE `tagspostsmapping`
+  ADD PRIMARY KEY (`TagID`,`PostID`),
+  ADD KEY `TagPostPostConstraint` (`PostID`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -1448,7 +1587,7 @@ ALTER TABLE `usergroupmapping`
 -- AUTO_INCREMENT for table `collections`
 --
 ALTER TABLE `collections`
-  MODIFY `CollectionID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `CollectionID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -1458,12 +1597,17 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `GroupID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `GroupID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `MessageID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `MessageID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `TagID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -1545,6 +1689,13 @@ ALTER TABLE `photocollectionsmapping`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `PostsUserConstraint` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+
+--
+-- Constraints for table `tagspostsmapping`
+--
+ALTER TABLE `tagspostsmapping`
+  ADD CONSTRAINT `TagPostPostConstraint` FOREIGN KEY (`PostID`) REFERENCES `posts` (`PostID`),
+  ADD CONSTRAINT `TagPostTagConstraint` FOREIGN KEY (`TagID`) REFERENCES `tags` (`TagID`);
 
 --
 -- Constraints for table `usergroupmapping`
