@@ -1326,6 +1326,7 @@ box-shadow: none;
 outline:none;
 }
 
+
 .inverted-create-circle-check:checked{
   -webkit-appearance: none;
 /*hide checkbox to only display angular classwitching*/
@@ -1506,6 +1507,12 @@ z-index: 10;
     width: 200px;
     border-radius: 50%;
 
+}
+
+.dropzone-circle-creation{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
 }
 /*other*/
 
