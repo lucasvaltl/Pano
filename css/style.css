@@ -219,7 +219,8 @@ a .profile-picture{
 
 .friend-picture{
   height: 70px;
-  width: auto;
+  width: 70px;
+  object-fit: cover;
 }
 
 .mask-container{
@@ -230,6 +231,12 @@ a .profile-picture{
 height: 90px;
 width: 90px;
 object-fit: cover;
+}
+
+.circle-cover-large{
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
 }
 
 hr{
@@ -516,10 +523,12 @@ a.fa-comment-o:focus,.fa-comment-o:hover {
 
 
 button.send-request-button {
-    display:inline;
+    display: inline;
     background: none;
     border: none;
-
+    position: absolute;
+    right: 7px;
+    top: 7px;
 }
 
  button.send-request-button.requested {
@@ -534,6 +543,9 @@ button.cancel-request-button.requested {
     display:inline;
     background: none;
     border: none;
+    position: absolute;
+    right: 7px;
+    top: 7px;
 }
 
 
@@ -862,9 +874,14 @@ left: 43%;
 }
 
 .friending-icon{
-  padding-top: 6px;
+  padding-top: 15px;
   text-align: right;
   color: #aaa;
+}
+
+.search-content .friending-icon{
+    padding-top: 15px;
+    font-size: 2em;
 }
 
  a:hover .friending-icon{
