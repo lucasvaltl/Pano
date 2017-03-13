@@ -1036,6 +1036,9 @@ width: 100%;
 .circles-main-content {
   width: 100%;
 }
+hr{
+      border-top: 1px solid #ccc;
+}
 
 .circle-messages-content{
 position: absolute;
@@ -1206,7 +1209,7 @@ padding-top: 5px;
 
 .create-circle{
 color: #444;
-  font-size: 1.7em;
+  font-size: 1.4em;
 }
 
 .create-circle .lv-button{
@@ -1241,6 +1244,7 @@ color: #444;
 .create-circle-shortdescrip{
   padding-top: 20px;
   padding-bottom: 10px;
+
 }
 
 .circle-create-input-textarea{
@@ -1251,6 +1255,7 @@ color: #444;
     border-radius: 5px;
     padding: 10px;
     text-wrap: normal;
+      color: #444!important;
 }
 
 .circle-create-input-textarea:focus{
@@ -1327,6 +1332,7 @@ right: 8px;
 box-shadow: none;
 outline:none;
 }
+
 
 .inverted-create-circle-check:checked{
   -webkit-appearance: none;
@@ -1494,6 +1500,7 @@ z-index: 10;
     height: 250px;
 }
 
+
 .dropzone-panorama:after{
   content: "+";
   font-size: 8em;
@@ -1516,12 +1523,39 @@ z-index: 10;
   margin-top: 15px;
 }
 
+
+.dropzone-circle-creation{
+    height: 100px;
+border: 1px  #bbb;
+border-style: dashed;
+}
+
+.dropzone-circle-creation .dz-message{
+  font-size: 0.8em;
+  margin-top: 0px;
+}
+
+.dropzone-circle-creation .dz-preview{
+   margin: 0px;
+}
+
+.dropzone-circle-creation .dz-preview .dz-image{
+  border-radius: 10px;
+overflow: hidden;
+width: 100px;
+height: 100px;
+position: relative;
+display: block;
+z-index: 10;
+}
+
 .padding-top-20{
   padding-top: 20px;
 }
 .larger-font{
   font-size: 1.2em;
 }
+
 
 /*other*/
 

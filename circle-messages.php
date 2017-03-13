@@ -45,7 +45,7 @@ if (isset($_GET['GroupID'])) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="css/offset.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Pano - <?php echo $profileUserName;?></title>
+  <title>Pano - Messages</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
