@@ -16,8 +16,8 @@ include('includes/config.php');
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <link rel="stylesheet" href="css/offset.css">
+        <link rel="stylesheet" href="dropzone.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="dropzone.css">
     <title>Pano - Settings</title>
 </head>
 
@@ -33,25 +33,36 @@ include('includes/config.php');
      ?>
 
     <main>
-        <div class="center-center">
+        <div >
             <br />
             <p>
                 <h2>Change Profile Picture:</h2>
             </p>
-
+<div class="drag-in">
             <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-profilepic" type="post">
                 <input type="hidden" name="hashname" value="<?=$_SESSION['UserID']?>">
                 <input type="hidden" name="picType" value="profilepics">
-                  <div class="dz-message data-dz-message"><span>..</span></div><br>
+                  <div class="dz-message data-dz-message"><span>Drag your new profile picture into here - or click to select</span></div><br>
             </form>
-            <form action="<?= $_SERVER['PHP_SELF'];?>" method="post">
+            </div>
+            <form action="<?= $_SERVER['PHP_SELF'];?>" method="post" class="padding-top-20 larger-font">
                  <input type="submit" name="confirmPic" class="btn btn-default lv-button" value="Confirm Pic" />
              </form>
+<div class="seperator-settings">
+      <hr/>
+  <div class="seperator-settings-inner">
 
-            <br><br><br>
-            <p>
-                <h2>Privacy Options:</h2>
-            </p>
+  </div>
+</div>
+
+    <h2>Change Settings:</h2>
+
+<div class="privacy-options drag-in">
+
+
+
+                <h3>Privacy Options:</h3>
+
             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
 
                 <br />
@@ -73,13 +84,8 @@ include('includes/config.php');
                     >&nbsp;  &nbsp; Public</label>
                 </p>
 
-
-                <br />
-                <br />
-
                 <div class="row">
 
-                    <br>
 
                     <?php if ($invalid_credentials) : ?>
                     <p class="alert alert-danger">Invalid credentials. Please try again.</p>
@@ -90,19 +96,20 @@ include('includes/config.php');
                     <?php endif;?>
 
                         <br />
-                        <label for="pwd">Please Confirm your Current Password for Privacy Settings to Update:</label>
+                        <label for="pwd">Please type your password for confirmation:</label>
                         <input type="password" class="form-control" id="pwd" name="Password" placeholder="Password">
                         <br>
+                        <h3>Change Password:</h3>
                         <label for="pwd">New Password: (Only type something if you wish to change your password)</label>
                         <input type="password" class="form-control" id="pwd" name="NewPassword" placeholder="Password">
                         <br>
                         <input type="submit" name="submit" class="btn btn-default lv-button" value="Save Settings" />
                         <br />
-
+</div>
                 </div>
             </form>
 
-            <div class="submitt-buttons">
+            <div class="larger-font">
                 <br />
                 <a href="logout.php" type="button" class="btn btn-default lv-button">Sign Out</a>
             </div>
