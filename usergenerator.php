@@ -270,6 +270,73 @@ if ($result = mysqli_query($conn, $query)){
 }
 */
 
+$PostID = "fdsfdsfdsfdsfdsfdsfdsfd";
+$CreatorID = 12399;
+$ShortDescrip = "berlin is cool #berlin #cool";
+$Location = "Berlin, Germany";
+
+$query = "INSERT INTO posts (PostID, UserID, PostText, PostLocation ) VALUES ('$PostID', '$CreatorID', '$ShortDescrip', '$Location')";
+if ($result = mysqli_query($conn, $query)) {
+
+    //getting all the hashtags from the PostText from the Post
+    /*$query2 = "SELECT PostText, PostID FROM posts
+    WHERE PostText REGEXP '^#[[:alnum:]]' OR PostText REGEXP ' #[[:alnum:]]'
+    AND PostID = $PostID";*/
+
+    $query2 = "SELECT PostText, PostID FROM posts
+    WHERE PostID ='$PostID'";
+
+    if ($result2 = mysqli_query($conn, $query2)){
+        $row2 = mysqli_fetch_array($result2);
+
+        $string = strtolower($row2['PostText']);
+        $PostID = $row2['PostID'];
+        $hashtags= FALSE;
+        preg_match_all("/(#\w+)/u", $string, $matches);
+
+        if ($matches) {
+           $hashtagsArray = array_count_values($matches[0]);
+           $hashtags = array_keys($hashtagsArray);
+        }
+
+        for ($i=0; $i<sizeof($hashtags); $i++){
+            print_r($hashtags[$i]);
+            print_r($PostID);
+            $query3 = "INSERT INTO tags (TagName)
+                         VALUES ('$hashtags[$i]')";
+
+
+            if ($result3 = mysqli_query($conn, $query3)) {
+                $query4 = "SELECT * FROM tags WHERE TagName = ('$hashtags[$i]')";
+
+                if ($result4 = mysqli_query($conn, $query4)) {
+                    $row4 = mysqli_fetch_array($result4);
+                    $TagID = $row4['TagID'];
+
+                    $query5 = "INSERT INTO tagspostsmapping (TagID, PostID) VALUES ('$TagID', '$PostID')";
+                    if ($result5 = mysqli_query($conn, $query5)){
+                         echo "yolo";
+                    } else {
+                         echo "Error: " . $query5 . "<br>" . mysqli_error($conn);
+                    } //$query5
+                } else {
+                    echo "Error: " . $query4 . "<br>" . mysqli_error($conn);
+                } // $query4
+
+            } else {
+                 echo "Error: " . $query3 . "<br>" . mysqli_error($conn);
+            } //$query3
+        } //forloop
+    } else {
+        echo "Error: " . $query2 . "<br>" . mysqli_error($conn);
+    } //$query2
+
+//    header("Location: profile-info.php?id=". urlencode($UserName));
+
+} else {
+   die('Error: ' . mysqli_error($conn));
+}
+
 
 
 

@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
 
 
     SELECT PostText, PostID FROM posts
-        WHERE PostID ='00bd6689e6d0cf8d800cec0b837367722c0f4294cf3120434718f9e78b2ee2aa'
+        WHERE PostID ='7db188f6d828b4ce90d0a524970e4880214686581310b257fb47dd7d6c542349'
         AND PostText REGEXP '^#[[:alnum:]]' OR PostText REGEXP ' #[[:alnum:]]'
 
         */
@@ -43,9 +43,12 @@ if(isset($_POST['submit'])){
     if ($result = mysqli_query($conn, $query)) {
 
         //getting all the hashtags from the PostText from the Post
-        $query2 = "SELECT PostText, PostID FROM posts
+        /*$query2 = "SELECT PostText, PostID FROM posts
         WHERE PostText REGEXP '^#[[:alnum:]]' OR PostText REGEXP ' #[[:alnum:]]'
-        AND PostID = $PostID";
+        AND PostID = $PostID";*/
+
+        $query2 = "SELECT PostText, PostID FROM posts
+        WHERE PostID ='$PostID'";
 
         if ($result2 = mysqli_query($conn, $query2)){
             $row2 = mysqli_fetch_array($result2);
@@ -65,30 +68,32 @@ if(isset($_POST['submit'])){
                 print_r($PostID);
                 $query3 = "INSERT INTO tags (TagName)
                              VALUES ('$hashtags[$i]')";
-            }
 
-            if ($result3 = mysqli_query($conn, $query3)) {
-                $query4 = "SELECT * FROM tags WHERE TagName = ('$hashtags[$i]')";
 
-                if ($result4 = mysqli_query($conn, $query4)) {
-                    $row4 = mysqli_fetch_array($result4);
-                    $TagID = $row4['TagID'];
+                if ($result3 = mysqli_query($conn, $query3)) {
+                    $query4 = "SELECT * FROM tags WHERE TagName = ('$hashtags[$i]')";
 
-                    $query5 = "INSERT INTO tagspostsmapping (TagID, PostID) VALUES ('$TagID', '$PostID')";
-                    if ($result5 = mysqli_query($conn, $query5)){
-                         echo "yolo";
+                    if ($result4 = mysqli_query($conn, $query4)) {
+                        $row4 = mysqli_fetch_array($result4);
+                        $TagID = $row4['TagID'];
+
+                        $query5 = "INSERT INTO tagspostsmapping (TagID, PostID) VALUES ('$TagID', '$PostID')";
+                        if ($result5 = mysqli_query($conn, $query5)){
+                             echo "yolo";
+                        } else {
+                             echo "Error: " . $query5 . "<br>" . mysqli_error($conn);
+                        } //$query5
                     } else {
-                         echo "Error: " . $query5 . "<br>" . mysqli_error($conn);
-                    }
+                        echo "Error: " . $query4 . "<br>" . mysqli_error($conn);
+                    } // $query4
+
                 } else {
-                    echo "Error: " . $query4 . "<br>" . mysqli_error($conn);
-                }
-            } else {
-                 echo "Error: " . $query3 . "<br>" . mysqli_error($conn);
-            }
+                     echo "Error: " . $query3 . "<br>" . mysqli_error($conn);
+                } //$query3
+            } //forloop
         } else {
             echo "Error: " . $query2 . "<br>" . mysqli_error($conn);
-        }
+        } //$query2
 
         header("Location: profile-info.php?id=". urlencode($UserName));
 
