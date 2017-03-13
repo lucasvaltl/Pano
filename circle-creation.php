@@ -30,8 +30,8 @@ include_once('includes/createcircle.php');
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="css/offset.css">
+    <link rel="stylesheet" href="dropzone.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="dropzone.css">
   <title>Pano - Circle Creation</title>
 </head>
 
@@ -47,23 +47,25 @@ include_once('includes/createcircle.php');
 
       <div class="row">
         <div class="col-sm-3 create-circle-picID">
-            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-circle-creation" type="post">
+            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-circle-creation " type="post">
                 <input type="hidden" name="hashname" value="<?= $blob_name ?>">
                 <input type="hidden" name="picType" value="circlepics">
-                  <div class="dz-message data-dz-message"><span>Upload Picture</span></div><br>
+                  <div class="dz-message data-dz-message">Drag in a picture or click to upload a cover picture</div>
             </form>
         </div>
         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group create-circle container">
           <input type="hidden" name="CreatorID" value="<?= $UserID ?>">
           <input type="hidden" name="PhotoID" value="<?= $blob_name ?>">
+          <div class="row">
+
         <div class="col-sm-6 create-circle-name">
-          <input type="text" class="form-control collection-name-input"  name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*14.5))) + 'px'}" ng-model="CollectionName">
+          <input type="text" class="form-control collection-name-input"  name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*16))) + 'px'}" ng-model="CollectionName">
         </div>
 
         <div class="col-sm-3 create-circle-button">
           <input type="submit" name="create" class="btn btn-default lv-button create-collection-btn" value="Create" />
         </div>
-      </div>
+
       <div class="row">
         <div class="col-sm-3">
         </div>
@@ -74,6 +76,8 @@ include_once('includes/createcircle.php');
 
         </div>
       </div>
+    </div>
+    </div>
       <hr />
       <div class="row">
         <h3>Please select the friends that you want to add to the circle:</h3>

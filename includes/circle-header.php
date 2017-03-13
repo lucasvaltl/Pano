@@ -59,7 +59,7 @@ $isPartOfCircle = false;
             <?php endif;?>
         </div>
     </div>
-    <hr />
+    <hr class="grey-hr" />
 </div>
 <div class="container profile-options">
     <div class="row">
@@ -73,5 +73,5 @@ $isPartOfCircle = false;
             <a href="<?=SITE_ROOT?>/circle-members.php?GroupID=<?php echo $GroupID;?>"> <i class="fa fa-users fa-3x"></i></a>
         </div>
     </div>
-    <hr />
+    <hr class="grey-hr" />
 </div>
