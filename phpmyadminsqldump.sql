@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 13, 2017 at 06:46 PM
+-- Generation Time: Mar 13, 2017 at 11:45 PM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -1233,6 +1233,7 @@ INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`)
 ('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401, 'Hello World', '2017-03-10 17:15:17', 'Sierra Nevada'),
 ('77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 12400, 'Nice Tits', '2017-03-10 23:57:47', 'Titland'),
 ('b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49', 12445, '#trafalgarsquare #london', '2017-03-12 15:46:36', 'London, United Kingdom'),
+('b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3', 12399, '#snowymountains #switzerland #cool', '2017-03-13 23:38:42', 'Swiss Alps, Airolo, Switzerland'),
 ('b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5', 12399, 'Iceland is awesome #glacier', '2017-03-10 20:24:07', 'Iceland'),
 ('bc48278dfb82b7b7a88ed4f05774045892e40ac623c639df81aa4f2454dc2d97', 12401, 'Hello world?', '2017-03-10 17:17:24', 'Sierra Nevada'),
 ('bfc775003d11e1214d785b96f88d16d625f64810af0270b67955a4beffdff249', 12401, 'best day of my life!!!!', '2017-03-10 18:09:57', 'hehe'),
@@ -1299,8 +1300,10 @@ INSERT INTO `tags` (`TagID`, `TagName`) VALUES
 (14, '#niagarafalls'),
 (1, '#oldtrafford'),
 (18, '#phoenix'),
+(49, '#snowymountains'),
 (11, '#socold'),
 (19, '#sunset'),
+(50, '#switzerland'),
 (24, '#sydneyharbourbridge'),
 (15, '#trafalgarsquare'),
 (6, '#volcano'),
@@ -1338,6 +1341,9 @@ INSERT INTO `tagspostsmapping` (`TagID`, `PostID`) VALUES
 (14, '5b3113b514f25ee329d7068bd791b5a0c2b4915e206e6e1e5d64e7c73635e822'),
 (15, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
 (16, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
+(21, 'b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3'),
+(49, 'b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3'),
+(50, 'b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3'),
 (17, 'b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5'),
 (18, 'd1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb'),
 (19, 'd1290e3f37399c7738e4703fcc4c6a3bccd17d06dc451bb657990a7509c13fcb'),
@@ -1607,7 +1613,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `TagID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `TagID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `user`
 --
