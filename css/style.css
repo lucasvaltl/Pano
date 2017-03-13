@@ -176,7 +176,8 @@ textarea {
 
 a .profile-picture{
   height: 60px;
-  width: auto;
+  width: 60px;
+    object-fit: cover;
 }
 
 .profile-picture:hover,.profile-picture:focus {
@@ -198,8 +199,8 @@ a .profile-picture{
 
 
 .profile-info .profile-user-picture {
-  max-height: 135px;
-  width: 135px;
+  height: 120px;
+  width: 120px;
   object-fit: cover;
 }
 
@@ -226,9 +227,9 @@ a .profile-picture{
 }
 
 .circle-cover{
--webkit-clip-path: circle(70px at center);
-clip-path: circle(70px at center);
-display: inline;
+height: 90px;
+width: 90px;
+object-fit: cover;
 }
 
 hr{

@@ -31,7 +31,7 @@ $isPartOfCircle = false;
 <div class="container profile-info">
     <div class="row ">
         <div class="col col-md-3 col-xs-3 profile-info-row">
-            <img src="<?=SITE_ROOT?>/images/panoramas/<?=$circleProfilePictureID?>.jpg" class="img-responsive circle-cover " />
+            <img src="<?=SITE_ROOT?>/images/panoramas/<?=$circleProfilePictureID?>.jpg" class="img-circle circle-cover " />
         </div>
         <div class="col col-md-6  col-xs-6 container">
             <p class="profile-info-name">
