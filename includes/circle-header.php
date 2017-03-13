@@ -32,7 +32,7 @@ $isPartOfCircle = false;
     <div class="row ">
         <div class="col col-md-3 col-xs-3 profile-info-row">
 
-            <img src="https://apppanoblob.blob.core.windows.net/circlepics/<?=$circleProfilePictureID?>.jpg" class="img-responsive circle-cover " />
+            <img src="https://apppanoblob.blob.core.windows.net/circlepics/<?=$circleProfilePictureID?>.jpg" class="img-circle  circle-cover " />
 
         </div>
         <div class="col col-md-6  col-xs-6 container">
