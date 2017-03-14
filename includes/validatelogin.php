@@ -11,9 +11,20 @@ if (isset($_POST['submit'])) {
     $Password = mysqli_real_escape_string ($conn, $_POST['Password']);
 
 
-    $query = "SELECT * FROM user WHERE UserName = '$UserName'";
+    if(!$stmt = $conn->prepare("SELECT * FROM user WHERE UserName = ?")){
+        echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+    }
 
-    if ($result = mysqli_query($conn, $query)) {
+    if(!$stmt->bind_param("s", $UserName)){
+        echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+    }
+
+    if ($stmt->execute()) {
+        echo "yolo";
+
+        $result = $stmt->get_result();
+
+
 
         $count = mysqli_num_rows($result);
         $row = mysqli_fetch_array($result);
@@ -28,13 +39,16 @@ if (isset($_POST['submit'])) {
             $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
             $_SESSION['SettingID'] = $row['SettingID'];
             $_SESSION['ProfilePictureID'] = $row['ProfilePictureID'];
+            $_SESSION['SearchTerm'] = null;
             $invalid_credentials = false;
             header("Location: home.php");
         } else {
             $invalid_credentials = true;
         }
+
+        $stmt->close();
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
     }
 }
 

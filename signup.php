@@ -3,6 +3,11 @@ ob_start();
 
 //session_start() needed to use global session variabls $_SESSION etc
 session_start();
+
+if(isset($_SESSION['UserName'])) { //if not yet logged in
+   header("Location: home.php");// send to login page
+   exit;
+   }
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +73,8 @@ session_start();
 
                                 if ($userNameAlreadyExists) : ?>
                                     <div class="alert alert-danger">The User Name you have chosen already exists!</div>
+                                <?php elseif ($isUserNameInvalid) : ?>
+                                    <div class="alert alert-danger">The User Name you have chosen is invalid. It must be 5-20 characters long, and consist of alphanumeric characters and underscores only.</div>
                                 <?php endif; ?>
                             </label>
                             <input type="text" class="form-control" id="usr" name="UserName" placeholder="User Name"
