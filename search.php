@@ -105,6 +105,8 @@ include('includes/header.php');
                 if($result = mysqli_query($conn, $sql)){
                     if(mysqli_num_rows($result) > 0){
 
+                        $rows = [];
+
 
                         while($row = mysqli_fetch_array($result)){
 
@@ -157,23 +159,37 @@ include('includes/header.php');
 
 
                             //create a frienditem and allow the returnHTML function to run with the parameters
-                            $row = new frienditem($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent, $mutualFriends);
-                            echo $row->returnHTML();
-                        }
+                            $row = array($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent, $mutualFriends);
+                            $rows[] = $row;
 
+                        }//while fetching rows
+
+                        // Define the custom sort function
+                        function custom_sort($a,$b) {
+                             return $a[6]<$b[6];
                         }
+                        // Sort the multidimensional array
+                          usort($rows, "custom_sort");
+
+                        foreach ($rows as $row) {
+                            $row = new frienditem($row[0],$row[1],$row[2],$row[3], $row[4],$row[5],$row[6]);
+                            echo $row->returnHTML();
+                        }//foreachloop
 
                     // Close result set
                     mysqli_free_result($result);
                     mysqli_free_result($result2);
 
+                    //needed to clear the SearchTerm session variable so home feed etc can be viewed
+                    $_SESSION['SearchTerm'] = null;
+                    }
                     } else{
                         echo "<p>No matches found</p>";
                     }
                 }
             } else{
                 echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-            }
+            } // search term
         // close connection
         mysqli_close($conn);
 

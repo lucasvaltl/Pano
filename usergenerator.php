@@ -266,4 +266,30 @@ if ($result = mysqli_query($conn, $query)){
 */
 
 
+function custom_sort($a,$b) {
+     return $a[0]>$b[0];
+}
+$rows = [];
+$row = array(114, 'Li', 'Li', 5, true,false, 6);
+
+$rows[] = $row;
+
+$row = array(117, 'Li', 'Lol', 5, true,false, 16);
+$rows[] = $row;
+
+var_dump($rows);
+
+
+// Sort the multidimensional array
+ usort($rows, "custom_sort");
+echo '<br>';
+   var_dump($rows);
+//echo $rows;
+
+foreach ($rows as $row) {
+    $row = new frienditem($row[0],$row[1],$row[2],$row[3], $row[4],$row[5],$row[6]);
+    echo $row->returnHTML();
+}
+
+
  ?>
