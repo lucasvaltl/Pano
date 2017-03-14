@@ -28,7 +28,7 @@ $displayRecommendations = false;
 if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
     $displayRecommendations = true;
 
-     $query = "SELECT * FROM posts
+    $query = "SELECT * FROM posts
                 LEFT JOIN user ON user.`UserID` = posts.`UserID`
                 WHERE user.`UserID` = '{$_SESSION['UserID']}'
                 OR user.`UserID` IN
@@ -53,6 +53,13 @@ if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
                   ON user.`UserID` = posts.`UserID`
                 WHERE photocollectionsmapping.`CollectionID` = '$CollectionID'
                 ORDER BY PostTime DESC";
+} else if (strpos($_SERVER['HTTP_REFERER'],'search.php')){
+    $query = "SELECT * FROM posts AS p
+            LEFT JOIN tagspostsmapping as tpm on p.PostID = tpm.POSTID
+            LEFT JOIN tags as t on tpm.TagID = t.TagID
+            LEFT JOIN user as u on u.UserID = p.UserID
+            WHERE TagName = '{$_SESSION['SearchTerm']}'
+            ORDER BY PostTime DESC";
 }
 
 
@@ -69,7 +76,7 @@ function addRecommendedFriendsRow($conn) {
 
 function findPosts($page, $query, $conn, $displayRecommendations) {
 
-//display recommendations only when on home or profile
+//display recommendations only when on home
     if ($page == 2 && $displayRecommendations){
         addRecommendedFriendsRow($conn);
     }
