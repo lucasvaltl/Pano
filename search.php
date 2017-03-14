@@ -37,85 +37,125 @@ include('includes/header.php');
 ?>
 <main>
 
-    <div class="friend-search-results container">
-
-        <p>
-        </p>
-
-        <p>
-        </p>
-
-        <br />
-            <hr />
-
         <?php
 
         include('includes/search-list.php');
 
         // collect input from typesearch form and ensure correctness
 
-        $term = mysqli_real_escape_string($conn, $_POST['search']);
+        $_SESSION['SearchTerm'] = mysqli_real_escape_string($conn, $_GET['search']);
 
-        if (isset($term)){
-            $sql = "SELECT * FROM user WHERE FirstName LIKE  '%" . $term . "%' OR LastName LIKE '%". $term ."%' OR UserName LIKE '%". $term ."%'";
+        if (isset($_SESSION['SearchTerm'])){
 
-            // Attempt select query execution
-            if($result = mysqli_query($conn, $sql)){
-                if(mysqli_num_rows($result) > 0){
+            if ($_SESSION['SearchTerm'][0] == '#'){
 
+                $popularTagQuery = "SELECT TagName, COUNT(TagName) AS TagNameOccurence
+                                    FROM tags AS t
+                                    LEFT JOIN tagspostsmapping AS tpm ON tpm.TagID = t.TagID
+                                    GROUP BY TagName
+                                    ORDER BY TagNameOccurence DESC
+                                    LIMIT 5";
 
-                    while($row = mysqli_fetch_array($result)){
-
-                        $isFriendOfUser = false;
-                        $friendRequestSent= false;
-
-                        $friendName = $row['UserName'];
-                        $friendUserID = $row['UserID'];
-                        $friendProfilePictureID = $row['ProfilePictureID'];
-
-                        //if the friend is yourself, skip the iteration
-                        if ($friendName == $_SESSION['UserName']){
-                            continue;
-                        }
-
-                        //otherwise check to see if the logged in user is friends with this user's friends
-                        $sql2 = "SELECT * FROM friends
-                            WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'";
-
-                        if ($result2 = mysqli_query($conn, $sql2)) {
-                            $count = mysqli_num_rows($result2);
-
-                            //if friends, display tick, otherwise an add friend icon will appear
-                            if ($count == 1) {
-                                $isFriendOfUser = true;
-                            }
-                        }
-
-                        $sql3 = "SELECT * FROM `friendrequests` WHERE FriendID='$friendUserID' AND UserID='{$_SESSION['UserID']}'";
-
-                        if ($result3 = mysqli_query($conn, $sql3)) {
-                            $count2 = mysqli_num_rows($result3);
-
-                            //if friends, display tick, otherwise an add friend icon will appear
-                            if ($count2 == 1) {
-                                $friendRequestSent = true;
-                            }
-                        }
-
-
-                        //create a frienditem and allow the returnHTML function to run with the parameters
-                        $row = new frienditem($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent);
-                        echo $row->returnHTML();
+                if ($result = mysqli_query($conn, $popularTagQuery)){
+                    $tagNames = [];
+                    while ($row = mysqli_fetch_array($result)){
+                        $tagName = $row['TagName'];
+                        $tagNames [] = $tagName;
                     }
+                }
+                ?>
+                <h1 class="search-results-text">Search results for: <?=$_SESSION['SearchTerm']?></h1>
+                <h3 class="search-results-text">
+                    Popular hashtags:
+                    <?php
+                        for ($i = 0; $i < sizeof($tagNames); $i++) {
+                            echo '<a href="'. SITE_ROOT .'/search.php?search=%23'. substr($tagNames[$i],1) .'"> '.$tagNames[$i].'&nbsp;&nbsp;</a>';
+                        }
+                    ?>
+                </h3>
+                <br>
+                <hr />
+                <?php
+                include('includes/loadposts.php');
+                ?>
 
+                <div id="feed-container" class="search-panoramas">
+                    <!-- posts go in here -->
+                </div>
+
+                <button id="load-more-button" data-page="1" type="button">Load More</button>
+
+                <div id="loader">
+                    <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
+                </div>
+
+                <?php
+            } else {
+                ?>
+                <h1 class="search-results-text">Search results for: <?=$_SESSION['SearchTerm']?></h1>
+                <br>
+                <hr>
+                <?
+                $sql = "SELECT * FROM user WHERE FirstName LIKE  '%" . $_SESSION['SearchTerm'] . "%' OR LastName LIKE '%". $_SESSION['SearchTerm'] ."%' OR UserName LIKE '%". $_SESSION['SearchTerm'] ."%'";
+
+                // Attempt select query execution
+                if($result = mysqli_query($conn, $sql)){
+                    if(mysqli_num_rows($result) > 0){
+
+
+                        while($row = mysqli_fetch_array($result)){
+
+                            $isFriendOfUser = false;
+                            $friendRequestSent= false;
+
+                            $friendName = $row['UserName'];
+                            $friendUserID = $row['UserID'];
+                            $friendProfilePictureID = $row['ProfilePictureID'];
+
+                            //if the friend is yourself, skip the iteration
+                            if ($friendName == $_SESSION['UserName']){
+                                continue;
+                            }
+
+                            //otherwise check to see if the logged in user is friends with this user's friends
+                            $sql2 = "SELECT * FROM friends
+                                WHERE UserID = '$friendUserID' AND FriendID = '{$_SESSION['UserID']}'";
+
+                            if ($result2 = mysqli_query($conn, $sql2)) {
+                                $count = mysqli_num_rows($result2);
+
+                                //if friends, display tick, otherwise an add friend icon will appear
+                                if ($count == 1) {
+                                    $isFriendOfUser = true;
+                                }
+                            }
+
+                            $sql3 = "SELECT * FROM `friendrequests` WHERE FriendID='$friendUserID' AND UserID='{$_SESSION['UserID']}'";
+
+                            if ($result3 = mysqli_query($conn, $sql3)) {
+                                $count2 = mysqli_num_rows($result3);
+
+                                //if friends, display tick, otherwise an add friend icon will appear
+                                if ($count2 == 1) {
+                                    $friendRequestSent = true;
+                                }
+                            }
+
+
+                            //create a frienditem and allow the returnHTML function to run with the parameters
+                            $row = new frienditem($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent);
+                            echo $row->returnHTML();
+                        }
+
+                        }
+
+                    // Close result set
+                    mysqli_free_result($result);
+                    mysqli_free_result($result2);
+
+                    } else{
+                        echo "<p>No matches found</p>";
                     }
-
-                // Close result set
-                mysqli_free_result($result);
-                mysqli_free_result($result2);
-
-                } else{
-                    echo "<p>No matches found</p>";
                 }
             } else{
                 echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
@@ -125,13 +165,18 @@ include('includes/header.php');
 
         ?>
 
-    </div>
+
 </main>
+
+</body>
+
+<!-- jquery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <?php
 include('includes/footer.php');
 include('includes/friendRequestJS.php');
+include('includes/commentlikejs.php');
 ?>
-
-</body>
 
 </html>

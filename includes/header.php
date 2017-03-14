@@ -1,3 +1,16 @@
+<?php
+if(!isset($_SESSION['UserName'])) { //if not yet logged in
+   header("Location: login.php");// send to login page
+   exit;
+
+//prevents lingering / buildup of unwanted search terms
+if(isset($_SESSION['SearchTerm'])) {
+    $_SESSION['SearchTerm'] = null;
+}
+}
+
+ ?>
+
 <div>
     <header>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -6,7 +19,7 @@
 <!-- search box -->
             <div class="pull-left">
                 <div class="search-box">
-                    <form action="search.php" method="post">
+                    <form action="search.php" method="get">
                       &nbsp;
                        <i class="fa fa-search search-icon"></i>
                          &nbsp;
