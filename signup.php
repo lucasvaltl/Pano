@@ -167,7 +167,9 @@ session_start();
 
                         <br>
                         <div class="login-help">
-                            <a href="login.php">Already a member? Log in over here!</a>
+                            <a href="login.php">Already a member? Log in over <div class="underline">
+                              here!
+                            </div></a>
                         </div>
                         <script type="text/javascript">
                         function initialize() {

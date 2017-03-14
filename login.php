@@ -80,7 +80,9 @@ include('includes/config.php');
 
                         <br />
                         <div class="login-help">
-                            <a href="signup.php">Not a member yet? Sign Up!</a> - <a href="#">Forgot Password</a>
+                            <a href="signup.php">Not a member yet? <div class="underline">
+                              Sign Up!
+                            </div></a>
                         </div>
                     </div>
                 </div>
