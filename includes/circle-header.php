@@ -31,7 +31,6 @@ $isPartOfCircle = false;
 <div class="container profile-info">
     <div class="row ">
         <div class="col col-md-3 col-xs-3 profile-info-row">
-
             <img src="https://apppanoblob.blob.core.windows.net/circlepics/<?=$circleProfilePictureID?>.jpg" class="img-circle  circle-cover " />
 
         </div>
@@ -52,11 +51,11 @@ $isPartOfCircle = false;
             if ($isPartOfCircle && ($CreatorID != $UserID)):
               ?>
             <form action="<?=SITE_ROOT?>/circle-members.php?GroupID=<?= $GroupID;?>" method="post" class="form-group">
-                <button type="submit"  name="submit" class="btn btn-default pull-right" Value="Exit Circle"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Exit Circle</button>
+                <button type="submit"  name="submit" class="btn btn-default pull-right exit-circle" Value="Exit Circle"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Exit Circle</button>
             </form>
           <?php elseif($CreatorID != $UserID) :?>
             <form action="<?=SITE_ROOT?>/circle-members.php?GroupID=<?= $GroupID;?>" method="post" class="form-group">
-                <button type="submit"  name="submit" class="btn btn-default pull-right" Value="Enter Circle"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Enter Circle</button>
+                <button type="submit"  name="submit" class="btn btn-default pull-right enter-circle" Value="Enter Circle"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Enter Circle</button>
             </form>
             <?php endif;?>
         </div>

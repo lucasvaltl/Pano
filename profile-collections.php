@@ -27,6 +27,7 @@ if (isset($_GET['id'])) {
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2qniLS_JRqdMIDCuy0L3ac7usMi6fbi4&v=3.exp&sensor=false&libraries=places"></script>
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Pano - Profile</title>
@@ -78,7 +79,6 @@ if (isset($_GET['id'])) {
       if($collections = mysqli_query($conn, $query)) {
 
             $count = 1;
-            echo '<hr/> ';
             //insert the collections into the page
             while($collection = mysqli_fetch_array($collections)) {
 
@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
                   if ($display_collection){
 
                       //insert post
-                      echo  ' <div class="col col-sm-6 ' . $borderRight . '">
+                      echo  ' <div class="col col-sm-6 soft-shadow collection-object">
                       <a href="'.SITE_ROOT.'/profile-collection.php?CollectionID='.$collection['CollectionID'].'">
                       <p>
                       <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $cover['PostID'] . '.jpg" class="img-responsive  profile-collections-title" alt="Collection does not contain Images"/>

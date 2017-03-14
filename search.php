@@ -77,7 +77,7 @@ include('includes/header.php');
                     ?>
                 </h3>
                 <br>
-                <hr />
+
                 <?php
                 include('includes/loadposts.php');
                 ?>
@@ -97,7 +97,6 @@ include('includes/header.php');
                 ?>
                 <h1 class="search-results-text">Search results for: <?=$_SESSION['SearchTerm']?></h1>
                 <br>
-                <hr>
                 <?
                 $sql = "SELECT * FROM user WHERE FirstName LIKE  '%" . $_SESSION['SearchTerm'] . "%' OR LastName LIKE '%". $_SESSION['SearchTerm'] ."%' OR UserName LIKE '%". $_SESSION['SearchTerm'] ."%'";
 

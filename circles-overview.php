@@ -49,8 +49,8 @@ $userID = $_SESSION['UserID'];
       <div class="circles-overview-header">
         Your  Circles
         <br />
+            <br />
       </div>
-      <hr />
       <div class="circles-overview-content">
 
 
@@ -76,13 +76,12 @@ $userID = $_SESSION['UserID'];
           // insert a new row every two elements
           if($count % 2 != 0){
             echo '<div class="row"> ';
-            $collection->setBorderRight();
           }
           //insert post
           $collection->returnHTML();
           //close row every two elements and insert a dividor
           if($count % 2 == 0){
-            echo '</div> <hr/> ';
+            echo '</div>  ';
           }
           $count += 1;
 

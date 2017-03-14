@@ -19,6 +19,7 @@ $filename = basename(__FILE__, '.php');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="https://use.fontawesome.com/ed51c90fe4.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2qniLS_JRqdMIDCuy0L3ac7usMi6fbi4&v=3.exp&sensor=false&libraries=places"></script>
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Pano - Profile</title>
@@ -68,13 +69,12 @@ $filename = basename(__FILE__, '.php');
           // insert a new row every two elements
           if($count % 2 != 0){
             echo '<div class="row"> ';
-            $collection->setBorderRight();
           }
           //insert post
           $collection->returnHTML();
           //close row every two elements and insert a dividor
           if($count % 2 == 0){
-            echo '</div> <hr/> ';
+            echo '</div>';
           }
           $count += 1;
 

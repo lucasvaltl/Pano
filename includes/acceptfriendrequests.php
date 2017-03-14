@@ -10,7 +10,6 @@
         $numRequests = mysqli_num_rows($result);
 
         if ($numRequests != 0) : ?>
-            <br>
             <div class="row notification-title grad animated slideInLeft">
                 Hey! Some people want to be your friends:
             </div>
