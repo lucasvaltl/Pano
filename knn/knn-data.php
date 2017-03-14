@@ -49,6 +49,7 @@ if ($result = mysqli_query($conn, $query)) {
 
 //===========================================================================
 //Gets a list of users who are not friends with the logged in user
+
 $query = "SELECT UserID from user
 			WHERE UserID != '{$_SESSION['UserID']}'
 			AND UserID NOT IN
@@ -56,7 +57,13 @@ $query = "SELECT UserID from user
 						WHERE FriendID = '{$_SESSION['UserID']}'
 						UNION ALL
 						SELECT FriendID from friends
-						WHERE UserID = '{$_SESSION['UserID']}')";
+						WHERE UserID = '{$_SESSION['UserID']}')
+			AND UserID NOT IN
+			(SELECT FriendID FROM friendrequests
+						WHERE UserID = '{$_SESSION['UserID']}')
+			AND UserID NOT IN
+			(SELECT UserID FROM friendrequests
+						WHERE FriendID = '{$_SESSION['UserID']}')";
 
 //$sampleSize is how many users are not friends with the user,
 // and $usersInSample is an array of UserIDs of those users
@@ -110,17 +117,6 @@ foreach ($usersInSample as $key => $userID) {
 			FROM friends AS my
 			JOIN friends AS their USING (FriendID)
 			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$userID')";
-
-		/*
-
-		SELECT my.FriendID
-			FROM friends AS my
-			JOIN friends AS their USING (FriendID)
-			WHERE  (my.UserID = 12399 AND their.UserID = 12400)
-			AND my.FriendID NOT IN (
-			SELECT UserID from user WHERE UserID = 12400)
-
-			*/
 
 	$numMutualFriends=0;
 
