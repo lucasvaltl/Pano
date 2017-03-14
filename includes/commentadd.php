@@ -36,23 +36,29 @@ if (mysqli_query($conn, $query)) {
 
 
 
-            echo ' <div class= "row post-comment id="' . $commentID .'"">
-               <div class="comment-user-picture col-md-9 col-xs-9">
-                 <a href="'. SITE_ROOT .'/profile-info.php?id='. $commentUserName .'" >&nbsp;
-                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $commentUserName . '
-                 </a>:
-                  &nbsp;    ' . $commentContent . '
-               </div>
-               <div col-md-3 col-xs-3">
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               '. $commentTimeStamp . '
+            echo                 ' <div class= "row post-comment" id="' . $commentID .'">
+
+                                 <a href="'. SITE_ROOT .'/profile-info.php?id='. $commentUserName .'" >&nbsp;
+                  <div class="col-md-1 col-xs-1 comment-picture-col">
+                                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" />
+                                        </div>
+                <div class="post-comment-content col-md-7 col-xs-7">
+                                   ' . $commentUserName . '
+                                 </a>:
+                                 <div class="post-comment-content">
+                                   &nbsp;    ' . $commentContent . '
+                                 </div>
+                               </div>
+                               <div class="col-md-3 col-xs-3 comment-timestamp">
+                       '. $commentTimeStamp . '
+                     </div>
+                      <div class="col-md-1 col-xs-1 ">
 
 
+                      </div>
 
-
-               </div>
-              </div>
-                <hr>';
+                              </div>
+                                <hr class="comment-hr">';
 
     }
 

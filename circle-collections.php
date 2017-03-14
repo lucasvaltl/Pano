@@ -57,7 +57,6 @@ if (isset($_GET['GroupID'])) {
         if($collections = mysqli_query($conn, $query)){
 
           $count = 1;
-          echo '<hr/> ';
           //insert the collections into the page
           while($collection = mysqli_fetch_array($collections)){
             //add first picture as cover to every collection
@@ -68,10 +67,9 @@ if (isset($_GET['GroupID'])) {
             // insert a new row every two elements
             if($count % 2 != 0){
               echo '<div class="row"> ';
-              $borderRight = 'border-right';
             }
             //insert post
-            echo  ' <div class="col col-sm-6 ' . $borderRight . '">
+            echo  ' <div class="col col-sm-6 soft-shadow collection-object">
             <a href="'.SITE_ROOT.'/profile-collection.php?CollectionID='.$collection['CollectionID'].'">
             <p>
             <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $cover['PostID'] . '.jpg" class="img-responsive  profile-collections-title" alt="Collection does not contain Images"/>
@@ -84,11 +82,9 @@ if (isset($_GET['GroupID'])) {
 
             //close row every two elements and insert a dividor
             if($count % 2 == 0){
-              echo '</div> <hr/> ';
+              echo '</div> ';
             }
             $count += 1;
-            //reset variables do default
-            $borderRight = '';
             $cover = null;
           }
         }

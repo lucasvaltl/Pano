@@ -121,9 +121,9 @@
         $display_page = true;
     } else if ($profileSettingID == 2){
         $friendshipQuery = "SELECT my.FriendID
-    			FROM friends AS my
-    			JOIN friends AS their USING (FriendID)
-    			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$profileUserID')";
+          FROM friends AS my
+          JOIN friends AS their USING (FriendID)
+          WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$profileUserID')";
 
         if ($result = mysqli_query($conn, $friendshipQuery)){
             if ($count = mysqli_num_rows($result) > 0){

@@ -25,10 +25,10 @@ echo '
         </p>
 
         <i class="fa fa-map-marker fa-lg"></i>&nbsp;
-        <input class="profile-info-location location form-control collection-name-input" type="text" name="Location" value="' .$Location . '" placeholder="Location e.g. (London, England)"
+        <input class="profile-info-location location form-control profile-edit-input  profile-edit-location"  type="text" name="Location" value="' .$Location . '" id="location" placeholder="Location e.g. (London, England)"
         />
 
-        <input class="profile-info-description descripton-text-box form-control collection-name-input" size="50%" type="text" name="ShortDescrip" value="' .$ShortDescrip . '" placeholder="Description (140 characters max)"
+        <input class="profile-info-description descripton-text-box form-control profile-edit-input" size="50%" type="text" name="ShortDescrip" value="' .$ShortDescrip . '" placeholder="Description (140 characters max)"
          />
 
     </div>
