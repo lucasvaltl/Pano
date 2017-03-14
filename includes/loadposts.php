@@ -1,7 +1,7 @@
 <?php
 
 //take this out when its live on the azure server
-sleep(1);
+//sleep(1);
 
 //ob_start needed to allow redirecting after login
 ob_start();
@@ -10,7 +10,7 @@ ob_start();
 
 if(!isset($_SESSION)) {
     session_start();
-} 
+}
 
 
 require_once('post.php');
