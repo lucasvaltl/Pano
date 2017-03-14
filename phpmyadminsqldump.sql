@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 14, 2017 at 12:20 AM
+-- Generation Time: Mar 14, 2017 at 02:26 AM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -78,7 +78,9 @@ INSERT INTO `comments` (`CommentID`, `UserID`, `PostID`, `Comment`, `CommentTime
 (11358, 12399, '77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 'Yeah I agree!', '2017-03-12 19:23:53'),
 (11359, 12399, '77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 'Please though, take it down! ', '2017-03-12 19:24:57'),
 (11360, 12399, 'd64a9ffc441847c5360d1a4503cd2a5ea529b2d86dbb7966f35df90d30de79aa', 'Nice picture Lucas', '2017-03-12 19:25:39'),
-(11361, 12399, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e', 'Looks cold!', '2017-03-12 19:26:02');
+(11361, 12399, '176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e', 'Looks cold!', '2017-03-12 19:26:02'),
+(11362, 12399, 'd8bac6816eeae2d04ebd7619db8eae089507b1b32b93faafd99858fffa281dd3', 'What a day this was!', '2017-03-14 01:21:41'),
+(11363, 12399, 'be530b97e85742019c77bcd8a12972c9f4eaac6acd5e69f808ebb2c6c1e36e6d', 'Really cool place!', '2017-03-14 01:23:20');
 
 -- --------------------------------------------------------
 
@@ -162,6 +164,7 @@ CREATE TABLE `friendrequests` (
 
 INSERT INTO `friendrequests` (`UserID`, `FriendID`) VALUES
 (12399, 12409),
+(12399, 12413),
 (12399, 12417),
 (12399, 12431),
 (12399, 12437),
@@ -1100,6 +1103,7 @@ CREATE TABLE `likes` (
 INSERT INTO `likes` (`PostID`, `UserID`) VALUES
 ('0b6ae7ad32e6b39d0460bdde67ff88632d8e94727242c25240688ba167f29dc7', 12399),
 ('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12399),
+('be530b97e85742019c77bcd8a12972c9f4eaac6acd5e69f808ebb2c6c1e36e6d', 12399),
 ('176f2271bc3e9b2e62641e5c24e4307121ad698e1193a6ea444d202bdbb4cd5e', 12400),
 ('77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 12400),
 ('49c4d2163dd13be90485c2e85b7f6eddbf128f8af2511748e0126de699185335', 12401),
@@ -1205,6 +1209,7 @@ INSERT INTO `posts` (`PostID`, `UserID`, `PostText`, `PostTime`, `PostLocation`)
 ('5b3113b514f25ee329d7068bd791b5a0c2b4915e206e6e1e5d64e7c73635e822', 12399, '#NiagaraFalls ', '2017-03-12 11:13:23', 'Niagara Falls, Canada/USA'),
 ('5fbdf1f6278c9360039898fa24b8dde58c0dfc4d5015183352bd4e38a4ea6d1d', 12401, 'Hello World', '2017-03-10 17:15:17', 'Sierra Nevada'),
 ('77f38c5a1ea518b67194f81e6c51b108b1cf45cab1c9cc03e7aeb641fe151c09', 12400, 'Nice Tits', '2017-03-10 23:57:47', 'Titland'),
+('86afd33fe895bae30777420bd412206df7b385ca493301a2e1ea5fca5fe3814e', 12399, 'View from afar... #sydney #sydneyharbourbridge #sydneyoperahouse ', '2017-03-14 02:03:41', 'Sydney, New South Wales, Australia'),
 ('b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49', 12445, '#trafalgarsquare #london', '2017-03-12 15:46:36', 'London, United Kingdom'),
 ('b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3', 12399, '#snowymountains #switzerland #cool', '2017-03-13 23:38:42', 'Swiss Alps, Airolo, Switzerland'),
 ('b9c1dd335f17a1f092df68bb066fafff699c5136aa162efd8df05e30f21c37b5', 12399, 'Iceland is awesome #glacier', '2017-03-10 20:24:07', 'Iceland'),
@@ -1280,7 +1285,9 @@ INSERT INTO `tags` (`TagID`, `TagName`) VALUES
 (11, '#socold'),
 (19, '#sunset'),
 (50, '#switzerland'),
+(54, '#sydney'),
 (24, '#sydneyharbourbridge'),
+(56, '#sydneyoperahouse'),
 (15, '#trafalgarsquare'),
 (6, '#volcano'),
 (23, '#weclimbedamountain');
@@ -1315,6 +1322,9 @@ INSERT INTO `tagspostsmapping` (`TagID`, `PostID`) VALUES
 (12, '5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5'),
 (13, '5397759102fa55e3a234ae1146b7ab350483caabeeec4809964aab53fac4ccd5'),
 (14, '5b3113b514f25ee329d7068bd791b5a0c2b4915e206e6e1e5d64e7c73635e822'),
+(24, '86afd33fe895bae30777420bd412206df7b385ca493301a2e1ea5fca5fe3814e'),
+(54, '86afd33fe895bae30777420bd412206df7b385ca493301a2e1ea5fca5fe3814e'),
+(56, '86afd33fe895bae30777420bd412206df7b385ca493301a2e1ea5fca5fe3814e'),
 (15, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
 (16, 'b78d944edf11609ee30b3cfd6b942fb69012a29f0b310327d45040b6f6115b49'),
 (21, 'b8c42179f5738e5f91c3642b49ba0b4b71ba4a432401551fd0773a3ba0b0abd3'),
@@ -1562,7 +1572,7 @@ ALTER TABLE `collections`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11362;
+  MODIFY `CommentID` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11364;
 --
 -- AUTO_INCREMENT for table `groups`
 --
@@ -1577,7 +1587,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `TagID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `TagID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `user`
 --
