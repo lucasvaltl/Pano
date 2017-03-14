@@ -144,9 +144,20 @@ include('includes/header.php');
                                 }
                             }
 
+                            $sql4 = "SELECT my.FriendID
+                        			FROM friends AS my
+                        			JOIN friends AS their USING (FriendID)
+                        			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$friendUserID')";
+
+                            $mutualFriends = 0;
+
+                            if ($result4 = mysqli_query($conn, $sql4)) {
+                                $mutualFriends = mysqli_num_rows($result4);
+                            }
+
 
                             //create a frienditem and allow the returnHTML function to run with the parameters
-                            $row = new frienditem($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent);
+                            $row = new frienditem($friendUserID, $friendName, $friendName, $friendProfilePictureID, $isFriendOfUser,$friendRequestSent, $mutualFriends);
                             echo $row->returnHTML();
                         }
 
