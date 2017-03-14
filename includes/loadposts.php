@@ -1,13 +1,17 @@
 <?php
 
 //take this out when its live on the azure server
-sleep(1);
+//sleep(1);
 
 //ob_start needed to allow redirecting after login
 ob_start();
 
 //session_start() needed to use global session variabls $_SESSION etc
-session_start();
+
+if(!isset($_SESSION)) {
+    session_start();
+}
+
 
 require_once('post.php');
 
@@ -24,11 +28,26 @@ $CollectionID = substr(strchr($_SERVER['HTTP_REFERER'], 'CollectionID='),13 );
 $displayRecommendations = false;
 
 //query to pick based on which page called loadposts.php
-//query tailored for the home feed
-if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
+
+
+// query tailored for the search bar entries starting with hashtags
+if ($_SESSION['SearchTerm'][0] == '#'){
+    $query = "SELECT * FROM posts AS p
+            LEFT JOIN tagspostsmapping as tpm on p.PostID = tpm.POSTID
+            LEFT JOIN tags as t on tpm.TagID = t.TagID
+            LEFT JOIN user as u on u.UserID = p.UserID
+            WHERE TagName = '{$_SESSION['SearchTerm']}'
+            ORDER BY PostTime DESC";
+
+    //set the $_SESSION['SearchTerm'] variable to null, so it can prepare for the next one
+    //(and so the else if statements are accessible later on)
+    $_SESSION['SearchTerm'] = null;
+
+    //query tailored for the home feed
+} else if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
     $displayRecommendations = true;
 
-     $query = "SELECT * FROM posts
+    $query = "SELECT * FROM posts
                 LEFT JOIN user ON user.`UserID` = posts.`UserID`
                 WHERE user.`UserID` = '{$_SESSION['UserID']}'
                 OR user.`UserID` IN
@@ -55,7 +74,6 @@ if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
                 ORDER BY PostTime DESC";
 }
 
-
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
 $posts = findPosts($page, $query, $conn, $displayRecommendations);
@@ -69,7 +87,7 @@ function addRecommendedFriendsRow($conn) {
 
 function findPosts($page, $query, $conn, $displayRecommendations) {
 
-//display recommendations only when on home or profile
+//display recommendations only when on home
     if ($page == 2 && $displayRecommendations){
         addRecommendedFriendsRow($conn);
     }

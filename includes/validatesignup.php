@@ -7,6 +7,7 @@ $missing = [];
 //will be used to toggle check email address and username validity
 $isEmailAddressInvalid = false;
 $emailAddressAlreadyExists = false;
+$isUserNameInvalid = false;
 $userNameAlreadyExists = false;
 
 
@@ -72,6 +73,16 @@ if (isset($_POST['submit'])) {
         $isEmailAddressValid = false;
     }
 
+    //checking if username is validation
+
+    if (preg_match('/^[a-z\d_]{4,20}$/i', $UserName)) {
+        $isUserNameInvalid = false;
+    } else {
+        $isUserNameInvalid = true;
+        $fail_count++;
+        $errors [] = $UserName;
+    }
+
     //checking if username is already taken or not by a different user
     if (!empty($EmailAddress)) {
         $query = mysqli_query($conn, "SELECT * FROM user WHERE EmailAddress = '$_POST[EmailAddress]'");
@@ -110,10 +121,17 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
     //hashing the passwords so that they are stored securely
     $Password = password_hash($Password, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO user (FirstName, LastName, UserName, EmailAddress, Password, Location, ShortDescrip)
-    VALUES ('$FirstName', '$LastName', '$UserName', '$EmailAddress', '$Password', '$Location', '$ShortDescrip')";
+    //prepared statement to handle queries containing user input properly
 
-    if (mysqli_query($conn, $query)) {
+    if(!$stmt = $conn->prepare("INSERT INTO user (FirstName, LastName, UserName, EmailAddress, Password, Location, ShortDescrip) VALUES (?,?,?,?,?,?,?)")){
+        echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+    }
+
+    if(!$stmt->bind_param("sssssss", $FirstName, $LastName, $UserName, $EmailAddress, $Password, $Location, $ShortDescrip)){
+        echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+    }
+
+    if ($stmt->execute()) {
         echo "New record created successfully";
 
 
@@ -141,6 +159,7 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
                 $_SESSION['ShortDescrip'] = $row['ShortDescrip'];
                 $_SESSION['SettingID'] = $row['SettingID'];
                 $_SESSION['ProfilePictureID'] = $row['ProfilePictureID'];
+                $_SESSION['SearchTerm'] = null;
 
                 $query2 = "INSERT INTO friendrecommendations (UserID) VALUES ('{$_SESSION['UserID']}')";
 
@@ -151,10 +170,11 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
                 }
 
             }
+            $stmt->close();
         }
 
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
     }
 }
 

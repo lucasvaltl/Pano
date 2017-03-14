@@ -105,67 +105,67 @@ textarea {
 /*adapt size of panoramas to screen*/
 @media (min-width: 768px) {
 .panorama {
-    height: 300px;
+    height: 219px;
     }
 }
 
 @media (min-width: 992px) {
 .panorama{
-        height: 400px;
+        height: 284px;
     }
 }
 
 @media (min-width: 1200px) {
 .panorama{
-    height: 500px;
+    height: 343px;
     }
 }
 
 @media (min-width: 1500px) {
 .panorama{
-    height:600px;
+    height: 429px;
     }
 }
 
 @media (min-width: 1800px) {
 .panorama{
-    height: 700px;
+    height: 515px;
     }
 }
 
 @media (min-width: 2100px) {
 .panorama{
-    height: 800px;
+    height: 600px;
     }
 }
 
 @media (min-width: 2400px) {
 .panorama{
-    height: 900px;
+    height: 686px;
     }
 }
 
 @media (min-width: 2700px) {
 .panorama{
-    height: 1000px;
+    height: 771px;
     }
 }
 
 @media (min-width: 3000px) {
 .panorama{
-    height: 1100px;
+    height: 857px;
     }
 }
 
 @media (min-width: 3600px) {
 .panorama{
-    height: 1300px;
+    height: 1029px;
     }
 }
 
 @media (min-width: 3900px) {
 .panorama{
-    height: 1400px;
+    height: 1114px;
     }
 }
 
@@ -974,7 +974,11 @@ button.request-reject-button {
 .search-icon{
   font-size: 1.6em;
   margin-bottom: 2px;
-    color: #444
+    color: #444;
+}
+
+.search-results-text{
+    color: #444;
 }
 
 .search-box {
@@ -991,7 +995,7 @@ button.request-reject-button {
 }
 
 .search-input{
-      font-size:1.3em;
+  font-size:1.0em;
   border: none;
   outline: none;
   border-bottom: #444 solid 1px;
