@@ -7,7 +7,11 @@ sleep(1);
 ob_start();
 
 //session_start() needed to use global session variabls $_SESSION etc
-session_start();
+
+if(!isset($_SESSION)) {
+    session_start();
+} 
+
 
 require_once('post.php');
 
