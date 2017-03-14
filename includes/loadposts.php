@@ -28,8 +28,23 @@ $CollectionID = substr(strchr($_SERVER['HTTP_REFERER'], 'CollectionID='),13 );
 $displayRecommendations = false;
 
 //query to pick based on which page called loadposts.php
-//query tailored for the home feed
-if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
+
+
+// query tailored for the search bar entries starting with hashtags
+if ($_SESSION['SearchTerm'][0] == '#'){
+    $query = "SELECT * FROM posts AS p
+            LEFT JOIN tagspostsmapping as tpm on p.PostID = tpm.POSTID
+            LEFT JOIN tags as t on tpm.TagID = t.TagID
+            LEFT JOIN user as u on u.UserID = p.UserID
+            WHERE TagName = '{$_SESSION['SearchTerm']}'
+            ORDER BY PostTime DESC";
+
+    //set the $_SESSION['SearchTerm'] variable to null, so it can prepare for the next one
+    //(and so the else if statements are accessible later on)
+    $_SESSION['SearchTerm'] = null;
+
+    //query tailored for the home feed
+} else if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
     $displayRecommendations = true;
 
     $query = "SELECT * FROM posts
@@ -57,15 +72,7 @@ if (strpos($_SERVER['HTTP_REFERER'],'home.php')){
                   ON user.`UserID` = posts.`UserID`
                 WHERE photocollectionsmapping.`CollectionID` = '$CollectionID'
                 ORDER BY PostTime DESC";
-} else if (strpos($_SERVER['HTTP_REFERER'],'search.php')){
-    $query = "SELECT * FROM posts AS p
-            LEFT JOIN tagspostsmapping as tpm on p.PostID = tpm.POSTID
-            LEFT JOIN tags as t on tpm.TagID = t.TagID
-            LEFT JOIN user as u on u.UserID = p.UserID
-            WHERE TagName = '{$_SESSION['SearchTerm']}'
-            ORDER BY PostTime DESC";
 }
-
 
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
