@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 14, 2017 at 02:26 AM
+-- Generation Time: Mar 14, 2017 at 04:17 AM
 -- Server version: 5.6.34
 -- PHP Version: 7.1.0
 
@@ -145,7 +145,9 @@ INSERT INTO `friendrecommendations` (`UserID`, `FriendID1`, `FriendID2`, `Friend
 (12439, NULL, NULL, NULL, NULL, NULL),
 (12440, NULL, NULL, NULL, NULL, NULL),
 (12444, 12427, 12415, 12440, 12437, 12412),
-(12445, 12427, 12415, 12440, 12437, 12412);
+(12445, 12427, 12415, 12440, 12437, 12412),
+(12448, 12427, 12425, 12440, 12437, 12412),
+(12450, 12427, 12415, 12407, 12440, 12437);
 
 -- --------------------------------------------------------
 
@@ -1358,7 +1360,7 @@ CREATE TABLE `user` (
   `ShortDescrip` varchar(150) NOT NULL,
   `DateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `SettingID` int(5) NOT NULL DEFAULT '3',
-  `ProfilePictureID` varchar(200) DEFAULT NULL
+  `ProfilePictureID` varchar(200) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1412,7 +1414,9 @@ INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `UserName`, `EmailAddress
 (12442, 'Jess', 'Nguyen', 'AwesomeBottle', 'AwesomeBottle@ucl.ac.uk', '$2y$10$uEiGBhZFZSaiopI0HaDWne0Rhmi/me42yZbb8H9ZYtVCkCi8jiZtS', 'San Francisco', 'Hi Im Jess Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3, '0'),
 (12443, 'Michelle', 'Nguyen', 'amazingBottleLass', 'amazingBottleLass@master.com', '$2y$10$Zk1hKuMQU15mhjEJYqviH.I5/JU25XyVhi6ceDKXEosysyywLlXlm', 'Chicago', 'Hi Im Michelle Nguyen, and I love photography. Pano is great!', '2017-03-10 20:16:53', 3, '0'),
 (12444, 'Fynn', 'Dewald', 'fynn', 'fynn@gmail.com', '$2y$10$GnDQaLqudLFIIPX9208zRO62AnjG8T42IsknR3wn0Fcjv42VNOOZ.', 'London', 'I love Law', '2017-03-10 23:59:17', 3, '0'),
-(12445, 'Yolo', 'Wizard', 'YoloWizard', 'yolo@wizard.com', '$2y$10$HVyaVW7tXvjBDGmyz7ivu.3Tz5fh3QfRMItPH6OD5o8HqvisDqqFW', 'Hodor', 'I stack shields', '2017-03-12 14:45:26', 2, '0');
+(12445, 'Yolo', 'Wizard', 'YoloWizard', 'yolo@wizard.com', '$2y$10$HVyaVW7tXvjBDGmyz7ivu.3Tz5fh3QfRMItPH6OD5o8HqvisDqqFW', 'Hodor', 'I stack shields', '2017-03-12 14:45:26', 2, '0'),
+(12448, 'Thomas', 'Tank', 'PenguinKing', 'penguinking@mail.com', '$2y$10$uTVBAjADg7HlN2GhQ/.Q3eEeHqfYUUF4FS9gBxCZ4vMfWRSlaltrW', 'Belfast, United Kingdom', 'I like Thomas the Tank Engine', '2017-03-14 03:37:24', 3, '0'),
+(12450, 'John', 'Johnson', 'JohnJohnson', 'johnjohn@lol.com', '$2y$10$selwfxibgY05ulwKf9IQbeTj67d5vYy8Ww34fTBt4u3YID/bkJodu', 'London, ON, Canada', 'I\'m awesome!', '2017-03-14 03:49:29', 3, '0');
 
 -- --------------------------------------------------------
 
@@ -1592,7 +1596,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12448;
+  MODIFY `UserID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12451;
 --
 -- Constraints for dumped tables
 --
