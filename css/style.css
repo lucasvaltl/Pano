@@ -1200,10 +1200,8 @@ ul#suggestions li a {
 }
 
 ul#suggestions li a:hover {
-  background-color: white;
-z-index: 200;
--webkit-box-shadow: 0 2px 30px 1px #ddd;
-box-shadow: 0 2px 30px 1px #ddd;
+  background-color: #ededed;
+border-radius: 7px;
 }
 
 
