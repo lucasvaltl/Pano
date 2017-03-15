@@ -21,18 +21,20 @@ $usersQuery = "SELECT * FROM user";
 
 if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 
-	$users = [];
+	$allTheUserIDs = [];
 
-	while ($userRow = mysqli_fetch_array){
-		$user = $userRow['UserID'];
-		$users [] = $user;
+	while ($userRow = mysqli_fetch_array($usersQueryResult)){
+		$justOneUserID = $userRow['UserID'];
+		$allTheUserIDs [] = $justOneUserID;
 	}
 
+	//var_dump($allTheUserIDs);
 
 
 
 
-		foreach ($users as $user){
+
+		foreach ($allTheUserIDs as $justOneUserID){
 			//Where the dataset of each user will be stored.
 
 
@@ -40,7 +42,7 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 
 			//===========================================================================
 			//Find out how many likes the user has
-			$query = "SELECT PostID FROM likes WHERE UserID  = '{$_SESSION['UserID']}'";
+			$query = "SELECT PostID FROM likes WHERE UserID  = '$justOneUserID'";
 
 			//$numTotalLikes is the total number of likes of the logged in user
 			$numTotalLikes;
@@ -57,7 +59,7 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 			//$numTotalFriends is number of total friends of the logged in user
 
 			$query = "SELECT UserID from friends
-						WHERE UserID = '{$_SESSION['UserID']}'";
+						WHERE UserID = '$justOneUserID'";
 
 			$numTotalFriends;
 
@@ -100,19 +102,19 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 				*/
 
 			$query = "SELECT UserID from user
-						WHERE UserID != '{$_SESSION['UserID']}'
+						WHERE UserID != '$justOneUserID'
 						AND UserID NOT IN
 						(SELECT UserID from friends
-									WHERE FriendID = '{$_SESSION['UserID']}'
+									WHERE FriendID = '$justOneUserID'
 									UNION ALL
 									SELECT FriendID from friends
-									WHERE UserID = '{$_SESSION['UserID']}')
+									WHERE UserID = '$justOneUserID')
 						AND UserID NOT IN
 						(SELECT FriendID FROM friendrequests
-									WHERE UserID = '{$_SESSION['UserID']}')
+									WHERE UserID = '$justOneUserID')
 						AND UserID NOT IN
 						(SELECT UserID FROM friendrequests
-									WHERE FriendID = '{$_SESSION['UserID']}')";
+									WHERE FriendID = '$justOneUserID')";
 
 			//$sampleSize is how many users are not friends with the user,
 			// and $usersInSample is an array of UserIDs of those users
@@ -147,7 +149,7 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 
 				$query = "SELECT *
 					FROM likes t1, likes t2
-					WHERE t1.PostID = t2.PostID AND t1.UserID = '{$_SESSION['UserID']}' AND t2.UserID = $userID
+					WHERE t1.PostID = t2.PostID AND t1.UserID = '$justOneUserID' AND t2.UserID = $userID
 					AND t1.UserID <> t2.UserID";
 
 				$numSharedLikes;
@@ -165,7 +167,7 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 				$query = "SELECT my.FriendID
 						FROM friends AS my
 						JOIN friends AS their USING (FriendID)
-						WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$userID')";
+						WHERE  (my.UserID = '$justOneUserID' AND their.UserID = '$userID')";
 
 				$numMutualFriends=0;
 
@@ -241,13 +243,17 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 						FriendID3 = '$recommendations[2]',
 						FriendID4 = '$recommendations[3]',
 						FriendID5 = '$recommendations[4]'
-						WHERE UserID = '{$_SESSION['UserID']}'";
+						WHERE UserID = '$justOneUserID'";
 
 			if ($result = mysqli_query($conn, $query)) {
 			//	echo "success bro";
 			} else {
 				echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
 			}
+
+		}
+	}
+
 
 
 			//============= THE FOLLOWING PRINTS A TEST GRAPH FOR VISUALISATION ===========
@@ -313,6 +319,3 @@ if ($usersQueryResult = mysqli_query($conn, $usersQuery)){
 			.currentUserPoint{background-color:red;}
 			.nearest{background-color:blue;}
 			</style>
-
-		}
-	}
