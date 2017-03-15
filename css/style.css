@@ -1615,6 +1615,13 @@ right: 20px;
   margin-top: 6px;
 }
 
+.create-message-content:focus{
+border: none;
+  border: 1px solid  #61e8bf;
+  outline: 0;
+  box-shadow: none;
+}
+
 /* loading */
 
 #loader {
