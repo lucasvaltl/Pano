@@ -1172,8 +1172,10 @@ padding-top: 5px;
 
 ul#suggestions {
   list-style: none;
+    background: white;
   margin: 0;
-  padding-top: 10px;
+padding: 0;
+  margin-top: 10px;
   width: 220px;
   display: none;
   position: absolute;
@@ -1185,24 +1187,23 @@ ul#suggestions li {
 
 ul#suggestions li a {
   display: block;
+  position: relative;
+
   min-height: 1em;
   padding: 0.5em 20px;
-  margin-left: -30px;
   background: white;
-  color: #000;
+  color: #444;
   text-decoration: none;
   text-align: left;
-  font-size: 0.8em;
+  font-size: 1em;
 
 }
 
 ul#suggestions li a:hover {
-  background: #BBB;
-  -moz-transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-  transition: 0.2s;
-  border-radius: 20px;
+  background-color: white;
+z-index: 200;
+-webkit-box-shadow: 0 2px 30px 1px #ddd;
+box-shadow: 0 2px 30px 1px #ddd;
 }
 
 
