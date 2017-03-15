@@ -50,6 +50,37 @@ if ($result = mysqli_query($conn, $query)) {
 //===========================================================================
 //Gets a list of users who are not friends with the logged in user
 
+/*
+SELECT UserID from user
+			WHERE UserID != 12399
+			AND UserID NOT IN
+			(SELECT UserID from friends
+						WHERE FriendID = 12399
+						UNION ALL
+						SELECT FriendID from friends
+						WHERE UserID = 12399)
+			AND UserID NOT IN
+			(SELECT FriendID FROM friendrequests
+						WHERE UserID = 12399)
+			AND UserID NOT IN
+			(SELECT UserID FROM friendrequests
+						WHERE FriendID = 12399)
+
+
+SELECT UserID from user
+WHERE UserID != 12399
+AND UserID NOT IN
+	(SELECT UserID from friends
+	WHERE FriendID = 12399
+			UNION ALL
+	SELECT FriendID FROM friendrequests
+	WHERE UserID = 12399
+			UNION ALL
+	SELECT UserID FROM friendrequests
+	WHERE FriendID = 12399)
+
+	*/
+
 $query = "SELECT UserID from user
 			WHERE UserID != '{$_SESSION['UserID']}'
 			AND UserID NOT IN
