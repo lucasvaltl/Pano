@@ -24,10 +24,11 @@ require_once('includes/config.php');
     <link rel="stylesheet" href="css/style.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Pano - Newsfeed</title>
-
-<?php include_once('includes/meta-data.php'); ?>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://apppanoblob.blob.core.windows.net/assets/favicon.ico">
+    <meta property="og:title" content="Pano" />
+    <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+    <meta property="og:description" content="The social network taking a wider perspectiv " />
 </head>
 
 <body ng-app="">
