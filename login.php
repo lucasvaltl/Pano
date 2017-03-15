@@ -31,8 +31,7 @@ include('includes/config.php');
 //THIS IF STATEMENT IS TEMPORARY
 
     if (isset($_SESSION['UserName'])) {
-        $UserName = $_SESSION['UserName'];
-        echo "Hi there $UserName";
+          header("Location: home.php");
     }
 
      ?>

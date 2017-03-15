@@ -98,7 +98,7 @@ include('includes/header.php');
                 <h1 class="search-results-text">Search results for: <?=$_SESSION['SearchTerm']?></h1>
                 <br>
                 <?
-                $sql = "SELECT * FROM user WHERE FirstName LIKE  '%" . $_SESSION['SearchTerm'] . "%' OR LastName LIKE '%". $_SESSION['SearchTerm'] ."%' OR UserName LIKE '%". $_SESSION['SearchTerm'] ."%'";
+                $sql = "SELECT * FROM user WHERE FirstName LIKE  '%" . $_SESSION['SearchTerm'] . "%' OR LastName LIKE '%". $_SESSION['SearchTerm'] ."%' OR UserName LIKE '%". $_SESSION['SearchTerm'] ."%' LIMIT 10";
 
                 // Attempt select query execution
                 if($result = mysqli_query($conn, $sql)){
@@ -146,9 +146,9 @@ include('includes/header.php');
                             }
 
                             $sql4 = "SELECT my.FriendID
-                        			FROM friends AS my
-                        			JOIN friends AS their USING (FriendID)
-                        			WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$friendUserID')";
+                              FROM friends AS my
+                              JOIN friends AS their USING (FriendID)
+                              WHERE  (my.UserID = '{$_SESSION['UserID']}' AND their.UserID = '$friendUserID')";
 
                             $mutualFriends = 0;
 
