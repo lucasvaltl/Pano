@@ -73,7 +73,6 @@ if(isset($_GET['CollectionID'])){
 
       </div>
         <br />
-        <hr />
 
         <div  id="feed-container" >
 
