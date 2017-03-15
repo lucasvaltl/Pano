@@ -5,5 +5,7 @@
 define ('SITE_ROOT', 'http://app-pano.azurewebsites.net');
 
 // OPTION 2: Connection to local DB /////////////////////////////////
-// define ('SITE_ROOT', '/panoapp');
+
+//define ('SITE_ROOT', '/panoapp');
+
 ?>
