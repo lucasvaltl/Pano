@@ -64,7 +64,7 @@ include_once('includes/edit-circle-members.php');
                                 $query = "SELECT CreatorID  FROM groups  WHERE GroupID='$GroupID'";
                                 $CreatorID = mysqli_fetch_assoc(mysqli_query($conn, $query));
                                 $CreatorID = $CreatorID['CreatorID'];
-                          
+
                                 if($UserID == $CreatorID):
 
                             ?>
@@ -95,7 +95,7 @@ include_once('includes/edit-circle-members.php');
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             <?php
-                              if($row['UserID']== $CreatorID){
+                              if($row['UserID'] == $CreatorID){
                                 $isAdmin = true;
                                 echo '<div class="admin-icon">
                                 Admin
