@@ -25,6 +25,7 @@ require_once('includes/config.php');
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Pano - Newsfeed</title>
 
+<?php include_once('includes/meta-data.php'); ?>
 
 
 </head>
