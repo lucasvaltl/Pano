@@ -335,9 +335,9 @@ hr{
 }
 
 #homepagelogo:hover,#homepagelogo:focus{
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -moz-transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
     transition: 0.3s;
 }
 

@@ -45,6 +45,7 @@ if(isset($_SESSION['SearchTerm'])) {
                 <a href="<?=SITE_ROOT?>/profile-info.php?id=<?php echo $_SESSION['UserName'];?>">
                     <img class="comment-picture img-circle" src="https://apppanoblob.blob.core.windows.net/profilepics/<?=$_SESSION['ProfilePictureID']?>.jpg">
                     &nbsp; &nbsp;<?=$_SESSION['UserName'];?>
+                    &nbsp; &nbsp;
                 </a>
             <?php else : ?>
             <div class="pull-right navbar-text">
