@@ -95,8 +95,8 @@ include_once('includes/createcircle.php');
                     FROM friends LEFT JOIN user
                     ON user.`UserID` = friends.`UserID`
                     OR user.`UserID` = friends.`FriendID`
-                    AND user.`UserID` != '$UserID'
-                    WHERE friends.`UserID` = '$UserID'");
+                    WHERE friends.`UserID` = '$UserID'
+                    AND user.`UserID` != '$UserID'");
         $friends = mysqli_query($conn, $query);
        ?>
 
