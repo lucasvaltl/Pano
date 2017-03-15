@@ -64,7 +64,9 @@ include_once('includes/edit-circle-members.php');
                                 $query = "SELECT CreatorID  FROM groups  WHERE GroupID='$GroupID'";
                                 $CreatorID = mysqli_fetch_assoc(mysqli_query($conn, $query));
                                 $CreatorID = $CreatorID['CreatorID'];
-                                if($UserID === $CreatorID):
+                          
+                                if($UserID == $CreatorID):
+
                             ?>
                             <input type="submit" name="submit" class="btn btn-default lv-button delete-circle-members" value="Delete" />
                             <?php endif; ?>
@@ -93,7 +95,7 @@ include_once('includes/edit-circle-members.php');
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             <?php
-                              if($row['UserID']=== $CreatorID){
+                              if($row['UserID']== $CreatorID){
                                 $isAdmin = true;
                                 echo '<div class="admin-icon">
                                 Admin
@@ -106,7 +108,7 @@ include_once('includes/edit-circle-members.php');
                         <div class="col col-sm-3 col-md-offset-1 col-xs-3 friending-icon">
                             <?php
                               // only display unfriending options when user is admin
-                                if($UserID === $CreatorID && !$isAdmin):
+                                if($UserID == $CreatorID && !$isAdmin):
                               ?>
                             <input type="checkbox" class="inverted-create-circle-check" name="<?= $row['UserID']?>" value="<?= $row['UserID']?>">
                             <?php endif; ?>
@@ -124,7 +126,7 @@ include_once('includes/edit-circle-members.php');
                 <div class="content friends-content container form-group">
 
                     <?php
-                        if($UserID === $CreatorID):
+                        if($UserID == $CreatorID):
                      ?>
                     <div class="row">
                         <div class="col col-sm-2">

@@ -27,6 +27,7 @@ define("DB_USERNAME", "b55e2163643140");
 
 
 // OPTION 2: Connection to local DB /////////////////////////////////
+
 /*
     define("DB_USERNAME", "root");
     define("DB_PASS", "root");
