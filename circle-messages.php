@@ -76,7 +76,7 @@ $messages = mysqli_query($conn, $query);
    ?>
 
    <div class="row">
- <div class=" <?php echo (( $row['UserID'] ==$_SESSION['UserID']) ? 'circle-message-right' : 'circle-message-left' ); ?>">
+ <div class=" <?php echo (( $row['UserID'] ==$_SESSION['UserID']) ? 'circle-message-right' : 'circle-message-left' ); ?> soft-shadow">
    <div class="message-sender">
      <?= $row['Username'] ?> @ <?= $row['MessageTime'] ?>
    </div>
