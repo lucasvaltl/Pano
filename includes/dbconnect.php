@@ -28,31 +28,32 @@ define("DB_USERNAME", "b55e2163643140");
 
 // OPTION 2: Connection to local DB /////////////////////////////////
 
-    // define("DB_USERNAME", "root");
-    // define("DB_PASS", "root");
-    // define("DB_NAME", "Pano");
-    // define("DB_HOST", "localhost");
-    // define("DB_PORT", "8889");
-    //
-    // //$link = mysqli_init();
-    // $conn = mysqli_connect(
-    //   // $link,
-    //    DB_HOST,
-    //    DB_USERNAME,
-    //    DB_PASS,
-    //    DB_NAME,
-    //    DB_PORT
-    // );
-    //
-    // //test if connection occured
-    // if(mysqli_connect_errno()) {
-    //     die("Database connection failed: " .
-    //         mysqli_connect_error() .
-    //         " (" . mysqli_connect_errno() . ")"
-    //     );
-    // }
+/*
+    define("DB_USERNAME", "root");
+    define("DB_PASS", "root");
+    define("DB_NAME", "Pano");
+    define("DB_HOST", "localhost");
+    define("DB_PORT", "8889");
 
+    //$link = mysqli_init();
+    $conn = mysqli_connect(
+      // $link,
+       DB_HOST,
+       DB_USERNAME,
+       DB_PASS,
+       DB_NAME,
+       DB_PORT
+    );
 
+    //test if connection occured
+    if(mysqli_connect_errno()) {
+        die("Database connection failed: " .
+            mysqli_connect_error() .
+            " (" . mysqli_connect_errno() . ")"
+        );
+    }
+
+*/
 
 /*
     $FirstName = 'Li';
