@@ -19,12 +19,13 @@ if(isset($_SESSION['SearchTerm'])) {
 <!-- search box -->
             <div class="pull-left">
                 <div class="search-box">
-                    <form id="search-form" action="search.php" method="get">
+                    <!-- autocomplete="off" role="presentation" required to disable browser autofill -->
+                    <form id="search-form" action="search.php" method="get" autocomplete="off" role="presentation">
                       &nbsp;
                        <i class="fa fa-search search-icon"></i>
                          &nbsp;
                          <?php $search = isset($_GET['search']) ? $_GET['search'] : ''; ?>
-                        <input type="text" class="search-input" id="search" name="search" placeholder="Search users or #tags" value="<?php echo htmlspecialchars($search); ?>" />
+                        <input type="text" class="search-input" id="search" name="search" placeholder="Search users or #tags" value="<?php echo $search; ?>" />
                         <button class="search-btn" type="submit" value=""><i class="fa fa-chevron-right"></i> </button>
                     </form>
                     <ul id="suggestions">
@@ -66,14 +67,19 @@ if(isset($_SESSION['SearchTerm'])) {
         var form = document.getElementById("search-form");
         var search = document.getElementById("search");
 
-        function showSuggestions(json) {
-            suggestions.style.display = 'block';
-         }
 
          function getSuggestions() {
            var search = this.value;
 
-           console.log(search);
+           var isThereHashTag = isThereHashTag(search);
+
+           if (isThereHashTag){
+               var search = search.substring(1);
+           }
+
+           function isThereHashTag(search){
+               return (search.indexOf("#") != -1) ? true : false;
+           }
 
            if (search.length < 3) {
                suggestions.style.display= 'none';
@@ -81,15 +87,14 @@ if(isset($_SESSION['SearchTerm'])) {
            }
 
            var xhr = new XMLHttpRequest();
-           xhr.open('GET', 'includes/autosuggest.php?search=' + search, true);
+           xhr.open('GET', 'includes/autosuggest.php?hashtag='+isThereHashTag+'&search=' + search, true);
            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
            xhr.onreadystatechange = function () {
              if(xhr.readyState == 4 && xhr.status == 200) {
                var result = xhr.responseText;
-               console.log('Result: ' + result);
+               //console.log('Result: ' + result);
                suggestions.innerHTML = result;
-
-               showSuggestions(result);
+               suggestions.style.display = 'block';
              }
            };
            xhr.send();
