@@ -19,13 +19,18 @@ if(isset($_SESSION['SearchTerm'])) {
 <!-- search box -->
             <div class="pull-left">
                 <div class="search-box">
-                    <form action="search.php" method="get">
+                    <!-- autocomplete="off" role="presentation" required to disable browser autofill -->
+                    <form id="search-form" action="search.php" method="get" autocomplete="off" role="presentation">
                       &nbsp;
                        <i class="fa fa-search search-icon"></i>
                          &nbsp;
-                        <input type="text" class="search-input" name="search" placeholder="Search users or #tags" />
+                         <?php $search = isset($_GET['search']) ? $_GET['search'] : ''; ?>
+                        <input type="text" class="search-input" id="search" name="search" placeholder="Search users or #tags" value="<?php echo $search; ?>" />
                         <button class="search-btn" type="submit" value=""><i class="fa fa-chevron-right"></i> </button>
                     </form>
+                    <ul id="suggestions">
+                        <!-- suggestions will fill in here -->
+                    </ul>
                 </div>
             </div>
 
@@ -54,3 +59,50 @@ if(isset($_SESSION['SearchTerm'])) {
     </header>
 
 </div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var suggestions = document.getElementById("suggestions");
+        var form = document.getElementById("search-form");
+        var search = document.getElementById("search");
+
+
+         function getSuggestions() {
+           var search = this.value;
+
+           var isThereHashTag = isThereHashTag(search);
+
+           if (isThereHashTag){
+               var search = search.substring(1);
+           }
+
+           function isThereHashTag(search){
+               return (search.indexOf("#") != -1) ? true : false;
+           }
+
+           if (search.length < 3) {
+               suggestions.style.display= 'none';
+               return;
+           }
+
+           var xhr = new XMLHttpRequest();
+           xhr.open('GET', 'includes/autosuggest.php?hashtag='+isThereHashTag+'&search=' + search, true);
+           xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+           xhr.onreadystatechange = function () {
+             if(xhr.readyState == 4 && xhr.status == 200) {
+               var result = xhr.responseText;
+               //console.log('Result: ' + result);
+               suggestions.innerHTML = result;
+               suggestions.style.display = 'block';
+             }
+           };
+           xhr.send();
+         }
+
+         //input listens for every key press
+         search.addEventListener("input", getSuggestions);
+
+    });
+
+</script>
