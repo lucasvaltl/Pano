@@ -23,6 +23,7 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animate.css">
     <title>Pano - Sign Up</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="https://apppanoblob.blob.core.windows.net/assets/favicon.ico">
     <meta property="og:title" content="Pano" />
     <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />

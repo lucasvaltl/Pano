@@ -37,6 +37,7 @@ include_once('includes/edit-circle-members.php');
     <title>Pano -
         <?php echo $GroupID;?>
     </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="https://apppanoblob.blob.core.windows.net/assets/favicon.ico">
     <meta property="og:title" content="Pano" />
     <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
