@@ -131,8 +131,6 @@ Which group do you want to share this collection with?
 <?php var_dump($_POST); ?>
     </form>
 
-
-
   </main>
   <?php
   include('includes/footer.php');

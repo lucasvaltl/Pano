@@ -15,19 +15,14 @@ $this->collectionImageIDA = $collectionImageIDA;
 $this->collectionNameA = $collectionNameA;
 }
 
-public function setBorderRight(){
-  $this->borderRight = 'border-right';
-}
-
-
 public function returnHTML(){
 
 
-$output =  ' <div class="col col-sm-6  ' . $this->borderRight . '">
+$output =  ' <div class="col col-sm-6  soft-shadow circle-cover-object">
     <a href="'.SITE_ROOT.'/' . $this->collectionLinkA . '">
 
     <p class="mask-container">
-          <img src="https://apppanoblob.blob.core.windows.net/circlepics/'.$this->collectionImageIDA.'.jpg" class="img-circle  circle-cover-large center-center" />
+          <img src="https://apppanoblob.blob.core.windows.net/circlepics/'.$this->collectionImageIDA.'.jpg" class=" circle-cover-large" />
     </p>
 
     <p>

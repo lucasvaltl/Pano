@@ -60,26 +60,32 @@ class post{
 
               $canUserDelete =
                   ($_SESSION['UserName'] == $comment->commentUserName ?
-                  '<button class="delete-comment-button"><i class="fa fa-times" aria-hidden="true"></i></button>' : '' );
+                  '<button class="delete-comment-button"><i class="fa fa-times" aria-hidden="true"></i></button>' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' );
 
             $currentComments .= ' <div class= "row post-comment" id="' . $comment->commentID .'">
-               <div class="comment-user-picture col-md-9 col-xs-9">
+
                  <a href="'. SITE_ROOT .'/profile-info.php?id='. $comment->commentUserName .'" >&nbsp;
-
-                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" /> &nbsp; &nbsp; &nbsp; ' . $comment->commentUserName . '
+  <div class="col-md-1 col-xs-1 comment-picture-col">
+                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" />
+                        </div>
+<div class="post-comment-content col-md-7 col-xs-7">
+                   ' . $comment->commentUserName . '
                  </a>:
-                  &nbsp;    ' . $comment->commentContent . '
+                 <div class="post-comment-content">
+                   &nbsp;    ' . $comment->commentContent . '
+                 </div>
                </div>
-               <div col-md-3 col-xs-3">
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               '. $comment->commentTimeStamp . '
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="col-md-3 col-xs-3 comment-timestamp">
+       '. $comment->commentTimeStamp . '
+     </div>
+      <div class="col-md-1 col-xs-1 ">
 
-               ' . $canUserDelete .'
+                       ' . $canUserDelete .'
 
-               </div>
+      </div>
+
               </div>
-                <hr class="comment-divider">';
+                <hr class="comment-hr">';
           }
 
       //if numLikes = 1, then it will display the singular rather than plural
@@ -91,7 +97,7 @@ class post{
 
       $commentWithAnS =  (sizeof($this->comments) == 1 ? '' : 's');
 
-      echo '<div class="post continer animated slideInUp" id="' . $this->PostID .'">
+      echo '<div class="post post-container animated slideInUp" id="' . $this->PostID .'">
         <div class="post-picture">
           <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $this->PostID . '.jpg" class="panorama">
         </div>
@@ -134,7 +140,7 @@ class post{
             &nbsp;&nbsp;&nbsp;&nbsp;'. $this->postTimeStamp . '
             </div>
           </div>
-             <hr>
+             <hr class="post-hr">
         </div>
         <div class="currentComments" id="currentComments' .$this->PostID .'" class="row  animated" ng-class="\'showcomments' . $this->PostID . '\' ? \'slideInLeft\' : \'slideOutRight\'" ng-show="showcomments' . $this->PostID . '">
       ' . $currentComments . '
@@ -143,7 +149,6 @@ class post{
       <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
          <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
       </div>
-      <hr>
       </div>
     ';
     }
