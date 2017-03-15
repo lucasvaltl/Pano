@@ -38,6 +38,10 @@ if(isset($_GET['CollectionID'])){
   <link rel="stylesheet" href="css/offset.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Pano - Profile</title>
+  <link rel="shortcut icon" href="https://apppanoblob.blob.core.windows.net/assets/favicon.ico">
+  <meta property="og:title" content="Pano" />
+  <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+  <meta property="og:description" content="The social network taking a wider perspective " />
 </head>
 
 <body ng-app="">

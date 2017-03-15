@@ -23,6 +23,10 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animate.css">
     <title>Pano - Sign Up</title>
+    <link rel="shortcut icon" href="https://apppanoblob.blob.core.windows.net/assets/favicon.ico">
+    <meta property="og:title" content="Pano" />
+    <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+    <meta property="og:description" content="The social network taking a wider perspective " />
 </head>
 
 <body id="gradhome">

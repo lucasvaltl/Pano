@@ -37,6 +37,10 @@ include_once('includes/edit-circle-members.php');
     <title>Pano -
         <?php echo $GroupID;?>
     </title>
+    <link rel="shortcut icon" href="https://apppanoblob.blob.core.windows.net/assets/favicon.ico">
+    <meta property="og:title" content="Pano" />
+    <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+    <meta property="og:description" content="The social network taking a wider perspective " />
 </head>
 
 <body ng-app="">
