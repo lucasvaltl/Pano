@@ -5,6 +5,7 @@ if (isset($_POST['hashname'])) {
   $blob_name = $_POST['hashname'];
 }
 
+session_start();
 
 /*
 Source: https://www.startutorial.com/articles/view/how-to-build-a-file-upload-form-using-dropzonejs-and-php
@@ -56,6 +57,7 @@ $options->setBlobContentType("image/jpeg");
 try    {
     //Upload blob
     $blobRestProxy->createBlockBlob($picType , $blob_name.".jpg", $content, $options);
+    $_SESSION['uploadSuccessful'] = true;
 }
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.

@@ -57,9 +57,9 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
     <div class="container content">
         <div>
             <div class="row vertical-align">
-                <div class="logo animated zoomIn">
+  
                     <img src="images/logo.png" class="png" id="signuplogo">
-                </div>
+
                 <br />
 
                 <div class="form-group questionnaire">
@@ -196,7 +196,7 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
                               here!
                             </div></a>
                         </div>
-                      
+
                         <script type="text/javascript">
                         function initialize() {
 

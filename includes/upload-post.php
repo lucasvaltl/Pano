@@ -1,8 +1,12 @@
 <?
 
+//sign up only goes through initial check if there are no errors or missing fields
+$fail_count = 0;
+
+$errors = [];
+$missing = [];
+
 if(isset($_POST['submit'])){
-
-
     $expected = ['PostID', 'CreatorID', 'ShortDescrip', 'Location'];
     $required = ['PostID', 'CreatorID', 'ShortDescrip', 'Location'];
     $PostID = mysqli_real_escape_string($conn, $_POST['PostID']);
@@ -10,15 +14,31 @@ if(isset($_POST['submit'])){
     $ShortDescrip= mysqli_real_escape_string ($conn, $_POST['ShortDescrip']);
     $Location = mysqli_real_escape_string ($conn, $_POST['Location']);
 
+//refrain from uploading a post without a picture. Variable pictureUploaded is set to true if the uploading worked
+if(isset($_SESSION['uploadSuccessful'] ) && $_SESSION['uploadSuccessful'] != true){
+$missing[]  = 'Picture';
+$fail_count++;
+}
 
+//reset upload successfull if  the picture actually uploaded
+$_SESSION['uploadSuccessful'] = false;
 
-    if (!isset($CreatorID) || $CreatorID == ''|| !isset($PostID) || $PostID == ''||  !isset($Location) || $Location == '' || !isset($ShortDescrip) || $ShortDescrip == ''  ) {
-      //needs to be improved
-      $error = "Not all required fields have been filled in";
-      header("Location: upload.php?error=" . urlencode($error));
-      exit();
+//checking if fields are missing
+foreach ($_POST as $key => $value) {
+    $value = is_array($value) ? $value : trim($value);
+
+    if (empty($value) && in_array($key, $required)) {
+        $missing[] = $key;
+        $$key = '';
+        $fail_count++;
+    } elseif (in_array($key, $expected)) {
+        $$key = $value;
     }
+}
 
+
+//perform query if nothing is missing
+if($fail_count == 0){
     //insert the post data into post table
     $query = "INSERT INTO posts (PostID, UserID, PostText, PostLocation ) VALUES ('$PostID', '$CreatorID', '$ShortDescrip', '$Location')";
     if ($result = mysqli_query($conn, $query)) {
@@ -79,4 +99,5 @@ if(isset($_POST['submit'])){
        die('Error: ' . mysqli_error($conn));
     }
 
+}
 }

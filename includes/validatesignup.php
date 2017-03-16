@@ -33,7 +33,10 @@ if (isset($_POST['submit'])) {
     $Password = mysqli_real_escape_string ($conn, $_POST['Password']);
     $Location = mysqli_real_escape_string($conn, $_POST['Location']);
     $ShortDescrip = mysqli_real_escape_string($conn, $_POST['ShortDescrip']);
-    $LegalCheck = mysqli_real_escape_string($conn, $_POST['LegalCheck']);
+    if(isset($_POST['LegalCheck'])){
+          $LegalCheck = mysqli_real_escape_string($conn, $_POST['LegalCheck']);
+    }
+
 
 
     //TODO come back when server is up
@@ -66,8 +69,9 @@ if (isset($_POST['submit'])) {
     }
 
 //add legal check to missing if it is not set - due to nature of how php POST processes checkboxes
-    if(empty($LegalCheck)){
+    if(!isset($LegalCheck)){
       $missing[] = 'LegalCheck';
+      $fail_count++;
     }
 
     //checking if email address is valid
