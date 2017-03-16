@@ -57,7 +57,9 @@ if (isset($_GET['id'])) {
        }
        ?>
      </div>
-
+     <div id="loader2">
+         <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif"  width="50" height="50"/>
+     </div>
 
     <main>
 
