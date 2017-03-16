@@ -1,14 +1,3 @@
-<?php
-//ob_start needed to allow redirecting after login
-ob_start();
-
-//session_start() needed to use global session variabls $_SESSION etc
-session_start();
-
-require_once('includes/config.php');
-
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -50,7 +39,7 @@ require_once('includes/config.php');
       While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to, your name, email address and location (&quot;Personal Information&quot;).
       <h4>Log Data</h4>
       We collect information that your browser sends whenever you visit our Service (&quot;Log Data&quot;). This Log Data may include information such as your computer's Internet Protocol (&quot;IP&quot;) address, browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages and other statistics.
-      <h4>Cookies</h4>
+      <h4>Cookies
       Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and stored on your computer's hard drive.
       We use &quot;cookies&quot; to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
       <h4>Service Providers</h4>
