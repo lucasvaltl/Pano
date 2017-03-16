@@ -24,9 +24,16 @@ require_once('includes/config.php');
     <link rel="stylesheet" href="css/style.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Pano - Newsfeed</title>
-
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Pano" />
+    <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+    <meta property="og:description" content="The social network taking a wider perspective " />
 </head>
 
 <body ng-app="">
@@ -51,7 +58,7 @@ require_once('includes/config.php');
         <button id="load-more-button" data-page="0" type="button">Load More</button>
 
         <div id="loader">
-            <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
+            <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" />
         </div>
 
     </main>

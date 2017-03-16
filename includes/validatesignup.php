@@ -21,8 +21,8 @@ if (isset($_POST['submit'])) {
 
     //the expected and required fields
 
-    $expected = ['FirstName', 'LastName', 'UserName', 'EmailAddress', 'Password', 'Location', 'ShortDescrip'];
-    $required = ['FirstName', 'LastName', 'UserName', 'EmailAddress', 'Password', 'Location', 'ShortDescrip'];
+    $expected = ['FirstName', 'LastName', 'UserName', 'EmailAddress', 'Password', 'Location', 'ShortDescrip', 'LegalCheck'];
+    $required = ['FirstName', 'LastName', 'UserName', 'EmailAddress', 'Password', 'Location', 'ShortDescrip', 'LegalCheck'];
 
 
     //mysqli_real_escape_string for safety measures against SQL injection
@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
     $Password = mysqli_real_escape_string ($conn, $_POST['Password']);
     $Location = mysqli_real_escape_string($conn, $_POST['Location']);
     $ShortDescrip = mysqli_real_escape_string($conn, $_POST['ShortDescrip']);
+    $LegalCheck = mysqli_real_escape_string($conn, $_POST['LegalCheck']);
 
 
     //TODO come back when server is up
@@ -62,6 +63,11 @@ if (isset($_POST['submit'])) {
         } elseif (in_array($key, $expected)) {
             $$key = $value;
         }
+    }
+
+//add legal check to missing if it is not set - due to nature of how php POST processes checkboxes
+    if(empty($LegalCheck)){
+      $missing[] = 'LegalCheck';
     }
 
     //checking if email address is valid

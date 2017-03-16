@@ -23,6 +23,16 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animate.css">
     <title>Pano - Sign Up</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+      <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+      <link rel="manifest" href="/manifest.json">
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+      <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Pano" />
+    <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+    <meta property="og:description" content="The social network taking a wider perspective " />
 </head>
 
 <body id="gradhome">
@@ -169,6 +179,14 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
                                 }
                                 ?></textarea>
                             <br>
+                            <?php if ($missing && in_array('LegalCheck', $missing)) : ?>
+                                <div class="alert alert-danger">You need to aggree to proceed</div>
+                            <?php endif; ?>
+                            <div class="privacy-check">
+                            <input type="checkbox" name="LegalCheck" value="check"  required/> &nbsp; &nbsp;I have read and agree to the <a href="terms-conditions.php">Terms and Conditions</a> and <a href="privacy-policy.php">Privacy Policy</a> as well as the use of cookies to store session data
+
+                          </div>
+                            <br>
                             <input type="submit" name="submit" class="btn btn-default lv-button" value="Sign Up" />
                         </form>
 
@@ -178,6 +196,7 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
                               here!
                             </div></a>
                         </div>
+                      
                         <script type="text/javascript">
                         function initialize() {
 

@@ -19,6 +19,16 @@ include('includes/config.php');
     <link rel="stylesheet" href="css/offset.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Pano - Log In</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Pano" />
+    <meta property="og:image" content="https://apppanoblob.blob.core.windows.net/assets/ogimage.jpg" />
+    <meta property="og:description" content="The social network taking a wider perspective " />
 </head>
 
 <body id="gradhome">
@@ -82,6 +92,12 @@ include('includes/config.php');
                             <a href="signup.php">Not a member yet? <div class="underline">
                               Sign Up!
                             </div></a>
+                            <div class="login-legal">
+                              <br />
+                                  <br />
+                           <a href="terms-conditions.php">Terms and Conditions</a> and <a href="privacy-policy.php">Privacy Policy</a>
+
+                          </div>
                         </div>
                     </div>
                 </div>
