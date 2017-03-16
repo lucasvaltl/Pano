@@ -3,32 +3,32 @@
 
 // OPTION 1: Connection to Azure /////////////////////////////////
 
-// define("DB_USERNAME", "b55e2163643140");
-//   define("DB_PASS", "94533d90");
-//   define("DB_NAME", "app_pano_database");
-//   define("DB_HOST", "br-cdbr-azure-south-b.cloudapp.net");
-//   define("DB_PORT", "3306");
-//   //$link = mysqli_init();
-//   $conn = mysqli_connect(
-//     // $link,
-//      DB_HOST,
-//      DB_USERNAME,
-//      DB_PASS,
-//      DB_NAME//,
-//      //DB_PORT
-//   );
-//   //test if connection occured
-//   if(mysqli_connect_errno()) {
-//       die("Database connection failed: " .
-//           mysqli_connect_error() .
-//           " (" . mysqli_connect_errno() . ")"
-//       );
-//   }
+define("DB_USERNAME", "b55e2163643140");
+  define("DB_PASS", "94533d90");
+  define("DB_NAME", "app_pano_database");
+  define("DB_HOST", "br-cdbr-azure-south-b.cloudapp.net");
+  define("DB_PORT", "3306");
+  //$link = mysqli_init();
+  $conn = mysqli_connect(
+    // $link,
+     DB_HOST,
+     DB_USERNAME,
+     DB_PASS,
+     DB_NAME//,
+     //DB_PORT
+  );
+  //test if connection occured
+  if(mysqli_connect_errno()) {
+      die("Database connection failed: " .
+          mysqli_connect_error() .
+          " (" . mysqli_connect_errno() . ")"
+      );
+  }
 
 
 // OPTION 2: Connection to local DB /////////////////////////////////
 
-
+/*
     define("DB_USERNAME", "root");
     define("DB_PASS", "root");
     define("DB_NAME", "Pano");
@@ -52,7 +52,7 @@
             " (" . mysqli_connect_errno() . ")"
         );
     }
-
+*/
 
 
 /*
