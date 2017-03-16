@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
       </div>
 
   <?php else : ?>
-      <div class="container content center-center profile-privacy animated zoomIn ">
+      <div class="container content  profile-privacy soft-shadow animated zoomIn ">
 
           <h2>Sorry!</h2>
 
