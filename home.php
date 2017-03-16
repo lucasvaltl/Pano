@@ -58,7 +58,9 @@ require_once('includes/config.php');
         <button id="load-more-button" data-page="0" type="button">Load More</button>
 
         <div id="loader">
+
           <img class="loading loading-gif" src="<?=SITE_ROOT?>/images/loading.gif"  />
+
         </div>
 
     </main>

@@ -51,6 +51,7 @@ require_once('includes/config.php');
 
     <div class="legal-policy">
       Last updated: March 15, 2017
+      <br />
       Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operate the www.panoapp.co.uk website (the &quot;Service&quot;). It was created as part of a coursework for a course taken at University College London. The site  is maintained by Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl.
       This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
       We will not use or share your information with anyone except as described in this Privacy Policy. This Privacy Policy is licensed by TermsFeed to Pano.

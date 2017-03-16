@@ -220,6 +220,7 @@ a .profile-picture{
 .comment-picture{
   height: 40px;
   width: 40px;
+    object-fit: cover;
 }
 
 .comment-picture:hover,.comment-picture:focus,
@@ -1632,6 +1633,11 @@ border: none;
     display:none;
 }
 
+.loading{
+  width:50px!important;
+  height:28px!important;
+}
+
 #load-more-button {
     display:none;
 }
@@ -1697,7 +1703,7 @@ border: none;
   font-family: 'Lato-Light', sans-serif;
   font-size: 2em;
   font-weight: 100;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .dropzone .dz-preview.dz-image-preview {
@@ -1719,29 +1725,20 @@ z-index: 10;
 @media(min-width:450px){
   .dz-message, .dropzone .dz-message{
       padding-top: 0px;
-        margin-top: 2em;
+margin-top: 20px;
   }
 }
 @media(min-width:830px){
   .dz-message, .dropzone .dz-message{
-      padding-top: 20px;
+      padding-top: 0px;
   }
 }
 .dropzone-plus{
-  font-size: 6em;
+  font-size: 4em;
 }
 
 .dropzone-panorama{
     height: 250px;
-}
-
-
-.dropzone-panorama:after{
-  content: "+";
-  font-size: 8em;
-  position: absolute;
-  top: 220px;
-  right: 46%;
 }
 
 
@@ -1789,6 +1786,36 @@ z-index: 10;
 }
 .larger-font{
   font-size: 1.2em;
+}
+
+/*errors*/
+
+
+.alert-danger{
+  color:  #ff3366;
+background: none;
+border: none;
+box-shadow: none;
+}
+
+.inputbox-error{
+  border-color:  #ff3366;
+}
+
+.inputbox-error::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+color:  #ff3366;
+}
+.inputbox-error::-moz-placeholder { /* Firefox 19+ */
+color:  #ff3366;
+}
+.inputbox-error::-ms-input-placeholder { /* IE 10+ */
+color:  #ff3366;
+}
+.inputbox-error::-moz-placeholder { /* Firefox 18- */
+color:  #ff3366;
+}
+.inputbox-error:valid{
+  border-color:  #ccc;
 }
 
 
@@ -1880,7 +1907,7 @@ color: white;
 
 .legal-policy{
   text-align: left;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .about{
   text-align: left;
