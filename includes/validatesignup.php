@@ -169,6 +169,9 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
 
                 $query2 = "INSERT INTO friendrecommendations (UserID) VALUES ('{$_SESSION['UserID']}')";
 
+
+                //adding default friends - IDs of the creators of Pano:
+
                 if ($result2 = mysqli_query($conn, $query2)) {
                     $defaultFriends = array(12399, 12400, 12401, 12402);
 
@@ -185,6 +188,9 @@ function AddNewUser($conn, $FirstName, $LastName, $UserName, $EmailAddress, $Pas
                             echo "Error: " . $addDefaultFriendsQuery . "<br>" . mysqli_error($conn);
                         }
                     }
+
+                    $date_of_expiry = time() + (60 * 60 * 24 * 30);
+                    setcookie("userlogin", "anon", $date_of_expiry, "/", "panoapp.co.uk");
 
 
                     header("Location: home.php");
