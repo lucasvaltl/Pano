@@ -40,6 +40,10 @@ if (isset($_POST['submit'])) {
             $_SESSION['ProfilePictureID'] = $row['ProfilePictureID'];
             $_SESSION['SearchTerm'] = null;
             $invalid_credentials = false;
+
+            $date_of_expiry = time() + (60 * 60 * 24 * 30);
+            setcookie("userlogin", "anon", $date_of_expiry, "/", "panoapp.co.uk");
+
             header("Location: home.php");
         } else {
             $invalid_credentials = true;
