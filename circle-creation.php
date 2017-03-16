@@ -69,7 +69,7 @@ include_once('includes/createcircle.php');
           <div class="row">
 
         <div class="col-sm-6 create-circle-name">
-          <input type="text" class="form-control collection-name-input"  name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*16))) + 'px'}" ng-model="CollectionName">
+          <input type="text" class="form-control collection-name-input"  name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*16))) + 'px'}" ng-model="CollectionName" autocomplete="off" role="presentation">
         </div>
 
         <div class="col-sm-3 create-circle-button">

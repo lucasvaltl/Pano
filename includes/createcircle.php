@@ -30,11 +30,18 @@ if (isset($_POST['create'])) {
   // If no errors detected, insert message into database
   else{
       $_SESSION['PhotoID']= $PhotoID;
-    $query = "INSERT INTO groups (CreatorID, PhotoID, GroupName, ShortDescrip ) VALUES ('$CreatorID', '$PhotoID', '$GroupName', '$ShortDescrip')";
-    if (!mysqli_query($conn, $query)) {
+
+    if(!$stmt = $conn->prepare("INSERT INTO groups (CreatorID, PhotoID, GroupName, ShortDescrip ) VALUES (?,?,?,?)")){
+        echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+    }
+
+    if(!$stmt->bind_param("isss", $CreatorID, $PhotoID, $GroupName, $ShortDescrip)){
+        echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+    }
+
+    if (!$stmt->execute()) {
       die('Error: ' . mysqli_error($conn));
     }  else {
-
 
       //look for groupID of newly created group
       $query = "SELECT MAX(GroupID) as GroupID FROM groups WHERE CreatorID='$CreatorID' ";

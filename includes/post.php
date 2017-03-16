@@ -146,7 +146,7 @@ class post{
       ' . $currentComments . '
       </div>
       <div class="row user-comment "  id="' . $this->PostID .'">
-      <input type="text" name="Comment" id="Comment" class="form-control actual-comment" placeholder="What do you want to say about it?"/>
+      <input type="text" name="Comment" id="Comment" class="form-control actual-comment" autocomplete="off" role="presentation" placeholder="What do you want to say about it?"/>
          <input type="submit" name="submit" class="btn btn-default comment-button" value="comment"  />
       </div>
       </div>

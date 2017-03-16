@@ -50,12 +50,29 @@ if($result = mysqli_query($conn, $query)){
   else{
     //if the group privacy option was selected, insert into the db with the GroupID
       if(isset($GroupID)){
-          $query = "INSERT INTO collections (OwnerID, GroupID, Caption, SettingID ) VALUES ('$OwnerID', '$GroupID', '$Caption', $PrivacySetting)";
+
+          if(!$stmt = $conn->prepare("INSERT INTO collections (OwnerID, GroupID, Caption, SettingID ) VALUES (?,?,?,?)")){
+              echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+          }
+
+          if(!$stmt->bind_param("iisi", $OwnerID, $GroupID, $Caption, $PrivacySetting)){
+              echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+          }
+
+
       } else{
-            $query = "INSERT INTO collections (OwnerID, Caption, SettingID ) VALUES ('$OwnerID',  '$Caption', $PrivacySetting)";
+
+            if(!$stmt = $conn->prepare("INSERT INTO collections (OwnerID, Caption, SettingID ) VALUES (?,?,?)")){
+                echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+            }
+
+            if(!$stmt->bind_param("isi", $OwnerID, $Caption, $PrivacySetting)){
+                echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+            }
+
       }
 
-    if (!mysqli_query($conn, $query)) {
+    if (!$stmt->execute()) {
       die('Error: ' . mysqli_error($conn));
     }  else {
 

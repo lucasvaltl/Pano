@@ -14,10 +14,15 @@ $Comment = $_POST['Comment'];
 $postPictureID = $_POST['postPictureID'];
 
 
-$query = "INSERT INTO comments (UserID, PostID, Comment)
-            VALUES ('{$_SESSION['UserID']}', '$postPictureID', '$Comment')";
+if(!$stmt = $conn->prepare("INSERT INTO comments (UserID, PostID, Comment) VALUES (?,?,?)")){
+    echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+}
 
-if (mysqli_query($conn, $query)) {
+if(!$stmt->bind_param("iss", $_SESSION['UserID'], $postPictureID, $Comment)){
+    echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+}
+
+if ($stmt->execute()) {
 
     $query2 = "SELECT * FROM comments
                 LEFT JOIN user ON user.`UserID` = comments.`UserID`
@@ -61,9 +66,7 @@ if (mysqli_query($conn, $query)) {
                                 <hr class="comment-hr">';
 
     }
-
-} else {
-    echo "Error: " . $query . "<br>" . mysqli_error($conn);
 }
+
 
 ?>

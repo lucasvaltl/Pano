@@ -16,13 +16,13 @@ require_once ('config.php');
             var cancelRequestButtonProfile = document.getElementById("cancel-friend-button");
             sendRequestButtonProfile.addEventListener("click", sendFriendRequestFromProfile);
             cancelRequestButtonProfile.addEventListener("click", cancelFriendRequestFromProfile);
-        } else {console.log("addfriendbutton")};
+        }
 
         if (document.getElementById("remove-friend-button")!== null){
-            console.log("arrived");
+        //    console.log("arrived");
             var deleteFriendButtonProfile = document.getElementById("remove-friend-button");
             deleteFriendButtonProfile.addEventListener("click",deleteFriendFromProfile);
-        } else console.log("xyolo");
+        }
 
     } else if (url.includes("search.php")) {
 
@@ -109,10 +109,6 @@ require_once ('config.php');
         deleteFriend(friendID, childDeleteFriendButton, childConfirmDeleteFriendButton);
 
     }
-
-
-
-
 
 
 

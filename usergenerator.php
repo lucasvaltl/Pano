@@ -266,4 +266,36 @@ if ($result = mysqli_query($conn, $query)){
 */
 
 
+
+//===========Giving Users a Profile Picture with ID ==============
+
+/*
+for ($i = 12413; $i < 12437; $i++){
+    $query =  "UPDATE `user` SET `ProfilePictureID` = '$i' WHERE `user`.`UserID` = '$i'";
+
+    if ($result = mysqli_query($conn, $query)) {
+        echo "yolo";
+    }
+}*/
+
+//=========Adding default friends ===========
+
+/*
+$defaultFriends = array(12399, 12400, 12401, 12402);
+
+foreach ($defaultFriends as $defaultFriend){
+    $addDefaultFriendsQuery = "INSERT INTO friends (UserID, FriendID)
+                                SELECT $defaultFriend, '{$_SESSION['UserID']}'
+                                UNION ALL
+                                SELECT '{$_SESSION['UserID']}', '$defaultFriend'";
+
+
+    if ($result3 = mysqli_query($conn, $addDefaultFriendsQuery)){
+        echo "yolo";
+    } else {
+        echo "Error: " . $addDefaultFriendsQuery . "<br>" . mysqli_error($conn);
+    }
+}*/
+
+
  ?>

@@ -51,12 +51,27 @@ if(isset($_POST['edit'])){
   else{
     //if the group privacy option was selected, insert into the db with the GroupID
     if(isset($GroupID)){
-      $query = "UPDATE collections SET  GroupID = '$GroupID', Caption = '$Caption', SettingID = '$PrivacySetting' WHERE CollectionID='$CollectionID'";
+
+      if(!$stmt = $conn->prepare("UPDATE collections SET  GroupID = ?, Caption = ?, SettingID = ? WHERE CollectionID=?")){
+          echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+      }
+
+      if(!$stmt->bind_param("isii", $GroupID, $Caption, $PrivacySetting, $CollectionID)){
+          echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+      }
     } else{
-      $query = "UPDATE collections SET  GroupID = Null,  Caption = '$Caption', SettingID = '$PrivacySetting' WHERE CollectionID='$CollectionID'";
+
+      if(!$stmt = $conn->prepare("UPDATE collections SET  GroupID = Null, Caption = ?, SettingID = ? WHERE CollectionID=?")){
+          echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+      }
+
+      if(!$stmt->bind_param("sii", $Caption, $PrivacySetting, $CollectionID)){
+          echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+      }
     }
 
-    if (!mysqli_query($conn, $query)) {
+
+    if (!$stmt->execute()) {
       die('Error when updating collection in database ' . mysqli_error($conn));
       exit();
     }  else {

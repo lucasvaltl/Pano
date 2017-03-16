@@ -23,12 +23,27 @@ if (isset($_POST['submit'])) {
             //Different queries depending on whether user decides to change their password
             if (!empty($NewPassword)){
                 $NewPassword = password_hash($NewPassword, PASSWORD_DEFAULT);
-                $query = "UPDATE user SET Password='$NewPassword' AND SettingID='$SettingID' WHERE UserName='{$_SESSION['UserName']}'";
+
+                if(!$stmt = $conn->prepare("UPDATE user SET Password=?, SettingID=? WHERE UserName=? ")){
+                    echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+                }
+
+                if(!$stmt->bind_param("sis", $NewPassword, $SettingID, $_SESSION['UserName'] )){
+                    echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+                }
             } else {
-                $query = "UPDATE user SET SettingID='$SettingID' WHERE UserName='{$_SESSION['UserName']}'";
+
+                if(!$stmt = $conn->prepare("UPDATE user SET SettingID=? WHERE UserName=?")){
+                    echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+                }
+
+                if(!$stmt->bind_param("is", $SettingID, $_SESSION['UserName'])){
+                    echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+                }
             }
 
-            if ($SettingChange = mysqli_query($conn, $query)) {
+            if ($stmt->execute()) {
+
                 $successful_change = true;
                 $_SESSION['SettingID'] = $SettingID;
             } else {

@@ -1642,6 +1642,11 @@ border: none;
     display:none;
 }
 
+.loading-gif{
+  width:50px!important;
+  height:28px!important;
+}
+
 /* back to top */
 
 #return-to-top {
