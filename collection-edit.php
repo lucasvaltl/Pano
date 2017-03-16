@@ -108,7 +108,7 @@ if(isset($_GET['CollectionID'])){
           </select>
         </div>
         <div class="row add-padding-30">
-          <input type="submit" name="edit" class="btn btn-default lv-button create-collection-btn" value="Edit" />
+          <input type="submit" name="edit" class="btn btn-default lv-button create-collection-btn" value="Save" />
         </div>
         <div class="row add-padding-20">
           <input type="submit" name="delete" class="btn btn-default lv-button delete-collection-btn" value="Delete Collection" />

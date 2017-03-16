@@ -20,7 +20,6 @@ if (isset($_POST['submit'])) {
     }
 
     if ($stmt->execute()) {
-        echo "yolo";
 
         $result = $stmt->get_result();
 

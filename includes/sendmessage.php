@@ -18,10 +18,19 @@ if (isset($_POST['submit'])) {
   }
 // If no errors detected, insert message into database
   else{
-    $query = "INSERT INTO messages (UserID, GroupID, Content ) VALUES ('$UserID', '$GroupID', '$Content')";
-    if (!mysqli_query($conn, $query)) {
+
+    if(!$stmt = $conn->prepare("INSERT INTO messages (UserID, GroupID, Content ) VALUES (?,?,?)")){
+        echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+    }
+
+    if(!$stmt->bind_param("iis", $UserID, $GroupID, $Content)){
+        echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+    }
+
+    if (!$stmt->execute()) {
       die('Error: ' . mysqli_error($conn)); }
       else {
+        $stmt->close();
         header("Location: circle-messages.php?GroupID=". urlencode($GroupID));
         exit();
       }

@@ -9,6 +9,7 @@
  //define ('SITE_ROOT', '/panoapp');
 
 
+
 // OPTION 3: Connection to www.panoapp.co.uk ////////////////////////////////
 
 define ('SITE_ROOT', 'http://www.panoapp.co.uk');
