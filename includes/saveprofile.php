@@ -19,7 +19,19 @@ $query= "UPDATE user
             Location = '$profileUserLocation'
             WHERE userID = '{$_SESSION['UserID']}'";
 
-if (mysqli_query($conn, $query)) {
+
+if(!$stmt = $conn->prepare("UPDATE user
+            SET ShortDescrip = ?,
+            Location = ?
+            WHERE userID = ?")){
+    echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+}
+
+if(!$stmt->bind_param("ssi", $profileUserDescription, $profileUserLocation, $_SESSION['UserID'])){
+    echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+}
+
+if ($stmt->execute()) {
     echo '
     <div class="row ">
         <div class="col col-md-3 col-xs-3 profile-info-row">

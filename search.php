@@ -95,13 +95,33 @@ include('includes/header.php');
                 <?php
             } else {
                 ?>
-                <h1 class="search-results-text">Search results for: <?=$_SESSION['SearchTerm']?></h1>
+
+                <h1 class="search-results-text">
+                    Search results for: <?=$_SESSION['SearchTerm']?>
+                </h1>
                 <br>
+
                 <?
-                $sql = "SELECT * FROM user WHERE FirstName LIKE  '%" . $_SESSION['SearchTerm'] . "%' OR LastName LIKE '%". $_SESSION['SearchTerm'] ."%' OR UserName LIKE '%". $_SESSION['SearchTerm'] ."%' LIMIT 10";
+                //for the prepared statement
+                $_SESSION['SearchTerm'] = "%{$_SESSION['SearchTerm']}%";
+
+                if (!$stmt = $conn->prepare(
+                    "SELECT * FROM user
+                    WHERE FirstName LIKE ?
+                    OR UserName LIKE ?
+                    LIMIT 10")){
+                        echo "Prepare failed: (". $conn->errno .")" . $conn->error;
+                }
+
+                if(!$stmt->bind_param("ss", $_SESSION['SearchTerm'], $_SESSION['SearchTerm'])){
+                    echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
+                }
 
                 // Attempt select query execution
-                if($result = mysqli_query($conn, $sql)){
+                if ($stmt->execute()) {
+
+                    $result = $stmt->get_result();
+
                     if(mysqli_num_rows($result) > 0){
 
                         $rows = [];

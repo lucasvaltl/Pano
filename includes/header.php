@@ -25,7 +25,7 @@ if(isset($_SESSION['SearchTerm'])) {
                        <i class="fa fa-search search-icon"></i>
                          &nbsp;
                          <?php $search = isset($_GET['search']) ? $_GET['search'] : ''; ?>
-                        <input type="text" class="search-input" id="search" name="search" placeholder="Search users or #tags" value="<?php echo $search; ?>" />
+                        <input type="text" class="search-input" id="search" name="search" placeholder="Search users or #tags" value="<?php echo htmlspecialchars($search); ?>" />
                         <button class="search-btn" type="submit" value=""><i class="fa fa-chevron-right"></i> </button>
                     </form>
                     <ul id="suggestions">
