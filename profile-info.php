@@ -57,9 +57,7 @@ if (isset($_GET['id'])) {
        }
        ?>
      </div>
-     <div id="loader2">
-         <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif"  width="50" height="50"/>
-     </div>
+
 
     <main>
 
@@ -87,6 +85,9 @@ if (isset($_GET['id'])) {
 
       <button id="load-more-button" data-page="0" type="button">Load More</button>
 
+      <div id="loader">
+        <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />
+      </div>
 
 
 
