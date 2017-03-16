@@ -1636,6 +1636,11 @@ border: none;
     display:none;
 }
 
+.loading{
+  width: 50px!important;
+  height: 50px!important;
+}
+
 /* back to top */
 
 #return-to-top {
