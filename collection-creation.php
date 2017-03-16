@@ -40,7 +40,7 @@ if(isset($_POST['create'])){
   include('includes/header.php');
   ?>
   <main>
-    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group">
+    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group" autocomplete="off" role="presentation">
       <input type="hidden" name="OwnerName" value="<?=$profileUserName?>">
       <div class="row collection-creation-header">
         <div class="create-collection-name row">

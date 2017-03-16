@@ -92,7 +92,7 @@ $messages = mysqli_query($conn, $query);
 <div class="container">
 
     <div class="row circle-create-message">
-      <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group form-inline submit message">
+      <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group form-inline submit message" autocomplete="off" role="presentation">
         <input type="hidden" name="GroupID" value="<?= $GroupID ?>"/>
         <input type="hidden" name="UserID"  value="<?= $_SESSION['UserID'] ?>"/>
         <div class="col col-xs-11">
