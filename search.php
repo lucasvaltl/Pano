@@ -86,7 +86,7 @@ include('includes/header.php');
                     <!-- posts go in here -->
                 </div>
 
-                <button id="load-more-button" data-page="1" type="button">Load More</button>
+                <button id="load-more-button" data-page="0" type="button">Load More</button>
 
                 <div id="loader">
                     <img class="loading" src="<?=SITE_ROOT?>/images/loading.gif" width="50" height="50" />

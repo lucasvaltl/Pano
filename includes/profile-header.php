@@ -135,7 +135,7 @@
 
         if ($result = mysqli_query($conn, $friendshipQuery)){
             if ($count = mysqli_num_rows($result) > 0){
-                $display_page = false;
+                $display_page = true;
             }
         }
     }

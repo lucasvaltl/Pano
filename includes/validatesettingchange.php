@@ -23,9 +23,8 @@ if (isset($_POST['submit'])) {
             //Different queries depending on whether user decides to change their password
             if (!empty($NewPassword)){
                 $NewPassword = password_hash($NewPassword, PASSWORD_DEFAULT);
-                //$query = "UPDATE user SET Password='$NewPassword' AND SettingID='$SettingID' WHERE UserName='{$_SESSION['UserName']}'";
 
-                if(!$stmt = $conn->prepare("UPDATE user SET Password=? AND SettingID=? WHERE UserName=? ")){
+                if(!$stmt = $conn->prepare("UPDATE user SET Password=?, SettingID=? WHERE UserName=? ")){
                     echo "Prepare failed: (". $conn->errno .")" . $conn->error;
                 }
 
@@ -33,7 +32,6 @@ if (isset($_POST['submit'])) {
                     echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
                 }
             } else {
-                $query = "UPDATE user SET SettingID='$SettingID' WHERE UserName='{$_SESSION['UserName']}'";
 
                 if(!$stmt = $conn->prepare("UPDATE user SET SettingID=? WHERE UserName=?")){
                     echo "Prepare failed: (". $conn->errno .")" . $conn->error;
@@ -43,7 +41,6 @@ if (isset($_POST['submit'])) {
                     echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
                 }
             }
-            //$2y$10$kTy2kgiTp21TltjC1YYxluQuY/Uv4V4CwjZevfipyg0AV96ARNP5G
 
             if ($stmt->execute()) {
 
