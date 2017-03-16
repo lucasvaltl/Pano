@@ -297,8 +297,5 @@ foreach ($defaultFriends as $defaultFriend){
     }
 }*/
 
-$NewPassword = "yolo";
-
-echo $NewPassword = password_hash($NewPassword, PASSWORD_DEFAULT);
 
  ?>
