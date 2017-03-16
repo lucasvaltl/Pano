@@ -71,7 +71,7 @@ require_once('includes/config.php');
 <?php
     include('includes/commentlikejs.php');
     include('includes/footer.php');
-//    include('knn/knn-data.php');
+    include('knn/knn-data.php');
 ?>
 
 </html>

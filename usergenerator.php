@@ -67,8 +67,8 @@ for ($i = 0; $i < $userCount; $i++){
 */
 
 // ===================Getting random users to like random posts =========================
-
 /*
+
 //query to get all ids of users
 $query = "SELECT UserID FROM user";
 
@@ -81,8 +81,8 @@ if ($result = mysqli_query($conn, $query)) {
     }
     //print_r($userIDs);
 }
-*/
-/*
+
+
 //query to get all PostIDs of the different posts
 $query = "SELECT PostID FROM posts";
 
@@ -96,7 +96,7 @@ if ($result = mysqli_query($conn, $query)) {
     //print_r($PostIDs);
 }
 
-$likeCount = 10;
+$likeCount = 200;
 
 for ($i = 0; $i < $likeCount; $i++) {
     $chosenUserID = (array_random($userIDs));
@@ -109,12 +109,12 @@ for ($i = 0; $i < $likeCount; $i++) {
         echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
     }
 }
-*/
+
 
 
 //=========================Getting random users to friend eachother ========================
 
-/*
+
 $friendCount = 20;
 
 for ($i = 0; $i < $friendCount; $i++) {
@@ -128,8 +128,8 @@ for ($i = 0; $i < $friendCount; $i++) {
         echo "Error: " . $query . "<br>" . mysqli_error($conn) . "<br>";
     }
 }
-*/
 
+*/
 
 
 //==================Adding all users to the friendrecommendations table====================
@@ -158,7 +158,7 @@ if ($result = mysqli_query($conn, $query)) {
 }
 
 */
-/*
+
 function array_random($arr, $num = 1) {
     shuffle($arr);
 
@@ -168,7 +168,7 @@ function array_random($arr, $num = 1) {
     }
     return $num == 1 ? $r[0] : $r;
 }
-*/
+
 
 
 //===========================Adding all hashtags from posts into the tags table ======
@@ -265,5 +265,34 @@ if ($result = mysqli_query($conn, $query)){
 }
 */
 
+//===========Giving Users a Profile Picture with ID ==============
+
+/*
+for ($i = 12413; $i < 12437; $i++){
+    $query =  "UPDATE `user` SET `ProfilePictureID` = '$i' WHERE `user`.`UserID` = '$i'";
+
+    if ($result = mysqli_query($conn, $query)) {
+        echo "yolo";
+    }
+}*/
+
+//=========Adding default friends ===========
+
+/*
+$defaultFriends = array(12399, 12400, 12401, 12402);
+
+foreach ($defaultFriends as $defaultFriend){
+    $addDefaultFriendsQuery = "INSERT INTO friends (UserID, FriendID)
+                                SELECT $defaultFriend, '{$_SESSION['UserID']}'
+                                UNION ALL
+                                SELECT '{$_SESSION['UserID']}', '$defaultFriend'";
+
+
+    if ($result3 = mysqli_query($conn, $addDefaultFriendsQuery)){
+        echo "yolo";
+    } else {
+        echo "Error: " . $addDefaultFriendsQuery . "<br>" . mysqli_error($conn);
+    }
+}*/
 
  ?>
