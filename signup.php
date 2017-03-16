@@ -179,6 +179,14 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
                                 }
                                 ?></textarea>
                             <br>
+                            <?php if ($missing && in_array('LegalCheck', $missing)) : ?>
+                                <div class="alert alert-danger">You need to aggree to proceed</div>
+                            <?php endif; ?>
+                            <div class="privacy-check">
+                            <input type="checkbox" name="LegalCheck" value="check"  required/> &nbsp; &nbsp;I have read and agree to the <a href="terms-conditions.php">Terms and Conditions</a> and <a href="privacy-policy.php">Privacy Policy</a> as well as the use of cookies to store session data
+
+                          </div>
+                            <br>
                             <input type="submit" name="submit" class="btn btn-default lv-button" value="Sign Up" />
                         </form>
 
@@ -188,6 +196,9 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
                               here!
                             </div></a>
                         </div>
+                        <?php var_dump($_POST); echo'<br/>
+                        ';
+                  var_dump($missing)?>
                         <script type="text/javascript">
                         function initialize() {
 

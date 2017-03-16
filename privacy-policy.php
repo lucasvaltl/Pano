@@ -35,14 +35,23 @@ require_once('includes/config.php');
 
 <body id="gradhome">
     <?php
+    if (isset($_SESSION['UserID'])) {
         include('includes/header.php');
+
+      }else{
+        echo '    <div id="left"></div>
+            <div id="right"></div>
+            <div id="top"></div>
+            <div id="bottom"></div>';
+      }
      ?>
     <main>
-
+    <div class="container">
     <h2>Privacy Policy</h2>
-    <div class="privacy-policy">
+
+    <div class="legal-policy">
       Last updated: March 15, 2017
-      Pano (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operates the www.panoapp.co.uk website (the &quot;Service&quot;). It was created as part of a coursework for a course taken at University College London. The site  is maintained by Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl
+      Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operate the www.panoapp.co.uk website (the &quot;Service&quot;). It was created as part of a coursework for a course taken at University College London. The site  is maintained by Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl.
       This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
       We will not use or share your information with anyone except as described in this Privacy Policy. This Privacy Policy is licensed by TermsFeed to Pano.
       We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible at www.panoapp.co.uk
@@ -52,7 +61,7 @@ require_once('includes/config.php');
       We collect information that your browser sends whenever you visit our Service (&quot;Log Data&quot;). This Log Data may include information such as your computer's Internet Protocol (&quot;IP&quot;) address, browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages and other statistics.
       <h4>Cookies</h4>
       Cookies are files with small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and stored on your computer's hard drive.
-      We use &quot;cookies&quot; to collect information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
+      We use &quot;cookies&quot; to collect information about the current session. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.
       <h4>Service Providers</h4>
       We may employ third party companies and individuals to facilitate our Service, to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.
       These third parties have access to your Personal Information only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
@@ -71,12 +80,25 @@ require_once('includes/config.php');
       If you have any questions about this Privacy Policy, please contact us under
       connectwithpano@gmail.com
     </div>
+    <br>
 
+    <button class="btn btn-primary btn-info" onclick="goBack()">
+
+        <span class="glyphicon glyphicon-hand-left"></span>&nbsp;&nbsp;Go Back</button>
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
+  </div>
 
 
     </main>
     <?php
+        if (isset($_SESSION['UserID'])) {
         include('includes/footer.php');
+      }
     ?>
 
 </body>
