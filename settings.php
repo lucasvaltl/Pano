@@ -128,7 +128,7 @@ include('includes/config.php');
 <h4>About:</h4>
 <div class="container about">
   <p>
-  Pano is a social network that takes a wider perspective. It is specifically tailerd towards enjoying panoaramic pictures in a desktop environment.  This website was created by Johannes Landgraf, Florian Obst, Li Koxie and Lucas Valtl as part of a coursework requirement for the COMPGC06 Course taken at University College London. It is currently in a proof of concept stage. None of the features, or the site itself, are guaranteed to work. Should the site be unexpectedly be down, it is presumably because we have run out hosting credits..;)
+  Pano is a social network that takes a wider perspective. It is specifically tailerd towards enjoying panoaramic pictures in a desktop environment.  This website was created by Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl as part of a coursework requirement for the COMPGC06 Course taken at University College London. It is currently in a proof of concept stage. None of the features, or the site itself, are guaranteed to work. Should the site be unexpectedly be down, it is presumably because we have run out hosting credits..;)
   </p>
 </div>
 <br />
@@ -139,7 +139,7 @@ include('includes/config.php');
 <div class="legal-policy">
 
 <p>
-  The information contained in this website is for general information purposes only. The information is provided by Johannes Landgraf, Florian Obst, Li Koxie and Lucas Valtl ("we", "us") and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.
+  The information contained in this website is for general information purposes only. The information is provided by Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl ("we", "us") and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.
 </p>
 <p>
   In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.

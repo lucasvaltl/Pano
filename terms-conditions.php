@@ -52,10 +52,10 @@ require_once('includes/config.php');
     <div class="legal-policy">
       Last updated: March 15, 2017
 <p>
-  Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+  Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern Pano’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
 </p>
 <p>
-  The term ‘Pano’ or ‘us’ or ‘we’ refers to the owners Johannes Landgraf, Florian Obst, Li Koxie and Lucas Valtl of the website. The term ‘you’ refers to the user or viewer of our website.
+  The term ‘Pano’ or ‘us’ or ‘we’ refers to the owners Johannes Landgraf, Florian Obst, Li Xie and Lucas Valtl of the website. The term ‘you’ refers to the user or viewer of our website.
 </p>
 <p>
   The use of this website is subject to the following terms of use:
