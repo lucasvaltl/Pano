@@ -196,9 +196,7 @@ if(isset($_SESSION['UserName'])) { //if not yet logged in
                               here!
                             </div></a>
                         </div>
-                        <?php var_dump($_POST); echo'<br/>
-                        ';
-                  var_dump($missing)?>
+                      
                         <script type="text/javascript">
                         function initialize() {
 
