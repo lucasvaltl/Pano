@@ -92,6 +92,12 @@ include('includes/config.php');
                             <a href="signup.php">Not a member yet? <div class="underline">
                               Sign Up!
                             </div></a>
+                            <div class="login-legal">
+                              <br />
+                                  <br />
+                           <a href="terms-conditions.php">Terms and Conditions</a> and <a href="privacy-policy.php">Privacy Policy</a>
+
+                          </div>
                         </div>
                     </div>
                 </div>

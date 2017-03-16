@@ -201,10 +201,11 @@ a .profile-picture{
 }
 
 .profile-privacy{
+  width: 80%;
+  margin: 0 auto;
     color: #444;
-    position: fixed;
     z-index: 2;
-    margin-top: 40px;
+    margin-top: 80px;
     padding: 0 10px;
     background-color: white;
 }
@@ -1870,4 +1871,33 @@ color: white;
 .underline{
   text-decoration: underline;
   display: inline;
+}
+
+.legal-policy{
+  text-align: left;
+  font-size: 0.8em;
+}
+.about{
+  text-align: left;
+}
+
+.privacy-check{
+  font-size: 0.8em;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.privacy-check a{
+  color: white;
+  text-decoration: underline;
+}
+
+.login-legal{
+    color: #ababab;
+  font-size: 0.7em;
+}
+
+.login-legal a{
+  color: #ababab;
+  text-decoration: underline;
 }
