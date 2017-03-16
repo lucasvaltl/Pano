@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
     $Location = mysqli_real_escape_string ($conn, $_POST['Location']);
 
 //refrain from uploading a post without a picture. Variable pictureUploaded is set to true if the uploading worked
-if(isset($_SESSION['uploadSuccessful'] ) && $_SESSION['uploadSuccessful'] != true){
+if(!isset($_SESSION['uploadSuccessful'] ) && $_SESSION['uploadSuccessful'] != true){
 $missing[]  = 'Picture';
 $fail_count++;
 }
