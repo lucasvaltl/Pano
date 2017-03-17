@@ -81,7 +81,10 @@ if(!isset($error)){
 </div>
 
     <h2>Change Settings:</h2>
+    <?php    if ($successful_change) : ?>
+            <p class="alert alert-success fade in">Successfully changed settings.</p>
 
+    <?php endif;?>
 <div class="privacy-options drag-in">
 
 
@@ -114,11 +117,8 @@ if(!isset($error)){
 
                     <?php if ($invalid_credentials) : ?>
                     <p class="alert alert-danger">Invalid credentials. Please try again.</p>
-                    <?php endif;
-                        if ($successful_change) : ?>
-                            <p class="alert alert-success fade in">Successfully changed settings.</p>
+                  <?php endif; ?>
 
-                    <?php endif;?>
 
                         <br />
                         <label for="pwd">Please type your password for confirmation:</label>

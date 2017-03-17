@@ -1800,6 +1800,12 @@ border: none;
 box-shadow: none;
 margin-bottom: 0px;
 }
+.alert-success{
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0px;
+}
 
 .inputbox-error{
   border-color:  #ff3366;
