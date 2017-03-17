@@ -28,7 +28,7 @@ if (isset($_POST['create'])) {
   }
 
   //refrain from uploading a post without a picture. Variable pictureUploaded is set to true if the uploading worked
-  if(!isset($_SESSION['uploadSuccessful'] ) && $_SESSION['uploadSuccessful'] != true){
+  if(isset($_SESSION['uploadSuccessful'] ) && $_SESSION['uploadSuccessful'] != true){
   $missing[]  = 'Picture';
   $fail_count++;
   }

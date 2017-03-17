@@ -13,6 +13,8 @@ if (isset($_SESSION['UserID'])) {
   $real_name = $UserID . time();
   $blob_name = hash('sha256',$real_name);
 }
+
+//make sure upload variable is false, even when just logging in (usually it would be null at this point)
 if (!isset($_SESSION['uploadSuccessful'])) {
 $_SESSION['uploadSuccessful'] = false;
 }

@@ -10,6 +10,12 @@ include('includes/config.php');
 if(isset($_GET['error'])){
   $error = $_GET['error'];
 }
+
+//make sure upload variable is false, even when just logging in (usually it would be null at this point)
+if (!isset($_SESSION['uploadSuccessful'])) {
+$_SESSION['uploadSuccessful'] = false;
+}
+
 require_once('includes/dbconnect.php');
 include('includes/validatesettingchange.php');
 if(!isset($error)){

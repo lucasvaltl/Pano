@@ -6,6 +6,11 @@ ob_start();
 //session_start() needed to use global session variabls $_SESSION etc
 session_start();
 
+//make sure upload variable is false, even when just logging in (usually it would be null at this point)
+if (!isset($_SESSION['uploadSuccessful'])) {
+$_SESSION['uploadSuccessful'] = false;
+}
+
 include('includes/config.php');
 require_once('includes/dbconnect.php');
 $filename = basename(__FILE__, '.php');
