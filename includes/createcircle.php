@@ -1,6 +1,8 @@
 <?php
 
 $missing = [];
+$errors = [];
+$fail_count = 0;
 
 if (isset($_POST['create'])) {
 
@@ -11,6 +13,32 @@ if (isset($_POST['create'])) {
   $GroupName= mysqli_real_escape_string ($conn, $_POST['GroupName']);
   $ShortDescrip = mysqli_real_escape_string ($conn, $_POST['ShortDescrip']);
 
+
+  //checking if fields are missing
+  foreach ($_POST as $key => $value) {
+      $value = is_array($value) ? $value : trim($value);
+
+      if (empty($value) && in_array($key, $required)) {
+          $missing[] = $key;
+          $$key = '';
+          $fail_count++;
+      } elseif (in_array($key, $expected)) {
+          $$key = $value;
+      }
+  }
+
+  //refrain from uploading a post without a picture. Variable pictureUploaded is set to true if the uploading worked
+  if(!isset($_SESSION['uploadSuccessful'] ) && $_SESSION['uploadSuccessful'] != true){
+  $missing[]  = 'Picture';
+  $fail_count++;
+  }
+
+  //reset upload successfull if  the picture actually uploaded
+  $_SESSION['uploadSuccessful'] = false;
+
+
+
+
 //convert the the keys  from the post array that store the postIDs into an array of members. This is a hack that needed to be done given in order to make the front end look pretty and in order to have several independent checkboxes in the form.
   $keys = array_keys($_POST);
   $count = 5;
@@ -20,15 +48,11 @@ if (isset($_POST['create'])) {
     $count++;
   }
   $members[] = $CreatorID;
-  // check for errors
-  if (!isset($CreatorID) || $CreatorID == '' || !isset($PhotoID) || $PhotoID == '' ||  !isset($GroupName) ||$GroupName == '' || !isset($ShortDescrip) || $ShortDescrip == ''  ) {
-    //needs to be improved
-    $error = "Not all required fields have been filled in";
-    header("Location: circle-creation.php?error=" . urlencode($error));
-    exit();
-  }
+
+
+
   // If no errors detected, insert message into database
-  else{
+if ($fail_count == 0){
       $_SESSION['PhotoID']= $PhotoID;
 
     if(!$stmt = $conn->prepare("INSERT INTO groups (CreatorID, PhotoID, GroupName, ShortDescrip ) VALUES (?,?,?,?)")){

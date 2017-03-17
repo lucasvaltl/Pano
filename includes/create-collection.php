@@ -1,6 +1,11 @@
 <?php
 
+
+$errors = [];
 $missing = [];
+
+//sign up only goes through initial check if there are no errors or missing fields
+$fail_count = 0;
 
 if (isset($_POST['create'])) {
 
@@ -20,6 +25,35 @@ if (isset($_POST['create'])) {
     $GroupID = null;
   }
 
+  //checking if fields are missing
+  foreach ($_POST as $key => $value) {
+      $value = is_array($value) ? $value : trim($value);
+      if (empty($value) && in_array($key, $required)) {
+          $missing[] = $key;
+          $$key = '';
+          $fail_count++;
+      } elseif (in_array($key, $expected)) {
+          $$key = $value;
+      }
+  }
+
+  //convert the the keys  from the post array that store the postIDs into an array of pictures. This is a hack that needed to be done given in order to make the front end look pretty and in order to have several independent checkboxes in the form.
+    $keys = array_keys($_POST);
+
+    $sizeOfPost = count($_POST);
+    while($count <  $sizeOfPost){
+      $photos[] = $keys[$count];
+      $count++;
+    }
+
+  //checking if privacy setting is valid
+  if(!($PrivacySetting==1 || $PrivacySetting==2 || $PrivacySetting==3 || $PrivacySetting==4 )){
+    $missing[] = 'PrivacySetting';
+    $fail_count++;
+  }
+
+
+if($fail_count === 0){
 //get user ID which is needed to create cction
 $query ="SELECT UserID from user WHERE UserName='$OwnerName'";
 
@@ -30,26 +64,10 @@ if($result = mysqli_query($conn, $query)){
   die('Error: ' . mysqli_error($conn));
 }
 
-//convert the the keys  from the post array that store the postIDs into an array of pictures. This is a hack that needed to be done given in order to make the front end look pretty and in order to have several independent checkboxes in the form.
-  $keys = array_keys($_POST);
 
-  $sizeOfPost = count($_POST);
-  while($count <  $sizeOfPost){
-    $photos[] = $keys[$count];
-    $count++;
-  }
 
-  // check for errors
-  if (!isset($OwnerID) || $OwnerID == '' ||  !isset($Caption) ||$Caption == ''  || !isset($PrivacySetting) || $PrivacySetting == '' ) {
-    //TODO needs to be improved
-    $error = "Not all required fields have been filled in";
-    header("Location: collection-creation.php?error="  . urlencode($error));
-    exit();
-  }
-  // If no errors detected, insert message into database
-  else{
     //if the group privacy option was selected, insert into the db with the GroupID
-      if(isset($GroupID)){
+      if($GroupID != null){
 
           if(!$stmt = $conn->prepare("INSERT INTO collections (OwnerID, GroupID, Caption, SettingID ) VALUES (?,?,?,?)")){
               echo "Prepare failed: (". $conn->errno .")" . $conn->error;
@@ -99,7 +117,7 @@ if($result = mysqli_query($conn, $query)){
               exit();
     }
   }
-}
-}
 
+}
+}
 ?>
