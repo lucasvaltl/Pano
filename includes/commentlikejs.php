@@ -77,7 +77,7 @@
         var current_y = window.innerHeight + window.pageYOffset;
 
 
-        if(current_y >= content_height - 4000 && !end_of_feed) {
+        if(current_y >= content_height - 8000 && !end_of_feed) {
             loadMorePosts();
         }
     }
