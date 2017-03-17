@@ -13,7 +13,9 @@ if (isset($_SESSION['UserID'])) {
   $real_name = $UserID . time();
   $blob_name = hash('sha256',$real_name);
 }
-
+(!isset($_SESSION['uploadSuccessful'])) {
+$_SESSION['uploadSuccessful'] = false;
+}
 
 include('includes/dbconnect.php');
 include('includes/upload-post.php');
