@@ -136,6 +136,11 @@
           deleteButtons.item(i).addEventListener("click", deleteComment);
         }
 
+        var deletePostButtons = document.getElementsByClassName("delete-post-button");
+        for (i=0; i<deletePostButtons.length; i++) {
+          deletePostButtons.item(i).addEventListener("click", deletePost);
+        }
+
         var commentRows = document.getElementsByClassName('currentComments');
         for (var i = 0; i < commentRows.length; i++){
             commentRows[i].style.display='none';
@@ -275,16 +280,37 @@
               }
 
 
-            //need to remove commentRow's html
-
           } else {
           //    alert("There was a problem with the request.");
           }
       }
 
+    }
 
+    function deletePost() {
 
+      var postContainer = this.parentElement.parentElement.parentElement.parentElement;
+      var postID = postContainer.id;
 
+     // console.log(postContainer);
+      //console.log(postID);
+
+      var xhr = new XMLHttpRequest();
+      var data = "PostID=" + postID;
+      xhr.open('POST',  '<?=SITE_ROOT?>/includes/postdelete.php', true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send(data);
+
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+              var result = xhr.responseText;
+             // console.log(result);
+              postContainer.remove();
+
+          } else {
+          //    alert("There was a problem with the request.");
+          }
+      }
     }
 
 

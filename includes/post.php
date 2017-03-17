@@ -58,8 +58,12 @@ class post{
         $currentComments = "";
           foreach ($this->comments as $comment){
 
-              $canUserDelete =
-                  ($_SESSION['UserName'] == $comment->commentUserName ?
+              $canUserDeleteComment =
+                  ($_SESSION['UserName'] == $comment->commentUserName
+                  || $_SESSION['UserID'] == 12399
+                  || $_SESSION['UserID'] == 12400
+                  || $_SESSION['UserID'] == 12401
+                  || $_SESSION['UserID'] == 12402 ?
                   '<button class="delete-comment-button"><i class="fa fa-times" aria-hidden="true"></i></button>' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' );
 
             $currentComments .= ' <div class= "row post-comment" id="' . $comment->commentID .'">
@@ -80,7 +84,7 @@ class post{
      </div>
       <div class="col-md-1 col-xs-1 ">
 
-                       ' . $canUserDelete .'
+                       ' . $canUserDeleteComment .'
 
       </div>
 
@@ -96,6 +100,15 @@ class post{
       $typeOfStar = ($this->hasUserLiked ? 'liked' : '');
 
       $commentWithAnS =  (sizeof($this->comments) == 1 ? '' : 's');
+
+      $canUserDeletePost =
+          ($_SESSION['UserName'] == $this->postUserName
+          || $_SESSION['UserID'] == 12399
+          || $_SESSION['UserID'] == 12400
+          || $_SESSION['UserID'] == 12401
+          || $_SESSION['UserID'] == 12402 ?
+          '<button class="delete-post-button"><i class="fa fa-times" aria-hidden="true"></i></button>' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' );
+
 
       echo '<div class="post post-container animated slideInUp" id="' . $this->PostID .'">
         <div class="post-picture">
@@ -135,9 +148,14 @@ class post{
                 </p>
               </div>
             </div>
-            <div col-md-3 col-xs-3">
+            <div col-md-2 col-xs-2">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;'. $this->postTimeStamp . '
+            </div>
+            <div class="col-md-1 col-xs-1 ">
+
+                             ' . $canUserDeletePost .'
+
             </div>
           </div>
              <hr class="post-hr">
