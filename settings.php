@@ -6,6 +6,15 @@ ob_start();
 session_start();
 
 include('includes/config.php');
+
+if(isset($_GET['error'])){
+  $error = $_GET['error'];
+}
+require_once('includes/dbconnect.php');
+include('includes/validatesettingchange.php');
+if(!isset($error)){
+          include('includes/updateprofilepic.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,24 +44,30 @@ include('includes/config.php');
 <body id="gradhome">
 
     <?php
-        require_once('includes/dbconnect.php');
+
         include('includes/header.php');
-        include('includes/validatesettingchange.php');
-        include('includes/updateprofilepic.php');
+
 
      ?>
 
     <main>
         <div >
+
             <br />
             <p>
                 <h2>Change Profile Picture:</h2>
             </p>
 <div class="drag-in">
-            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-profilepic" type="post">
+            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-profilepic <?php     if (isset($error) && $error == 'upload-error'){
+              echo 'inputbox-error';
+            }?>" type="post">
                 <input type="hidden" name="hashname" value="<?=$_SESSION['UserID']?>">
                 <input type="hidden" name="picType" value="profilepics">
-                  <div class="dz-message data-dz-message"><span>Drag your new profile picture into here - or click to select</span></div><br>
+                  <div class="dz-message data-dz-message"><?php if (isset($error) && $error == 'upload-error') : ?>
+                    <span class="alert alert-danger">Please add a profile picture. Only jpg files of less than 6mb are allowed.</span>
+                  <?php else: ?>
+                    <span>Drag your profile picture into here - Or just click*</span>
+                  <?php endif; ?></div><br>
             </form>
             </div>
             <form action="<?= $_SERVER['PHP_SELF'];?>" method="post" class="padding-top-20 larger-font">

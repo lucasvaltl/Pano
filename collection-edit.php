@@ -24,6 +24,10 @@ if(isset($_GET['CollectionID'])){
   $CollectionID = $_GET['CollectionID'];
 }
 
+if(isset($_GET['error'])){
+  $error = $_GET['error'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,6 +69,12 @@ if(isset($_GET['CollectionID'])){
       }
     }
     ?>
+    <div class="alert-danger">
+      <?php if(isset($error)){
+        echo $error;
+      } ?>
+
+    </div>
     <div class="row collection-identifier">
       Collection:
     </div>

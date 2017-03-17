@@ -57,10 +57,18 @@ include_once('includes/createcircle.php');
 
       <div class="row">
         <div class="col-sm-3 create-circle-picID">
-            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-circle-creation " type="post">
+            <form action="<?=SITE_ROOT?>/includes/upload.php" class="dropzone dropzone-circle-creation <?php     if ($missing){
+              echo 'inputbox-error';
+            }?> " type="post">
                 <input type="hidden" name="hashname" value="<?= $blob_name ?>">
                 <input type="hidden" name="picType" value="circlepics">
-                  <div class="dz-message data-dz-message">Drag in a picture or click to upload a cover picture</div>
+                  <div class="dz-message data-dz-message"><?php if ($missing && in_array('Picture', $missing)) : ?>
+                    <span class="alert alert-danger">Please add a cover picture. Only jpg files of less than 6mb are allowed.</span>
+                  <?php elseif ($missing): ?>
+                    <span class="alert alert-danger">Unfortunately you need to re-upload your picture</span>
+                  <?php else: ?>
+                    <span>Drag a cover picture into here - Or just click*</span>
+                  <?php endif; ?></div>
             </form>
         </div>
         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post" class="form-group create-circle container">
@@ -69,7 +77,12 @@ include_once('includes/createcircle.php');
           <div class="row">
 
         <div class="col-sm-6 create-circle-name">
-          <input type="text" class="form-control collection-name-input"  name="GroupName" placeholder="Insert Awesome Name Here" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*16))) + 'px'}" ng-model="CollectionName" autocomplete="off" role="presentation">
+          <input type="text" class="form-control collection-name-input <?php     if ($missing && in_array('GroupName', $missing)){
+            echo 'collection-name-input-error';
+          }?>"  name="GroupName" placeholder="<?php if ($missing && in_array('GroupName', $missing)){echo 'You have to give it a name!';}else{echo 'Insert awsome name here';}?>" ng-style="{'width': (CollectionName.length == 0 ? '360': ((CollectionName.length*16))) + 'px'}" ng-model="CollectionName" autocomplete="off" role="presentation" <?php
+          if ($errors || $missing) {
+            echo 'ng-init="CollectionName=\'' . htmlentities($GroupName) . '\'"';
+          }?> required>
         </div>
 
         <div class="col-sm-3 create-circle-button">
@@ -80,7 +93,13 @@ include_once('includes/createcircle.php');
         <div class="col-sm-3">
         </div>
         <div class="col-sm-6 create-circle-shortdescrip">
-          <textarea type="textarea" class="form-control circle-create-input circle-create-input-textarea" placeholder="What will the circle be about? Please write a short description." wrap="soft" name="ShortDescrip"></textarea>
+          <textarea type="textarea" class="form-control circle-create-input circle-create-input-textarea <?php     if ($missing && in_array('ShortDescrip', $missing)){
+            echo 'inputbox-error';
+          }?>" placeholder="What will the circle be about? Please write a short description." wrap="soft" name="ShortDescrip"><?php
+          if ($errors || $missing) {
+            echo htmlentities($ShortDescrip);
+          }
+          ?></textarea>
         </div>
         <div class="col-sm-3">
 

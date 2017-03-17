@@ -43,8 +43,8 @@ if(isset($_POST['edit'])){
   // check for errors
   if (!isset($OwnerID) || $OwnerID == '' ||  !isset($Caption) ||$Caption == ''  || !isset($PrivacySetting) || $PrivacySetting == '' ) {
     //TODO needs to be improved
-    $error = "Not all required fields have been filled in";
-    header("Location: collection-creation.php?error="  . urlencode($error));
+    $error = "All fields are required to be filled in";
+    header("Location: collection-edit.php?CollectionID=".$CollectionID."&error="  . urlencode($error));
     exit();
   }
   // If no errors detected, insert message into database
