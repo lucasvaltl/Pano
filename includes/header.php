@@ -48,10 +48,12 @@ if(isset($_SESSION['SearchTerm'])) {
                     &nbsp; &nbsp;
                 </button>
                 <ul class="dropdown-content">
+                    <br>
                     <li> Image Scaling<hr></li>
                     <li><a id="ratio-default">Default</a></li>
                     <li><a id="ratio-wide">Wide</a></li>
                     <li><a id="ratio-narrow">Narrow</a></li>
+                    <br>
                 </ul>
             <?php else : ?>
             <div class="pull-right navbar-text">

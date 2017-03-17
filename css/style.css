@@ -445,7 +445,7 @@ ul.dropdown-content {
     margin-left: -14px;
 }
 
-.dropdown-content a {
+.dropdown-content a  {
     display:block;
     position: inline;
     background: white;
@@ -474,8 +474,8 @@ ul.dropdown-content:focus {
     outline:0;
 }
 
-ul.dropdown-content a:hover,
-ul.dropdown-content a:focus {
+ul.dropdown-content li a:hover,
+ul.dropdown-content li a:focus {
     background-color: #ededed;
     outline:0;
     cursor: pointer;
