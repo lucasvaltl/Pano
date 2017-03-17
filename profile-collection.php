@@ -88,6 +88,9 @@ if(isset($_GET['CollectionID'])){
 
         </div>
 
+        <br>
+        <br>
+
         <button id="load-more-button" data-page="0" type="button">Load More</button>
 
         <div id="loader">
@@ -105,6 +108,11 @@ if(isset($_GET['CollectionID'])){
 
 <!-- jquery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous">
+</script>
 
 <?php
     include('includes/commentlikejs.php');

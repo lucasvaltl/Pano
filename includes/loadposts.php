@@ -126,7 +126,7 @@ function findPosts($page, $stmt, $conn, $displayRecommendations) {
         $result = $stmt->get_result();
         $total_posts = mysqli_num_rows($result);
 
-        $per_page = 8;
+        $per_page = 15;
         $offset = (($page - 1) * $per_page) + 1;
 
         $post_counter = 1;

@@ -14,6 +14,7 @@
     loadMore.addEventListener("click", loadMorePosts);
     var loader = document.getElementById("loader");
     var request_in_progress = false;
+    var end_of_feed = false;
 
 
 
@@ -24,6 +25,23 @@
             $('#return-to-top').fadeIn(400);
         } else { //else fade out arrow
             $('#return-to-top').fadeOut(400);
+        }
+
+    //    var content_height = feedContainer.offsetHeight;
+        var content_height = $(document).height();
+        var adjusted_height = content_height - 120 ;
+        var current_y = window.innerHeight + window.pageYOffset;
+        var current_x =  ($(document).width() / 2)-25;
+
+    //    console.log(current_y);
+    //    console.log(content_height);
+    //    console.log(current_x);
+
+        if (current_y >= content_height - 100){
+
+              $('#return-to-top').css({top: adjusted_height, right: current_x, position:'absolute'});
+        } else {
+              $('#return-to-top').css({top: "", right: "", position:""});
         }
     });
     //when arrow is clicked, scroll to top
@@ -59,7 +77,7 @@
         var current_y = window.innerHeight + window.pageYOffset;
 
 
-        if(current_y >= content_height - 4000) {
+        if(current_y >= content_height - 4000 && !end_of_feed) {
             loadMorePosts();
         }
     }
@@ -92,7 +110,6 @@
                 div.appendChild(items[0]);
             }
 
-//potential issue start
             var sendRequestButtonCollFilter = document.getElementsByClassName("send-request-button-coll");
             var cancelRequestButtonCollFilter = document.getElementsByClassName("cancel-request-button-coll");
 
@@ -101,13 +118,12 @@
                 cancelRequestButtonCollFilter.item(i).addEventListener("click",cancelFriendRequestFromCollFilter);
             }
 
-  //potential issue middle
+
             var class_name = temp.firstElementChild.nextElementSibling.className;
 
-          //potential issue end
         }
 
-        //console.log("yolo" + class_name);
+
 
         var items = temp.getElementsByClassName(class_name);
 
@@ -171,16 +187,19 @@
         xhr.onreadystatechange = function () {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
-                // console.log('Result: ' + result);
+                 //console.log('Result: ' + result);
 
                 hideLoader();
                 setCurrentPage(next_page);
                 //if statement to prevent appendFeedClassNameError
                 if (result.length > 10){
                     appendToFeedContainer(feedContainer, result);
+                } else {
+                    end_of_feed = true;
                 }
 
                 request_in_progress = false;
+
             }
         };
         xhr.send();

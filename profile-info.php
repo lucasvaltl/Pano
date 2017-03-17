@@ -20,7 +20,10 @@ if (isset($_GET['id'])) {
 <!DOCTYPE html>
 <html>
 
-<a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+
+<a href="javascript:" id="return-to-top" ><i class="icon-chevron-up"></i></a>
+
+
 
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -67,6 +70,10 @@ if (isset($_GET['id'])) {
 
       </div>
 
+      <br>
+      <br>
+
+
   <?php else : ?>
       <div class="container content  profile-privacy soft-shadow animated zoomIn ">
 
@@ -98,6 +105,11 @@ if (isset($_GET['id'])) {
 
 <!-- jquery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous">
+</script>
 
 <?php
     include('includes/commentlikejs.php');
