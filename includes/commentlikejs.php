@@ -53,12 +53,13 @@
     }
 
 
-    //if the user has scrolled to the end of the page, then call loadMorePosts
+    //if the user has scrolled to almost bottom of the page, then call loadMorePosts
     function scrollReaction() {
         var content_height = feedContainer.offsetHeight;
         var current_y = window.innerHeight + window.pageYOffset;
 
-        if(current_y >= content_height) {
+
+        if(current_y >= content_height - 4000) {
             loadMorePosts();
         }
     }
@@ -174,7 +175,10 @@
 
                 hideLoader();
                 setCurrentPage(next_page);
-                appendToFeedContainer(feedContainer, result);
+                //if statement to prevent appendFeedClassNameError
+                if (result.length > 10){
+                    appendToFeedContainer(feedContainer, result);
+                }
 
                 request_in_progress = false;
             }
