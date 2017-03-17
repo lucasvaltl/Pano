@@ -115,72 +115,219 @@ textarea {
   height: 200px;
   object-fit: cover;
 }
+
+
 /*adapt size of panoramas to screen*/
+
+
+
+/* default size ratio 3.5 */
+
+
 @media (min-width: 768px) {
-.panorama {
-    height: 279px;
+.panorama.default {
+    height: 219px;
     }
 }
 
 @media (min-width: 992px) {
-.panorama{
-        height: 344px;
+.panorama.default{
+        height: 283px;
     }
 }
 
 @media (min-width: 1200px) {
-.panorama{
-    height: 403px;
+.panorama.default{
+    height: 343px;
     }
 }
 
 @media (min-width: 1500px) {
-.panorama{
-    height: 489px;
+.panorama.default{
+    height: 429px;
     }
 }
 
 @media (min-width: 1800px) {
-.panorama{
-    height: 565px;
+.panorama.default{
+    height: 514px;
     }
 }
 
 @media (min-width: 2100px) {
-.panorama{
-    height: 660px;
+.panorama.default{
+    height: 600px;
     }
 }
 
+
 @media (min-width: 2400px) {
-.panorama{
-    height: 746px;
+.panorama.default{
+    height: 686px;
     }
 }
 
 @media (min-width: 2700px) {
-.panorama{
-    height: 831px;
+.panorama.default{
+    height: 771px;
     }
 }
 
 @media (min-width: 3000px) {
-.panorama{
-    height: 917px;
+.panorama.default{
+    height: 857px;
     }
 }
 
 @media (min-width: 3600px) {
-.panorama{
-    height: 1089px;
+.panorama.default{
+    height: 1028px;
     }
 }
 
 @media (min-width: 3900px) {
-.panorama{
-    height: 1174px;
+.panorama.default{
+    height: 1114px;
     }
 }
+
+
+/* wide size 2.9*/
+@media (min-width: 768px) {
+.panorama.wide {
+    height: 264px;
+    }
+}
+
+@media (min-width: 992px) {
+.panorama.wide{
+        height: 342px;
+    }
+}
+
+@media (min-width: 1200px) {
+.panorama.wide{
+    height: 414px;
+    }
+}
+
+@media (min-width: 1500px) {
+.panorama.wide{
+    height: 517px;
+    }
+}
+
+@media (min-width: 1800px) {
+.panorama.wide{
+    height: 621px;
+    }
+}
+
+@media (min-width: 2100px) {
+.panorama.wide{
+    height: 724px;
+    }
+}
+
+
+@media (min-width: 2400px) {
+.panorama.wide{
+    height: 827px;
+    }
+}
+
+@media (min-width: 2700px) {
+.panorama.wide{
+    height: 931px;
+    }
+}
+
+@media (min-width: 3000px) {
+.panorama.wide{
+    height: 1034px;
+    }
+}
+
+@media (min-width: 3600px) {
+.panorama.wide{
+    height: 1241px;
+    }
+}
+
+@media (min-width: 3900px) {
+.panorama.wide{
+    height: 1344px;
+    }
+}
+
+/* narrow size 3.9*/
+@media (min-width: 768px) {
+.panorama.narrow {
+    height: 202px;
+    }
+}
+
+@media (min-width: 992px) {
+.panorama.narrow{
+        height: 261px;
+    }
+}
+
+@media (min-width: 1200px) {
+.panorama.narrow{
+    height: 307px;
+    }
+}
+
+@media (min-width: 1500px) {
+.panorama.narrow{
+    height: 384px;
+    }
+}
+
+@media (min-width: 1800px) {
+.panorama.narrow{
+    height: 461px;
+    }
+}
+
+@media (min-width: 2100px) {
+.panorama.narrow{
+    height: 538px;
+    }
+}
+
+
+@media (min-width: 2400px) {
+.panorama.narrow{
+    height: 615px;
+    }
+}
+
+@media (min-width: 2700px) {
+.panorama.narrow{
+    height: 692px;
+    }
+}
+
+@media (min-width: 3000px) {
+.panorama.narrow{
+    height: 769px;
+    }
+}
+
+@media (min-width: 3600px) {
+.panorama.narrow{
+    height: 923px;
+    }
+}
+
+@media (min-width: 3900px) {
+.panorama.narrow{
+    height: 1000px;
+    }
+}
+
 
 .post-picture{
   padding-bottom: 10px;
@@ -280,6 +427,66 @@ hr{
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     transition: 0.3s;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+ul.dropdown-content {
+    list-style: none;
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: -14px;
+}
+
+.dropdown-content a {
+    display:block;
+    position: inline;
+    background: white;
+    color: #444;
+    text-align: left;
+    font-size: 0.8em;
+    width: 160px;
+    margin-left: -30px;
+
+}
+
+button.dropdown-header{
+    display:inline;
+    background: none;
+    border: none;
+    font-size: 1em;
+}
+
+button.dropdown-header:focus{
+    outline:0;
+}
+
+ul.dropdown-content:hover,
+ul.dropdown-content:focus {
+    background-color: white;
+    outline:0;
+}
+
+ul.dropdown-content a:hover,
+ul.dropdown-content a:focus {
+    background-color: #ededed;
+    outline:0;
+    cursor: pointer;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    color: black;
+    text-decoration: none;
+    display: block;
 }
 
 
@@ -1177,7 +1384,7 @@ ul#suggestions {
   list-style: none;
 
   margin: 0;
-padding: 0;
+  padding: 0;
   margin-top: 10px;
   width: 228px;
   display: none;
@@ -1191,7 +1398,7 @@ ul#suggestions li {
 ul#suggestions li a {
   display: block;
   position: relative;
-margin-left: 15px;
+  margin-left: 15px;
   min-height: 1em;
   padding: 0.5em 20px;
   background: white;

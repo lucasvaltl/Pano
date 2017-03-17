@@ -3,7 +3,7 @@
 
 // OPTION 1: Connection to Azure /////////////////////////////////
 
-define("DB_USERNAME", "b55e2163643140");
+/*define("DB_USERNAME", "b55e2163643140");
   define("DB_PASS", "94533d90");
   define("DB_NAME", "app_pano_database");
   define("DB_HOST", "br-cdbr-azure-south-b.cloudapp.net");
@@ -23,12 +23,12 @@ define("DB_USERNAME", "b55e2163643140");
           mysqli_connect_error() .
           " (" . mysqli_connect_errno() . ")"
       );
-  }
+  }*/
 
 
 // OPTION 2: Connection to local DB /////////////////////////////////
 
-/*
+
     define("DB_USERNAME", "root");
     define("DB_PASS", "root");
     define("DB_NAME", "Pano");
@@ -52,7 +52,7 @@ define("DB_USERNAME", "b55e2163643140");
             " (" . mysqli_connect_errno() . ")"
         );
     }
-*/
+
 
 
 /*

@@ -112,7 +112,7 @@ class post{
 
       echo '<div class="post post-container animated slideInUp" id="' . $this->PostID .'">
         <div class="post-picture">
-          <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $this->PostID . '.jpg" class="panorama">
+          <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $this->PostID . '.jpg" class="panorama default">
         </div>
 
         <div class="row ">

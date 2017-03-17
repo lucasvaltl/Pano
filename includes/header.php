@@ -41,12 +41,18 @@ if(isset($_SESSION['SearchTerm'])) {
 
 <!-- Profile -->
             <?php if (isset($_SESSION['UserName'])) : ?>
-            <div class="pull-right navbar-text">
-                <a href="<?=SITE_ROOT?>/profile-info.php?id=<?php echo $_SESSION['UserName'];?>">
+            <div class="pull-right navbar-text dropdown">
+                <button class="dropdown-header" href="<?=SITE_ROOT?>/profile-info.php?id=<?php echo $_SESSION['UserName'];?>">
                     <img class="comment-picture img-circle" src="https://apppanoblob.blob.core.windows.net/profilepics/<?=$_SESSION['ProfilePictureID']?>.jpg">
                     &nbsp; &nbsp;<?=$_SESSION['UserName'];?>
                     &nbsp; &nbsp;
-                </a>
+                </button>
+                <ul class="dropdown-content">
+                    <li> Image Scaling<hr></li>
+                    <li><a id="ratio-default">Default</a></li>
+                    <li><a id="ratio-wide">Wide</a></li>
+                    <li><a id="ratio-narrow">Narrow</a></li>
+                </ul>
             <?php else : ?>
             <div class="pull-right navbar-text">
                 <a href="<?=SITE_ROOT?>/login.php">Log in!</a>
@@ -105,5 +111,43 @@ if(isset($_SESSION['SearchTerm'])) {
          search.addEventListener("input", getSuggestions);
 
     });
+
+    var toggleDefaultButton = document.getElementById("ratio-default");
+    var toggleWideButton = document.getElementById("ratio-wide");
+    var toggleNarrowButton = document.getElementById("ratio-narrow");
+    toggleDefaultButton.addEventListener("click", toggleDefault);
+    toggleWideButton.addEventListener("click", toggleWide);
+    toggleNarrowButton.addEventListener("click", toggleNarrow);
+
+    function toggleDefault () {
+        var desiredRatio = "default";
+        var undesiredRatio1 = "narrow";
+        var undesiredRatio2 = "wide";
+        togglePanoRatio(desiredRatio, undesiredRatio1 ,undesiredRatio2);
+    }
+    function toggleWide () {
+        var desiredRatio = "wide";
+        var undesiredRatio1 = "narrow";
+        var undesiredRatio2 = "default";
+        togglePanoRatio(desiredRatio, undesiredRatio1 ,undesiredRatio2);
+    }
+    function toggleNarrow () {
+        var desiredRatio = "narrow";
+        var undesiredRatio1 = "wide";
+        var undesiredRatio2 = "default";
+        togglePanoRatio(desiredRatio, undesiredRatio1 ,undesiredRatio2);
+    }
+
+    function togglePanoRatio(desiredRatio, undesiredRatio1 ,undesiredRatio2) {
+        var panoramas = document.getElementsByClassName("panorama");
+        console.log(desiredRatio);
+        for (i=0; i<panoramas.length; i++){
+            panoramas.item(i).classList.add(desiredRatio);
+            panoramas.item(i).classList.remove(undesiredRatio1);
+            panoramas.item(i).classList.remove(undesiredRatio2);
+        }
+    }
+
+
 
 </script>
