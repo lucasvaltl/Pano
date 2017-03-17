@@ -174,7 +174,10 @@
 
                 hideLoader();
                 setCurrentPage(next_page);
-                appendToFeedContainer(feedContainer, result);
+                //if statement to prevent appendFeedClassNameError
+                if (result.length > 10){
+                    appendToFeedContainer(feedContainer, result);
+                }
 
                 request_in_progress = false;
             }
