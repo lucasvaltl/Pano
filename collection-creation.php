@@ -107,8 +107,6 @@ include('includes/create-collection.php');
           </div>
         </div>
         <br />
-        <hr />
-        <?php var_dump($photos); ?>
       </div>
       <div class="content collection-creation">
 
@@ -159,7 +157,6 @@ include('includes/create-collection.php');
 
       </div>
 </div>
-      <?php var_dump($_POST); ?>
     </form>
 
   </main>
