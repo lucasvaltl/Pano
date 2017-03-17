@@ -37,7 +37,7 @@
     //    console.log(content_height);
     //    console.log(current_x);
 
-        if (current_y >= content_height - 100){
+        if (current_y >= content_height - 100  && end_of_feed){
 
               $('#return-to-top').css({top: adjusted_height, right: current_x, position:'absolute'});
         } else {
