@@ -111,7 +111,10 @@ include('includes/create-collection.php');
         <?php var_dump($photos); ?>
       </div>
       <div class="content collection-creation">
+
         <h4>Please choose the picture(s) you want to add to this album</h4>
+        <br />
+        <div class="soft-shadow">
         <?php
 
 
@@ -155,7 +158,7 @@ include('includes/create-collection.php');
         ?>
 
       </div>
-
+</div>
       <?php var_dump($_POST); ?>
     </form>
 

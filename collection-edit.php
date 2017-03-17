@@ -125,10 +125,13 @@ if(isset($_GET['error'])){
         </div>
       </div>
       <br />
-      <hr />
+
     </div>
     <div class="content collection-creation">
       <h4>Please select the pictures which should be in this collection. All pictures that are currently in the album are pre-selected.</h4>
+      <br />
+      <div class="soft-shadow">
+
       <?php
       //query for all pictures in the collection to later mark them as checked
       $query = "SELECT PostID FROM photocollectionsmapping
@@ -175,6 +178,7 @@ if(isset($_GET['error'])){
       }
       ?>
 
+    </div>
     </div>
 
   </form>
