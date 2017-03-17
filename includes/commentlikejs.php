@@ -59,7 +59,7 @@
         var current_y = window.innerHeight + window.pageYOffset;
 
 
-        if(current_y >= content_height - 2000) {
+        if(current_y >= content_height - 4000) {
             loadMorePosts();
         }
     }
