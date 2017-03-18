@@ -192,7 +192,7 @@
                 hideLoader();
                 setCurrentPage(next_page);
                 //if statement to prevent appendFeedClassNameError
-                if (result.length > 1){
+                if (result.length > 10){
                     appendToFeedContainer(feedContainer, result);
                 } else {
                     end_of_feed = true;
