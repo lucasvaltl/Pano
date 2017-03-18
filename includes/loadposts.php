@@ -24,10 +24,15 @@ if (isset($_SERVER['HTTP_REFERER'])){
     $profileUserName = substr(strchr($_SERVER['HTTP_REFERER'], 'id='), 3);
     //gets the collectionIDfrom the URL of the page.
     $CollectionID = substr(strchr($_SERVER['HTTP_REFERER'], 'CollectionID='),13 );
-
 }
 
 $displayRecommendations = false;
+
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+
+$per_page = 15;
+$offset = (($page - 1) * $per_page) + 1;
+
 
 //==========query to pick based on which page called loadposts.php============
 
@@ -40,11 +45,12 @@ if ($_SESSION['SearchTerm'][0] == '#'){
             LEFT JOIN tags as t on tpm.`TagID` = t.`TagID`
             LEFT JOIN user as u on u.`UserID` = p.`UserID`
             WHERE TagName = ?
-            ORDER BY PostTime DESC")){
+            ORDER BY PostTime DESC
+            LIMIT ? , ?")){
         echo "Prepare failed: (". $conn->errno .")" . $conn->error;
     }
 
-    if(!$stmt->bind_param("s", $_SESSION['SearchTerm'])){
+    if(!$stmt->bind_param("sii", $_SESSION['SearchTerm'], $offset, $per_page)){
         echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
     }
 
@@ -60,13 +66,15 @@ if ($_SESSION['SearchTerm'][0] == '#'){
                     (SELECT FriendID
                     FROM friends
                     WHERE UserID = ?)
-                    ORDER BY PostTime DESC")){
+                    ORDER BY PostTime DESC
+                    LIMIT ? , ?")){
         echo "Prepare failed: (". $conn->errno .")" . $conn->error;
     }
 
-    if(!$stmt->bind_param("ii", $_SESSION['UserID'], $_SESSION['UserID'])){
+    if(!$stmt->bind_param("iiii", $_SESSION['UserID'], $_SESSION['UserID'], $offset, $per_page)){
         echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
     }
+
 
 //query tailored for the profile-info page
 } else if (strpos($_SERVER['HTTP_REFERER'],'profile-info.php')){
@@ -75,11 +83,12 @@ if ($_SESSION['SearchTerm'][0] == '#'){
         "SELECT * FROM posts
                     LEFT JOIN user ON user.`UserID` = posts.`UserID`
                     WHERE user.`UserName` = ?
-                    ORDER BY PostTime DESC")){
+                    ORDER BY PostTime DESC
+                    LIMIT ? , ?")){
         echo "Prepare failed: (". $conn->errno .")" . $conn->error;
     }
 
-    if(!$stmt->bind_param("s", $profileUserName)){
+    if(!$stmt->bind_param("sii", $profileUserName, $offset, $per_page)){
         echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
     }
     //query tailored for a collection
@@ -92,22 +101,17 @@ if ($_SESSION['SearchTerm'][0] == '#'){
                     JOIN user
                       ON user.`UserID` = posts.`UserID`
                     WHERE photocollectionsmapping.`CollectionID` = ?
-                    ORDER BY PostTime DESC")){
+                    ORDER BY PostTime DESC
+                    LIMIT ? , ?")){
         echo "Prepare failed: (". $conn->errno .")" . $conn->error;
     }
 
-    if(!$stmt->bind_param("i", $CollectionID)){
+    if(!$stmt->bind_param("iii", $CollectionID, $offset, $per_page)){
         echo "Binding parameters failed: (".$stmt->errno . ")".$stmt->error;
     }
 }
 
-
-
-
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-
-$posts = findPosts($page, $stmt, $conn, $displayRecommendations);
-
+$posts = findPosts($page, $stmt, $conn, $displayRecommendations, $offset , $per_page);
 
 function addRecommendedFriendsRow($conn) {
     require_once('dbconnect.php');
@@ -115,9 +119,9 @@ function addRecommendedFriendsRow($conn) {
 }
 
 
-function findPosts($page, $stmt, $conn, $displayRecommendations) {
+function findPosts($page, $stmt, $conn, $displayRecommendations, $offset , $per_page) {
 
-//display recommendations only when on home
+    //display recommendations only when on home
     if ($page == 2 && $displayRecommendations){
         addRecommendedFriendsRow($conn);
     }
@@ -126,20 +130,9 @@ function findPosts($page, $stmt, $conn, $displayRecommendations) {
         $result = $stmt->get_result();
         $total_posts = mysqli_num_rows($result);
 
-        $per_page = 15;
-        $offset = (($page - 1) * $per_page) + 1;
-
-        $post_counter = 1;
-
-        //skips over the posts already put on the feed
-        while ($post_counter < $offset ) {
-            $post = mysqli_fetch_array($result);
-            $post_counter++;
-        }
-
         //if there are less posts than posts per page, set $per_page to how many are remaining
-        if (($total_posts - $offset) < $per_page) {
-            $per_page = $total_posts-$offset + 1;
+        if ($total_posts< $per_page) {
+            $per_page = $total_posts;
         }
 
         for ($i=0; $i < $per_page; $i++) {
@@ -211,10 +204,11 @@ function findPosts($page, $stmt, $conn, $displayRecommendations) {
 
 
         }
+    } else {
+          echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
     }
 
 }
-
 
     //set the $_SESSION['SearchTerm'] variable to null, so it can prepare for the next one
     //(and so the else if statements are accessible later on)

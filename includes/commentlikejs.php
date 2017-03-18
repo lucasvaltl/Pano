@@ -187,15 +187,16 @@
         xhr.onreadystatechange = function () {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 var result = xhr.responseText;
-                 //console.log('Result: ' + result);
+            //     console.log('Result: ' + result);
 
                 hideLoader();
                 setCurrentPage(next_page);
                 //if statement to prevent appendFeedClassNameError
-                if (result.length > 10){
+                if (result.length > 1){
                     appendToFeedContainer(feedContainer, result);
                 } else {
                     end_of_feed = true;
+            //        console.log(end_of_feed);
                 }
 
                 request_in_progress = false;
