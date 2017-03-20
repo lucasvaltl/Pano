@@ -31,7 +31,7 @@ $displayRecommendations = false;
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
 $per_page = 15;
-$offset = (($page - 1) * $per_page) + 1;
+$offset = (($page - 1) * $per_page);
 
 
 //==========query to pick based on which page called loadposts.php============
