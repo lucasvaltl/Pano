@@ -31,7 +31,7 @@ public function returnHTML(){
     </div>
     <div class="col-md-3 col-xs-3 friend-name">
         <a href="'.SITE_ROOT.'/profile-info.php?id='.$this->friendLink.'">&nbsp;
-            <img src="https://apppanoblob.blob.core.windows.net/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
+            <img src="'. SITE_ROOT .'/AzureBackups/profilepics/'.$this->friendPictureID.'.jpg" class="img-circle friend-picture" /> &nbsp; &nbsp; &nbsp; &nbsp; '.$this->friendName.'
         </a>
     </div>
 

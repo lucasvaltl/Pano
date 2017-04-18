@@ -134,7 +134,7 @@ if (isset($_GET['id'])) {
                       echo  ' <div class="col col-sm-6 soft-shadow collection-object">
                       <a href="'.SITE_ROOT.'/profile-collection.php?CollectionID='.$collection['CollectionID'].'">
                       <p>
-                      <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $cover['PostID'] . '.jpg" class="img-responsive  profile-collections-title" alt="Collection does not contain Images"/>
+                      <img src="'. SITE_ROOT .'/AzureBackups/panoramas/'  . $cover['PostID'] . '.jpg" class="img-responsive  profile-collections-title" alt="Collection does not contain Images"/>
                       </p>
                       <p>
                       <h4>'.$collection['Caption'].'</h4>

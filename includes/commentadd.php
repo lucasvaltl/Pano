@@ -45,7 +45,7 @@ if ($stmt->execute()) {
 
                                  <a href="'. SITE_ROOT .'/profile-info.php?id='. $commentUserName .'" >&nbsp;
                   <div class="col-md-1 col-xs-1 comment-picture-col">
-                                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" />
+                                   <img src="'. SITE_ROOT .'/AzureBackups/profilepics/' . $commentUserPictureID . '.jpg" class="img-circle comment-picture" />
                                         </div>
                 <div class="post-comment-content col-md-7 col-xs-7">
                                    ' . $commentUserName . '

@@ -17,7 +17,7 @@ $profilePictureID = $_POST['profilePictureID'];
 echo '
 <div class="row ">
     <div class="col col-md-3 col-xs-3 profile-info-row">
-        <img src="https://apppanoblob.blob.core.windows.net/profilepics/'.$profilePictureID.'.jpg" class="img-circle img-responsive profile-user-picture " />
+        <img src="'. SITE_ROOT .'/AzureBackups/profilepics/'.$profilePictureID.'.jpg" class="img-circle img-responsive profile-user-picture " />
     </div>
     <div class="col col-md-6  col-xs-6 container">
         <p class="profile-info-name">

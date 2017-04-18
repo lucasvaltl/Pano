@@ -70,7 +70,7 @@ class post{
 
                  <a href="'. SITE_ROOT .'/profile-info.php?id='. $comment->commentUserName .'" >&nbsp;
   <div class="col-md-1 col-xs-1 comment-picture-col">
-                   <img src="https://apppanoblob.blob.core.windows.net/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" />
+                   <img src="'. SITE_ROOT .'/AzureBackups/profilepics/' . $comment->commentUserPictureID . '.jpg" class="img-circle comment-picture" />
                         </div>
 <div class="post-comment-content col-md-7 col-xs-7">
                    ' . $comment->commentUserName . '
@@ -112,14 +112,14 @@ class post{
 
       echo '<div class="post post-container animated slideInUp" id="' . $this->PostID .'">
         <div class="post-picture">
-          <img src="https://apppanoblob.blob.core.windows.net/panoramas/' . $this->PostID . '.jpg" class="panorama">
+          <img src="'. SITE_ROOT .'/AzureBackups/panoramas/' . $this->PostID . '.jpg" class="panorama">
         </div>
 
         <div class="row ">
           <div class="container post-meta vertical-center">
             <div class="post-user-picture col-md-3 col-xs-3">
               <a href="'. SITE_ROOT .'/profile-info.php?id='. $this->postUserName .'" >&nbsp;
-                <img src="https://apppanoblob.blob.core.windows.net/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
+                <img src="'. SITE_ROOT .'/AzureBackups/profilepics/'.$this->postUserPictureID.'.jpg" class="img-circle profile-picture" /> &nbsp; &nbsp; &nbsp; '.$this->postUserName.'
               </a>
             </div>
             <div class="post-like-comment col-md-1 col-xs-1 " >

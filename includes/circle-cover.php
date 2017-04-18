@@ -22,7 +22,7 @@ $output =  ' <div class="col col-sm-6  soft-shadow circle-cover-object">
     <a href="'.SITE_ROOT.'/' . $this->collectionLinkA . '">
 
     <p class="mask-container">
-          <img src="https://apppanoblob.blob.core.windows.net/circlepics/'.$this->collectionImageIDA.'.jpg" class=" circle-cover-large" />
+          <img src="'.SITE_ROOT.'/AzureBackups/circlepics/'.$this->collectionImageIDA.'.jpg" class=" circle-cover-large" />
     </p>
 
     <p>
