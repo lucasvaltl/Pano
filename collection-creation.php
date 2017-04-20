@@ -140,7 +140,7 @@ include('includes/create-collection.php');
             }
             echo '
             <div class="col col-sm-4 picture-list-col picture-list-picture-container">
-            <img src="https://apppanoblob.blob.core.windows.net/panoramas/'.$picture['PostID'].'.jpg" class="img-responsive  picture-list-picture"/>
+            <img src="'. SITE_ROOT .'/AzureBackups/panoramas/' .$picture['PostID'].'.jpg" class="img-responsive  picture-list-picture"/>
 
             <input type="checkbox" class="create-collection-check" value="checked" name="'.$picture['PostID'].'" id="'.$picture['PostID'].'" '.$checked.'/>
             </div>
