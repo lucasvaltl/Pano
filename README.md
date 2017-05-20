@@ -5,4 +5,18 @@ Pano is a social network for panoramic pictures. It takes a unique approach by f
 
 Pano was deployed under www.panoapp.co.uk. However, unfortunately, our azure credits have run out. While we scramble to fix this situation, here are some screenshots that show a locally hosted version:
 
+Login Screen:
 ![Login Screen](/screenshots/login.png?raw=true "Login Screen")
+
+
+News Feed:
+![News Feed](/screenshots/newsfeed.png?raw=true "News Feed")
+
+Profile:
+![Profilen](/screenshots/profile.png?raw=true "Profile")
+
+Group Chats:
+![Profile](/screenshots/groupchats.png?raw=true "Group Chats")
+
+Search via Hashtag:
+![Search](/screenshots/search.png?raw=true "Search")
