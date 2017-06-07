@@ -1,5 +1,5 @@
 # Pano
-A social network taking a wider perspective
+*A social network taking a wider perspective*
 
 Pano is a social network for panoramic pictures. It takes a unique approach by focusing on sharing omniderctional snapshots of situations that the users find themselves in. In the future, this approach can be expanded to include AR and VR applications such as head tracking for panning within pictures or even fully immersive 360° panoramas that capture the full extend of the experience that a user wants to share.
 
