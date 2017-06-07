@@ -14,7 +14,10 @@ News Feed:
 ![News Feed](/screenshots/newsfeed.png?raw=true "News Feed")
 
 Profile:
-![Profilen](/screenshots/profile.png?raw=true "Profile")
+![Profile](/screenshots/profile.png?raw=true "Profile")
+
+Create Albums:
+![Albums](/screenshots/photocollections.png?raw=true "Albums")
 
 Group Chats:
 ![Profile](/screenshots/groupchats.png?raw=true "Group Chats")
